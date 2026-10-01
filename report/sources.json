@@ -1,0 +1,50 @@
+[
+  [
+    "S1",
+    "美图官方：AI 测试/自动化平台实习岗位",
+    "https://hr.meitu.com/jobCampus/a71bfe87-a00f-4254-9077-afb72797bbfc",
+    "页面明确列出测试用例生成、缺陷分析、AI Agent、自动化框架及编程基础。注明2026暑期，作为能力需求样本，不代表10月仍开放。"
+  ],
+  [
+    "S2",
+    "米哈游招聘官网",
+    "https://join.mihoyo.com/",
+    "核实官方招聘入口。未取得可稳定引用的全部具体岗位详情，不以转载岗位推算录取率或岗位数量。"
+  ],
+  [
+    "S3",
+    "SWE-bench 官方 FAQ",
+    "https://www.swebench.com/SWE-bench/faq/",
+    "评测以真实GitHub问题、补丁、隔离环境及测试结果为基础；用于设计验收方法，不引用排行榜承诺项目表现。"
+  ],
+  [
+    "S4",
+    "Qdrant：Hybrid Search with Reranking",
+    "https://qdrant.tech/documentation/tutorials-basics/reranking-hybrid-search/",
+    "混合检索与重排的官方实现参考。选题最终应满足稠密/稀疏与重排要求；本次LSA demo仅展示本地链路。"
+  ],
+  [
+    "S5",
+    "MLflow：Model Registry Workflows",
+    "https://mlflow.org/docs/latest/ml/model-registry/workflow/",
+    "模型注册、版本与alias工作流参考；版本切换必须和服务加载/推理验证关联。"
+  ],
+  [
+    "S6",
+    "Evidently：Data drift",
+    "https://docs.evidentlyai.com/metrics/explainer_drift",
+    "漂移比较参考和当前数据分布；漂移检测与有真实标签的模型质量评估应分开设计。"
+  ],
+  [
+    "S7",
+    "Godot：General optimization tips",
+    "https://docs.godotengine.org/en/stable/tutorials/performance/general_optimization.html",
+    "以测量和定位瓶颈为基础的性能优化参考；支持塔防项目加入可复现性能证据。"
+  ],
+  [
+    "S8",
+    "INRIA：3D Gaussian Splatting 官方实现",
+    "https://github.com/graphdeco-inria/gaussian-splatting",
+    "复现环境、训练和渲染要求参考。教学演示、论文复现、可发表创新是不同层级。"
+  ]
+]
