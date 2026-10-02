@@ -1,4 +1,4 @@
-# 工程实践选题实验室
+# 工程实践项目
 
 基于丁箐老师14题、白天老师11题的选题研究，以及4个独立目录的可运行原型。调研日期：2026-10-01。
 
@@ -38,10 +38,10 @@ conda env update -n engineering-practice-lab -f environment.yml
 | 路径 | 内容 | 对应选题 |
 |---|---|---|
 | `report/index.html` | 独立HTML调研报告，筛选/排序/逐题分析/来源 | 全部25题 |
-| `demos/01-repair-agent/` | 可信样例的测试-候选补丁-独立验证 | 丁箐 项目十一 |
+| `demos/01-repair-agent/` | 测试与修复：内置样例、候选补丁与验收 | 丁箐 项目十一 |
 | `demos/02-process-rag/` | BM25+LSA/RRF、引用和拒答 | 丁箐 项目一 |
-| `demos/03-mlops/` | 真实训练、分布监控、配对质量评估和版本切换 | 丁箐 项目二 |
-| `demos/04-tower-defense/` | 两类塔、五波敌人、完整胜负闭环 | 白天 B类第5题 |
+| `demos/03-mlops/` | 模型发布实验：训练、分布监控与版本切换 | 丁箐 项目二 |
+| `demos/04-tower-defense/` | 两类塔、五波敌人、经济与胜负判断 | 白天 B类第5题 |
 | `environment.yml` | 所有 demo 共用的 Conda 环境 | 全项目 |
 | `shared/` | 公用界面样式/交互工具 |
 | `tests/` | 引擎与HTTP验收测试 |
@@ -66,9 +66,10 @@ conda env update -n engineering-practice-lab -f environment.yml
 conda activate engineering-practice-lab
 python -m unittest discover -s tests -v
 node tests/test_tower.cjs
+node tests/test_ui.cjs
 ```
 
-Node.js 已包含在共用 Conda 环境中，仅用于塔防引擎测试，不是运行浏览器游戏的必要依赖。测试结果与界面验证限制见 `docs/VALIDATION.md`。
+Node.js 已包含在共用 Conda 环境中，用于塔防引擎与前端逻辑测试，不是运行浏览器游戏的必要依赖。前端测试使用 DOM 适配器与实际引擎返回值，不包含浏览器布局验收。测试结果与界面验证限制见 `docs/VALIDATION.md`。
 
 ## 推荐主线
 
