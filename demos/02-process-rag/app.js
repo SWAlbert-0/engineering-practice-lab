@@ -48,6 +48,7 @@ form.addEventListener('submit', event => {
     $('#run-context').textContent = `本次检索：${params.query} / ${params.material} / ${params.mode === 'hybrid' ? '混合检索' : '关键词检索'}`;
     $('#status').textContent = `检索完成，用时 ${result.duration_ms} ms。${result.refused ? '未生成草案。' : '草案仅摘录检索到的资料。'}`;
     $('#export').disabled = false;
+    publishResult('rag', result, params);
   });
 });
 $('#export').addEventListener('click', () => downloadJSON(result, 'retrieval-results.json'));

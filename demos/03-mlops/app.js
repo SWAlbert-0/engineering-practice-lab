@@ -52,6 +52,7 @@ form.addEventListener('submit', event => {
     $('#run-context').textContent = `本次配置：标签污染 ${Math.round(params.noise * 100)}% / 特征偏移 ${params.shift.toFixed(1)} / ${params.labels ? '有' : '无'}真实标签`;
     $('#status').textContent = `实验完成，用时 ${result.duration_ms} ms。`;
     $('#export').disabled = false;
+    publishResult('mlops', result);
   });
 });
 $('#export').addEventListener('click', () => downloadJSON(result, 'model-release-results.json'));

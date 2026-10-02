@@ -58,3 +58,10 @@ function markStale() {
   const context = $('#run-context');
   if (context && context.textContent) context.textContent = '参数已修改。下方仍显示上次结果，请重新运行。';
 }
+
+// The product shell persists results; this workbench remains runnable by itself.
+function publishResult(project, result, extra = {}) {
+  if (window.parent === window) return;
+  const context = {...Object.fromEntries(new URLSearchParams(location.search)), ...extra};
+  window.parent.postMessage({type:'engineering-result',project,result,context}, location.origin === 'null' ? '*' : location.origin);
+}

@@ -1,6 +1,17 @@
 'use strict';
 const { Game, PATH, position, onRoad } = TowerEngine;
-let game = new Game();
+const launch = new URLSearchParams(location.search);
+const levelId = ['training','standard','challenge'].includes(launch.get('level')) ? launch.get('level') : 'standard';
+const levelSettings = {training:['基础训练',240,20],standard:['标准防线',160,12],challenge:['紧缺补给',130,10]}[levelId];
+const speed = [1,1.5,2].includes(Number(launch.get('speed'))) ? Number(launch.get('speed')) : 1;
+let reported = false;
+function newGame() {
+  const instance = new Game(); instance.gold=levelSettings[1];instance.life=levelSettings[2];
+  let towers=[];try{towers=JSON.parse(launch.get('layout') || '[]');}catch{}
+  if(Array.isArray(towers)) for(const t of towers.slice(0,5)) if(Number.isFinite(t.x)&&Number.isFinite(t.y)&&['bolt','frost'].includes(t.type))instance.build(t.x,t.y,t.type);
+  reported=false;return instance;
+}
+let game = newGame();
 let pointer = null;
 const canvas = $('#game');
 const ctx = canvas.getContext('2d');
@@ -23,7 +34,7 @@ $('#pause').addEventListener('click', () => {
   $('#pause').textContent = game.paused ? '继续' : '暂停';
 });
 $('#reset').addEventListener('click', () => {
-  game = new Game();
+  game = newGame();
   $('#pause').textContent = '暂停';
   $('#status').textContent = '先点击空地建塔，再开始第一波。';
   render();
@@ -69,7 +80,7 @@ function render() {
     ctx.strokeStyle = effect.type === 'frost' ? '#99d4f0' : '#e9d3a6'; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(...effect.a); ctx.lineTo(...effect.b); ctx.stroke();
   }
-  if (pointer && !['won', 'lost'].includes(game.state)) {
+  if (pointer && launch.get('preview') !== 'off' && !['won', 'lost'].includes(game.state)) {
     const [x, y] = pointer, frost = $('#tower').value === 'frost';
     const valid = game.gold >= (frost ? 70 : 50) && x >= 22 && x <= 878 && y >= 22 && y <= 478
       && !onRoad(x, y) && !game.towers.some(t => Math.hypot(t.x - x, t.y - y) < 43);
@@ -95,10 +106,13 @@ function render() {
   $('#pause').disabled = ['won', 'lost'].includes(game.state);
   if (game.state === 'won') $('#status').textContent = '防守成功。可以点击重开开始新的一局。';
   if (game.state === 'lost') $('#status').textContent = '基地耐久归零。可以点击重开调整布局。';
+  if (!reported && ['won','lost'].includes(game.state)) {
+    reported=true; publishResult('tower', {level:levelId,levelName:levelSettings[0],outcome:game.state,wave:game.wave,kills:game.kills,life:game.life,gold:game.gold,clock:game.clock,towers:game.towers.map(t=>({x:t.x,y:t.y,type:t.type}))});
+  }
 }
 let last = performance.now(), accumulated = 0;
 function frame(now) {
-  accumulated += Math.min((now - last) / 1000, .15); last = now;
+  accumulated += Math.min((now - last) / 1000, .15) * speed; last = now;
   while (accumulated >= 1 / 60) { game.step(1 / 60); accumulated -= 1 / 60; }
   render(); requestAnimationFrame(frame);
 }

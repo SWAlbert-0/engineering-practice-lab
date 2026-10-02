@@ -27,6 +27,6 @@ class HttpTests(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as c:self.request('/api/repair',{},'https://example.com')
         self.assertEqual(c.exception.code,403)
     def test_pages_and_assets_exist(self):
-        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/04-tower-defense/']:
+        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/04-tower-defense/','/shared/product/core.js','/shared/product/style.css'] + [f'/demos/{name}/{file}' for name in ['01-repair-agent','02-process-rag','03-mlops','04-tower-defense'] for file in ['workbench.html','product.js']]:
             with self.subTest(path=path):
                 with urllib.request.urlopen(self.base+path) as r:self.assertEqual(r.status,200);self.assertGreater(len(r.read()),100)

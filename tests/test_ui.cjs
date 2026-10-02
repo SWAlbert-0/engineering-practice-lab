@@ -27,7 +27,7 @@ class Element {
   replaceChildren(...rows) { this.rows = rows; }
 }
 function page(folder) {
-  const html = read(`${folder}/index.html`), nodes = new Map(), groups = {};
+  const html = read(`${folder}/${folder === 'report' ? 'index' : 'workbench'}.html`), nodes = new Map(), groups = {};
   for (const match of html.matchAll(/<([a-z]+)\b([^>]*\bid="([^"]+)"[^>]*)>/g)) {
     const node = new Element(match[3]), attributes = match[2];
     node.value = attributes.match(/\bvalue="([^"]*)"/)?.[1] || '';
@@ -54,8 +54,8 @@ function page(folder) {
   };
   let downloaded = 0;
   const pending = [], requests = [];
-  const window = new Element();
-  const context = vm.createContext({document, window, location: {protocol: 'http:', hash: ''}, Blob, URL, performance,
+  const window = new Element(); window.parent = window;
+  const context = vm.createContext({document, window, location: {protocol: 'http:', hash: '', search: '', origin: 'http://localhost:8765'}, Blob, URL, URLSearchParams, performance,
     setTimeout: fn => fn(), requestAnimationFrame: fn => { context.nextFrame = fn; },
     fetch: async (url, options) => { requests.push({url, body: JSON.parse(options.body)}); const next = pending.shift(); if (next instanceof Error) throw next; assert(next, 'Missing API response'); return {ok: true, json: async () => next}; }
   });
@@ -122,6 +122,25 @@ async function submit(p, id = 'run') {
   game.get('pause').fire('click'); assert(game.run('game.paused')); assert.equal(game.get('pause').textContent, '继续');
   game.get('reset').fire('click'); assert.equal(game.get('gold').textContent, 160); assert(!game.run('game.paused'));
   game.run("game.state='lost';render()"); assert.equal(game.get('next').textContent, '本局结束'); assert(game.get('pause').disabled);
+
+  const planned = page('demos/04-tower-defense');
+  planned.context.TowerEngine = require('../demos/04-tower-defense/engine.js');
+  planned.context.location.search = '?level=training&speed=2&layout=' + encodeURIComponent(JSON.stringify([{x:190,y:60,type:'bolt'}]));
+  planned.get('game').getContext = () => drawing;
+  planned.get('game').getBoundingClientRect = () => ({left:0,top:0,width:900,height:500});
+  planned.get('tower').value = 'bolt';
+  const reports = [];
+  planned.context.window.parent = {postMessage: (message, origin) => reports.push({message, origin})};
+  planned.load('demos/04-tower-defense/app.js');
+  assert.equal(planned.get('gold').textContent, 190); // Training 240 - saved tower 50.
+  assert.equal(planned.get('life').textContent, 20);
+  planned.run('game.next(); frame(last+1000)');
+  assert(planned.run('game.clock') > .28); // Capped .15 real seconds at 2x.
+  planned.run("game.state='won';render();render()");
+  assert.equal(reports.length, 1); assert.equal(reports[0].message.result.level, 'training');
+  assert.equal(reports[0].origin, 'http://localhost:8765');
+  planned.get('reset').fire('click');
+  assert.equal(planned.get('gold').textContent, 190); assert.equal(planned.run('game.towers.length'), 1);
 
   const report = page('report');
   const topics = JSON.parse(read('report/topics.json'));

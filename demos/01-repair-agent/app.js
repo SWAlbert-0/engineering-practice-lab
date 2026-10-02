@@ -32,6 +32,16 @@ form.addEventListener('submit', event => {
     $('#run-context').textContent = `本次配置：${description}`;
     $('#status').textContent = `测试完成，用时 ${result.duration_ms} ms。`;
     $('#export').disabled = false;
+    publishResult('repair', result, {case: $('#case').value, candidate: $('#candidate').value});
   });
 });
 $('#export').addEventListener('click', () => downloadJSON(result, 'repair-results.json'));
+
+const initial = new URLSearchParams(location.search);
+if (['boundary','empty','dedupe'].includes(initial.get('case'))) $('#case').value = initial.get('case');
+if (['correct','wrong'].includes(initial.get('candidate'))) $('#candidate').value = initial.get('candidate');
+
+if (initial.get('task')) {
+  $('#case').disabled = true;
+  $('#case').title = '此样例已绑定当前任务；更换样例请新建任务。';
+}
