@@ -1,0 +1,11 @@
+# All demos share this environment. Keep dependencies here as new demos are added.
+name: engineering-practice-lab
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - "numpy>=2.0,<3"
+  - "scikit-learn>=1.5,<2"
+  # Only needed for the tower-defense engine tests; installed in the same env.
+  - nodejs=22

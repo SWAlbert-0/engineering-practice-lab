@@ -12,3 +12,7 @@
 8. 用户随后创建 `SWAlbert-0/engineering-practice-lab`。已通过连接器核实仓库为 private，且尚无分支和已有文件；本次将报告、四个demo和验证记录一并提交到 main。
 
 目标仓库：https://github.com/SWAlbert-0/engineering-practice-lab 。保持私密，不启用公开站点。不包含课程原PDF、密钥或其他用户项目。
+
+## 2026-10-02
+
+按用户要求，所有选题 demo 共用 `engineering-practice-lab` Conda 环境。新增根目录 `environment.yml`，统一管理 Python、NumPy、scikit-learn 和 Node.js；移除旧 `requirements.txt`，同步更新首页、报告、主 README 和四个 demo 的运行说明。仅配置与文档变化；Conda 创建尚未实测，详见验证记录。

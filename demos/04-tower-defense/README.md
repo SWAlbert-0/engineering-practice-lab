@@ -4,7 +4,21 @@
 
 ## 运行
 
-在仓库根目录安装 requirements.txt 后执行 `python server.py`，访问 `http://127.0.0.1:8765/demos/04-tower-defense/`。塔防可直接双击本目录index.html。
+全部 demo 共用根目录 `environment.yml` 定义的 `engineering-practice-lab` 环境。首次使用在仓库根目录执行：
+
+```bash
+conda env create -f environment.yml
+```
+
+环境已创建后不必重复创建，每次启动只需：
+
+```bash
+conda activate engineering-practice-lab
+python server.py
+```
+
+访问 `http://127.0.0.1:8765/demos/04-tower-defense/`。本demo是纯浏览器游戏，也可直接双击本目录 `index.html`。
+后续依赖统一更新根目录环境配置，不为此 demo 单独创建环境。
 
 ## 演示步骤
 

@@ -2,32 +2,36 @@
 
 基于丁箐老师14题、白天老师11题的选题研究，以及4个独立目录的可运行原型。调研日期：2026-10-01。
 
-## 快速开始
+## 快速开始：全部 demo 共用一个 Conda 环境
 
-需要 Python 3.10+（实测3.12）。塔防与报告可以单独打开 HTML；前三个 demo 需要服务端。
+先安装 Miniconda 或 Anaconda，在仓库根目录执行以下命令。Windows 可使用 Anaconda Prompt；已初始化 Conda 的 PowerShell、macOS 和 Linux 终端也可使用。
 
 ```bash
-python -m venv .venv
-```
-
-Windows PowerShell：
-
-```powershell
-.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate engineering-practice-lab
 python server.py
 ```
 
-macOS / Linux：
+环境只创建一次。之后每次运行：
 
 ```bash
-source .venv/bin/activate
-python -m pip install -r requirements.txt
+conda activate engineering-practice-lab
 python server.py
 ```
 
 浏览器打开 http://127.0.0.1:8765 。端口占用可使用 `python server.py --port 8766`。
-不需要 API Key。依赖安装需要网络，安装后全部原型可离线运行。
+所有选题 demo 共用 `engineering-practice-lab`，不为每个 demo 建环境。后续新增 demo 的依赖也统一维护在根目录 `environment.yml`。
+
+环境配置包含 Python 3.12、NumPy、scikit-learn，以及塔防引擎测试所需的 Node.js，均通过 Conda 安装。塔防与报告也可直接打开 HTML；前三个 demo 需要上述服务端。
+不需要 API Key。创建环境需要网络，安装后全部原型可离线运行。
+
+拉取新版配置后，更新同一个环境：
+
+```bash
+conda env update -n engineering-practice-lab -f environment.yml
+```
+
+环境已存在时使用更新命令，不必重复创建。如果 Windows PowerShell 提示无法激活，先改用 Anaconda Prompt 运行上述命令。
 
 ## 目录
 
@@ -38,6 +42,7 @@ python server.py
 | `demos/02-process-rag/` | BM25+LSA/RRF、引用和拒答 | 丁箐 项目一 |
 | `demos/03-mlops/` | 真实训练、分布监控、配对质量评估和版本切换 | 丁箐 项目二 |
 | `demos/04-tower-defense/` | 两类塔、五波敌人、完整胜负闭环 | 白天 B类第5题 |
+| `environment.yml` | 所有 demo 共用的 Conda 环境 | 全项目 |
 | `shared/` | 公用界面样式/交互工具 |
 | `tests/` | 引擎与HTTP验收测试 |
 | `docs/` | 验收记录、后续开发范围 |
@@ -58,11 +63,12 @@ python server.py
 ## 测试
 
 ```bash
+conda activate engineering-practice-lab
 python -m unittest discover -s tests -v
 node tests/test_tower.cjs
 ```
 
-Node仅用于塔防引擎测试，不是运行浏览器游戏的必要依赖。测试结果与界面验证限制见 `docs/VALIDATION.md`。
+Node.js 已包含在共用 Conda 环境中，仅用于塔防引擎测试，不是运行浏览器游戏的必要依赖。测试结果与界面验证限制见 `docs/VALIDATION.md`。
 
 ## 推荐主线
 
