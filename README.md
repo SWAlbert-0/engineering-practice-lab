@@ -62,6 +62,12 @@ conda env update -n engineering-practice-lab -f environment.yml
 
 新增记录保存在当前浏览器 LocalStorage；关闭页面后可继续查看，切换浏览器或清理站点数据不会自动同步。设置页可导出工作区记录或重置为初始示例。示例记录有单独标记；运行历史来自实际计算。详细页面与状态说明见 [docs/PRODUCT_FLOWS.md](docs/PRODUCT_FLOWS.md)。
 
+## 主题与选题介绍
+
+四个项目分别采用代码审查台、工艺资料阅览室、模型发布控制室和林地塔防主题。每个项目顶部都有“选题介绍”按钮，可查看老师来源、难度、简历价值、周期、要求与当前实现范围。
+
+设计 skills 的调研来源、主题说明与验证边界见 [docs/DESIGN_SKILLS.md](docs/DESIGN_SKILLS.md)。所有资源随仓库提供，不需要安装新依赖。
+
 ## Demo边界
 
 这些项目包含完整的页面导航、详情与功能引导；真实运行部分与本地模拟流程分别标明。尚未完成课程要求中的全部后端集成。

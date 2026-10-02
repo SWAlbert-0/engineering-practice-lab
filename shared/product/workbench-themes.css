@@ -1,0 +1,38 @@
+/* The embedded execution pages use the same material and color as their shell. */
+.workbench-repair { --bg:#f5f6f8; --accent:#375dcc; --paper:#fff; --line:#dfe4e9; }
+.workbench-repair .panel { border-radius:8px; }
+.workbench-repair .diff { background:#23303f; color:#d3deeb; }
+.workbench-repair .diff-add { background:#2c4b44; color:#bce6d0; }
+.workbench-repair .diff-remove { background:#533c46; color:#f1c2c8; }
+.workbench-repair .diff-meta { color:#b6c8de; }
+.workbench-rag { --bg:#f5f4ed; --paper:#fffef8; --ink:#303b31; --muted:#697264; --line:#dcded1; --accent:#506a45; }
+.workbench-rag .panel { border-radius:3px 12px 12px 3px; }
+.workbench-rag .draft { font-family:"Palatino Linotype","Noto Serif CJK SC",SimSun,serif; font-size:15px; line-height:2.1; padding:27px; }
+.workbench-rag .evidence { border-left:3px solid #c5cfb4; }
+.workbench-rag input,.workbench-rag textarea,.workbench-rag select { background:#fffef8; border-color:#bdc8b0; }
+.workbench-rag .examples button { color:#506a45; }
+.workbench-mlops { --bg:#121f31; --paper:#192b40; --ink:#e7eff8; --muted:#a4b5c9; --line:#30445d; --soft:#17263a; --accent:#98c7e8; --good:#a4d5b5; --warn:#e5c08c; --bad:#efa9b1; color-scheme:dark; }
+.workbench-mlops input,.workbench-mlops textarea,.workbench-mlops select { background:#17263a; color:#e7eff8; border-color:#4b6179; }
+.workbench-mlops button { color:#132d42; }
+.workbench-mlops button.secondary { color:#d4e5f4; background:#192b40; border-color:#4b6179; }
+.workbench-mlops th,.workbench-mlops .hist-track { background:#142337; }
+.workbench-mlops .hist-fill.current,.workbench-mlops .legend .current { background:#d2b07f; }
+.workbench-mlops .panel { border-radius:9px; }
+.workbench-tower { --bg:#18332b; --paper:#224037; --ink:#ece9d4; --muted:#b2c2ac; --line:#456153; --accent:#e5c483; color-scheme:dark; }
+.workbench-tower .panel,.workbench-tower .game-board { border-color:#647454; border-radius:11px; }
+.workbench-tower .game-board,.workbench-tower .game-hud { background:#203c32; }
+.workbench-tower .game-hud,.workbench-tower .game-status { border-color:#48634e; }
+.workbench-tower .game-status { color:#d2dbc0; }
+.workbench-tower .game-hud dd { color:#e7d39e; }
+.workbench-tower .game-hud dt { color:#becaae; }
+.workbench-tower button { color:#283c2e; }
+.workbench-tower button.secondary,.workbench-tower select { background:#294435; color:#e8dfbd; border-color:#71825e; }
+.workbench-tower .tower-key strong { color:#e9dec0; }
+.workbench-tower .game-controls .panel-head { background:#263f34; }
+.workbench-tower .game-controls { background:#223e34; }
+button { transition:background-color 120ms; }
+@media(prefers-reduced-motion:reduce) { button { transition:none; } }
+.workbench-mlops button:hover { background:#b2d9f2; }
+.workbench-mlops button.secondary:hover { background:#29435e; }
+.workbench-tower button:hover { background:#edd8a7; }
+.workbench-tower button.secondary:hover { background:#39553e; }

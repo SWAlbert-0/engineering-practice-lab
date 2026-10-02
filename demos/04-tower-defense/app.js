@@ -49,32 +49,37 @@ function polygon(x, y, radius, sides, fill) {
   ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
 }
 function render() {
-  ctx.fillStyle = '#202c3b'; ctx.fillRect(0, 0, 900, 500);
-  ctx.fillStyle = '#344051';
+  ctx.fillStyle = '#203d35'; ctx.fillRect(0, 0, 900, 500);
+  ctx.fillStyle = '#42604d';
   for (let x = 20; x < 900; x += 40) for (let y = 20; y < 500; y += 40) ctx.fillRect(x, y, 1, 1);
+  // Terrain stays away from the fixed road and does not change build rules.
+  for (const [x, y] of [[43,35],[91,41],[381,38],[626,43],[808,55],[91,249],[111,411],[365,437],[609,445],[821,257]]) {
+    ctx.fillStyle='#4e6f50';ctx.beginPath();ctx.moveTo(x,y-19);ctx.lineTo(x+15,y+11);ctx.lineTo(x-15,y+11);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#9b865c';ctx.fillRect(x-2,y+11,4,8);
+  }
   ctx.lineJoin = 'round'; ctx.lineCap = 'round';
   ctx.beginPath(); PATH.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
-  ctx.strokeStyle = '#53616d'; ctx.lineWidth = 54; ctx.stroke();
-  ctx.strokeStyle = '#45515e'; ctx.lineWidth = 46; ctx.stroke();
-  ctx.strokeStyle = '#73808a'; ctx.lineWidth = 1; ctx.setLineDash([6, 16]); ctx.stroke(); ctx.setLineDash([]);
-  ctx.fillStyle = '#344c60'; ctx.fillRect(846, 365, 49, 68);
-  ctx.strokeStyle = '#83a8c1'; ctx.lineWidth = 2; ctx.strokeRect(846, 365, 49, 68);
-  ctx.fillStyle = '#d7e4ed'; ctx.font = '12px sans-serif'; ctx.fillText('基地', 857, 404);
-  ctx.fillStyle = '#acbbc9'; ctx.fillText('入口', 14, 79);
+  ctx.strokeStyle = '#172e29'; ctx.lineWidth = 54; ctx.stroke();
+  ctx.strokeStyle = '#ac9b70'; ctx.lineWidth = 46; ctx.stroke();
+  ctx.strokeStyle = '#d3c295'; ctx.lineWidth = 1; ctx.setLineDash([6, 16]); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = '#bfae7f'; ctx.fillRect(846, 365, 49, 68);
+  ctx.strokeStyle = '#e5d39e'; ctx.lineWidth = 2; ctx.strokeRect(846, 365, 49, 68);
+  ctx.fillStyle = '#294637'; ctx.font = '12px sans-serif'; ctx.fillText('基地', 857, 404);
+  ctx.fillStyle = '#dfe1c9'; ctx.fillText('入口', 14, 79);
   for (const tower of game.towers) {
     const frost = tower.type === 'frost';
-    polygon(tower.x, tower.y + 3, 21, 8, '#17212e');
-    polygon(tower.x, tower.y, 19, 8, '#546270');
+    polygon(tower.x, tower.y + 3, 21, 8, '#172e27');
+    polygon(tower.x, tower.y, 19, 8, '#567153');
     polygon(tower.x, tower.y, 14, 8, frost ? '#80bad2' : '#dec89c');
-    ctx.fillStyle = '#334252'; ctx.fillRect(tower.x - 4, tower.y - 22, 8, 23);
+    ctx.fillStyle = '#2b473a'; ctx.fillRect(tower.x - 4, tower.y - 22, 8, 23);
     ctx.fillStyle = frost ? '#b9e0ed' : '#eee3c7'; ctx.fillRect(tower.x - 3, tower.y - 25, 6, 8);
   }
   for (const enemy of game.enemies) {
     const [x, y] = position(enemy.d);
-    polygon(x, y + 2, 12, 6, '#182330');
-    polygon(x, y, 10, 6, enemy.slow > 0 ? '#94c4d8' : '#c98569');
-    ctx.fillStyle = '#273442'; ctx.fillRect(x - 15, y - 20, 30, 4);
-    ctx.fillStyle = '#e3ba91'; ctx.fillRect(x - 15, y - 20, 30 * Math.max(0, enemy.hp / enemy.max), 4);
+    polygon(x, y + 2, 12, 6, '#182f27');
+    polygon(x, y, 10, 6, enemy.slow > 0 ? '#94c4d8' : '#c67c58');
+    ctx.fillStyle = '#293e30'; ctx.fillRect(x - 15, y - 20, 30, 4);
+    ctx.fillStyle = '#ecd194'; ctx.fillRect(x - 15, y - 20, 30 * Math.max(0, enemy.hp / enemy.max), 4);
   }
   for (const effect of game.effects) {
     ctx.strokeStyle = effect.type === 'frost' ? '#99d4f0' : '#e9d3a6'; ctx.lineWidth = 2;
@@ -90,7 +95,7 @@ function render() {
     polygon(x, y, 13, 8, valid ? '#a8c4d7' : '#c08b81');
   }
   if (game.paused || ['won', 'lost'].includes(game.state)) {
-    ctx.fillStyle = '#142030d9'; ctx.fillRect(0, 0, 900, 500);
+    ctx.fillStyle = '#142c23e6'; ctx.fillRect(0, 0, 900, 500);
     ctx.textAlign = 'center'; ctx.fillStyle = '#edf2f6'; ctx.font = '600 34px sans-serif';
     ctx.fillText(game.state === 'won' ? '防守成功' : game.state === 'lost' ? '基地失守' : '已暂停', 450, 237);
     ctx.fillStyle = '#acbbca'; ctx.font = '15px sans-serif';

@@ -52,3 +52,6 @@ form.addEventListener('submit', event => {
   });
 });
 $('#export').addEventListener('click', () => downloadJSON(result, 'retrieval-results.json'));
+
+const initialQuery = new URLSearchParams(location.search).get('query');
+if (initialQuery) { $('#query').value = initialQuery.slice(0,600); $('#material').value = '全部'; }

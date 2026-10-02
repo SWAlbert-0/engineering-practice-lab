@@ -10,7 +10,7 @@ assert.equal(python.status,0,python.stderr);const results=JSON.parse(python.stdo
 class Node {
  constructor(){this.value='';this.innerHTML='';this.textContent='';this.hidden=false;this.listeners={};this.style={};this.classList={toggle(){}};}
  addEventListener(name,fn){this.listeners[name]=fn;}
- setAttribute(){} removeAttribute(){} focus(){} close(){} showModal(){}
+ setAttribute(){} removeAttribute(){} focus(){this.focused=true;} close(){this.open=false;this.listeners.close?.();} showModal(){this.open=true;}
  querySelector(){return null;}
 }
 function setup(folder,store=new Map()){
@@ -20,11 +20,13 @@ function setup(folder,store=new Map()){
  const context=vm.createContext({document,location:{hash:'',origin:'http://localhost:8765'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},structuredClone,URLSearchParams,URL,Blob,console,setTimeout:()=>0,clearTimeout(){},FormData,scrollTo(){},addEventListener:(name,fn)=>{windowEvents[name]=fn;},TowerEngine:require('../demos/04-tower-defense/engine.js')});
  vm.runInContext('globalThis.window=globalThis;',context);
  vm.runInContext(read('shared/product/core.js'),context);
+ vm.runInContext(read('shared/product/topics.js'),context);
+ vm.runInContext(read('shared/product/themes.js'),context);
  vm.runInContext('const originalStart=P.start;P.start=config=>{globalThis.config=config;originalStart(config);};',context);
  vm.runInContext(read(`demos/${folder}/product.js`),context);
  const c=context.config,p=context.P,s=p.state;
  const render=(page,id)=>{const html=c.render(page,id,s);assert.match(html,/<h1>/,`${folder}/${page} has heading`);assert(!/(?:>undefined<|>NaN<)/.test(html),`Invalid display value ${folder}/${page}`);rendered.push({folder,route:page+(id?'/'+id:''),html});return html;};
- return {c,p,s,context,store,render,events,windowEvents,el,frame:f=>{frame=f;}};
+ return {c,p,s,context,document,store,render,events,windowEvents,el,frame:f=>{frame=f;}};
 }
 function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),visited=new Set();for(let i=0;i<queue.length;i++){
  const route=queue[i];if(visited.has(route))continue;visited.add(route);const [page,id]=route.split('?')[0].split('/');if(page==='play')app.context.location.hash='#'+route;
@@ -87,6 +89,28 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  tower.c.onResult({result:{level:'standard',levelName:'标准防线',outcome:'won',wave:5,kills:60,life:12,gold:30,clock:80,towers:t.layouts[0].towers}},t);assert.equal(t.battles.length,1);
  tower.c.submit('game-settings',{speed:'2',preview:'off'},t);assert.equal(t.settings.speed,'2');
  const towerCount=routes(tower);
+ for(const app of [repair,rag,mlops,tower]) {
+   assert(app.document.body.className.includes('theme-'+app.c.id));
+   assert.match(app.document.body.innerHTML,/aria-controls="topic-dialog"/);
+   const html=app.p.topicMarkup(),topic=app.context.ProjectTopics[app.c.id];
+   const source=JSON.parse(read('report/topics.json')).find(t=>t.id===topic.id);
+   for(const field of ['id','teacher','title','difficulty','value','weeks','score','resource','core','risk','upgrade','acceptance']) assert.equal(topic[field],source[field]);
+   assert(html.includes(topic.title));assert(html.includes(topic.teacher));assert(html.includes(topic.weeks+' 周'));
+   assert.match(html,/aria-labelledby="topic-title"/);assert.match(html,/当前原型已实现/);
+   rendered.push({folder:app.c.folder,route:'topic-modal',html});
+   const trigger=new Node();trigger.dataset={action:'topic-info'};trigger.isConnected=true;
+   await app.events.click({target:{closest:selector=>selector==='[data-action]'?trigger:null}});
+   assert(app.el('#topic-dialog').open);assert.equal(app.document.body.style.overflow,'hidden');assert(app.el('#topic-title').focused);
+   const close=new Node();close.dataset={action:'topic-close'};
+   await app.events.click({target:{closest:selector=>selector==='[data-action]'?close:null}});
+   assert(!app.el('#topic-dialog').open);assert(trigger.focused);assert.notEqual(app.document.body.style.overflow,'hidden');
+   await app.events.click({target:{closest:selector=>selector==='[data-action]'?trigger:null}});
+   const dialog=app.el('#topic-dialog');dialog.getBoundingClientRect=()=>({left:10,right:300,top:10,bottom:300});
+   dialog.listeners.click({target:dialog,clientX:50,clientY:50});assert(dialog.open);
+   dialog.listeners.click({target:dialog,clientX:1,clientY:1});assert(!dialog.open);
+ }
+ await rag.c.submit('quick-search',{query:'铝合金薄壁零件'},k);
+ assert(rag.context.location.hash.includes('search?query='));
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(rendered,null,2));
  console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, tower ${towerCount}.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});
