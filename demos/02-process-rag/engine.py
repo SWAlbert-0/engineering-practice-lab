@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import normalize
-DOCS=json.loads((Path(__file__).parent/'corpus.json').read_text())
+DOCS=json.loads((Path(__file__).parent/'corpus.json').read_text(encoding='utf-8'))
 def tokens(text):
     groups=re.findall(r'[\u4e00-\u9fff]+|[a-zA-Z0-9]+',text.lower());out=[]
     for s in groups:

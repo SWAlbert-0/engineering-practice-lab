@@ -22,8 +22,8 @@ def check(source,case,holdout=False):
     pairs=case['holdout'] if holdout else case['tests']
     script=source+'\nimport json\ncases='+repr(pairs)+'\nresults=[]\nfor value, expected in cases:\n    try:\n        actual='+case['fn']+'(value)\n        results.append({"input":value,"expected":expected,"actual":actual,"pass":actual==expected})\n    except Exception as e:\n        results.append({"input":value,"expected":expected,"error":type(e).__name__,"pass":False})\nprint(json.dumps(results))\n'
     with tempfile.TemporaryDirectory(prefix='topic-lab-') as tmp:
-        path=Path(tmp)/'check.py';path.write_text(script)
-        p=subprocess.run([sys.executable,'-I',str(path)],capture_output=True,text=True,timeout=3,cwd=tmp)
+        path=Path(tmp)/'check.py';path.write_text(script,encoding='utf-8')
+        p=subprocess.run([sys.executable,'-I','-X','utf8',str(path)],capture_output=True,text=True,encoding='utf-8',timeout=3,cwd=tmp)
     if p.returncode:raise RuntimeError('Bundled fixture failed')
     return json.loads(p.stdout)
 

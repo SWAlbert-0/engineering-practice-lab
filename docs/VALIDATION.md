@@ -40,3 +40,9 @@
 ## 2026-10-02 环境配置调整
 
 所有 demo 统一使用根目录 environment.yml 定义的 Conda 环境 engineering-practice-lab，依赖全部经 Conda 安装，移除旧 requirements.txt。已静态检查 YAML 结构、依赖覆盖和运行文档一致性。当前执行环境没有 Conda，未实际执行环境求解、创建或在新 Conda 环境重跑测试；上面的测试记录仍对应原运行环境。
+
+## 2026-10-02 Windows 默认编码修复
+
+用户在 Windows Conda 环境启动时，RAG 读取 UTF-8 的 corpus.json 却使用系统默认 GBK，导致 UnicodeDecodeError。现已显式以 UTF-8 读取语料；修复验证台的临时 Python 文件也显式以 UTF-8 写入，子进程使用 UTF-8 模式及匹配的输出解码。
+
+新增两个编码回归测试：模拟未指定编码时使用 GBK，验证中文语料加载及包含中文的修复样例执行。修复前两项均失败，其中语料测试复现同类 UnicodeDecodeError；修复后完整17项Python测试通过，包括HTTP接口检查。此为Linux上模拟GBK默认行为的回归，不是Windows系统实机验收。无需更新Conda依赖或重建环境。

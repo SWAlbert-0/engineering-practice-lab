@@ -16,3 +16,7 @@
 ## 2026-10-02
 
 按用户要求，所有选题 demo 共用 `engineering-practice-lab` Conda 环境。新增根目录 `environment.yml`，统一管理 Python、NumPy、scikit-learn 和 Node.js；移除旧 `requirements.txt`，同步更新首页、报告、主 README 和四个 demo 的运行说明。仅配置与文档变化；Conda 创建尚未实测，详见验证记录。
+
+### Windows 启动编码问题
+
+修复默认GBK读取UTF-8语料的启动异常，并统一可信修复样例的文件/子进程编码。先用两项编码回归复现，再修复；完整17项Python测试通过。代码更新即可，继续使用原有共用Conda环境。
