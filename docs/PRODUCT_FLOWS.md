@@ -78,10 +78,15 @@
 
 布阵编辑器不编辑道路、寻路和波次；没有塔升级、音效或账号系统。重开会恢复本关初始资源，并重新加载开局布阵。
 
+## 图文指南
+
+四项目指南按需求、架构、代码、流程、验收和后续开发组织。每页提供2张原生SVG关系图、6章目录、代码示例、操作入口和可展开排查说明；章节路由为 `#guide/architecture` 等，支持直接访问、返回与键盘焦点定位。当前实现的架构与尚未完成的阶段分别说明。
+
 ## 开发结构
 
 - `shared/product/core.js`：路由、页面组件、存储、表单事件与工作台消息桥接。
 - `shared/product/style.css`：公共组件；`themes.css`、`themes.js`：独立主题与首页；`topics.js`：选题介绍数据。
+- `shared/product/guides-data.js`：四项目指南内容；`guides.js`、`guides.css`：图示、章节与排版。
 - 各项目 `product.js`：页面定义、初始数据与操作流程。
 - 各项目 `workbench.html`、`app.js`：实际计算或游戏界面。
 - 原 Python 引擎与接口保持原有职责，Windows UTF-8 修复继续生效。

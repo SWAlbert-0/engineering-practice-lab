@@ -22,6 +22,8 @@ function setup(folder,store=new Map()){
  vm.runInContext(read('shared/product/core.js'),context);
  vm.runInContext(read('shared/product/topics.js'),context);
  vm.runInContext(read('shared/product/themes.js'),context);
+ vm.runInContext(read('shared/product/guides-data.js'),context);
+ vm.runInContext(read('shared/product/guides.js'),context);
  vm.runInContext('const originalStart=P.start;P.start=config=>{globalThis.config=config;originalStart(config);};',context);
  vm.runInContext(read(`demos/${folder}/product.js`),context);
  const c=context.config,p=context.P,s=p.state;

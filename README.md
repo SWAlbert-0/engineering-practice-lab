@@ -62,6 +62,17 @@ conda env update -n engineering-practice-lab -f environment.yml
 
 新增记录保存在当前浏览器 LocalStorage；关闭页面后可继续查看，切换浏览器或清理站点数据不会自动同步。设置页可导出工作区记录或重置为初始示例。示例记录有单独标记；运行历史来自实际计算。详细页面与状态说明见 [docs/PRODUCT_FLOWS.md](docs/PRODUCT_FLOWS.md)。
 
+## 图文项目指南
+
+每个项目导航中的指南已扩展为六章项目说明：需求分析、架构设计、代码开发、任务流程、验收与排查、后续开发。每份包含模块关系图、分支流程图、代码片段与可直接进入功能页面的操作步骤。目录支持章节跳转，图表可在小屏内部横向滚动。内容按当前代码编写，并区分真实计算、本地流程模拟与未实现能力。
+
+- [测试与修复指南](demos/01-repair-agent/index.html#guide)
+- [工艺资料检索指南](demos/02-process-rag/index.html#guide)
+- [模型发布平台指南](demos/03-mlops/index.html#guide)
+- [塔防开发指南](demos/04-tower-defense/index.html#guide)
+
+请通过本地服务打开这些 HTML 页面；GitHub 中可查看对应源码。指南内容位于 `shared/product/guides-data.js`，排版与图示由 `guides.js`、`guides.css` 提供，随四个项目主题显示。
+
 ## 主题与选题介绍
 
 四个项目分别采用代码审查台、工艺资料阅览室、模型发布控制室和林地塔防主题。每个项目顶部都有“选题介绍”按钮，可查看老师来源、难度、简历价值、周期、要求与当前实现范围。

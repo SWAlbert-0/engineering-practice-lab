@@ -22,7 +22,7 @@ const config={id:'rag',folder:'02-process-rag',title:'工艺资料检索',subtit
  if(page==='evaluation')return K.title('检索评估','使用 4 个固定教学问题，检查首条命中与无资料拒答。',K.button('evaluate','运行评估','',''))+K.notice('评估口径','这组问题与内置语料配套，只用于回归检查，不代表真实业务检索质量。一次评估执行 4 次实际检索。')+K.panel('固定问题集',K.table(['问题','预期'],[['铝合金薄壁精加工','首条 AL-02'],['不锈钢钻孔','首条 ST-01'],['量具校准','首条 QA-01'],['量子纠缠实验','资料不足，拒答']]))+`<section class="section">${K.panel('评估记录',s.evaluations.length?K.table(['批次','通过','模式','时间','操作'],s.evaluations.map(e=>[K.h(e.id),`${e.checks.filter(c=>c.pass).length} / 4`,'混合检索',K.h(K.date(e.at)),K.link('evaluation-result/'+e.id,'查看详情')])):K.empty('还没有评估记录','点击运行评估，查看每个问题的实际结果。'))}</section>`;
  if(page==='evaluation-result'){const e=s.evaluations.find(e=>e.id===id);if(e)return K.title('评估详情',K.h(K.date(e.at)))+K.panel('逐题结果',K.table(['问题','预期','实际','结果'],e.checks.map(c=>[K.h(c.query),K.h(c.expected),K.h(c.actual),K.badge(c.pass?'通过':'未通过',c.pass?'good':'bad')])));}
  if(page==='settings')return K.settings(`<section class="section">${K.form('policy',K.field('reviewer','默认审核人',s.policy.reviewer)+K.area('note','审核要求',s.policy.note),'保存审核要求','overview')}</section>`);
- if(page==='guide')return K.guide([['浏览知识库','了解材料覆盖范围，打开文档查看段落与版本。'],['检索并核对出处','选择材料，比较混合检索与关键词检索。'],['保存并编辑草案','从检索记录生成草案；编辑后重新进入待审核。'],['完成审核与评估','保存结论和意见，再运行固定问题集检查检索行为。']],'检索接口使用内置 8 段资料实际计算。文本导入、草案编辑与审核记录保存在浏览器；PDF 解析、新资料索引、LLM 生成与企业审批尚未接入。');
+ if(page==='guide')return ProjectGuides.render('rag');
  return K.title('未找到记录')+K.empty('页面不存在或记录已删除','请返回资料列表。','overview','返回概览');
 },async submit(name,v,s){
  if(name==='quick-search'){K.go('search?query='+encodeURIComponent(v.query.trim()));return;}

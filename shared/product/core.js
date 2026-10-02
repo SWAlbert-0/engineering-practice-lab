@@ -48,6 +48,7 @@ window.P = (() => {
       try {const doc=frame.contentDocument;const resize=()=>{frame.style.height=Math.max(520,doc.documentElement.scrollHeight)+'px';};resize();const observer=new MutationObserver(resize);observer.observe(doc.body,{subtree:true,childList:true,characterData:true,attributes:true});frame._observer=observer;}catch{}
     });
     window.scrollTo(0,0);
+    if(page==='guide' && id)window.ProjectGuides?.focus(id);
   }
   function workbench(params={}) {return `<div class="workbench-wrap"><iframe class="workbench" title="${h(project.title)}运行工作台" src="workbench.html?${h(new URLSearchParams(params))}"></iframe></div>`;}
   async function api(path,data) {let response;try{response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}catch{throw Error('无法连接服务，请启动 python server.py 后重试。');}const result=await response.json();if(!response.ok)throw Error(result.error || '请求失败');return result;}

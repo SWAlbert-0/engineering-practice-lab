@@ -1,0 +1,96 @@
+/* Long-form project handbooks inherit each product's palette and typography. */
+.project-guide { max-width:1080px; margin:0 auto; line-height:1.9; }
+.guide-cover { padding:12px 0 30px; border-bottom:2px solid var(--accent); }
+.guide-kicker { color:var(--accent); font-size:12px; letter-spacing:.12em; font-weight:650; }
+.guide-cover h1 { font-size:clamp(27px,3vw,39px); margin:16px 0 10px; line-height:1.35; }
+.guide-deck { font-size:20px; color:var(--ink); margin:8px 0 18px; }
+.guide-cover > p:not(.guide-deck) { max-width:800px; color:var(--muted); font-size:15px; }
+.guide-cover-notes { display:flex; flex-wrap:wrap; gap:10px 28px; color:var(--muted); font-size:12px; margin-top:22px; }
+.guide-toc { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 26px; padding:20px 0; }
+.guide-toc a { display:flex; align-items:center; gap:13px; padding:13px 4px; border-bottom:1px solid var(--line); color:var(--ink); }
+.guide-toc a:hover { color:var(--accent); }
+.guide-toc span { color:var(--accent); font:12px var(--mono); }
+.guide-chapter { margin-top:42px; }
+.guide-chapter-heading { display:flex; align-items:baseline; gap:16px; padding:0 0 15px; border-bottom:1px solid var(--line); margin-bottom:23px; }
+.guide-chapter-heading > span { color:var(--accent); font:22px var(--mono); }
+.guide-chapter-heading h2 { margin:0; font-size:25px; scroll-margin-top:28px; }
+.guide-chapter-heading > a { margin-left:auto; font-size:12px; white-space:nowrap; }
+.guide-chapter p { margin:12px 0; }
+.guide-chapter h3 { margin:28px 0 13px; font-size:18px; }
+.guide-chapter h4 { margin:0 0 6px; font-size:16px; }
+.guide-chapter .table-wrap { border:1px solid var(--line); border-radius:5px; background:var(--paper); }
+.guide-chapter table { min-width:620px; table-layout:fixed; }
+.guide-chapter th:first-child,.guide-chapter td:first-child { width:23%; }
+.guide-chapter td { font-size:13px; vertical-align:top; white-space:normal; line-height:1.9; overflow-wrap:anywhere; padding:15px 17px; }
+.guide-chapter th { font-size:12px; padding:12px 17px; }
+.guide-scenario { border-left:3px solid var(--accent); padding:18px 24px; background:var(--paper); }
+.guide-scenario > span { color:var(--accent); font-size:12px; font-weight:650; }
+.guide-scenario p { margin-bottom:0; font-size:15px; }
+.guide-callout { padding:19px 23px; margin:24px 0; background:var(--accent-soft); border-radius:5px; }
+.guide-callout strong { color:var(--accent); }
+.guide-callout p { margin:8px 0 0; font-size:13px; }
+.guide-figure { margin:25px 0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--paper); }
+.guide-diagram { width:100%; overflow-x:auto; padding:15px 12px 0; }
+.guide-diagram-hint { display:none; }
+.guide-diagram svg { width:100%; min-width:640px; display:block; max-height:480px; color:var(--accent); }
+.guide-node rect { fill:var(--bg); stroke:var(--line); stroke-width:1.4; }
+.guide-node text,.guide-decision text { fill:var(--ink); font-size:16px; font-weight:600; }
+.guide-node .guide-node-detail { font-size:12px; font-weight:400; fill:var(--muted); }
+.guide-edge { fill:none; stroke:var(--accent); stroke-width:1.7; }
+.guide-edge-label { font-size:12px; fill:var(--muted); }
+.guide-decision path { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.4; }
+.guide-decision text { font-size:14px; }
+.guide-figure figcaption { padding:18px 23px 22px; border-top:1px solid var(--line); font-size:13px; }
+.guide-figure figcaption strong { display:block; margin-bottom:6px; }
+.guide-figure figcaption span { color:var(--muted); }
+.guide-code { border:1px solid var(--line); background:var(--paper); border-radius:6px; overflow:hidden; margin:24px 0 15px; }
+.guide-code > div { padding:11px 18px; border-bottom:1px solid var(--line); color:var(--muted); font-size:12px; overflow-wrap:anywhere; }
+.guide-code pre { margin:0; padding:21px; overflow:auto; font:13px/1.95 var(--mono); color:var(--ink); }
+.guide-code code { color:inherit; background:transparent; padding:0; }
+.guide-build,.guide-walkthrough,.guide-roadmap { list-style:none; padding:0; margin:0; }
+.guide-build li,.guide-walkthrough li { display:flex; gap:22px; padding:19px 0; border-bottom:1px solid var(--line); }
+.guide-build li > span { padding-top:3px; color:var(--accent); font:17px/1.7 var(--mono); }
+.guide-build p,.guide-walkthrough p { margin:0; color:var(--muted); font-size:14px; }
+.guide-step { flex:none; width:30px; height:30px; display:grid; place-items:center; border:1px solid var(--accent); border-radius:50%; color:var(--accent); font-family:var(--mono); }
+.guide-task-link { display:inline-block; margin-top:10px; font-size:13px; padding:4px 0; }
+.guide-faq details { border-bottom:1px solid var(--line); padding:15px 0; }
+.guide-faq summary { cursor:pointer; font-weight:600; padding:4px 0; }
+.guide-faq p { color:var(--muted); padding-left:19px; font-size:14px; }
+.guide-roadmap li { display:grid; grid-template-columns:88px minmax(0,1fr); gap:22px; padding:20px 0; border-bottom:1px solid var(--line); }
+.guide-roadmap li > span { color:var(--accent); padding-top:5px; font-size:12px; }
+.guide-roadmap h3 { margin:0 0 8px; }
+.guide-roadmap p { font-size:14px; margin:7px 0; }
+.guide-deliverable { color:var(--muted); }
+.guide-end { display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; padding:20px 0 40px; font-size:13px; }
+.theme-rag .guide-cover h1,.theme-rag .guide-chapter-heading h2,.theme-tower .guide-cover h1,.theme-tower .guide-chapter-heading h2 { font-family:"Noto Serif CJK SC","Songti SC",SimSun,serif; }
+.theme-rag .guide-cover { border-bottom-width:1px; }
+.theme-rag .guide-scenario { background:#ececdf; }
+.theme-mlops .guide-code { background:#0e1929; }
+.theme-tower .guide-scenario { background:#e3ddbf; color:#263d30; }
+.theme-tower .guide-scenario > span { color:#49623d; }
+@media(max-width:720px) {
+ .guide-diagram-hint { display:block; margin:12px 17px 0!important; color:var(--muted); font-size:12px; }
+ .guide-chapter .table-wrap::before { content:'表格可左右滑动 →'; display:block; padding:9px 15px; color:var(--muted); font-size:11px; }
+ .guide-toc { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 16px; }
+ .guide-toc a { font-size:13px; gap:10px; }
+ .guide-cover { padding-top:4px; }
+ .guide-deck { font-size:17px; }
+ .guide-chapter { margin-top:32px; }
+ .guide-chapter-heading { gap:11px; }
+ .guide-chapter-heading h2 { font-size:21px; }
+ .guide-chapter-heading > span { font-size:18px; }
+ .guide-scenario,.guide-callout { padding:17px; }
+ .guide-figure figcaption { padding:15px 17px; }
+ .guide-build li,.guide-walkthrough li { gap:14px; }
+ .guide-roadmap li { grid-template-columns:1fr; gap:5px; }
+ .guide-end { justify-content:flex-start; }
+}
+@media print {
+ .rail,.topbar,.guide-toc,.guide-end,.guide-chapter-heading > a,.guide-task-link { display:none!important; }
+ .surface { margin:0!important; }
+ .content { padding:0!important; }
+ .project-guide { color:#222; --bg:#f6f6f6; --paper:#fff; --ink:#222; --muted:#555; --line:#ccc; --accent:#333; --accent-soft:#eee; }
+ .guide-diagram svg { min-width:0; }
+ .guide-chapter table { min-width:0; }
+ .guide-figure,.guide-code { break-inside:avoid; }
+}

@@ -23,7 +23,7 @@ const config={id:'repair',folder:'01-repair-agent',title:'测试与修复',subti
  if(page==='result'&&run)return resultView(run,s);
  if(page==='rules')return R.title('验收规则','查看当前执行器的固定规则，维护人工审查要求。')+`<div class="columns">${R.panel('自动验收规则',R.pad(`<ul class="checklist"><li>回归测试全部通过 ${R.badge('必须','good')}</li><li>独立用例全部通过 ${R.badge('必须','good')}</li><li>测试过程未修改用例 ${R.badge('固定样例')}</li><li>执行任意用户代码 ${R.badge('未开放')}</li></ul><p class="help-text">此处规则由执行器固定，修改审查说明不会改变实际测试判断。</p>`))}${R.form('policy',R.field('reviewer','默认审查人',s.policy.reviewer)+R.area('note','人工审查要求',s.policy.note),'保存要求','overview')}</div>`;
  if(page==='settings')return R.settings();
- if(page==='guide')return R.guide([['选择仓库与缺陷','仓库信息用于任务归档；当前只执行内置可信样例。'],['创建任务并运行','填写预期行为，选择正确或错误候选。'],['检查差异与失败用例','比较修复前、候选回归与独立测试。'],['记录审查结论','认可或退回补丁，添加备注，导出结果。']],'仓库登记、任务与审查可在本地保存；测试由 Python 实际执行。LLM、远程克隆、PR 创建和容器沙箱尚未接入。');
+ if(page==='guide')return ProjectGuides.render('repair');
  return R.title('未找到记录')+R.empty('页面不存在或记录已删除','请从导航选择一个页面。','overview','返回概览');
 },submit(name,v,s){
  if(name==='repo'){const id=R.uid('repo');s.repos.push({...v,id,sample:false});R.audit('登记仓库 '+v.name);R.go('repo/'+id);R.toast('仓库信息已保存，尚未连接远程代码。');}
