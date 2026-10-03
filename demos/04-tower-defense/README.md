@@ -4,21 +4,21 @@
 
 ## 运行
 
-全部 demo 共用根目录 `environment.yml` 定义的 `engineering-practice-lab` 环境。首次使用在仓库根目录执行：
+在仓库根目录启动，全部项目共用同一个环境：
 
-```bash
-conda env create -f environment.yml
+```powershell
+# Windows PowerShell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1
 ```
 
-环境已创建后不必重复创建，每次启动只需：
-
 ```bash
-conda activate engineering-practice-lab
-python server.py
+# macOS / Linux
+bash start.sh
 ```
 
-访问 `http://127.0.0.1:8765/demos/04-tower-defense/`。本demo是纯浏览器游戏，也可直接双击本目录 `index.html`。
-后续依赖统一更新根目录环境配置，不为此 demo 单独创建环境。
+脚本优先使用当前终端可调用的 Conda，自动创建/复用 `engineering-practice-lab`。无 Conda 时需要 Python 3.10–3.13（推荐3.12），自动创建共用 `.venv`。无需先手动激活，首次安装后会直接启动服务。
+
+访问 `http://127.0.0.1:8765/demos/04-tower-defense/`。环境、端口与检查参数见 [完整部署说明](../../docs/DEPLOYMENT.md)。请通过本地服务访问所有项目功能。
 
 ## 演示步骤
 

@@ -2,36 +2,41 @@
 
 基于丁箐老师14题、白天老师11题的选题研究，以及4个独立目录的多页面交互原型。调研日期：2026-10-01。
 
-## 快速开始：全部 demo 共用一个 Conda 环境
+## 一条命令启动
 
-先安装 Miniconda 或 Anaconda，在仓库根目录执行以下命令。Windows 可使用 Anaconda Prompt；已初始化 Conda 的 PowerShell、macOS 和 Linux 终端也可使用。
+获取完整仓库后，在根目录执行。四个项目共用一个环境，无需逐个部署。
 
-```bash
-conda env create -f environment.yml
-conda activate engineering-practice-lab
-python server.py
+**Windows PowerShell：**
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1
 ```
 
-环境只创建一次。之后每次运行：
+**macOS / Linux：**
 
 ```bash
-conda activate engineering-practice-lab
-python server.py
+bash start.sh
 ```
 
-浏览器打开 http://127.0.0.1:8765 。端口占用可使用 `python server.py --port 8766`。
-所有选题 demo 共用 `engineering-practice-lab`，不为每个 demo 建环境。后续新增 demo 的依赖也统一维护在根目录 `environment.yml`。
+| 当前环境 | 自动处理 |
+|---|---|
+| 终端可调用 Conda | 创建或复用 `engineering-practice-lab`，依赖全部通过 Conda 安装，不调用 pip |
+| 没有 Conda，已安装 Python 3.10–3.13 | 创建或复用仓库内 `.venv`，仅在该虚拟环境中安装 Python 依赖；推荐 Python 3.12 |
+| 两者都没有 | 提示先安装 Miniconda / Anaconda，或 Python 3.12 |
 
-环境配置包含 Python 3.12、NumPy、scikit-learn，以及引擎和页面流程测试所需的 Node.js，均通过 Conda 安装。塔防与报告也可直接打开 HTML；前三个 demo 需要上述服务端。
-不需要 API Key。创建环境需要网络，安装后全部原型可离线运行。
+浏览器打开 <http://127.0.0.1:8765>，Ctrl+C 停止。首次安装需要网络；以后配置未变时跳过安装，可离线运行。Conda 环境还包含测试用 Node.js 22，无 Conda 分支运行页面不需要 Node.js。
 
-拉取新版配置后，更新同一个环境：
+**明确使用 Conda**：Windows 命令追加 `-Manager conda`，macOS/Linux 追加 `--manager conda`。无需提前激活；也可从 Anaconda Prompt 直接执行：
 
 ```bash
-conda env update -n engineering-practice-lab -f environment.yml
+conda run --no-capture-output -n base python launch.py --manager conda
 ```
 
-环境已存在时使用更新命令，不必重复创建。如果 Windows PowerShell 提示无法激活，先改用 Anaconda Prompt 运行上述命令。
+**明确使用无 Conda 方案**：对应追加 `-Manager venv` / `--manager venv`。
+
+端口占用可追加 `-Port 8766` / `--port 8766`；只创建环境并检查用 `-Check` / `--check`；强制同步依赖用 `-Update` / `--update`。已有环境继续复用；四个 demo 不各自创建环境。
+
+拉取更新后重跑同一启动命令即可。完整步骤、系统要求、私密仓库访问与故障排查见 [部署说明](docs/DEPLOYMENT.md)。原有 `conda activate engineering-practice-lab` 后运行 `python server.py` 的方式仍可使用。
 
 ## 目录
 
@@ -43,6 +48,8 @@ conda env update -n engineering-practice-lab -f environment.yml
 | `demos/03-mlops/` | 模型发布实验：训练、分布监控与版本切换 | 丁箐 项目二 |
 | `demos/04-tower-defense/` | 两类塔、五波敌人、经济与胜负判断 | 白天 B类第5题 |
 | `environment.yml` | 所有 demo 共用的 Conda 环境 | 全项目 |
+| `start.ps1` / `start.sh` / `launch.py` | 自动选择环境、安装检查和启动 | 全项目 |
+| `requirements.txt` | 仅用于无 Conda 开发者的共用 `.venv` | 全项目 |
 | `shared/` | 公用界面样式/交互工具 |
 | `tests/` | 引擎与HTTP验收测试 |
 | `docs/` | 验收记录、后续开发范围 |

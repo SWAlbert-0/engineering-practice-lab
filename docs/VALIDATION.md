@@ -1,6 +1,6 @@
 # 验证记录
 
-最新状态：主题设计与图文项目指南均已完成 Firefox 桌面与窄屏检查，最新范围见文末“图文项目指南”。早期记录中的浏览器下载失败为当时状态。
+最新状态：一键启动已在 Linux 的真实 Conda 与 .venv 环境中验证，详见文末“一键部署”。主题与图文指南的浏览器验证记录保留在对应章节。早期记录中的浏览器下载失败为当时状态。
 
 日期：2026-10-01。环境：Python 3.12，numpy 2.3.5，scikit-learn 1.8.0；Node测试塔防核心。
 
@@ -108,3 +108,20 @@
 - 查看了浅色、深色与林地主题的中文截图，核对图中连接、字号与窄屏阅读。截图用临时中文字体，项目仍使用系统字体。
 
 没有改变后端计算、存储结构或Conda依赖，因此没有重跑完整Python引擎回归；产品流程测试仍调用实际引擎返回值。尚未做Windows浏览器与手机硬件实测；本次不对原生打印和下载作验收声明。
+
+
+## 2026-10-03 一键部署
+
+新增 start.ps1、start.sh 与 launch.py。Conda 分支使用同名共用环境与 environment.yml，不调用 pip；无 Conda 分支仅在共用 .venv 内安装 requirements.txt。成功检查后写依赖摘要，失败不启动服务；未改变 Python 服务接口和监听范围。
+
+已执行：
+
+- 校验官方 Miniforge 26.7.2-0 安装包 SHA-256 后，在临时目录安装，实际创建 engineering-practice-lab 环境。Python 3.12.14、NumPy 2.5.3、scikit-learn 1.9.1 与 Node.js 22 校验通过。
+- Conda 首次创建、后续跳过安装、显式 --update 同步与 --check 退出通过。
+- 无 Conda 路径实际创建 .venv、安装依赖并复用通过。会话恢复后旧测试 venv 的解释器链接缺失，将旧目录移走后重建，符合文档中的不完整环境恢复流程。
+- 两种环境分别实际启动服务，验证首页与三个计算API、自定义端口、从仓库以外目录启动、端口占用时先报错、Ctrl+C 停止并释放端口。
+- 新 .venv 的完整 Python 测试26项通过，包括新增9项启动逻辑检查；覆盖创建/复用、配置变化更新、失败无成功标记、Conda不回退pip、venv不写全局与无效目录不覆盖。
+- 新 Conda 环境内执行 test_products.cjs 与 test_ui.cjs 通过。
+- 校验官方 PowerShell 7.6.6 便携包后，在 Linux 上实际运行 start.ps1 的 venv 和 Conda 检查分支，参数与退出码正常。Bash语法检查通过。
+
+未做Windows、macOS实机验收；Linux上的PowerShell运行不覆盖Windows Python Launcher、系统策略或Conda DLL加载行为。当前支持范围与推荐Python版本见 DEPLOYMENT.md，依赖使用兼容范围而非全平台精确锁定。测试运行时只安装到临时目录或专用环境，不纳入仓库。

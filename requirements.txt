@@ -1,0 +1,4 @@
+# Only for developers without Conda. Installed inside the shared .venv by launch.py.
+# Keep runtime ranges in sync with environment.yml; Node.js is optional for tests.
+numpy>=2.0,<3
+scikit-learn>=1.5,<2
