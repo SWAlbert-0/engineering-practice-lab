@@ -1,7 +1,7 @@
-"""Consistent SQLite backup for D01/D09. Stop the service before restoring a backup."""
+"""Consistent SQLite backup for D01/D09/D11. Stop the service before restoring a backup."""
 import argparse,os,sqlite3
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--project',choices=('process','requirements'),default='process');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--project',choices=('process','requirements','repair'),default='process');a=p.parse_args()
 source=Path(os.environ.get('LAB_DATA_DIR',str(Path(__file__).resolve().parents[1]/'data')))/(a.project+'.sqlite3')
 target=Path(a.output).resolve()
 if not source.exists():p.error('Database does not exist; start the service first.')

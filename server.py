@@ -15,6 +15,7 @@ requirements=load('05-requirements');literature=load('06-literature');video=load
 from shared.model_client import configured
 from shared.process_workspace import get_workspace, WorkspaceError
 from shared.requirements_workspace import get_requirements_workspace
+from shared.repair_workspace import get_repair_workspace
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
@@ -28,6 +29,19 @@ class Handler(SimpleHTTPRequestHandler):
         path=urlsplit(self.path).path
         if path=='/healthz':return self.reply(200,{'status':'ok','projects':6})
         if path=='/api/capabilities':return self.reply(200,{'llm':configured()})
+        if path.startswith('/api/repair-workspace/'):
+            try:
+                w=get_repair_workspace();parts=path.removeprefix('/api/repair-workspace/').strip('/').split('/');q=parse_qs(urlsplit(self.path).query)
+                if parts==['workspace']:result=w.state()
+                elif len(parts)==2 and parts[0]=='tasks':result=w.task(parts[1])
+                elif len(parts)==3 and parts[0]=='tasks' and parts[2]=='events':result={'events':w.task(parts[1])['events']}
+                elif len(parts)==3 and parts[0]=='tasks' and parts[2]=='export':return self.binary(*w.export(parts[1],q.get('format',['json'])[0],q.get('attempt',[None])[0]))
+                else:raise WorkspaceError('接口不存在。',404)
+                return self.reply(200,result)
+            except WorkspaceError as error:return self.reply(error.status,{'error':str(error)})
+            except (ValueError,TypeError):return self.reply(400,{'error':'请求参数无效。'})
+            except Exception:
+                import traceback;traceback.print_exc();return self.reply(500,{'error':'读取修复工作区失败，请查看服务端日志。'})
         if path.startswith('/api/requirements-workspace/'):
             try:
                 w=get_requirements_workspace();parts=path.removeprefix('/api/requirements-workspace/').strip('/').split('/')
@@ -93,6 +107,14 @@ class Handler(SimpleHTTPRequestHandler):
             if 'application/json' not in self.headers.get('Content-Type',''):raise ValueError('需要 JSON')
             data=json.loads(self.rfile.read(length))
             if not isinstance(data,dict):raise ValueError('需要 JSON 对象')
+            if self.path.startswith('/api/repair-workspace/'):
+                parts=urlsplit(self.path).path.removeprefix('/api/repair-workspace/').strip('/').split('/');w=get_repair_workspace();status=200
+                if parts==['tasks']:result=w.create(data);status=202
+                elif len(parts)==3 and parts[0]=='tasks':
+                    if parts[2]=='reviews':result=w.review(parts[1],data)
+                    else:result=w.action(parts[1],parts[2]);status=202
+                else:raise WorkspaceError('接口不存在。',404)
+                return self.reply(status,result)
             if self.path.startswith('/api/requirements-workspace/'):
                 parts=urlsplit(self.path).path.removeprefix('/api/requirements-workspace/').strip('/').split('/');w=get_requirements_workspace();status=200
                 if parts==['documents']:result=w.import_document(data);status=201
@@ -155,12 +177,12 @@ def main(argv=None):
     p.add_argument('--port',type=int,default=8765)
     a=p.parse_args(argv)
     if not 1 <= a.port <= 65535:p.error('port must be between 1 and 65535')
-    workspace=get_workspace();requirements_workspace=get_requirements_workspace()
+    workspace=get_workspace();requirements_workspace=get_requirements_workspace();repair_workspace=get_repair_workspace()
     with ThreadingHTTPServer((a.host,a.port),Handler) as httpd:
         print(f'Engineering Topic Lab listening on {a.host}:{a.port}',flush=True)
         try:httpd.serve_forever()
         except KeyboardInterrupt:pass
-        finally:workspace.close();requirements_workspace.close()
+        finally:workspace.close();requirements_workspace.close();repair_workspace.close()
 
 if __name__=='__main__':
     main()

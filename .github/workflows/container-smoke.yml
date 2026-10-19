@@ -37,6 +37,17 @@ jobs:
       - name: Unit and service regression tests
         run: |
           docker run --rm --read-only --tmpfs /tmp -e PYTHONDONTWRITEBYTECODE=1 -v "$PWD:/suite:ro" -w /suite engineering-practice-lab:local python -m unittest discover -s tests -v
+      - name: Verify D11 worker identity
+        run: |
+          python3 - <<'PYCODE'
+          import json,urllib.request
+          value=json.load(urllib.request.urlopen('http://127.0.0.1:8765/api/repair-workspace/workspace'))
+          assert value['capabilities']['worker_uid']==10001,value['capabilities']
+          assert value['capabilities']['ready'],value['capabilities']
+          PYCODE
+      - name: D11 real Docker isolation and cleanup
+        run: |
+          docker run --rm --user 0:10001 --read-only --tmpfs /tmp -e PYTHONDONTWRITEBYTECODE=1 -e LAB_REPAIR_DOCKER_TEST=1 -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:/suite:ro" -w /suite engineering-practice-lab:local python -m unittest discover -s tests -p test_repair_docker.py -v
       - name: Install browser acceptance tools
         run: |
           npm install --prefix /tmp/lab-browser --no-audit --no-fund playwright@1.62.1
@@ -53,6 +64,10 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_design_workspaces.cjs
+      - name: D11 real browser acceptance
+        env:
+          NODE_PATH: /tmp/lab-browser/node_modules
+        run: node tests/test_repair_browser.cjs
       - name: Verify persistent workspace after restart
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
@@ -61,6 +76,7 @@ jobs:
           docker compose up -d --wait --wait-timeout 90
           node tests/test_process_browser.cjs --check-persistence
           node tests/test_requirements_browser.cjs --check-persistence
+          node tests/test_repair_browser.cjs --check-persistence
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

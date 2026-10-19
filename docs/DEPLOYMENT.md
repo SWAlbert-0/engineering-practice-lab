@@ -1,6 +1,6 @@
 # 容器部署与运行管理
 
-六个项目和调研报告打包在同一个镜像中，由根目录 Python 服务提供网页与 API。使用者只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
+六个项目和调研报告由统一应用镜像提供网页与 API。D11 另用同一镜像运行独立 worker，并构建一次性测试使用的小型镜像。使用者只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
 
 ## 首次启动
 
@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 资料与 D09 需求/用例保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 和 [D09 工作区说明](D09_WORKSPACE.md)。其余四项仍使用浏览器 LocalStorage，不自动跨设备同步。源码与 Docker socket 均不挂入运行服务。
+D01 资料、D09 需求/用例与 D11 修复任务/证据保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 和 [D09 工作区说明](D09_WORKSPACE.md)。其余三项仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
 
 ## 端口与可选配置
 
@@ -71,18 +71,18 @@ cp .env.example .env
 | 健康检查 | 每 10 秒检查 `/healthz`，启动宽限 30 秒；连续失败显示 unhealthy |
 | 日志与重启 | 每份 10 MiB、最多 3 份；`unless-stopped` 重启策略 |
 
-健康失败不会由 Docker 自动重启仍活着的进程；重启策略作用于退出进程。当前镜像统一了运行环境，尚未实现不可信仓库的逐任务沙箱；修复项目仍只执行内置可信样例。Base image 和系统包未锁定 digest，不能宣称镜像逐字节可复现。首次构建若缺少某架构的预编译 wheel 会明确失败，不隐式安装编译工具链。
+健康失败不会由 Docker 自动重启仍活着的进程；重启策略作用于退出进程。D11 的 worker 和一次性受限容器说明见 [D11工作区](D11_WORKSPACE.md)。`repair-image` 检查完成后退出为正常状态；worker 提供单独健康检查，默认启动命令同时等待应用和 worker 就绪。Web 服务仍非 root；受信任 worker 启动时设置 socket 附加组，主进程随后使用 UID/GID 10001；它持有 Docker socket，其能力与受限任务容器不同。Base image 和系统包未锁定 digest，不能宣称镜像逐字节可复现。首次构建若缺少某架构的预编译 wheel 会明确失败，不隐式安装编译工具链。
 
 ## 离线交付镜像（可选）
 
-有网络的同学先在与队友相同 CPU 架构上构建并导出：
+在有网络且目标 CPU 架构一致的机器上构建并导出：
 
 ```bash
 docker compose build
-docker save -o engineering-practice-lab-image.tar engineering-practice-lab:local
+docker save -o engineering-practice-lab-image.tar engineering-practice-lab:local engineering-practice-lab-repair:local
 ```
 
-将镜像 tar、`compose.yaml` 和 `.env.example` 交给队友，或让队友保留完整仓库。队友执行：
+交付镜像 tar、`compose.yaml` 和 `.env.example`，或保留完整仓库。在目标机器执行：
 
 ```bash
 docker load -i engineering-practice-lab-image.tar
@@ -101,6 +101,7 @@ docker compose up --no-build --pull never -d --wait
 | 端口被占用 | 修改 `.env` 的 `LAB_PORT`，重跑启动命令 |
 | 服务 unhealthy 或启动超时 | `docker compose logs --tail=100` 查看引擎加载错误，修复后重新构建 |
 | 更新后仍看到旧页面 | 确认执行带 `--build` 的命令并刷新浏览器；镜像使用复制的源码，不热挂载宿主机文件 |
+| D11 运行器不可用 | 查看 `docker compose logs --tail=100 repair-worker`；确认 Linux 引擎、socket 权限、任务镜像及 worker 健康，重新执行带 `--build` 的启动命令 |
 | 模型配置齐全但请求失败 | 检查模型名称、容器内可达地址、认证和图像能力；默认离线功能不依赖该配置 |
 
 仓库的 [Container smoke test](../.github/workflows/container-smoke.yml) 在 GitHub Actions 中验证 Compose、真实构建、只读非 root 容器、健康检查、六项目网页与离线 API。接口检查脚本只使用 Python 标准库：`python scripts/container_smoke.py`（需默认端口且关闭模型配置）。它不是视频内容理解或外部模型质量评测。
@@ -111,7 +112,7 @@ docker compose up --no-build --pull never -d --wait
 
 # 本地 Python 开发方式
 
-容器使用者不需要执行以下步骤。希望直接运行 Python 并修改代码时，六个项目继续共用一个 Conda 或 `.venv` 环境。默认仅监听本机。
+容器使用者不需要执行以下步骤。希望直接运行 Python 并修改代码时，六个项目继续共用一个 Conda 或 `.venv` 环境。默认仅监听本机。D11 在本地模式只运行内置可信候选，不需要也不自动连接 Docker；手写与模型候选使用 Compose 的独立运行器。
 
 ## 1. 获取完整仓库
 

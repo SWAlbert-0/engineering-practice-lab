@@ -1,0 +1,7 @@
+# Job image has no application, database, model key or host mount.
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUTF8=1
+WORKDIR /opt/repair
+COPY shared/repair_fixtures.py shared/repair_judge.py ./
+USER 65534:65534
+CMD ["python", "-I", "-S", "/opt/repair/repair_judge.py", "--self-check"]
