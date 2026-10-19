@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 资料、D09 需求/用例、D11 修复任务/证据、D13 文献/综述与 D02 数据/模型/服务/监控保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 、[D13 工作区说明](D13_WORKSPACE.md) 和 [D02 工作区说明](D02_WORKSPACE.md)。D12 仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
+D01 资料、D09 需求/用例、D11 修复任务/证据、D13 文献/综述与 D02 数据/模型/服务/监控保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 、[D13 工作区说明](D13_WORKSPACE.md) 和 [D02 工作区说明](D02_WORKSPACE.md)。D12的视频、帧、回答和任务保存于`/data/video/`，同样复用此卷；完整限制见[D12工作区](D12_WORKSPACE.md)。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
 
 ## 端口与可选配置
 
@@ -215,7 +215,7 @@ python3.12 launch.py --manager venv
 | `.venv` 不完整或来自另一台机器 | 确认其中没有要保留的文件，停止服务后将 `.venv` 移走，再用 Python 3.12 重建。脚本不会自动删除已有目录 |
 | Linux 提示缺少 ensurepip / venv | 通过系统包管理器安装与所用 Python 版本对应的 venv 组件后重试 |
 | 端口 8765 已占用 | 停止旧服务，或指定 8766；脚本不会终止其他进程 |
-| 新端口下看不到历史记录 | D12和旧教学页的LocalStorage按来源隔离；五个服务端工作区应检查数据目录/卷是否为原路径 |
+| 新端口下看不到历史记录 | 旧教学页LocalStorage按来源隔离；六个服务端工作区应检查数据目录/卷是否为原路径 |
 
 同一环境不要同时运行两个首次安装/更新过程。依赖安装中断时可修复网络后重试；脚本只在安装和加载检查都成功后保存摘要。
 
@@ -239,3 +239,8 @@ conda run --no-capture-output -n engineering-practice-lab node tests/test_produc
 - [Conda env update](https://docs.conda.io/projects/conda/en/stable/commands/env/update.html)
 - [Conda run](https://docs.conda.io/projects/conda/en/26.3.x/commands/run.html)
 - [Python venv](https://docs.python.org/3/library/venv.html)
+
+
+### D12视频处理依赖
+
+Docker镜像包含FFmpeg / ffprobe；共用Conda环境新增ffmpeg，已有环境执行`conda env update -f environment.yml`。venv入口不使用pip安装外部解码器，须先在系统安装FFmpeg并加入PATH。原片上限16 MiB/600秒，单实例运行；数据库和视频文件应在停止服务后一起备份，暂无D12在线一致性备份工具。
