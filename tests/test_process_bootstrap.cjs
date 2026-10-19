@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 module.exports=async function checkBootstrap(browser,base,artifact){
  const url=base+'/demos/02-process-rag/index.html';
  const context=await browser.newContext();const page=await context.newPage();
- const ready=()=>page.getByRole('heading',{name:'资料有出处，草案可核查',exact:true}).waitFor();
+ const ready=()=>page.getByRole('heading',{name:'工艺资料工作台',exact:true}).waitFor();
  const entry='**/demos/02-process-rag/workspace.js?*';
  try{
   // Cached legacy product.js must never be requested by the new HTML.

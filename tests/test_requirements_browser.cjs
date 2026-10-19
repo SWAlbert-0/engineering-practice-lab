@@ -1,13 +1,14 @@
 /* Real browser acceptance; uses only offline fixtures and an isolated CI volume. */
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const {chromium}=require(process.env.LAB_PLAYWRIGHT||'playwright');
+const playwright=require(process.env.LAB_PLAYWRIGHT||'playwright');
+const browserName=process.env.LAB_BROWSER||'chromium',browserType=playwright[browserName];
 const base=process.env.LAB_TEST_URL||'http://127.0.0.1:8765',endpoint='/api/requirements-workspace/';
 async function api(p,body){const r=await fetch(base+endpoint+p,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const x=await r.json();assert(r.ok,JSON.stringify(x));return x;}
 async function waitFor(fn){for(let n=0;n<180;n++){const r=await fn();if(r)return r;await new Promise(resolve=>setTimeout(resolve,250));}throw Error('Timed out waiting for D09 state');}
 (async()=>{
  if(process.argv.includes('--check-persistence')){const saved=JSON.parse(fs.readFileSync('/tmp/lab-requirements-e2e.json'));const suite=await api('sets/'+saved.suite);assert(suite.source_outdated);assert.equal(suite.set.current,saved.version);const release=await fetch(base+endpoint+'releases/'+saved.release+'/export');assert.equal((await release.json()).status,'released');console.log('D09 source, case versions and release verified after container restart.');return;}
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});const context=await browser.newContext({viewport:{width:1536,height:1040},acceptDownloads:true});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));const artifact='/tmp/lab-browser-artifacts';fs.mkdirSync(artifact,{recursive:true});
+ const browser=await browserType.launch({headless:true,executablePath:process.env.LAB_BROWSER_EXECUTABLE||undefined,args:browserName==='chromium'?['--no-sandbox']:[]});const context=await browser.newContext({viewport:{width:1536,height:1040},acceptDownloads:true});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));const artifact='/tmp/lab-browser-artifacts';fs.mkdirSync(artifact,{recursive:true});
  try{
   const settled=async(target=page)=>target.waitForFunction(()=>{const view=document.querySelector('#workspace-view');return view&&!view.inert&&view.dataset.route===(location.hash.slice(1)||'overview');});
   const go=async route=>{await page.goto(base+'/demos/05-requirements/index.html#'+route);await settled();assert(await page.locator('#workspace-error').isHidden(),await page.locator('#error-message').textContent());};

@@ -1,13 +1,14 @@
 /* Real browser acceptance of D01 against a running offline service. */
 'use strict';
 const assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
-const {chromium}=require(process.env.LAB_PLAYWRIGHT||'playwright');
+const playwright=require(process.env.LAB_PLAYWRIGHT||'playwright');
+const browserName=process.env.LAB_BROWSER||'chromium',browserType=playwright[browserName];
 const base=process.env.LAB_TEST_URL||'http://127.0.0.1:8765';
 async function api(p,body){const r=await fetch(base+'/api/process/'+p,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const x=await r.json();assert(r.ok,JSON.stringify(x));return x;}
 async function waitFor(fn){for(let i=0;i<180;i++){const x=await fn();if(x)return x;await new Promise(r=>setTimeout(r,300));}throw Error('Timed out waiting for state');}
 (async()=>{
  if(process.argv.includes('--check-persistence')){const p=JSON.parse(fs.readFileSync('/tmp/lab-process-e2e.json'));const d=await api('drafts/'+p.draft);assert.equal(d.version,2);assert(d.stale);assert((await api('documents/'+p.doc)).document.deleted);console.log('D01 persistence verified after container restart.');return;}
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+ const browser=await browserType.launch({headless:true,executablePath:process.env.LAB_BROWSER_EXECUTABLE||undefined,args:browserName==='chromium'?['--no-sandbox']:[]});
  const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});const page=await context.newPage();
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const artifact='/tmp/lab-browser-artifacts';fs.mkdirSync(artifact,{recursive:true});

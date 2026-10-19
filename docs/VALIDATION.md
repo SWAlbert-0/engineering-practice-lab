@@ -177,3 +177,19 @@ D09 新增独立 SQLite 原文/分析/用例版本库与持久任务，业务页
 工作流新增 `tests/test_requirements_browser.cjs`，在实际 Compose 镜像中执行文件导入 → 分析 → 编辑自动保存/刷新恢复 → 版本提交 → 核对门禁 → 批量审核 → 发布 → 导出回导 → 双浏览器冲突比较与本地备份 → 原文修订影响 → 390px 页面检查，并和 D01 一起验证容器重启后的记录。脚本还覆盖入口文件加载失败后的 HTML 提示与重新加载。桌面工作台、用例编辑、矩阵、移动编辑器和指南截图归档在 Actions 的 `d01-browser-evidence` 工件（名称沿用，含 D01/D09）。实际容器与浏览器运行结果见 [容器验收工作流](https://github.com/SWAlbert-0/engineering-practice-lab/actions/workflows/container-smoke.yml)。
 
 当前未完成真实模型质量评估、100 条独立业务样本与双人语义标注、账户权限或实际被测系统执行；自动化检查不作为业务准确率。
+
+## 2026-10-19 D01 / D09 前端重设计
+
+根据 distinctive-ai-design、Anthropic frontend-design 和 Vercel web-design-guidelines 完成两项目独立布局。D01 首页直接检索并按材料浏览；D09 首页直接导入需求，核心编辑区增加用例目录和操作/输入/预期三列字段。保留服务端版本、审核、冲突与发布规则，没有新增运行依赖。方向、来源和截图评审记录见 [界面设计说明](DESIGN_SKILLS.md)。
+
+本地验证结果：
+
+- 完整 Python 测试 **81 项通过**；其他项目的产品流程与前端行为检查通过。
+- 真实 Firefox 的 D01 完整上传、索引、检索、来源定位、草案编辑/审核/导出、来源变化、缓存隔离、加载失败/恢复及390px检查通过。
+- 真实 Firefox 的 D09 完整导入、生成、自动保存/刷新、版本提交、审核门禁、发布、导出回导、双浏览器冲突恢复、原文影响和390px检查通过。
+- 新增 `tests/test_design_workspaces.cjs`，验证 D01 首页检索/问题快捷填充/材料筛选、D09 首页文件导入/目录切换自动保存/核对全选及选择数量，桌面和390px检查通过。
+- 查看两轮真实截图，调整 D09 文字对比度、字段字号与文件读取控件；共享样式及脚本语法、差异空白检查通过。
+
+浏览器测试使用隔离的临时数据目录与测试字体，不写入已有工作区。Firefox 的沙箱适配仅限当前测试容器；项目部署配置没有改变。此次未做 Windows/macOS 或手机硬件验收，也未调用真实模型服务。
+
+容器工作流继续运行真实 Docker 构建、Chromium 全流程及重启持久化检查，并增加新版入口验收；截图保存在 `d01-browser-evidence` 工件。实际容器结果以[对应提交的工作流](https://github.com/SWAlbert-0/engineering-practice-lab/actions/workflows/container-smoke.yml)为准。

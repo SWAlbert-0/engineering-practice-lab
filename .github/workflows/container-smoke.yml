@@ -49,6 +49,10 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_requirements_browser.cjs
+      - name: Redesigned workspace entry points
+        env:
+          NODE_PATH: /tmp/lab-browser/node_modules
+        run: node tests/test_design_workspaces.cjs
       - name: Verify persistent workspace after restart
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
