@@ -17,6 +17,12 @@
 
 `D01` 等编号对应原始选题，`demos/` 下的目录序号用于代码组织，两者不一一对应。各项目的用途、操作流程、实现入口与后续评估方案见 [选题与实现说明](docs/PROJECTS.md)。
 
+## 完善计划与参考调研
+
+[参考调研与完善计划](docs/RESEARCH_AND_ROADMAP.md) 对六个选题的 18 个主要参考对象进行对照，说明共用架构、功能与界面改进、评估方法及阶段安排。[实施任务清单](docs/IMPLEMENTATION_BACKLOG.md) 列出 37 项任务的依赖、估算与完成条件，当前均为待实施状态。
+
+启动服务后可访问 [HTML 调研报告](report/upgrade-plan.html)，其中包含页面结构建议、工期估算与任务筛选。GitHub 中可直接阅读上述 Markdown 文档。
+
 ## 快速部署
 
 ### 环境要求
@@ -159,6 +165,8 @@ node tests/test_products.cjs
 | [交互流程说明](docs/PRODUCT_FLOWS.md) | 页面范围、记录状态与人工审核规则 |
 | [模型配置说明](docs/MODEL_SETUP.md) | 可选模型配置、调用预算与数据发送范围 |
 | [界面设计说明](docs/DESIGN_SKILLS.md) | 设计参考、主题与验证范围 |
+| [参考调研与完善计划](docs/RESEARCH_AND_ROADMAP.md) | 相似项目、功能与界面方案、技术取舍、实施阶段 |
+| [实施任务清单](docs/IMPLEMENTATION_BACKLOG.md) | 37 项待实施任务、依赖、工时与完成条件 |
 | [验收记录](docs/VALIDATION.md) | 已完成检查与未验证范围 |
 | [开发记录](docs/WORKLOG.md) | 项目范围与部署方式的变更记录 |
 

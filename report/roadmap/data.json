@@ -1,0 +1,1323 @@
+{
+  "date": "2026-10-19",
+  "baseline": "4956ee6d0852a6371549efada6804dbd7a2eb6e1",
+  "sources": [
+    {
+      "id": "R01",
+      "name": "RAGFlow",
+      "url": "https://github.com/infiniflow/ragflow",
+      "kind": "开源项目",
+      "scope": "D01",
+      "fact": "公开提供文档解析、分块干预和可追溯引用。",
+      "learn": "学习导入状态、分块预览、来源回跳；将工艺草案与证据绑定。",
+      "caveat": "参考其流程，首版不引入整套基础设施；不能把其性能声明视为本项目指标。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "R02",
+      "name": "Dify",
+      "url": "https://github.com/langgenius/dify",
+      "kind": "公开源码，附加许可条件",
+      "scope": "D01",
+      "fact": "将知识摄取、检索、模型配置与工作流组织在同一平台。",
+      "learn": "借鉴索引配置与检索调试的分工，以及明确的失败反馈。",
+      "caveat": "Dify 使用附加条件许可；学习交互和边界，不直接复制界面或默认纳入其整个平台。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "R03",
+      "name": "Glean Search",
+      "url": "https://www.glean.com/enterprise-search",
+      "kind": "商业服务",
+      "scope": "D01",
+      "fact": "官方说明企业检索遵循数据源权限，并呈现结果与内容来源。",
+      "learn": "检索前按工作区限制候选文档；结果旁显示来源、版本与更新时间。",
+      "caveat": "企业通用搜索是相邻产品，不直接解决工艺结构、单位和审批约束；未进行付费产品实测。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "M01",
+      "name": "MLflow Model Registry",
+      "url": "https://mlflow.org/docs/latest/ml/model-registry/",
+      "kind": "开源组件 / 托管版本",
+      "scope": "D02",
+      "fact": "支持模型版本、血缘、别名、标签及 UI/API。",
+      "learn": "将实验、模型制品和实际服务版本关联；区分注册别名与服务生效状态。",
+      "caveat": "别名更新不等于所有服务实例已热加载；本项目必须单独实现加载确认与回滚验证。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "M02",
+      "name": "Evidently",
+      "url": "https://docs.evidentlyai.com/introduction",
+      "kind": "开源框架 / 平台",
+      "scope": "D02",
+      "fact": "提供数据质量、漂移与 AI 评估，以及可视化报告。",
+      "learn": "把参考窗口、当前窗口、样本量、标签可用性与指标解释放在同一页面。",
+      "caveat": "漂移不是效果下降的充分证据；首版复用评估库，不再建设第二套监控平台。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "M03",
+      "name": "Amazon SageMaker Model Registry",
+      "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html",
+      "kind": "商业托管服务",
+      "scope": "D02",
+      "fact": "官方文档展示模型版本、元数据、血缘与生命周期管理。",
+      "learn": "学习部署前审批、制品版本与运行环境的对应关系。",
+      "caveat": "作为流程参照；首版使用本地容器服务，不引入 AWS 账号或云资源依赖。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "Q01",
+      "name": "ZenTao 禅道",
+      "url": "https://github.com/easysoft/zentaopms",
+      "kind": "开源版 / 商业版本",
+      "scope": "D09",
+      "fact": "公开仓库覆盖产品、项目与质量管理，并区分开源及商业版本。",
+      "learn": "围绕需求、测试用例和缺陷建立稳定对象编号与关联。",
+      "caveat": "是需求与测试生命周期参照，不据此认定开源版具备商业版全部 AI 能力。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "Q02",
+      "name": "Kiwi TCMS",
+      "url": "https://kiwitcms.readthedocs.io/en/latest/guide/testcase.html",
+      "kind": "开源测试管理",
+      "scope": "D09",
+      "fact": "文档展示测试用例创建、内容维护及版本历史。",
+      "learn": "设计用例的步骤、预期结果、审核和版本变化；借鉴测试管理对象关系。",
+      "caveat": "偏测试管理，不是自然语言需求理解引擎；不将其列为同类 AI 生成算法。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "Q03",
+      "name": "Qase AI Test Designer",
+      "url": "https://docs.qase.io/en/articles/9653096-ai-test-designer",
+      "kind": "商业 SaaS",
+      "scope": "D09",
+      "fact": "支持由需求生成待审核用例，选择保留后保存，并标记 AI 来源。",
+      "learn": "采用输入依据、逐项修改、批量审核、确认入库的流程。",
+      "caveat": "其文档提示未保存结果可能丢失；本项目应增加自动草稿，不能机械照搬。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "A01",
+      "name": "OpenHands Agent Canvas / SDK",
+      "url": "https://github.com/OpenHands/OpenHands",
+      "kind": "开源界面 / 代理生态",
+      "scope": "D11",
+      "fact": "当前仓库定位为编码代理控制中心，支持不同执行后端。",
+      "learn": "学习会话、任务与执行后端分离，提供可审阅的运行过程。",
+      "caveat": "界面仓库与代理 SDK 分工已变化；不将当前主仓库当作单一旧版代理内核。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "A02",
+      "name": "mini-SWE-agent",
+      "url": "https://github.com/SWE-agent/mini-swe-agent",
+      "kind": "开源代理",
+      "scope": "D11",
+      "fact": "以简洁代理、模型及环境接口支持软件任务和不同执行环境。",
+      "learn": "借鉴受控循环、环境适配器、轨迹记录与预算上限。",
+      "caveat": "只学习结构，不把其公开基准成绩作为本项目结果，也不直接开放无限 shell。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "A03",
+      "name": "Devin",
+      "url": "https://docs.devin.ai/get-started/devin-intro",
+      "kind": "商业服务",
+      "scope": "D11",
+      "fact": "官方产品说明涵盖写代码、运行测试、处理缺陷与工程集成。",
+      "learn": "把用户目标、执行过程、补丁产物和审查入口组织为一个任务。",
+      "caveat": "商业能力按官方公开文档理解；未验证自动修复成功率或隐藏执行机制。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "V01",
+      "name": "Qwen3-VL",
+      "url": "https://github.com/QwenLM/Qwen3-VL",
+      "kind": "开放模型与代码",
+      "scope": "D12",
+      "fact": "官方介绍视频理解和时间戳对齐，提供多个规模模型。",
+      "learn": "以小规模模型构建本地推理适配器，保存抽帧与模型配置。",
+      "caveat": "原 Qwen2.5-VL 仓库入口已重定向；建议固定模型与依赖版本后验证，不照抄历史安装命令。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "V02",
+      "name": "VideoLLaMA3",
+      "url": "https://github.com/DAMO-NLP-SG/VideoLLaMA3",
+      "kind": "研究模型与代码",
+      "scope": "D12",
+      "fact": "公开提供 2B/7B 模型和视频推理示例。",
+      "learn": "参考视频处理与评估组织，作为第二模型或方法对照。",
+      "caveat": "README 同时注明研究预览的非商业服务限制；不据 Apache 标签认定全部模型与数据可商用。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "V03",
+      "name": "TwelveLabs Search",
+      "url": "https://docs.twelvelabs.io/docs/guides/search",
+      "kind": "商业 API",
+      "scope": "D12",
+      "fact": "检索返回视频标识、片段起止时间及排序信息。",
+      "learn": "结果绑定时间区间，点击证据回到相应片段；建立视频任务而非临时聊天。",
+      "caveat": "可用于交互参照，首版不依赖该付费 API；检索相关性不能替代事件推理正确性。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "L01",
+      "name": "STORM / Co-STORM",
+      "url": "https://github.com/stanford-oval/storm",
+      "kind": "开源研究系统",
+      "scope": "D13",
+      "fact": "将研究、提纲、正文与润色分为模块，并支持引用。",
+      "learn": "先建立研究问题和提纲，再围绕证据逐节写作与核查。",
+      "caveat": "通用知识报告与科研系统综述并不等价；必须另加论文筛选、数据提取和人工审核。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "L02",
+      "name": "Open Deep Research",
+      "url": "https://github.com/langchain-ai/open_deep_research",
+      "kind": "开源研究代理",
+      "scope": "D13",
+      "fact": "通过 LangGraph 组织研究流程，区分研究、压缩与报告模型配置。",
+      "learn": "学习任务阶段、角色配置及中间产物，允许只重跑失败节点。",
+      "caveat": "首版不直接移植完整搜索代理；摘要压缩结果必须仍可定位原始证据。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "L03",
+      "name": "Elicit Systematic Review",
+      "url": "https://elicit.com/solutions/systematic-review",
+      "kind": "商业服务",
+      "scope": "D13",
+      "fact": "官方展示筛选、提取、句级来源和可查看中间过程。",
+      "learn": "以证据矩阵为工作中心，保存纳入排除理由，编辑正文时联动来源。",
+      "caveat": "仅参考公开功能与界面示例；不沿用厂商节时或准确率宣传值。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T01",
+      "name": "FastAPI",
+      "url": "https://fastapi.tiangolo.com/",
+      "kind": "技术文档",
+      "scope": "共用",
+      "fact": "提供类型化请求、校验与 OpenAPI 文档。",
+      "learn": "用于替换单文件 HTTP 路由，保留现有引擎适配层。",
+      "caveat": "计划采用，尚未修改当前依赖。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T02",
+      "name": "SQLAlchemy 版本计数",
+      "url": "https://docs.sqlalchemy.org/en/20/orm/versioning.html",
+      "kind": "技术文档",
+      "scope": "共用",
+      "fact": "文档说明通过版本计数识别部分过期写入。",
+      "learn": "实现审核和版本编辑的并发冲突响应。",
+      "caveat": "版本计数不自动覆盖绕过 ORM 的全部批量写入；需要接口测试。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T03",
+      "name": "Playwright",
+      "url": "https://playwright.dev/docs/intro",
+      "kind": "技术文档",
+      "scope": "共用",
+      "fact": "提供浏览器端到端测试工具。",
+      "learn": "验证真实导航、上传、刷新恢复、弹窗键盘行为与证据联动。",
+      "caveat": "开发与 CI 使用，不增加最终运行容器的浏览器依赖。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T04",
+      "name": "mini-SWE-agent 默认代理代码",
+      "url": "https://github.com/SWE-agent/mini-swe-agent/blob/main/src/minisweagent/agents/default.py",
+      "kind": "核心代码",
+      "scope": "D11",
+      "fact": "代码包含步数、成本与运行时长相关限制。",
+      "learn": "预算作为执行状态与停止原因保存，而非只写在提示词。",
+      "caveat": "实际停止时机和最大单次超额需另行验证。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T05",
+      "name": "SWE-agent 维护说明",
+      "url": "https://github.com/SWE-agent/SWE-agent",
+      "kind": "维护文档",
+      "scope": "D11",
+      "fact": "仓库建议新使用者优先考虑 mini-SWE-agent。",
+      "learn": "将 mini-SWE-agent 作为轻量学习主线。",
+      "caveat": "保留旧系统用于理解历史，不以旧教程决定当前架构。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T06",
+      "name": "Dify LICENSE",
+      "url": "https://github.com/langgenius/dify/blob/main/LICENSE",
+      "kind": "许可原文",
+      "scope": "D01",
+      "fact": "官方许可包含 Apache 2.0 之外的附加条件。",
+      "learn": "记录依赖与复用范围，学习方案优先重新实现领域流程。",
+      "caveat": "不在本次计划中复制 Dify 源码或作法律适用结论。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T07",
+      "name": "Qwen3-VL-4B-Instruct 模型卡",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
+      "kind": "模型卡",
+      "scope": "D12",
+      "fact": "提供 4B 模型权重及推理示例。",
+      "learn": "作为 3B–7B 规模范围内的候选基线，先做硬件可行性实验。",
+      "caveat": "显存与吞吐取决于精度、帧数和上下文；不承诺固定硬件即可运行。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T08",
+      "name": "GROBID",
+      "url": "https://github.com/grobidOrg/grobid",
+      "kind": "开源文档解析",
+      "scope": "D13",
+      "fact": "面向学术文档的信息提取。",
+      "learn": "后续用于论文结构和参考文献解析适配。",
+      "caveat": "初版可先做可提取文本 PDF；部署与资源开销单独评估。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T09",
+      "name": "Video-MME",
+      "url": "https://github.com/MME-Benchmarks/Video-MME",
+      "kind": "官方评测项目",
+      "scope": "D12",
+      "fact": "提供视频理解评测数据说明与评估协议。",
+      "learn": "固定数据版本、可获取样本和字幕/音频条件。",
+      "caveat": "子集结果单独报告，不能对标完整榜单。",
+      "checked": "2026-10-19"
+    },
+    {
+      "id": "T10",
+      "name": "MVBench",
+      "url": "https://github.com/OpenGVLab/Ask-Anything",
+      "kind": "官方评测项目",
+      "scope": "D12",
+      "fact": "项目包含 MVBench 视频理解评估。",
+      "learn": "作为第二套任务分布，与 Video-MME 分别报告。",
+      "caveat": "核验视频可获取性和原始协议，不把缺失样本算作正确或静默排除。",
+      "checked": "2026-10-19"
+    }
+  ],
+  "projects": [
+    {
+      "id": "D09",
+      "name": "需求设计台",
+      "folder": "05-requirements",
+      "priority": 1,
+      "hours": [
+        38,
+        58
+      ],
+      "position": "面向需求评审与测试设计的工作台；以一个可修订、可追踪、可导出的用例集为交付物。",
+      "current": "当前模型只提取角色和标题，用例由模板构建；需求和审核信息留在浏览器。",
+      "refs": [
+        "Q01",
+        "Q02",
+        "Q03"
+      ],
+      "flow": [
+        "导入需求并固定版本",
+        "提取验收条件和歧义",
+        "生成结构化用例",
+        "修改与审核",
+        "发布用例集并导出"
+      ],
+      "features": [
+        "支持 Markdown/TXT 导入，段落标识与原文偏移随版本固定；无效格式和缺失信息明确提示。",
+        "需求项含角色、行为、前置条件、约束与验收标准；模型输出使用 schema 校验，缺少依据时形成待确认问题。",
+        "生成正向、异常、边界及权限场景的步骤、输入和预期；可逐条改写、增删、去重并关联验收条件。",
+        "需求修订触发受影响用例标记，保留旧版本；AI 建议经人工接受后建立新版本。",
+        "导出 CSV/JSON/Markdown，附需求版本、审核者、时间与来源；ER/UML 在后续独立验收。"
+      ],
+      "design": [
+        "蓝灰与纸白主题，以需求原文、用例编辑器、追踪矩阵三种工作模式组织。",
+        "桌面原文与用例并排，点击来源定位段落；窄屏切为有当前位置提示的顺序页。",
+        "用例行展示人工/模型来源、待确认/已核对状态；批量操作前显示影响数量。",
+        "修改自动保存草稿，保存冲突显示差异；生成中显示当前阶段与取消入口，不锁死全文编辑。"
+      ],
+      "entities": [
+        "RequirementDocument",
+        "RequirementVersion",
+        "RequirementItem",
+        "AcceptanceCriterion",
+        "TestCaseVersion",
+        "TraceLink",
+        "Review"
+      ],
+      "api": [
+        "POST /api/v1/requirements/import",
+        "POST /api/v1/requirements/{id}/analyses",
+        "POST /api/v1/testcase-sets/{id}/reviews",
+        "GET /api/v1/testcase-sets/{id}/export"
+      ],
+      "metrics": [
+        "功能门槛：跨浏览器查看同一版本；刷新不丢草稿；旧版本不可被覆盖；冲突写入返回 409；导出可重新导入核对。",
+        "质量方案：100 条需求按来源/业务场景分组划分 20 条开发、80 条保留测试；两名审核者标注验收条件与场景，报告提取 P/R/F1、用例可用率、重复率及核对耗时。",
+        "候选质量目标：验收条件召回率 ≥85%、人工可用率 ≥80%；先测规则和单轮提示基线再冻结门槛，未达标保留人工编辑流程。"
+      ],
+      "cut": "首版不做任意系统自动执行、复杂 UML 建模或全量 Jira 同步；文本变更与语义建议分别标识。"
+    },
+    {
+      "id": "D01",
+      "name": "工艺资料检索",
+      "folder": "02-process-rag",
+      "priority": 2,
+      "hours": [
+        46,
+        70
+      ],
+      "position": "面向工艺资料维护和工艺草案审核，建立从真实文档到有来源草案的完整流程。",
+      "current": "当前只有八段教学语料进入索引；上传文本只供预览，草案未调用模型。",
+      "refs": [
+        "R01",
+        "R02",
+        "R03"
+      ],
+      "flow": [
+        "上传与解析文档",
+        "确认分块并建索引",
+        "检索与核对证据",
+        "生成结构化草案",
+        "审核与导出版本"
+      ],
+      "features": [
+        "先支持 TXT/Markdown 和可提取文本的 PDF；文档哈希去重、版本替换、删除同步索引；扫描 PDF 明确提示暂不支持。",
+        "每个分块保存文档版本、页码、段落偏移和材料/设备标签；BM25 作为基线，嵌入与融合为可切换策略。",
+        "生成的工艺步骤包含材料、设备、操作、参数/单位、依据和待确认项；无依据的数值不得补造。",
+        "提供索引任务进度、失败重试与检索调试；重建时继续使用上一可用索引，完成后原子切换。",
+        "将审核通过的草案固定为版本并导出 Markdown/JSON；源文档更新后标记受影响草案。"
+      ],
+      "design": [
+        "暖白与深绿的资料阅览室主题，避免通用聊天页占据全部空间。",
+        "主视图为文档目录、页内证据、草案三栏；检索结果显示版本与定位信息。",
+        "分块边界可预览，错误解析可标记退回；导入页逐文件显示解析/索引状态。",
+        "工艺参数使用字段与单位编辑；缺证据处显示待确认，审核抽屉聚焦具体字段与来源。"
+      ],
+      "entities": [
+        "Document",
+        "DocumentVersion",
+        "Chunk",
+        "IndexVersion",
+        "RetrievalRun",
+        "ProcessDraftVersion",
+        "EvidenceLink"
+      ],
+      "api": [
+        "POST /api/v1/knowledge/documents",
+        "POST /api/v1/knowledge/index-jobs",
+        "POST /api/v1/process-drafts",
+        "POST /api/v1/process-drafts/{id}/reviews"
+      ],
+      "metrics": [
+        "功能门槛：新上传内容可检索；删除后不再命中；源文档与引用可定位；失败索引不覆盖可用版本；全部批准参数具备证据或人工确认标记。",
+        "质量方案：至少 20 份授权或自编文档、100 个问题，按文档族划分开发/保留集，含至少 20 个不可回答问题；同一语料比较 BM25、嵌入和融合。",
+        "报告 Recall@5、MRR、引用支持率与拒答 P/R；候选目标 Recall@5 ≥85%、引用支持率 ≥90%，报告样本量、区间及人工复核分歧。"
+      ],
+      "cut": "先完成文本 PDF；OCR、复杂表格和多租户企业连接器另列迭代，不以通用聊天准确率替代工艺可靠性。"
+    },
+    {
+      "id": "D11",
+      "name": "测试与修复",
+      "folder": "01-repair-agent",
+      "priority": 3,
+      "hours": [
+        60,
+        98
+      ],
+      "position": "面向受控 Python 仓库的缺陷修复工作台，交付可审查补丁、独立测试与完整执行证据。",
+      "current": "当前运行三类可信样例与预置补丁，登记地址不拉取仓库，子进程不是隔离沙箱。",
+      "refs": [
+        "A01",
+        "A02",
+        "A03",
+        "T04",
+        "T05"
+      ],
+      "flow": [
+        "选择受控仓库与基线提交",
+        "复现缺陷并固定测试",
+        "模型提出候选补丁",
+        "隔离验证与有限修订",
+        "人工审核并导出补丁"
+      ],
+      "features": [
+        "仅开放白名单仓库与固定提交；依赖在预构建镜像中准备，记录基线 SHA、测试集哈希、环境 digest。",
+        "任务执行器独立部署并运行一次性受限环境，默认禁网、无宿主凭据、无宿主目录/应用数据库挂载，限制 CPU、内存、进程数和时长。",
+        "代理循环限定读取、受控编辑和测试动作；最多两次修订，保存模型输入版本、工具轨迹与每轮补丁。",
+        "应用前验证 diff 路径、文件类型与大小，测试目录与验收脚本只读；回归或独立验收失败的补丁不能转为通过。",
+        "支持运行中取消、失败原因归类、补丁下载和人工审查；创建远程 PR 放到后续显式操作。"
+      ],
+      "design": [
+        "石墨色代码审查台；亮色阅读区保障长 diff 可读性。",
+        "左侧任务与步骤，中部统一 diff，右侧测试结果；选中失败测试联动日志和修改文件。",
+        "区分任务状态、测试状态和人工审查结论；显示原提交与候选 SHA，避免单一绿色通过标记。",
+        "取消、超时、预算耗尽与运行器不可用各有恢复操作；审核按钮仅在门禁满足时可用。"
+      ],
+      "entities": [
+        "RepositorySnapshot",
+        "RepairTask",
+        "Attempt",
+        "PatchArtifact",
+        "TestSuiteSnapshot",
+        "TestRun",
+        "RunnerLease",
+        "Review"
+      ],
+      "api": [
+        "POST /api/v1/repair/tasks",
+        "GET /api/v1/repair/tasks/{id}/events",
+        "POST /api/v1/repair/tasks/{id}/cancel",
+        "GET /api/v1/repair/attempts/{id}/patch"
+      ],
+      "metrics": [
+        "功能门槛：越界路径、修改验收测试、超预算、超时及失败补丁均有确定处理；取消后回收环境；重启后任务可判定为中断或继续，不重复发布产物。",
+        "质量方案：至少 5 个授权开源 Python 仓库、30 个独立缺陷，覆盖至少 3 类；开发与测试按仓库/缺陷族隔离；保留只用于验收的测试。",
+        "比较无修复、同模型单轮与受控循环，固定模型/预算/测试协议；报告解决率、回归破坏率、测试篡改拦截、耗时和成本，不预设高成功率。"
+      ],
+      "cut": "首版不支持任意公网仓库或多语言。独立 runner 未就绪时保留可信样例模式，不把应用容器等同任务沙箱。"
+    },
+    {
+      "id": "D13",
+      "name": "文献研读室",
+      "folder": "06-literature",
+      "priority": 4,
+      "hours": [
+        48,
+        76
+      ],
+      "position": "面向小规模专题综述，以论文证据矩阵和人工审核为中心，生成可追溯的章节草稿。",
+      "current": "当前处理五篇论文的人工摘要转述；新登记论文不参与分析，自动检查只匹配摘记位置。",
+      "refs": [
+        "L01",
+        "L02",
+        "L03",
+        "T08"
+      ],
+      "flow": [
+        "定义问题与纳入标准",
+        "导入论文并去重",
+        "提取证据矩阵",
+        "确认提纲并分节写作",
+        "核查引用与导出"
+      ],
+      "features": [
+        "支持 DOI/元数据登记与合法 PDF 导入；DOI、标题和哈希联合去重，区分仅摘要与全文可用。",
+        "提取研究问题、方法、数据、指标、局限与结论，证据绑定论文版本、页码与字符偏移。",
+        "记录纳入/排除理由；提纲先经确认，再由阅读、综合、核查角色处理相同证据集。",
+        "流程节点有输入哈希与中间产物，失败时只重跑对应节点；更换论文或提纲后使下游结果过期。",
+        "导出 Markdown 和 BibTeX，检查正文引用标识与文献表一致；“无支持”“有冲突”作为可见结果。"
+      ],
+      "design": [
+        "米白与墨红的学术阅读主题，以证据表格和正文排版为主体。",
+        "论文库 → 证据矩阵 → 提纲 → 章节编辑四个工作区；PDF 与引用抽屉联动。",
+        "矩阵单元格展示摘要/全文来源及人工核对状态；冲突结论并列，不自动合并成一致意见。",
+        "章节审核显示尚未定位、未复核或过期引用；支持从断点继续，成本预览按节点呈现。"
+      ],
+      "entities": [
+        "Paper",
+        "PaperVersion",
+        "ReviewProtocol",
+        "ScreeningDecision",
+        "EvidenceCell",
+        "OutlineVersion",
+        "SectionDraft",
+        "CitationLink",
+        "WorkflowNode"
+      ],
+      "api": [
+        "POST /api/v1/literature/papers",
+        "POST /api/v1/literature/protocols",
+        "POST /api/v1/literature/workflows",
+        "GET /api/v1/literature/reviews/{id}/export"
+      ],
+      "metrics": [
+        "功能门槛：摘要与全文清晰区分；每条导出引用可回到实际论文或明确标为待核查；删除/更新论文使相关正文过期；任务中断可恢复。",
+        "质量方案：2–3 个子领域、每领域 10 篇授权全文，建立至少 60 条人工证据；两名审核者盲评单次模型和多角色流程，保持证据、模型与预算可比。",
+        "报告引用位置有效率、语义支持率、主题覆盖、无依据结论率和审核耗时；候选目标引用位置有效率 100%、语义支持率 ≥90%，并报告人工分歧。"
+      ],
+      "cut": "首版不抓取付费墙、自动宣称系统综述合规或自动投稿；先完成小规模领域，全文复杂表格后置。"
+    },
+    {
+      "id": "D02",
+      "name": "模型发布平台",
+      "folder": "03-mlops",
+      "priority": 5,
+      "hours": [
+        48,
+        76
+      ],
+      "position": "面向传统表格模型的小型训练—注册—部署—监控平台，首版只支持受信训练流水线。",
+      "current": "当前模型和数据均为合成实验，未保存权重；发布、流量和告警操作留在浏览器。",
+      "refs": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "flow": [
+        "版本化数据并训练",
+        "记录实验与制品",
+        "审核并部署版本",
+        "真实请求与窗口监控",
+        "回滚与验证"
+      ],
+      "features": [
+        "接入授权表格 CSV 数据，固定训练/验证/监控窗口划分，记录 schema、数据哈希与实验参数。",
+        "使用 MLflow 本地追踪与注册适配器；保存训练产生的受信模型制品、指标与血缘，不开放任意 pickle 上传。",
+        "建立真实 /predict 服务；审批后加载候选版本，健康验证通过才改变活动指针，失败保留原模型。",
+        "采集请求窗口、数据质量和漂移，标签到达后才计算效果；无标签明确显示不可计算。",
+        "回滚恢复历史制品并进行实际预测校验，保留审批、部署、监控和回滚事件。"
+      ],
+      "design": [
+        "深蓝控制室主题，关键版本与生效时间优先于大屏装饰。",
+        "实验比较表展示同一数据切分的结果；部署详情分开显示目标版本、加载版本与健康状态。",
+        "监控图同时标注窗口、样本量、阈值和标签状态；漂移提示与质量下降使用不同状态。",
+        "回滚前展示影响范围，操作后展示真实预测返回的版本；事件时间线支持追查失败。"
+      ],
+      "entities": [
+        "DatasetVersion",
+        "ExperimentRun",
+        "ModelVersion",
+        "Deployment",
+        "ActiveModelPointer",
+        "PredictionEvent",
+        "MonitoringWindow",
+        "Alert"
+      ],
+      "api": [
+        "POST /api/v1/mlops/training-jobs",
+        "POST /api/v1/mlops/deployments",
+        "POST /api/v1/mlops/predict",
+        "POST /api/v1/mlops/deployments/{id}/rollback"
+      ],
+      "metrics": [
+        "功能门槛：容器重启可恢复活动模型；100 次测试请求返回正确的服务版本；加载失败不切换；回滚后预测确由历史模型产生。",
+        "质量方案：干净、特征偏移、标签偏移和标签缺失四组可复现窗口；比较教学 PSI 与 Evidently 报告，不把漂移自动判为效果下降。",
+        "报告部署成功率、加载/回滚时长、监控延迟与告警误报；性能基线标注硬件、并发、窗口及模型，不预先承诺吞吐。"
+      ],
+      "cut": "首版使用单实例串行版本切换；真实百分比灰度、Kubernetes、多云调度与自动重训练另行实现。"
+    },
+    {
+      "id": "D12",
+      "name": "视频观察台",
+      "folder": "04-video-understanding",
+      "priority": 6,
+      "hours": [
+        54,
+        88
+      ],
+      "position": "面向短视频的可检索、可定位问答工作台；产品可用性与本地轻量模型研究分为两个验收层次。",
+      "current": "当前浏览器抽帧真实可用，离线仅校验 JPEG 与时刻；视频原件未持久化，未进行本地模型评测。",
+      "refs": [
+        "V01",
+        "V02",
+        "V03",
+        "T07",
+        "T09",
+        "T10"
+      ],
+      "flow": [
+        "导入并保存素材",
+        "采样与生成处理任务",
+        "执行模型分析",
+        "定位与核查证据",
+        "导出记录与比较实验"
+      ],
+      "features": [
+        "限制首版素材时长 10 分钟、文件 200 MB，校验容器格式；服务端保存原件、哈希、缩略图与元数据，删除同步清理。",
+        "使用 FFmpeg 固定解码时间基准；先均匀采样，再对比镜头/变化采样，保存实际解码时间戳和帧映射。",
+        "模型提供者分为远端视觉 API 和本地推理服务；能力探测显示是否支持视频/图像、最大帧数与超时。",
+        "回答返回证据时间区间与不确定性；播放器点击证据跳转，原片缺失或模型不可用时明确标识。",
+        "GPU profile 先验证 Qwen3-VL-4B 可运行，再做量化/采样消融；通用 CPU 入口仍可整理素材和调用已配置的外部服务。"
+      ],
+      "design": [
+        "暗青与琥珀的视频工作台主题，播放器与时间线为主要视觉区域。",
+        "上方播放器、下方可缩放时间线与采样帧；右侧问题、回答和证据。",
+        "原始视频时刻、实际采样时刻和模型证据区间分别展示；切换采样方案使旧分析标为过期。",
+        "上传、转码、采样、推理各有状态；不支持的编码、模型离线和额度不足提供具体处理入口。"
+      ],
+      "entities": [
+        "VideoAsset",
+        "MediaVersion",
+        "SamplingPlan",
+        "FrameArtifact",
+        "VideoAnalysis",
+        "TemporalEvidence",
+        "BenchmarkRun"
+      ],
+      "api": [
+        "POST /api/v1/video/assets",
+        "POST /api/v1/video/assets/{id}/sampling-jobs",
+        "POST /api/v1/video/analyses",
+        "GET /api/v1/video/analyses/{id}/export"
+      ],
+      "metrics": [
+        "功能门槛：重启后可重新播放原片；证据跳转误差 ≤1 秒（以测试素材真实解码时刻为准）；删除无残留引用；上传中断和解码失败可恢复。",
+        "研究方案：先各 50 题调通 MVBench 与 Video-MME，再固定各 200 题可获取子集，保留缺失清单；字幕、音频、采样帧数与模型版本一致报告，子集不能冒充完整榜单。",
+        "同一模型比较精度/量化与采样；候选目标峰值显存或端到端耗时下降 ≥25%，准确率损失 ≤3 个百分点，达不到即保留原配置并报告；跨模型差异另列，不能归因为量化收益。"
+      ],
+      "cut": "无 GPU 时先交付外部模型适配和完整素材流程，但不得宣称完成本地轻量化；长视频、音频与训练后置。"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "C01",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "接口与数据契约",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [],
+      "work": "拆分 server.py 路由，FastAPI/Pydantic 保留旧接口适配；固定对象 ID、schema、错误码与原型标识。",
+      "done": "旧工作台可继续调用；新增 OpenAPI；400/403/404/409/422/503 的使用与前端提示一致。",
+      "status": "planned"
+    },
+    {
+      "id": "C02",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "持久化与迁移",
+      "hours": [
+        12,
+        18
+      ],
+      "depends": [
+        "C01"
+      ],
+      "work": "SQLAlchemy/Alembic + SQLite WAL；/data 命名卷存 DB、文件和制品；LocalStorage 改为可一次导入的缓存。",
+      "done": "清理浏览器与重建容器后数据仍在；导入幂等；旧版 JSON 可迁移；备份恢复校验哈希；同工作区并发修改可检测冲突。",
+      "status": "planned"
+    },
+    {
+      "id": "C03",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "持久任务与取消",
+      "hours": [
+        14,
+        20
+      ],
+      "depends": [
+        "C02"
+      ],
+      "work": "同镜像独立 worker，DB 队列、任务租约/心跳、节点产物和重试策略；前端轮询，SSE 后续。",
+      "done": "queued/running/cancelling/succeeded/failed/cancelled/interrupted 可追查；worker 被终止后不重复提交产物；付费节点不盲目自动重试。",
+      "status": "planned"
+    },
+    {
+      "id": "C04",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "工作区与权限",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C02"
+      ],
+      "work": "单机本地默认工作区；启用多人共享前提供 owner/editor/reviewer/viewer 与会话认证、服务端对象校验、审计。",
+      "done": "跨工作区读取/导出/审核均被拒绝；审批基于当前版本；非授权访问有确定错误；本机演示仍可一键启动。",
+      "status": "planned"
+    },
+    {
+      "id": "C05",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "模型提供者与运行记录",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C01"
+      ],
+      "work": "共享客户端支持能力声明、schema 校验、超时、限流和错误归类；每次运行保存模型/提示/输入版本和实际用量。",
+      "done": "模型未配置与请求失败可区分；密钥不进页面/日志；缺失用量显示未知；用户确认后才重新发起可能重复计费的请求。",
+      "status": "planned"
+    },
+    {
+      "id": "C06",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "公共交互与主题规范",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C01"
+      ],
+      "work": "提取 API 状态、表单、详情抽屉、任务列表与版本比较组件；保留六项目主题，新增字段级保存与冲突状态。",
+      "done": "1440 与 390 宽度无页面溢出；键盘可完成主要流程；弹窗焦点可回到触发按钮；状态除颜色外有文本；长表格有筛选/分页。",
+      "status": "planned"
+    },
+    {
+      "id": "C07",
+      "project": "COMMON",
+      "priority": "P0",
+      "title": "部署与验收基础",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06"
+      ],
+      "work": "Compose app/worker 复用同一构建镜像，/data 可写而根文件系统只读；CI 增加迁移、重启恢复与真实浏览器流程。",
+      "done": "空环境单命令启动，更新前备份、迁移失败停止并提示恢复；原健康和六项目离线检查继续通过；日志可按 run_id 定位。",
+      "status": "planned"
+    },
+    {
+      "id": "D09-01",
+      "project": "D09",
+      "priority": "P1",
+      "title": "需求导入与版本原文",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C02",
+        "C04",
+        "C01"
+      ],
+      "work": "保存段落标识、版本与可定位原文；导入任务支持失败恢复。",
+      "done": "不同浏览器读取相同原文，旧版本不可覆盖。",
+      "status": "planned"
+    },
+    {
+      "id": "D09-02",
+      "project": "D09",
+      "priority": "P1",
+      "title": "结构化提取与用例生成",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C03",
+        "C05",
+        "D09-01"
+      ],
+      "work": "提取验收条件与歧义，再生成包含步骤/输入/预期的场景；输出校验。",
+      "done": "不合法模型结果不入正式集；缺字段进入待完善状态。",
+      "status": "planned"
+    },
+    {
+      "id": "D09-03",
+      "project": "D09",
+      "priority": "P1",
+      "title": "追踪、变更与导出",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "D09-02"
+      ],
+      "work": "版本化 trace links，修订后使关联结果过期，导出用例集。",
+      "done": "任何用例可追溯到来源；旧审查不自动适用于新版本。",
+      "status": "planned"
+    },
+    {
+      "id": "D09-04",
+      "project": "D09",
+      "priority": "P1",
+      "title": "原文与用例联动页面",
+      "hours": [
+        6,
+        10
+      ],
+      "depends": [
+        "C06",
+        "D09-01"
+      ],
+      "work": "并排编辑、自动草稿、批量审核、冲突差异与窄屏模式。",
+      "done": "刷新保留草稿，点击来源定位，冲突不覆盖其他修改。",
+      "status": "planned"
+    },
+    {
+      "id": "D09-05",
+      "project": "D09",
+      "priority": "P1",
+      "title": "需求质量与端到端验收",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "D09-01",
+        "D09-02",
+        "D09-03",
+        "D09-04",
+        "C07"
+      ],
+      "work": "建立 100 条分组数据、规则与单轮基线、两人审核表，走完导入到导出。",
+      "done": "提交样本清单、可重复命令、分歧记录和带版本的导出样例。",
+      "status": "planned"
+    },
+    {
+      "id": "D01-01",
+      "project": "D01",
+      "priority": "P1",
+      "title": "文档入库与解析",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C02",
+        "C03",
+        "C04",
+        "C01"
+      ],
+      "work": "TXT/Markdown/文本 PDF 入库，哈希、页码、段落与版本落库。",
+      "done": "上传新文档进入索引；解析失败可重试且不污染旧版本。",
+      "status": "planned"
+    },
+    {
+      "id": "D01-02",
+      "project": "D01",
+      "priority": "P1",
+      "title": "动态索引与检索对照",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D01-01"
+      ],
+      "work": "BM25、嵌入、融合适配器与索引版本；替换/删除和原子切换。",
+      "done": "删除后不可命中；同一问题可比较策略与证据。",
+      "status": "planned"
+    },
+    {
+      "id": "D01-03",
+      "project": "D01",
+      "priority": "P1",
+      "title": "有依据工艺草案",
+      "hours": [
+        10,
+        14
+      ],
+      "depends": [
+        "C05",
+        "D01-02"
+      ],
+      "work": "结构化工艺步骤和字段引用，参数/单位/缺证据校验，审核发布。",
+      "done": "未经来源或人工确认的参数不可被当作已审核值。",
+      "status": "planned"
+    },
+    {
+      "id": "D01-04",
+      "project": "D01",
+      "priority": "P1",
+      "title": "文档—证据—草案页面",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C06",
+        "D01-01"
+      ],
+      "work": "三栏核对、分块预览、导入队列与字段审核抽屉。",
+      "done": "点击引用回原页，替换文档后旧草案显示过期。",
+      "status": "planned"
+    },
+    {
+      "id": "D01-05",
+      "project": "D01",
+      "priority": "P1",
+      "title": "工艺检索与生成验收",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "D01-01",
+        "D01-02",
+        "D01-03",
+        "D01-04",
+        "C07"
+      ],
+      "work": "20 份文档、100 个问题，比较检索和拒答，人工核验参数证据。",
+      "done": "输出保留集指标、失败类别、复核记录与完整导出草案。",
+      "status": "planned"
+    },
+    {
+      "id": "D11-01",
+      "project": "D11",
+      "priority": "P1",
+      "title": "受控仓库与独立运行器",
+      "hours": [
+        14,
+        22
+      ],
+      "depends": [
+        "C03",
+        "C04",
+        "C07",
+        "C01"
+      ],
+      "work": "固定仓库提交与镜像，运行器离开 Web 容器，一次性环境与资源/网络边界。",
+      "done": "无宿主凭据和共享数据挂载；取消/超时回收执行环境。",
+      "status": "planned"
+    },
+    {
+      "id": "D11-02",
+      "project": "D11",
+      "priority": "P1",
+      "title": "受控代理与候选补丁",
+      "hours": [
+        12,
+        20
+      ],
+      "depends": [
+        "C05",
+        "D11-01"
+      ],
+      "work": "模型提议、diff schema、路径白名单、只读验收测试和有限修订。",
+      "done": "测试篡改和越界写入被拒绝，达到预算即停止。",
+      "status": "planned"
+    },
+    {
+      "id": "D11-03",
+      "project": "D11",
+      "priority": "P1",
+      "title": "回归门禁与任务证据",
+      "hours": [
+        12,
+        20
+      ],
+      "depends": [
+        "D11-02"
+      ],
+      "work": "复现、回归、独立验收、原始日志与每轮轨迹；补丁下载和人工审查。",
+      "done": "失败或过期测试不能认可；结果绑定基线与环境。",
+      "status": "planned"
+    },
+    {
+      "id": "D11-04",
+      "project": "D11",
+      "priority": "P1",
+      "title": "补丁审查与日志联动",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C06",
+        "D11-01"
+      ],
+      "work": "任务步骤、diff、失败测试与停止原因联动，重试可选择失败阶段。",
+      "done": "审核者可从失败用例跳到日志和改动文件，键盘可操作。",
+      "status": "planned"
+    },
+    {
+      "id": "D11-05",
+      "project": "D11",
+      "priority": "P1",
+      "title": "跨仓库修复评估",
+      "hours": [
+        12,
+        20
+      ],
+      "depends": [
+        "D11-01",
+        "D11-02",
+        "D11-03",
+        "D11-04",
+        "C07"
+      ],
+      "work": "5 仓库/30 缺陷、三类缺陷，固定预算比较单轮和循环，验证隔离边界。",
+      "done": "给出解决率、回归破坏、成本与误判样例，不引用他人榜单作为结果。",
+      "status": "planned"
+    },
+    {
+      "id": "D13-01",
+      "project": "D13",
+      "priority": "P2",
+      "title": "论文导入与证据定位",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C02",
+        "C03",
+        "C04",
+        "C01"
+      ],
+      "work": "元数据/合法 PDF 入库与去重，页码和文本偏移；明确摘要或全文。",
+      "done": "论文更新使旧证据过期，引用定位到实际文档。",
+      "status": "planned"
+    },
+    {
+      "id": "D13-02",
+      "project": "D13",
+      "priority": "P2",
+      "title": "筛选与证据矩阵",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D13-01"
+      ],
+      "work": "保存问题协议、纳入排除理由、结构化字段与冲突证据。",
+      "done": "每个矩阵单元格有来源与人工核对状态。",
+      "status": "planned"
+    },
+    {
+      "id": "D13-03",
+      "project": "D13",
+      "priority": "P2",
+      "title": "阶段式协作与导出",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C05",
+        "D13-02"
+      ],
+      "work": "确认提纲、阅读/综合/核查、节点产物、失败恢复，输出 Markdown/BibTeX。",
+      "done": "失败节点可重跑；引用标识与参考文献表一致。",
+      "status": "planned"
+    },
+    {
+      "id": "D13-04",
+      "project": "D13",
+      "priority": "P2",
+      "title": "证据矩阵与章节编辑",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C06",
+        "D13-01"
+      ],
+      "work": "论文库、矩阵、提纲与正文模式，引用抽屉和整篇审核门禁。",
+      "done": "未定位/有冲突引用能被发现，人工修改后审核状态失效。",
+      "status": "planned"
+    },
+    {
+      "id": "D13-05",
+      "project": "D13",
+      "priority": "P2",
+      "title": "跨领域证据评估",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D13-01",
+        "D13-02",
+        "D13-03",
+        "D13-04",
+        "C07"
+      ],
+      "work": "2–3 子领域各10篇，至少60条证据，同预算单次/多角色盲评。",
+      "done": "输出语义支持、主题覆盖、审核耗时和审核分歧。",
+      "status": "planned"
+    },
+    {
+      "id": "D02-01",
+      "project": "D02",
+      "priority": "P2",
+      "title": "数据与 MLflow 追踪",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C02",
+        "C03",
+        "C04",
+        "C01"
+      ],
+      "work": "受信 CSV 数据、固定切分、实验与制品、MLflow 注册适配。",
+      "done": "模型制品可重载，数据与实验血缘可追溯。",
+      "status": "planned"
+    },
+    {
+      "id": "D02-02",
+      "project": "D02",
+      "priority": "P2",
+      "title": "真实部署与回滚",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D02-01"
+      ],
+      "work": "/predict 服务、候选加载确认、活动指针与历史回滚。",
+      "done": "加载失败保留旧版本；预测输出实际模型版本。",
+      "status": "planned"
+    },
+    {
+      "id": "D02-03",
+      "project": "D02",
+      "priority": "P2",
+      "title": "窗口监控与告警",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D02-02"
+      ],
+      "work": "数据质量、漂移、标签可用性及 Evidently 报告适配。",
+      "done": "无标签不显示伪准确率；告警关联具体样本窗口。",
+      "status": "planned"
+    },
+    {
+      "id": "D02-04",
+      "project": "D02",
+      "priority": "P2",
+      "title": "版本与监控页面",
+      "hours": [
+        8,
+        12
+      ],
+      "depends": [
+        "C06",
+        "D02-01"
+      ],
+      "work": "目标/加载版本、健康状态、窗口说明和回滚事件。",
+      "done": "操作结果能与真实预测核对，数据图具备单位和样本量。",
+      "status": "planned"
+    },
+    {
+      "id": "D02-05",
+      "project": "D02",
+      "priority": "P2",
+      "title": "发布与故障验收",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "D02-01",
+        "D02-02",
+        "D02-03",
+        "D02-04",
+        "C07"
+      ],
+      "work": "干净/特征偏移/标签偏移/缺标签窗口和加载失败、重启恢复注入。",
+      "done": "100 次请求验证活动版本，报告切换/回滚延迟与误报。",
+      "status": "planned"
+    },
+    {
+      "id": "D12-01",
+      "project": "D12",
+      "priority": "P2",
+      "title": "持久素材与采样",
+      "hours": [
+        12,
+        18
+      ],
+      "depends": [
+        "C02",
+        "C03",
+        "C04",
+        "C01"
+      ],
+      "work": "受限上传、服务端 FFmpeg、原件与帧映射、删除清理。",
+      "done": "重启可播放原片，损坏文件不进入推理，采样时间可复现。",
+      "status": "planned"
+    },
+    {
+      "id": "D12-02",
+      "project": "D12",
+      "priority": "P2",
+      "title": "视觉服务适配",
+      "hours": [
+        10,
+        16
+      ],
+      "depends": [
+        "C05",
+        "D12-01"
+      ],
+      "work": "模型能力探测、远端/本地接口、结构化回答与时间区间校验。",
+      "done": "模型不可用有明确错误；回答不引用采样范围之外的证据。",
+      "status": "planned"
+    },
+    {
+      "id": "D12-03",
+      "project": "D12",
+      "priority": "P2",
+      "title": "本地模型与轻量化",
+      "hours": [
+        12,
+        20
+      ],
+      "depends": [
+        "D12-02"
+      ],
+      "work": "GPU 可行性实验，固定 Qwen3-VL-4B，再做量化或采样对照。",
+      "done": "记录权重、精度、硬件、峰值显存和端到端耗时；失败保留原配置。",
+      "status": "planned"
+    },
+    {
+      "id": "D12-04",
+      "project": "D12",
+      "priority": "P2",
+      "title": "播放器与证据时间线",
+      "hours": [
+        8,
+        14
+      ],
+      "depends": [
+        "C06",
+        "D12-01"
+      ],
+      "work": "真实播放器、采样点、证据区间、点击跳转和过期状态。",
+      "done": "测试素材跳转误差≤1秒，改采样不复用旧分析。",
+      "status": "planned"
+    },
+    {
+      "id": "D12-05",
+      "project": "D12",
+      "priority": "P2",
+      "title": "两套基准与流程验收",
+      "hours": [
+        12,
+        20
+      ],
+      "depends": [
+        "D12-01",
+        "D12-02",
+        "D12-03",
+        "D12-04",
+        "C07"
+      ],
+      "work": "MVBench/Video-MME 先各50题调通，再各200题固定子集；记录缺失样本。",
+      "done": "区分子集/完整评测，输出量化或采样的精度效率曲线与原始结果。",
+      "status": "planned"
+    }
+  ]
+}
