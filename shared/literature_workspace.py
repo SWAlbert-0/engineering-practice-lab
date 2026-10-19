@@ -378,7 +378,7 @@ class LiteratureWorkspace:
         id = uid('job')
         stamp = now()
         if context is not None:
-            existing = c.execute("SELECT id FROM jobs WHERE project=? AND kind=? AND mode=? AND context=? AND status IN ('queued','running') ORDER BY created LIMIT 1", (project, kind, mode, dump(context))).fetchone()
+            existing = c.execute("SELECT id FROM jobs WHERE project=? AND kind=? AND mode=? AND context=? AND model_fp IS ? AND status IN ('queued','running') ORDER BY created LIMIT 1", (project, kind, mode, dump(context), model_fp() if mode != 'offline' else None)).fetchone()
             if existing:
                 return existing['id']
         if c.execute("SELECT count(*) FROM jobs WHERE status IN ('queued','running')").fetchone()[0] >= 24:
@@ -445,6 +445,11 @@ class LiteratureWorkspace:
                 p = self.paper(old['payload']['paper'], old['payload']['version'], c)
                 if not p['paper']['active'] or p['paper']['current'] >= old['payload']['version'] or p['versions'][0]['number'] != old['payload']['version'] or (p['version']['status'] == 'pending'):
                     raise WorkspaceError('文献解析已在进行、已完成或版本已被替代。', 409)
+            # An existing retry owns its checkpoints. Do not inject another job's nodes.
+            if old['context'] is not None:
+                existing = c.execute("SELECT id FROM jobs WHERE project=? AND kind=? AND mode=? AND context=? AND model_fp IS ? AND status IN ('queued','running') ORDER BY created LIMIT 1", (old['project'], old['kind'], old['mode'], dump(old['context']), model_fp() if old['mode'] != 'offline' else None)).fetchone()
+                if existing:
+                    return {'job_id': existing['id']}
             new = self._enqueue(c, old['project'], old['kind'], old['mode'], old['payload'], old['context'])
             for n in old['nodes']:
                 if n['status'] == 'succeeded':

@@ -148,6 +148,11 @@ class LiteratureTests(unittest.TestCase):
             self.w.job_action(j,'cancel');return {'evidence':[{'paper':self.p,'field':'method','page':1,'quote':'原文😀第一句。','summary':'说明'}]}
         with patch('shared.literature_workspace.configured',return_value=True),patch('shared.literature_workspace.ask_json',side_effect=model):
             j=self.w.enqueue(self.pr,'read',{'mode':'single'})['job_id'];self.w.process_one();value=self.w.job(j);self.assertEqual(value['status'],'cancelled');self.assertEqual(value['nodes'][0]['status'],'succeeded');self.assertEqual(self.w.evidence(self.pr),[])
+    def test_repeated_retry_does_not_overwrite_existing_checkpoints(self):
+        def model(prompt,payload,**kwargs):
+            self.w.job_action(j,'cancel');return {'evidence':[{'paper':self.p,'field':'method','page':1,'quote':'原文😀第一句。','summary':'已付费阅读结果'}]}
+        with patch('shared.literature_workspace.configured',return_value=True),patch('shared.literature_workspace.ask_json',side_effect=model) as call:
+            j=self.w.enqueue(self.pr,'read',{'mode':'single'})['job_id'];self.w.process_one();first=self.w.job_action(j,'retry')['job_id'];again=self.w.job_action(j,'retry')['job_id'];self.assertEqual(first,again);self.w.process_one();self.assertEqual(self.w.job(first)['status'],'succeeded');self.assertEqual(call.call_count,1)
     def test_data_survives_new_connection(self):
         d=self.draft();other=LiteratureWorkspace(self.temp.name,False);self.assertEqual(other.draft(d)['context']['project']['title'],'来源冲突研究');other.close()
 
