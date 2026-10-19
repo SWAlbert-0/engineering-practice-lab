@@ -2,23 +2,17 @@
 
 来源：丁箐 项目二。
 
-## 运行
+## 容器启动
 
-在仓库根目录启动，全部项目共用同一个环境：
-
-```powershell
-# Windows PowerShell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1
-```
+安装并启动 Docker（Windows/macOS 使用 Docker Desktop 的 Linux 容器），在仓库根目录执行：
 
 ```bash
-# macOS / Linux
-bash start.sh
+docker compose up --build -d --wait
 ```
 
-脚本优先使用当前终端可调用的 Conda，自动创建/复用 `engineering-practice-lab`。无 Conda 时需要 Python 3.10–3.13（推荐3.12），自动创建共用 `.venv`。无需先手动激活，首次安装后会直接启动服务。
+浏览器打开 <http://127.0.0.1:8765/demos/03-mlops/>。六个项目共用一个容器，不需要本机 Python、Conda 或 Node.js。首次构建需要联网，默认离线功能无需模型密钥。
 
-访问 `http://127.0.0.1:8765/demos/03-mlops/`。环境、端口与检查参数见 [完整部署说明](../../docs/DEPLOYMENT.md)。请通过本地服务访问所有项目功能。
+日志、更新、端口和可选模型配置见 [部署说明](../../docs/DEPLOYMENT.md)。需要直接修改 Python 代码时，仍可使用其中的共用 Conda 开发环境。
 
 ## 演示步骤
 

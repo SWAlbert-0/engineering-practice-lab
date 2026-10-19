@@ -1,0 +1,24 @@
+# Only runtime resources enter the build context. Never send local credentials.
+**
+!Dockerfile
+!requirements.container.txt
+!server.py
+!index.html
+!README.md
+!demos/
+!demos/**
+!shared/
+!shared/**
+!report/
+!report/**
+!docs/
+!docs/**
+!scripts/
+!scripts/healthcheck.py
+**/__pycache__
+**/*.py[cod]
+**/.env
+**/.env.*
+**/.git
+**/node_modules
+**/.venv

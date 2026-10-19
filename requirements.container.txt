@@ -1,0 +1,6 @@
+# Shared runtime lock for the Python 3.12 container (no dev/test packages).
+numpy==2.3.5
+scikit-learn==1.8.0
+scipy==1.17.0
+joblib==1.5.3
+threadpoolctl==3.6.0

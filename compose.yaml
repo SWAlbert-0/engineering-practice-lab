@@ -1,0 +1,26 @@
+name: engineering-practice-lab
+services:
+  lab:
+    image: engineering-practice-lab:local
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:${LAB_PORT:-8765}:8765"
+    environment:
+      LAB_LLM_BASE_URL: "${LAB_LLM_BASE_URL:-}"
+      LAB_LLM_MODEL: "${LAB_LLM_MODEL:-}"
+      LAB_LLM_API_KEY: "${LAB_LLM_API_KEY:-}"
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

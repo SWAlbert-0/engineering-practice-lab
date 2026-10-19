@@ -1,6 +1,108 @@
-# 开发者部署与启动
+# 容器部署与团队使用
 
-六个项目由根目录 `server.py` 一起提供服务，启动一次即可浏览全部页面。默认地址是 <http://127.0.0.1:8765>；离线模式无需 API Key、数据库或前端构建。以下流程用于本地开发与演示，服务仍只监听本机。
+六个项目和调研报告打包在同一个镜像中，由根目录 Python 服务提供网页与 API。队友只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
+
+## 首次启动
+
+Windows/macOS：安装并启动 [Docker Desktop](https://docs.docker.com/desktop/)，Windows 使用 Linux 容器模式。Linux：安装 [Docker Engine](https://docs.docker.com/engine/install/) 和 [Compose 插件](https://docs.docker.com/compose/install/linux/)。先确认 `docker info`、`docker compose version` 正常；推荐当前 Compose v2。旧版不支持 `--wait` 时更新 Compose。
+
+使用有仓库访问权限的账号获取完整源码，或从 GitHub 下载 ZIP 并解压：
+
+```bash
+git clone https://github.com/SWAlbert-0/engineering-practice-lab.git
+cd engineering-practice-lab
+docker compose up --build -d --wait
+```
+
+三个系统使用相同命令。第一次会联网下载 `python:3.12-slim`、系统运行库和精确锁定的 Python 依赖，并构建本机架构的镜像；后续保留构建缓存。当前没有预发布到镜像仓库，`docker compose pull` 不能代替首次构建。构建完成后，默认离线模式不需要外部服务。
+
+等待命令成功后，打开 <http://127.0.0.1:8765>。`/healthz` 表示服务及六个引擎已加载，不代表可选模型服务已验证可用。所有项目入口、主题、图文指南和示例媒体均在镜像内。
+
+## 日常操作
+
+| 需求 | 命令 |
+|---|---|
+| 查看状态与健康情况 | `docker compose ps` |
+| 查看最近日志并持续跟踪 | `docker compose logs -f --tail=100` |
+| 临时停止 / 再次启动 | `docker compose stop` / `docker compose start` |
+| 停止并移除容器（保留镜像） | `docker compose down` |
+| 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
+| 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
+
+浏览器操作记录仍保存于该浏览器的 LocalStorage。重新构建或删除容器不会删除它；换电脑、浏览器、访问地址或端口不会自动同步。设置页可导出工作区记录。当前后端无业务数据库，因此没有待挂载的数据卷，也不把源码或 Docker socket 挂进容器。
+
+## 端口与可选配置
+
+默认无需 `.env`。需要更换端口或启用模型时，复制模板：
+
+```powershell
+# Windows PowerShell
+Copy-Item .env.example .env
+```
+
+```bash
+# macOS / Linux
+cp .env.example .env
+```
+
+编辑 `.env`，例如将 `LAB_PORT=8765` 改为 `LAB_PORT=8766`，再执行 `docker compose up --build -d --wait`。访问地址改为 <http://127.0.0.1:8766>；容器内部端口保持 8765。环境变量优先于 `.env`；如果修改文件不生效，检查终端是否已经设置了同名变量。
+
+模型配置的三个变量默认留空，开启方法见 [MODEL_SETUP.md](MODEL_SETUP.md)。Compose 自动读取根目录 `.env` 并注入服务端环境；Python 直接启动不会读取该文件。修改模型参数后重建容器进程即可：`docker compose up -d --force-recreate --wait`。本地模型服务的 `127.0.0.1` 在容器内指向容器自身，不能直接沿用宿主机回环地址；Docker Desktop 可使用 `host.docker.internal`，Linux 需要另行配置可达地址。
+
+`.env` 被 Git 和 Docker 构建上下文排除。不要把密钥写进 Dockerfile、镜像或截图，也不要分享包含密钥展开结果的 `docker compose config` 输出。镜像只复制所需运行文件，不包含 `.git`、本机环境和测试依赖。
+
+## 容器结构与限制
+
+| 项目 | 约定 |
+|---|---|
+| Python 与运行依赖 | Python 3.12；五个运行包在 `requirements.container.txt` 固定版本 |
+| 服务进程 | 容器内监听 `0.0.0.0:8765`；宿主机仅发布 `127.0.0.1` |
+| 权限 | UID/GID 10001，根文件系统只读，移除 Linux capabilities |
+| 临时文件 | `/tmp` 使用 64 MiB tmpfs，供内置可信测试样例使用，重建容器即清空 |
+| 健康检查 | 每 10 秒检查 `/healthz`，启动宽限 30 秒；连续失败显示 unhealthy |
+| 日志与重启 | 每份 10 MiB、最多 3 份；`unless-stopped` 重启策略 |
+
+健康失败不会由 Docker 自动重启仍活着的进程；重启策略作用于退出进程。当前镜像统一了运行环境，尚未实现不可信仓库的逐任务沙箱；修复项目仍只执行内置可信样例。Base image 和系统包未锁定 digest，不能宣称镜像逐字节可复现。首次构建若缺少某架构的预编译 wheel 会明确失败，不隐式安装编译工具链。
+
+## 离线交付镜像（可选）
+
+有网络的同学先在与队友相同 CPU 架构上构建并导出：
+
+```bash
+docker compose build
+docker save -o engineering-practice-lab-image.tar engineering-practice-lab:local
+```
+
+将镜像 tar、`compose.yaml` 和 `.env.example` 交给队友，或让队友保留完整仓库。队友执行：
+
+```bash
+docker load -i engineering-practice-lab-image.tar
+docker compose up --no-build --pull never -d --wait
+```
+
+只交付同架构镜像；Intel/AMD64 与 ARM64 不通用。不要把含个人密钥的 `.env` 一起发送。镜像 tar 较大，不提交到 Git 仓库。
+
+## 故障排查与验收
+
+| 现象 | 处理方式 |
+|---|---|
+| Cannot connect to Docker daemon | 启动 Docker Desktop 或系统 Docker 服务，确认 `docker info` 正常 |
+| Windows 报镜像 OS 不匹配 | 切换到 Linux containers |
+| 拉基础镜像 / apt / Python 包失败 | 检查 Docker daemon 的代理、镜像源和网络；构建失败时不会启动新服务 |
+| 端口被占用 | 修改 `.env` 的 `LAB_PORT`，重跑启动命令 |
+| 服务 unhealthy 或启动超时 | `docker compose logs --tail=100` 查看引擎加载错误，修复后重新构建 |
+| 更新后仍看到旧页面 | 确认执行带 `--build` 的命令并刷新浏览器；镜像使用复制的源码，不热挂载宿主机文件 |
+| 模型配置齐全但请求失败 | 检查模型名称、容器内可达地址、认证和图像能力；默认离线功能不依赖该配置 |
+
+仓库的 [Container smoke test](../.github/workflows/container-smoke.yml) 在 GitHub Actions 中验证 Compose、真实构建、只读非 root 容器、健康检查、六项目网页与离线 API。接口检查脚本只使用 Python 标准库：`python scripts/container_smoke.py`（需默认端口且关闭模型配置）。它不是视频内容理解或外部模型质量评测。
+
+实现依据：[Compose up](https://docs.docker.com/reference/cli/docker/compose/up/)、[Compose services](https://docs.docker.com/reference/compose-file/services/)、[Dockerfile](https://docs.docker.com/reference/dockerfile/)。
+
+---
+
+# 本地 Python 开发方式
+
+容器使用者不需要执行以下步骤。希望直接运行 Python 并修改代码时，六个项目继续共用一个 Conda 或 `.venv` 环境。默认仅监听本机。
 
 ## 1. 获取完整仓库
 
@@ -39,7 +141,7 @@ conda run --no-capture-output -n base python launch.py --manager conda
 
 1. 查找名为 `engineering-practice-lab` 的共用环境；没有则根据 `environment.yml` 创建。
 2. 已有环境首次交给脚本管理，或环境配置发生变化时，执行 `conda env update`。不使用 `--prune`，也不调用 pip。
-3. 检查 Python 3.12、NumPy、scikit-learn、Node.js 22，并实际加载三个 Python 引擎与 UTF-8 语料。
+3. 检查 Python 3.12、NumPy、scikit-learn、Node.js 22，并实际加载六个 Python 引擎与 UTF-8 语料。
 4. 检查通过后启动服务，终端显示访问地址。按 Ctrl+C 停止服务，环境保留供下次复用。
 
 只调用 `conda run`，不要求脚本修改终端的激活状态。依赖校验成功后，在环境内保存清单摘要；后续配置未变则跳过安装，可离线启动。首次创建与需要更新依赖时仍需要访问 Conda 软件源。

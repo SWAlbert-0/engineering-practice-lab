@@ -1,0 +1,42 @@
+name: Container smoke test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Validate Compose and build image
+        run: |
+          docker compose config --quiet
+          docker compose build --pull
+      - name: Start and wait for readiness
+        run: docker compose up -d --wait --wait-timeout 90
+      - name: Check six projects and offline APIs
+        run: python3 scripts/container_smoke.py
+      - name: Check runtime permissions and image contents
+        run: |
+          docker compose exec -T lab python -c "import os,pathlib; assert os.getuid()==10001; assert not pathlib.Path('/app/.env').exists(); assert not pathlib.Path('/app/.git').exists()"
+          docker compose exec -T lab python -c "import pathlib,tempfile; t=tempfile.TemporaryDirectory(); pathlib.Path(t.name,'probe').write_text('ok'); t.cleanup()"
+          docker compose exec -T lab python - <<'PYCODE'
+          import errno
+          from pathlib import Path
+          try:
+              Path('/app/write-probe').write_text('unexpected')
+          except OSError as error:
+              assert error.errno == errno.EROFS, error
+          else:
+              raise AssertionError('Container filesystem is writable')
+          PYCODE
+      - name: Show logs
+        if: always()
+        run: docker compose logs --no-color
+      - name: Stop containers
+        if: always()
+        run: docker compose down

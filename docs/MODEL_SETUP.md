@@ -1,8 +1,22 @@
 # 新增项目的可选模型模式
 
-六个项目共用原有 Conda 环境和启动命令。项目九、十二、十三的本地处理不需要密钥；只有在工作台选择模型模式并点击运行时才发起请求。没有配置或请求失败时明确报错，不将离线结果伪装成模型结果。
+六个项目共用同一个容器；本地开发也可继续使用原有 Conda 环境。项目九、十二、十三的本地处理不需要密钥；只有在工作台选择模型模式并点击运行时才发起请求。没有配置或请求失败时明确报错，不将离线结果伪装成模型结果。
 
-## 服务端配置
+## Docker Compose 配置（推荐）
+
+复制根目录 `.env.example` 为 `.env`，编辑以下三个变量：
+
+```dotenv
+LAB_LLM_BASE_URL=https://你的模型服务基础地址/v1
+LAB_LLM_MODEL=你已开通的模型名称
+LAB_LLM_API_KEY=你的密钥
+```
+
+替换占位值后执行 `docker compose up -d --force-recreate --wait`；首次部署使用 `docker compose up --build -d --wait`。Compose 将变量注入服务端，不需要改 Dockerfile 或重新安装依赖；`.env` 不进入镜像，也不提交 Git。变量留空时仍能使用默认离线功能。
+
+Docker Desktop 上调用宿主机的模型服务，可将地址中的 `127.0.0.1` 改为 `host.docker.internal`；Linux 使用容器可访问的实际服务地址。基础地址不带 `/chat/completions`。
+
+## 直接运行 Python 时的服务端配置
 
 使用提供 `/chat/completions` 的 OpenAI 兼容 API，在启动服务的同一终端设置：
 
@@ -22,7 +36,7 @@ export LAB_LLM_API_KEY="你的密钥"
 bash start.sh
 ```
 
-替换占位值后再使用。配置只读取进程环境变量，不自动加载 `.env` 文件。基础地址不包含 `/chat/completions`。需要换模型时更新变量并重启服务。没有新增Python运行依赖。
+替换占位值后再使用。直接运行 Python 时只读取进程环境变量，不自动加载 `.env`；Docker Compose 负责读取并注入 `.env`。基础地址不包含 `/chat/completions`。需要换模型时更新变量并重启服务。没有新增Python运行依赖。
 
 页面通过 `/api/capabilities` 只获知配置是否齐全；不会获取密钥或完整服务地址。配置齐全不表示模型一定可用，认证、格式和模态错误会在实际请求时显示。
 

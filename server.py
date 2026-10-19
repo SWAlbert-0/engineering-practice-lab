@@ -17,6 +17,7 @@ from shared.model_client import configured
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
     def do_GET(self):
+        if self.path=='/healthz':return self.reply(200,{'status':'ok','projects':6})
         if self.path=='/api/capabilities':return self.reply(200,{'llm':configured()})
         return super().do_GET()
     def do_POST(self):
@@ -52,7 +53,16 @@ class Handler(SimpleHTTPRequestHandler):
         content=json.dumps(data,ensure_ascii=False,allow_nan=False).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(content)));self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(content)
 
+def main(argv=None):
+    p=argparse.ArgumentParser()
+    p.add_argument('--host',default='127.0.0.1',help='Bind address; containers use 0.0.0.0')
+    p.add_argument('--port',type=int,default=8765)
+    a=p.parse_args(argv)
+    if not 1 <= a.port <= 65535:p.error('port must be between 1 and 65535')
+    with ThreadingHTTPServer((a.host,a.port),Handler) as httpd:
+        print(f'Engineering Topic Lab listening on {a.host}:{a.port}',flush=True)
+        try:httpd.serve_forever()
+        except KeyboardInterrupt:pass
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=8765);a=p.parse_args()
-    print(f'Engineering Topic Lab: http://127.0.0.1:{a.port}',flush=True)
-    ThreadingHTTPServer(('127.0.0.1',a.port),Handler).serve_forever()
+    main()

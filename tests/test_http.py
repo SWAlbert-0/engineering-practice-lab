@@ -18,6 +18,10 @@ class HttpTests(unittest.TestCase):
         for path,data,key in [('/api/repair',{'case':'empty'},'accepted'),('/api/rag',{'query':'量具校准'},'hits'),('/api/mlops',{'noise':.65,'labels':True},'rollback')]:
             with self.subTest(path=path):
                 with self.request(path,data) as r:self.assertTrue(json.load(r)[key])
+    def test_readiness_does_not_expose_configuration(self):
+        with urllib.request.urlopen(self.base+'/healthz') as response:
+            self.assertEqual(json.load(response),{'status':'ok','projects':6})
+
     def test_invalid_inputs_rejected(self):
         for path,data in [('/api/rag',{'query':''}),('/api/mlops',{'noise':2}),('/api/repair',{'case':'arbitrary'}),('/api/mlops',{'noise':float('nan')})]:
             with self.subTest(path=path,data=data):

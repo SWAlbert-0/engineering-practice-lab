@@ -2,15 +2,17 @@
 
 对应丁箐老师项目 D13。
 
-## 启动
+## 容器启动
 
-在仓库根目录运行，继续共用现有环境：
+安装并启动 Docker（Windows/macOS 使用 Docker Desktop 的 Linux 容器），在仓库根目录执行：
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1
+```bash
+docker compose up --build -d --wait
 ```
 
-macOS / Linux 使用 `bash start.sh`。浏览器打开 <http://127.0.0.1:8765/demos/06-literature/>。入口需要本地服务，不直接双击HTML执行计算。
+浏览器打开 <http://127.0.0.1:8765/demos/06-literature/>。六个项目共用一个容器，不需要本机 Python、Conda 或 Node.js。首次构建需要联网，默认离线功能无需模型密钥。
+
+日志、更新、端口和可选模型配置见 [部署说明](../../docs/DEPLOYMENT.md)。需要直接修改 Python 代码时，仍可使用其中的共用 Conda 开发环境。
 
 ## 当前能力
 

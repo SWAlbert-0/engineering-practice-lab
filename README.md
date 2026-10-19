@@ -2,41 +2,30 @@
 
 基于丁箐老师14题、白天老师11题的选题研究，以及6个独立目录的多页面交互原型。调研日期：2026-10-01。
 
-## 一条命令启动
+## 一条命令启动（Docker）
 
-获取完整仓库后，在根目录执行。六个项目共用一个环境，无需逐个部署。
+队友只需安装 Git 和 Docker。Windows/macOS 使用已启动的 Docker Desktop（Linux 容器）；Linux 使用 Docker Engine 与 Compose v2。无需安装 Python、Conda、Node.js，也无需逐个部署六个项目。
 
-**Windows PowerShell：**
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1
-```
-
-**macOS / Linux：**
+首次获取私密仓库需要自己的协作者权限：
 
 ```bash
-bash start.sh
+git clone https://github.com/SWAlbert-0/engineering-practice-lab.git
+cd engineering-practice-lab
+docker compose up --build -d --wait
 ```
 
-| 当前环境 | 自动处理 |
-|---|---|
-| 终端可调用 Conda | 创建或复用 `engineering-practice-lab`，依赖全部通过 Conda 安装，不调用 pip |
-| 没有 Conda，已安装 Python 3.10–3.13 | 创建或复用仓库内 `.venv`，仅在该虚拟环境中安装 Python 依赖；推荐 Python 3.12 |
-| 两者都没有 | 提示先安装 Miniconda / Anaconda，或 Python 3.12 |
-
-浏览器打开 <http://127.0.0.1:8765>，Ctrl+C 停止。首次安装需要网络；以后配置未变时跳过安装，可离线运行。Conda 环境还包含测试用 Node.js 22，无 Conda 分支运行页面不需要 Node.js。
-
-**明确使用 Conda**：Windows 命令追加 `-Manager conda`，macOS/Linux 追加 `--manager conda`。无需提前激活；也可从 Anaconda Prompt 直接执行：
+浏览器打开 <http://127.0.0.1:8765>。第一次自动下载基础镜像与锁定的依赖并构建，之后复用构建缓存；默认模式无需配置文件、模型密钥或 GPU。`--wait` 会等健康检查通过再返回，服务在后台运行。
 
 ```bash
-conda run --no-capture-output -n base python launch.py --manager conda
+# 查看状态 / 查看日志 / 停止
+docker compose ps
+docker compose logs -f --tail=100
+docker compose down
 ```
 
-**明确使用无 Conda 方案**：对应追加 `-Manager venv` / `--manager venv`。
+更新代码后：`git pull`，再执行 `docker compose up --build -d --wait`。本仓库提供源码构建，不依赖预先发布的私有镜像。已有 Conda 环境可继续用于开发；Conda 与无 Conda 的本地启动方式保留在 [部署说明](docs/DEPLOYMENT.md)。
 
-端口占用可追加 `-Port 8766` / `--port 8766`；只创建环境并检查用 `-Check` / `--check`；强制同步依赖用 `-Update` / `--update`。已有环境继续复用；六个 demo 不各自创建环境。
-
-拉取更新后重跑同一启动命令即可。完整步骤、系统要求、私密仓库访问与故障排查见 [部署说明](docs/DEPLOYMENT.md)。原有 `conda activate engineering-practice-lab` 后运行 `python server.py` 的方式仍可使用。
+完整的配置、换端口、镜像离线交付与故障排查见 [部署说明](docs/DEPLOYMENT.md)。可选模型模式见 [模型配置](docs/MODEL_SETUP.md)。
 
 ## 目录
 
@@ -49,6 +38,8 @@ conda run --no-capture-output -n base python launch.py --manager conda
 | `demos/04-video-understanding/` | 视频预览、实际抽帧、时间戳问答 | 丁箐 项目十二 |
 | `demos/05-requirements/` | 需求版本、用例草案与变更追踪 | 丁箐 项目九 |
 | `demos/06-literature/` | 证据摘记、角色工作流与综述审核 | 丁箐 项目十三 |
+| `Dockerfile` / `compose.yaml` | 一条命令构建、后台启动与健康检查 | 全项目 |
+| `requirements.container.txt` | 容器运行依赖精确版本 | 全项目 |
 | `environment.yml` | 所有 demo 共用的 Conda 环境 | 全项目 |
 | `start.ps1` / `start.sh` / `launch.py` | 自动选择环境、安装检查和启动 | 全项目 |
 | `requirements.txt` | 仅用于无 Conda 开发者的共用 `.venv` | 全项目 |
@@ -69,7 +60,7 @@ conda run --no-capture-output -n base python launch.py --manager conda
 | 需求设计台 | 需求版本、分析、用例、追踪、变更、质量检查 | 规则/可选模型提取、用例完善、旧版本影响定位 |
 | 文献研读室 | 文献、问题、工作流、草稿、审核、模式对照 | 固定摘记池、并行阅读模型流程、人工核查 |
 
-各目录 `index.html` 是项目入口，`workbench.html` 是嵌入其中的计算或游戏工作台。页面路径使用 hash 路由，可以通过地址栏返回与前进。
+各目录 `index.html` 是项目入口，`workbench.html` 是嵌入其中的计算工作台。页面路径使用 hash 路由，可以通过地址栏返回与前进。
 
 新增记录保存在当前浏览器 LocalStorage；关闭页面后可继续查看，切换浏览器或清理站点数据不会自动同步。设置页可导出工作区记录或重置为初始示例。示例记录有单独标记；运行历史来自实际计算。详细页面与状态说明见 [docs/PRODUCT_FLOWS.md](docs/PRODUCT_FLOWS.md)。
 
@@ -103,7 +94,7 @@ conda run --no-capture-output -n base python launch.py --manager conda
 - **需求**：可选模型提取角色和标题，用例来自本地模板。没有ER/UML或完整100样例评测。
 - **文献**：使用5篇真实论文的人工摘要摘记；自动检查只验证引用位置。全文解析和跨领域盲评待完成。
 
-仅绑定127.0.0.1，面向个人本地演示。可信fixture的Python子进程不是安全沙箱，不可将此执行器直接扩展为公网任意代码执行服务。
+容器内监听 `0.0.0.0:8765`，Compose 仅将端口发布到宿主机 `127.0.0.1`；本机 Python 启动仍默认监听 `127.0.0.1`。容器用于统一团队演示环境。可信fixture的Python子进程不是安全沙箱，不可将此执行器直接扩展为公网任意代码执行服务。
 
 ## 可选模型模式
 
@@ -118,7 +109,7 @@ node tests/test_ui.cjs
 node tests/test_products.cjs
 ```
 
-Node.js 已包含在共用 Conda 环境中，用于前端逻辑测试，不是运行浏览器游戏的必要依赖。前端测试使用 DOM 适配器与实际引擎返回值，不包含浏览器布局验收。测试结果与界面验证限制见 `docs/VALIDATION.md`。
+Node.js 已包含在共用 Conda 环境中，用于前端逻辑测试，不是运行页面的必要依赖。前端测试使用 DOM 适配器与实际引擎返回值，不包含浏览器布局验收。测试结果与界面验证限制见 `docs/VALIDATION.md`。
 
 ## 推荐主线
 
