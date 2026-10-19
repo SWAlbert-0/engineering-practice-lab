@@ -110,38 +110,6 @@ async function submit(p, id = 'run') {
   mlops.pending.push(data.drift); await submit(mlops);
   assert.equal(mlops.get('sv').textContent, '2.0'); assert.match(mlops.get('drift-summary').textContent, /检测到分布漂移/); assert.equal(mlops.get('decision').textContent, '保留 v2');
 
-  const game = page('demos/04-tower-defense');
-  game.context.TowerEngine = require('../demos/04-tower-defense/engine.js');
-  const drawing = new Proxy({}, {get: (obj, key) => obj[key] || (() => {}), set: (obj, key, val) => {obj[key] = val; return true;}});
-  game.get('game').getContext = () => drawing;
-  game.get('game').getBoundingClientRect = () => ({left: 10, top: 20, width: 450, height: 250});
-  game.get('tower').value = 'bolt'; game.load('demos/04-tower-defense/app.js');
-  game.get('game').fire('click', {clientX: 105, clientY: 50}); // Logical map (190,60).
-  assert.equal(game.get('gold').textContent, 110); assert.equal(game.run('game.towers[0].x'), 190);
-  game.get('next').fire('click'); game.run('render()'); assert.equal(game.get('wave').textContent, '1 / 5'); assert(game.get('next').disabled);
-  game.get('pause').fire('click'); assert(game.run('game.paused')); assert.equal(game.get('pause').textContent, '继续');
-  game.get('reset').fire('click'); assert.equal(game.get('gold').textContent, 160); assert(!game.run('game.paused'));
-  game.run("game.state='lost';render()"); assert.equal(game.get('next').textContent, '本局结束'); assert(game.get('pause').disabled);
-
-  const planned = page('demos/04-tower-defense');
-  planned.context.TowerEngine = require('../demos/04-tower-defense/engine.js');
-  planned.context.location.search = '?level=training&speed=2&layout=' + encodeURIComponent(JSON.stringify([{x:190,y:60,type:'bolt'}]));
-  planned.get('game').getContext = () => drawing;
-  planned.get('game').getBoundingClientRect = () => ({left:0,top:0,width:900,height:500});
-  planned.get('tower').value = 'bolt';
-  const reports = [];
-  planned.context.window.parent = {postMessage: (message, origin) => reports.push({message, origin})};
-  planned.load('demos/04-tower-defense/app.js');
-  assert.equal(planned.get('gold').textContent, 190); // Training 240 - saved tower 50.
-  assert.equal(planned.get('life').textContent, 20);
-  planned.run('game.next(); frame(last+1000)');
-  assert(planned.run('game.clock') > .28); // Capped .15 real seconds at 2x.
-  planned.run("game.state='won';render();render()");
-  assert.equal(reports.length, 1); assert.equal(reports[0].message.result.level, 'training');
-  assert.equal(reports[0].origin, 'http://localhost:8765');
-  planned.get('reset').fire('click');
-  assert.equal(planned.get('gold').textContent, 190); assert.equal(planned.run('game.towers.length'), 1);
-
   const report = page('report');
   const topics = JSON.parse(read('report/topics.json'));
   report.get('topic-rows').rows = topics.map(t => { const n = new Element(); n.dataset.id = t.id; return n; });
@@ -156,5 +124,5 @@ async function submit(p, id = 'run') {
   report.context.location.hash = '#topic-D11'; report.window.fire('hashchange'); assert(report.get('topic-D11').open);
   report.window.fire('beforeprint'); assert(topics.every(t => report.get('topic-' + t.id).open));
   report.window.fire('afterprint'); assert(!report.get('topic-D01').open); assert(report.get('topic-D11').open);
-  console.log('Frontend behavior checks passed: repair, retrieval, model release, tower controls, report filters.');
+  console.log('Frontend behavior checks passed: repair, retrieval, model release, report filters.');
 })().catch(error => {console.error(error); process.exitCode = 1;});

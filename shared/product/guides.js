@@ -9,10 +9,10 @@ window.ProjectGuides = (() => {
   const arrow = (d,id,label,x,y) => `<path class="guide-edge" d="${d}" marker-end="url(#${id})"/>${label?`<text class="guide-edge-label" x="${x}" y="${y}" text-anchor="middle">${h(label)}</text>`:''}`;
   const box = (x,y,w,title,detail) => `<g class="guide-node"><rect x="${x}" y="${y}" width="${w}" height="72" rx="8"/><text x="${x+w/2}" y="${y+29}" text-anchor="middle">${h(title)}</text><text class="guide-node-detail" x="${x+w/2}" y="${y+51}" text-anchor="middle">${h(detail)}</text></g>`;
   function architecture(g,id) {
-    const m=`guide-${id}-arch-arrow`,n=g.architecture.nodes,tower=id==='tower';
+    const m=`guide-${id}-arch-arrow`,n=g.architecture.nodes;
     const svg=`<svg viewBox="0 0 760 326" role="img" aria-labelledby="guide-arch-title guide-arch-desc"><title id="guide-arch-title">${h(g.architecture.title)}</title><desc id="guide-arch-desc">${h(g.architecture.description)}</desc>${marker(m)}
-    ${arrow('M220 72 H280',m,'打开',250,57)}${arrow('M478 72 H538',m,tower?'调用':'请求',507,57)}
-    ${arrow('M638 110 V214',m,tower?'读取状态':'分派执行',677,168)}${tower?arrow('M380 110 V214',m,'仅终局',416,175):arrow('M538 252 H478',m,'返回',507,236)}
+    ${arrow('M220 72 H280',m,'打开',250,57)}${arrow('M478 72 H538',m,'请求',507,57)}
+    ${arrow('M638 110 V214',m,'分派执行',677,168)}${arrow('M538 252 H478',m,'返回',507,236)}
     ${arrow('M282 252 H250 V156 H122 V112',m,'同源消息',191,176)}${arrow('M122 110 V214',m,'保存',90,196)}
     ${box(24,36,196,...n[0])}${box(282,36,196,...n[1])}${box(540,36,196,...n[2])}${box(24,216,196,...n[3])}${box(282,216,196,...n[4])}${box(540,216,196,...n[5])}</svg>`;
     return figure(svg,'图 01 · 当前实现的模块关系',g.architecture.description);

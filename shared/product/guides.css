@@ -62,12 +62,10 @@
 .guide-roadmap p { font-size:14px; margin:7px 0; }
 .guide-deliverable { color:var(--muted); }
 .guide-end { display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; padding:20px 0 40px; font-size:13px; }
-.theme-rag .guide-cover h1,.theme-rag .guide-chapter-heading h2,.theme-tower .guide-cover h1,.theme-tower .guide-chapter-heading h2 { font-family:"Noto Serif CJK SC","Songti SC",SimSun,serif; }
+.theme-rag .guide-cover h1,.theme-rag .guide-chapter-heading h2 { font-family:"Noto Serif CJK SC","Songti SC",SimSun,serif; }
 .theme-rag .guide-cover { border-bottom-width:1px; }
 .theme-rag .guide-scenario { background:#ececdf; }
 .theme-mlops .guide-code { background:#0e1929; }
-.theme-tower .guide-scenario { background:#e3ddbf; color:#263d30; }
-.theme-tower .guide-scenario > span { color:#49623d; }
 @media(max-width:720px) {
  .guide-diagram-hint { display:block; margin:12px 17px 0!important; color:var(--muted); font-size:12px; }
  .guide-chapter .table-wrap::before { content:'表格可左右滑动 →'; display:block; padding:9px 15px; color:var(--muted); font-size:11px; }

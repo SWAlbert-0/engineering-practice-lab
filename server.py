@@ -11,16 +11,21 @@ def load(folder):
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     return module
 repair=load('01-repair-agent');rag=load('02-process-rag');mlops=load('03-mlops')
+requirements=load('05-requirements');literature=load('06-literature');video=load('04-video-understanding')
+from shared.model_client import configured
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
+    def do_GET(self):
+        if self.path=='/api/capabilities':return self.reply(200,{'llm':configured()})
+        return super().do_GET()
     def do_POST(self):
         try:
             origin=self.headers.get('Origin')
             if origin and urlsplit(origin).netloc!=self.headers.get('Host'):
                 return self.reply(403,{'error':'仅接受同源请求'})
             length=int(self.headers.get('Content-Length',0))
-            if not 0<length<=50000:raise ValueError('请求大小无效')
+            if not 0<length<=250000:raise ValueError('请求大小无效')
             if 'application/json' not in self.headers.get('Content-Type',''):raise ValueError('需要 JSON')
             data=json.loads(self.rfile.read(length))
             if not isinstance(data,dict):raise ValueError('需要 JSON 对象')
@@ -34,6 +39,10 @@ class Handler(SimpleHTTPRequestHandler):
                 if not math.isfinite(noise+shift) or not 0<=noise<=1 or not 0<=shift<=3:raise ValueError('参数超出范围')
                 if not isinstance(labels,bool):raise ValueError('labels 必须为布尔值')
                 result=mlops.run(noise,shift,labels)
+            elif self.path=='/api/requirements':result=requirements.analyze(data.get('text'),data.get('mode','offline'))
+            elif self.path=='/api/requirements/compare':result=requirements.compare(data.get('before'),data.get('after'))
+            elif self.path=='/api/literature':result=literature.run(data.get('topic'),data.get('ids'),data.get('mode','offline'))
+            elif self.path=='/api/video':result=video.run(data.get('question'),data.get('frames'),data.get('mode','offline'),data.get('duration',0))
             else:return self.reply(404,{'error':'不存在的 API'})
             self.reply(200,result)
         except (ValueError,TypeError,KeyError) as e:self.reply(400,{'error':str(e)})

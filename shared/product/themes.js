@@ -1,20 +1,5 @@
 'use strict';
 window.ProjectThemes = (() => {
-  const forestMap = (towers = []) => {
-    const trees = [[42,30],[91,38],[141,31],[332,58],[383,36],[422,62],[572,68],[624,45],[676,64],[785,48],[842,69],[88,238],[138,268],[53,302],[105,383],[161,422],[330,214],[389,238],[425,192],[356,437],[428,462],[578,424],[617,447],[656,386],[796,251],[841,220],[813,469]];
-    return `<svg viewBox="0 0 900 500" class="map-preview forest-map" role="img" aria-label="林地防线地图：敌人从左侧进入，沿折线路径前往右下方基地。">
-      <rect width="900" height="500" fill="#203d35"/>
-      <path d="M0 330Q140 220 187 325T410 465L440 500H0Z" fill="#294c40"/><path d="M286 0Q312 125 446 108T680 80L735 0Z" fill="#294c40"/>
-      <path d="M-30 434Q155 311 218 429T492 460M284-20Q307 151 458 122T704 117M737-15Q680 97 817 135T930 256" stroke="#52745d" stroke-opacity=".35" stroke-width="2" fill="none"/>
-      <path d="M0 120H240V350H500V180H720V400H920" stroke="#172e29" stroke-width="63" fill="none" stroke-linejoin="round"/>
-      <path d="M0 120H240V350H500V180H720V400H920" stroke="#ac9b70" stroke-width="47" fill="none" stroke-linejoin="round"/>
-      <path d="M0 120H240V350H500V180H720V400H920" stroke="#d3c295" stroke-opacity=".7" stroke-width="2" stroke-dasharray="5 15" fill="none"/>
-      ${trees.map(([x,y],i)=>`<g transform="translate(${x} ${y})"><ellipse cy="19" rx="17" ry="7" fill="#162e2866"/><path d="M-3 9h6v18h-6" fill="#907957"/><path d="M0-22 19 13H-19Z" fill="${i%2?'#52735a':'#658060'}"/><path d="M0-22 0 13H-19Z" fill="#365947"/><path d="M0-10 14 17H-14Z" fill="${i%2?'#4d6e56':'#5b795a'}"/></g>`).join('')}
-      <g transform="translate(862 391)"><path d="M-30-14 0-28 30-14V25L0 39-30 25Z" fill="#132a23"/><path d="M-23-20h46v43h-46Z" fill="#cfbc8d"/><path d="M-29-25h58v13h-58Z" fill="#a69870"/><path d="M-21-34h11v15h-11m15-15H15v15H-6m25-15h11v15H19" fill="#dacba2"/><path d="M-6 23V3q6-9 12 0v20" fill="#375444"/><path d="M0-34v-38l27 9L0-50" fill="#d6a34e" stroke="#d6a34e" stroke-width="2"/></g>
-      ${towers.map(t=>`<g transform="translate(${Number(t.x)} ${Number(t.y)})"><circle cy="5" r="23" fill="#182e2766"/><path d="m0-19 17 10v20L0 21-17 11V-9Z" fill="${t.type==='frost'?'#87bfd0':'#debd7b'}"/><circle r="8" fill="#2b473a"/><path d="M0 0V-27" stroke="${t.type==='frost'?'#c2e3e8':'#f3dfad'}" stroke-width="7"/></g>`).join('')}
-      <text x="17" y="79" fill="#dfe1c9" font-size="17">入口</text><text x="823" y="463" fill="#e4d1a1" font-size="17">基地</text>
-    </svg>`;
-  };
   function home(id,s) {
     const {h,link,button,panel,pad,table,badge,timeline,date}=P;
     if(id==='repair') {
@@ -38,12 +23,6 @@ window.ProjectThemes = (() => {
       <aside class="release-log"><div class="section-head"><h2>发布队列</h2>${link('releases','全部记录')}</div>${s.releases.slice(0,3).map(x=>`<a href="#release/${h(x.id)}" class="release-log-item"><span>${h(x.environment)}</span><h3>${h(x.name)}</h3>${badge(x.status)}<small>${x.sample?'初始流程示例':'本地流程模拟'}</small></a>`).join('')}</aside></div>
       <div class="console-foot"><span><i></i>CPU 训练可运行</span><span>模型注册中心：未连接</span><span>推理服务：未部署</span><span>待处理告警：${s.alerts.filter(a=>a.status!=='已处理').length}</span></div>`;
     }
-    if(id==='tower') {
-      const layout=s.layouts[0];
-      return `<header class="campaign-heading"><div><div class="crumb">战役大厅 / 林地防线</div><h1>守住林间的最后一道防线</h1><p>两类防御塔，五波敌人。先安排布阵，再迎接进攻。</p></div>${button('topic-info','关于这个选题','','secondary')}</header>
-      <section class="campaign-stage"><div class="campaign-map">${forestMap(layout?.towers || [])}<div class="map-caption"><span>标准防线</span><small>${layout?'展示布阵：'+h(layout.name):'预设道路 / 五波敌人'}</small></div></div><div class="campaign-order"><span class="campaign-seal">本地战役</span><h2>准备出发</h2><p>敌人会沿道路向基地推进。转角适合集中火力，霜塔可以延长攻击时间。</p><dl><div><dt>标准关卡金币</dt><dd>160</dd></div><div><dt>基地耐久</dt><dd>12</dd></div><div><dt>防守波次</dt><dd>5</dd></div></dl>${link('play/standard','进入标准关卡','btn campaign-play')}${link('levels','选择其他难度','campaign-secondary')}</div></section>
-      <div class="campaign-links"><a href="#editor"><span class="campaign-link-icon">${P.icon('settings')}</span><div><h2>战前布阵</h2><p>放置塔位，把方案带入对局。</p></div><span>${s.layouts.length} 个方案</span></a><a href="#codex"><span class="campaign-link-icon">${P.icon('file')}</span><div><h2>防御图鉴</h2><p>查看伤害、射程与敌人属性。</p></div><span>2 类防御塔</span></a><a href="#battles"><span class="campaign-link-icon">${P.icon('chart')}</span><div><h2>战斗手记</h2><p>回看结局与结束时的布阵。</p></div><span>${s.battles.length} 场对局</span></a></div>`;
-    }
   }
-  return {home,forestMap};
+  return {home};
 })();

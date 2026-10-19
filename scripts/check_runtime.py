@@ -26,7 +26,7 @@ def main():
         if not node.startswith('v22.'):
             raise RuntimeError('The shared Conda environment must include Node.js 22.')
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    import server  # Loads all Python engines and the UTF-8 corpus; does not listen.
+    import server  # Loads all six Python engines and the UTF-8 corpora; does not listen.
     if not server.rag.DOCS:
         raise RuntimeError('Bundled corpus is empty; inspect the checkout.')
     print('Ready: Python {}.{} / NumPy {} / scikit-learn {}'.format(

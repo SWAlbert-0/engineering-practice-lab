@@ -1,5 +1,4 @@
 'use strict';
-// Topic facts mirror report/topics.json; estimates assume 15 hours per week.
 window.ProjectTopics = {
   "repair": {
     "id": "D11",
@@ -61,24 +60,64 @@ window.ProjectTopics = {
     "implemented": "合成数据训练、实验与版本记录、质量判断、监控快照和本地发布审批模拟。",
     "pending": "模型文件存储、注册中心、容器服务、CI/CD、真实流量切换与持续监控。"
   },
-  "tower": {
-    "id": "B-B5",
-    "title": "2D 塔防类游戏开发",
+  "video": {
+    "id": "D12",
+    "title": "轻量级多模态大模型的视频理解与推理系统",
+    "difficulty": 5,
+    "value": 4,
+    "fit": 2,
+    "feasibility": 1,
+    "evidence": 4,
+    "weeks": "14–20+",
+    "resource": "3B–7B模型；GPU显存与视频长度相关",
+    "core": "选任务和数据；开源视频多模态模型轻量化改造；至少2基准；效率精度比较；demo",
+    "risk": "量化推理展示不等于轻量化创新；CPU不适合完整训练研究；两基准工作量大",
+    "upgrade": "先获得算力和导师指导，固定帧数/分辨率/批量，再做PEFT或蒸馏消融",
+    "acceptance": "两基准同设置比较准确率、显存、吞吐与延迟；区分加载和推理耗时",
+    "teacher": "丁箐",
+    "score": 58,
+    "direction": "多模态与视频理解",
+    "implemented": "真实视频预览、浏览器抽帧、时间戳校验、可选视觉模型问答与记录。",
+    "pending": "3B–7B本地视频模型、轻量化训练、至少2基准及GPU效率精度对照。"
+  },
+  "requirements": {
+    "id": "D09",
+    "title": "基于大模型 API 的智能需求分析与用例生成工具",
     "difficulty": 3,
     "value": 4,
-    "fit": 4,
+    "fit": 5,
     "feasibility": 4,
-    "evidence": 5,
+    "evidence": 4,
+    "weeks": "6–8",
+    "resource": "CPU + 模型 API",
+    "core": "≥100个开源需求样例；功能拆分、ER建议、UML/用例格式、结构校验、一致性检查、人机反馈",
+    "risk": "只做一段提示词配网页，难以超越通用聊天工具；生成格式正确但语义不完整",
+    "upgrade": "做需求ID→规则→用例追踪矩阵、冲突检测、版本差异和人工验收；可并入D11",
+    "acceptance": "按项目分割需求集；盲评遗漏/矛盾/可执行性；记录人工修订时间，不把100条都用于调提示",
+    "teacher": "丁箐",
+    "score": 85,
+    "direction": "AI应用、需求工程与测试设计",
+    "implemented": "需求版本、离线/可选模型提取、模板用例、人工核对、追踪与文本变更影响。",
+    "pending": "ER/UML、语义一致性、完整100样例独立评测及被测系统执行。"
+  },
+  "literature": {
+    "id": "D13",
+    "title": "基于多智能体协同的科研文献智能综述生成系统",
+    "difficulty": 4,
+    "value": 4,
+    "fit": 4,
+    "feasibility": 3,
+    "evidence": 4,
     "weeks": "8–12",
-    "resource": "CPU；Godot/Unity等引擎",
-    "core": "完整场景、角色、防御塔、怪物AI、关卡、得分和胜负",
-    "risk": "小教程复刻可玩但简历区分度低；不等于游戏AI算法项目",
-    "upgrade": "数据驱动关卡、可视化编辑器、对象池、寻路/行为树、存档及性能剖析",
-    "acceptance": "固定种子回放；胜负和经济边界；同设备压力场景P95帧时间；工具编辑后立即预览",
-    "teacher": "白天",
-    "score": 84,
-    "direction": "游戏客户端、游戏工具开发",
-    "implemented": "三种资源难度、两类塔、五波敌人、布阵编辑与加载、速度设置与战绩记录。",
-    "pending": "游戏引擎工程、地图编辑、存档、复杂寻路、性能剖析与资源管理。"
+    "resource": "CPU + API；论文获取",
+    "core": "框架化多Agent、RAG引用、任务分解融合、Web原型；2–3计算机子领域评估",
+    "risk": "多Agent标签不自动提高质量；引用真实不等于论述被支持；API费用与全文可得性",
+    "upgrade": "句子级证据对齐、去重、来源质量控制；对比单Agent与多Agent",
+    "acceptance": "在固定文献池评估引用准确率、论述支持率、覆盖度和成本；专家盲评",
+    "teacher": "丁箐",
+    "score": 76,
+    "direction": "知识工具与Agent工程",
+    "implemented": "固定真实论文摘记池、离线/单次/并行模型流程、引用位置校验和逐条审核。",
+    "pending": "全文解析、文献检索、框架化长任务恢复和2–3子领域盲评。"
   }
 };

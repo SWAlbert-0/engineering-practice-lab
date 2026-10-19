@@ -7,6 +7,9 @@ const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p
 const python=spawnSync(process.env.PYTHON || 'python',['-c',`import json,server
 print(json.dumps({'repair':server.repair.run('boundary','correct'),'wrong':server.repair.run('boundary','wrong'),'rag':server.rag.search('铝合金薄壁精加工','铝合金'),'bad':server.mlops.run(.65,0,True),'unlabeled':server.mlops.run(.65,0,False)}))`],{cwd:root,encoding:'utf8'});
 assert.equal(python.status,0,python.stderr);const results=JSON.parse(python.stdout),rendered=[];
+const extra=spawnSync(process.env.PYTHON || 'python',['-c',`import json,server
+print(json.dumps({'requirements':server.requirements.analyze(server.requirements.SAMPLE),'compare':server.requirements.compare(server.requirements.SAMPLE,server.requirements.SAMPLE.replace('快速','5秒内')),'literature':server.literature.run('Agent如何利用外部反馈改进任务执行？',['REACT-2022','REFLEXION-2023'])}))`],{cwd:root,encoding:'utf8'});
+assert.equal(extra.status,0,extra.stderr);Object.assign(results,JSON.parse(extra.stdout));
 class Node {
  constructor(){this.value='';this.innerHTML='';this.textContent='';this.hidden=false;this.listeners={};this.style={};this.classList={toggle(){}};}
  addEventListener(name,fn){this.listeners[name]=fn;}
@@ -17,13 +20,15 @@ function setup(folder,store=new Map()){
  const elements=new Map(),events={},windowEvents={};let frame=null;
  const el=selector=>{if(!elements.has(selector))elements.set(selector,new Node());return elements.get(selector);};
  const document={body:new Node(),documentElement:{style:{setProperty(){}}},querySelector:selector=>selector==='iframe'?frame:el(selector),querySelectorAll:()=>[],addEventListener:(name,fn)=>{events[name]=fn;},createElement:()=>({click(){}})};
- const context=vm.createContext({document,location:{hash:'',origin:'http://localhost:8765'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},structuredClone,URLSearchParams,URL,Blob,console,setTimeout:()=>0,clearTimeout(){},FormData,scrollTo(){},addEventListener:(name,fn)=>{windowEvents[name]=fn;},TowerEngine:require('../demos/04-tower-defense/engine.js')});
+ const context=vm.createContext({document,location:{hash:'',origin:'http://localhost:8765'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},structuredClone,URLSearchParams,URL,Blob,console,setTimeout:()=>0,clearTimeout(){},FormData,scrollTo(){},addEventListener:(name,fn)=>{windowEvents[name]=fn;}});
  vm.runInContext('globalThis.window=globalThis;',context);
  vm.runInContext(read('shared/product/core.js'),context);
  vm.runInContext(read('shared/product/topics.js'),context);
  vm.runInContext(read('shared/product/themes.js'),context);
  vm.runInContext(read('shared/product/guides-data.js'),context);
  vm.runInContext(read('shared/product/guides.js'),context);
+ vm.runInContext(read('shared/product/additional-guides.js'),context);
+ if(folder==='06-literature')vm.runInContext(read('demos/06-literature/seed.js'),context);
  vm.runInContext('const originalStart=P.start;P.start=config=>{globalThis.config=config;originalStart(config);};',context);
  vm.runInContext(read(`demos/${folder}/product.js`),context);
  const c=context.config,p=context.P,s=p.state;
@@ -79,19 +84,32 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  mlops.c.submit('resolve-alert',{id:m.alerts[0].id,resolution:'标签回流后复核'},m);assert.equal(m.alerts[0].status,'已处理');
  const mlopsCount=routes(mlops,['new-release','new-experiment']);
 
- const tower=setup('04-tower-defense'),t=tower.s;
- tower.render('editor');
- const ctx=new Proxy({},{get:(o,k)=>o[k] || (()=>{}),set:(o,k,v)=>{o[k]=v;return true;}});
- const canvas=tower.el('#layout-canvas');canvas.getContext=()=>ctx;canvas.getBoundingClientRect=()=>({left:0,top:0,width:450,height:250});
- tower.el('[name=tool]').value='bolt';tower.el('[name=level]').value='standard';tower.c.afterRender('editor');
- canvas.listeners.click({clientX:95,clientY:30});canvas.listeners.click({clientX:155,clientY:140});
- tower.c.submit('layout',{id:'',name:'New layout',level:'standard'},t);assert.equal(t.layouts[0].towers.length,2);assert.equal(t.layouts[0].towers[0].x,190);
- const play=tower.render('play','standard');assert(play.includes('level=standard'));
- tower.context.location.hash='#play/standard?layout='+t.layouts[0].id;assert.match(tower.render('play','standard'),/layout=%5B%7B/);
- tower.c.onResult({result:{level:'standard',levelName:'标准防线',outcome:'won',wave:5,kills:60,life:12,gold:30,clock:80,towers:t.layouts[0].towers}},t);assert.equal(t.battles.length,1);
- tower.c.submit('game-settings',{speed:'2',preview:'off'},t);assert.equal(t.settings.speed,'2');
- const towerCount=routes(tower);
- for(const app of [repair,rag,mlops,tower]) {
+ const video=setup('04-video-understanding'),requirements=setup('05-requirements'),literature=setup('06-literature');
+ const old=requirements.s.specs[0];
+ requirements.c.onResult({result:structuredClone(results.requirements),context:{spec:old.id,text:old.text}},requirements.s);
+ const analysis=requirements.s.runs[0],caseItem=analysis.result.cases[0];
+ await requirements.c.submit('case-review',{run:analysis.id,case:caseItem.id,precondition:'已选课学生',steps:'打开任务\n核对本人课堂',expected:'只显示已选课堂',comment:'已核对访问范围'},requirements.s);
+ assert.equal(caseItem.status,'已核对');assert.equal(caseItem.steps.length,2);
+ await requirements.c.submit('revision',{id:old.id,text:old.text.replace('快速','5秒内')},requirements.s);
+ assert.equal(requirements.s.specs.length,2);assert.equal(requirements.s.specs[1].text,old.text);
+ requirements.p.api=async()=>structuredClone(results.compare);
+ await requirements.c.submit('compare',{before:old.id,after:requirements.s.specs[0].id},requirements.s);
+ assert(requirements.s.changes[0].result.changes[0].cases.length>0);
+ const before=requirements.s.runs.length;
+ requirements.c.onResult({result:structuredClone(results.requirements),context:{spec:old.id,text:'不同原文'}},requirements.s);
+ assert.equal(requirements.s.runs[0].spec,'');assert.equal(requirements.s.runs.length,before+1);
+ literature.c.onResult({result:structuredClone(results.literature),context:{scope:'scope-agent'}},literature.s);
+ const litDraft=literature.s.runs[0];
+ assert.throws(()=>literature.c.action('approve-report',litDraft.id,literature.s),/逐条/);
+ for(let i=0;i<litDraft.result.claims.length;i++)literature.c.submit('claim-review',{id:litDraft.id+'~'+i,comment:'已对照摘记与原文范围'},literature.s);
+ assert.throws(()=>literature.c.action('approve-report',litDraft.id,literature.s),/整篇/);
+ literature.c.submit('report-note',{id:litDraft.id,note:'摘记层面已核对，全文结论需继续验证'},literature.s);
+ literature.c.action('approve-report',litDraft.id,literature.s);assert.equal(litDraft.status,'已审核');
+ literature.c.submit('report-note',{id:litDraft.id,note:'更新意见'},literature.s);assert.equal(litDraft.status,'待审核');
+ video.c.onResult({result:{question:'问题',provider:'离线采样校验',duration:12,frame_count:2,evidence:[],sampled_times:[3,9],duration_ms:1,answer:'无视觉推理',uncertainty:'待模型',boundary:'采样校验'},context:{material:'样片',frames:[]}},video.s);
+ assert.equal(video.s.runs.length,1);
+ const additionalCounts=[video,requirements,literature].map(a=>routes(a));
+ for(const app of [repair,rag,mlops,video,requirements,literature]) {
    assert(app.document.body.className.includes('theme-'+app.c.id));
    assert.match(app.document.body.innerHTML,/aria-controls="topic-dialog"/);
    const html=app.p.topicMarkup(),topic=app.context.ProjectTopics[app.c.id];
@@ -114,5 +132,5 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  await rag.c.submit('quick-search',{query:'铝合金薄壁零件'},k);
  assert(rag.context.location.hash.includes('search?query='));
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(rendered,null,2));
- console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, tower ${towerCount}.`);
+ console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, video/requirements/literature ${additionalCounts.join(", ")}.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -1,6 +1,6 @@
 # 开发者部署与启动
 
-四个项目由根目录 `server.py` 一起提供服务，启动一次即可浏览全部页面。默认地址是 <http://127.0.0.1:8765>；无需 API Key、数据库或前端构建。以下流程用于本地开发与演示，服务仍只监听本机。
+六个项目由根目录 `server.py` 一起提供服务，启动一次即可浏览全部页面。默认地址是 <http://127.0.0.1:8765>；离线模式无需 API Key、数据库或前端构建。以下流程用于本地开发与演示，服务仍只监听本机。
 
 ## 1. 获取完整仓库
 
@@ -74,7 +74,7 @@ python3.12 launch.py --manager venv
 
 脚本创建仓库根目录 `.venv`，并仅通过该环境的 Python 执行 `-m pip install -r requirements.txt`。不会把依赖装进系统 Python，也不会为每个项目分别创建环境。不需要手动激活 `.venv`，依赖未变时会复用它。
 
-无 Conda 分支只安装页面运行所需的 Python 依赖；Node.js 不是启动服务或玩塔防的必需项。如果要执行 JavaScript 测试，请另外准备 Node.js 22。
+无 Conda 分支只安装页面运行所需的 Python 依赖；Node.js 不是启动服务的必需项。如果要执行 JavaScript 测试，请另外准备 Node.js 22。
 
 ## 4. 自动选择与常用参数
 
@@ -113,7 +113,6 @@ Conda 已准备好时：
 
 ```bash
 conda run --no-capture-output -n engineering-practice-lab python -m unittest discover -s tests -v
-conda run --no-capture-output -n engineering-practice-lab node tests/test_tower.cjs
 conda run --no-capture-output -n engineering-practice-lab node tests/test_ui.cjs
 conda run --no-capture-output -n engineering-practice-lab node tests/test_products.cjs
 ```
