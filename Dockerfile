@@ -21,7 +21,7 @@ COPY demos/ ./demos/
 COPY shared/ ./shared/
 COPY report/ ./report/
 COPY docs/ ./docs/
-COPY scripts/healthcheck.py scripts/parse_process_pdf.py scripts/backup_process_data.py scripts/repair_worker.py ./scripts/
+COPY scripts/healthcheck.py scripts/parse_process_pdf.py scripts/backup_process_data.py scripts/repair_worker.py scripts/train_mlops.py ./scripts/
 USER 10001:10001
 EXPOSE 8765
 HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=3 \

@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 资料、D09 需求/用例、D11 修复任务/证据与 D13 文献/综述保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 和 [D13 工作区说明](D13_WORKSPACE.md)。D02 与 D12 仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
+D01 资料、D09 需求/用例、D11 修复任务/证据、D13 文献/综述与 D02 数据/模型/服务/监控保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 、[D13 工作区说明](D13_WORKSPACE.md) 和 [D02 工作区说明](D02_WORKSPACE.md)。D12 仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
 
 ## 端口与可选配置
 
@@ -215,7 +215,7 @@ python3.12 launch.py --manager venv
 | `.venv` 不完整或来自另一台机器 | 确认其中没有要保留的文件，停止服务后将 `.venv` 移走，再用 Python 3.12 重建。脚本不会自动删除已有目录 |
 | Linux 提示缺少 ensurepip / venv | 通过系统包管理器安装与所用 Python 版本对应的 venv 组件后重试 |
 | 端口 8765 已占用 | 停止旧服务，或指定 8766；脚本不会终止其他进程 |
-| 新端口下看不到历史记录 | LocalStorage 按来源隔离，端口变化会使用另一份浏览器存储；旧记录仍在旧端口的来源下 |
+| 新端口下看不到历史记录 | D12和旧教学页的LocalStorage按来源隔离；五个服务端工作区应检查数据目录/卷是否为原路径 |
 
 同一环境不要同时运行两个首次安装/更新过程。依赖安装中断时可修复网络后重试；脚本只在安装和加载检查都成功后保存摘要。
 

@@ -59,3 +59,5 @@ bash start.sh
 D11 的模型请求发送固定教学源码、缺陷描述与回归反馈，不发送宿主文件、数据库或模型密钥。独立验收的输入/输出不进入修订反馈。任务创建时须确认预算，重试再次确认；Conda/venv 本地模式不执行模型源码。完整约束见 [D11工作区](D11_WORKSPACE.md)。
 
 D13 任务保留成功节点，显式重试仅在输入指纹、模型配置一致时复用。取消不撤销已发出的请求；无可靠 usage 时不显示费用或 token 估算。支持范围与评估见 [D13说明](D13_WORKSPACE.md)。
+
+D02无需大模型API。其可选MLflow参数/指标同步使用独立的 LAB_MLFLOW_URL、LAB_MLFLOW_EXPERIMENT、LAB_MLFLOW_TOKEN；默认无需外部追踪服务，范围见 [D02说明](D02_WORKSPACE.md)。

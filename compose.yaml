@@ -10,6 +10,9 @@ services:
       - "127.0.0.1:${LAB_PORT:-8765}:8765"
     environment:
       LAB_REPAIR_RUNNER: docker
+      LAB_MLFLOW_URL: "${LAB_MLFLOW_URL:-}"
+      LAB_MLFLOW_EXPERIMENT: "${LAB_MLFLOW_EXPERIMENT:-engineering-practice-lab}"
+      LAB_MLFLOW_TOKEN: "${LAB_MLFLOW_TOKEN:-}"
       LAB_LLM_BASE_URL: "${LAB_LLM_BASE_URL:-}"
       LAB_LLM_MODEL: "${LAB_LLM_MODEL:-}"
       LAB_LLM_API_KEY: "${LAB_LLM_API_KEY:-}"

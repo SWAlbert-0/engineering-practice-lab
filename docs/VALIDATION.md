@@ -221,3 +221,17 @@ D11 首次真实容器验收 [运行39277075668](https://github.com/SWAlbert-0/e
 桌面/窄屏截图位于 CI 工件 `d01-browser-evidence`（沿用名称）。工作流新增 D13 Chromium 端到端及重启检查，并继续运行其余三个工作区、真实 Docker 隔离和权限检查。最终容器结果以对应提交的 Actions 为准。
 
 未使用真实供应商密钥；未进行跨领域专家盲评，也未将逐字匹配率作为语义支持率。Windows/Conda 和 ARM64 本轮没有新增实机验收；运行依赖与三种启动方式保持一致。
+
+
+## 2026-10-20 D02 持久模型发布与监控工作区
+
+新增数据快照、固定分层训练、受限子进程与安全JSON制品、审核/加载、真实预测/回滚、窗口监控、告警处理、可选MLflow元数据桥接与Prometheus文本出口。当前实现与未完成范围见 [D02工作区](D02_WORKSPACE.md)。
+
+- `python -m unittest discover -s tests -v`：184项，179通过、5项真实Docker隔离测试本地跳过；D02新增39项（32领域、3业务HTTP、4可选MLflow桥接）。覆盖固定切分和训练内标准化、制品重载一致、100次实际请求版本、损坏候选/活动制品、审核/发布竞争、审核哈希绑定、回滚真实权重、运行中取消、显式中断重试、五类窗口、零有效行、告警审计、重启/备份及可选HTTP桥接幂等/凭据重定向边界。
+- `node tests/test_products.cjs`、`node tests/test_ui.cjs`：保留教学页面、引擎与报告交互回归通过。
+- 实际Firefox + 服务运行 `node tests/test_mlops_browser.cjs`：通过脚本下载失败/恢复、CSV真实上传、两次训练/审核/加载、同条件实验比较、保留输入的服务校验、实际预测、五类监控、告警处理、历史回滚、跨浏览器读取、原生制品导出、旧审核页冲突；390px检查22个页面状态无整页横向溢出。桌面/窄屏截图由测试生成。
+- 服务重启后 `--check-persistence`：实际加载模型、修订3、预测哈希、无标签窗口与处理记录保留。SQLite backup API创建的备份另行恢复，核对活动权重、实际预测、窗口和审计。
+
+CI新增D02 Chromium验收和重启检查，继续运行其余四工作区、容器构建/权限与5项真实Docker隔离检查。截图沿用 d01-browser-evidence 工件名，最终结果以该提交Actions为准。
+
+MLflow测试为隔离HTTP协议fixture和离线桩，未在外部MLflow实机服务完成联调；未部署Evidently/Prometheus/Grafana。没有真实业务泛化、误报校准或固定硬件并发负载成绩；计算耗时不含审计写入和HTTP往返。Windows/Conda与ARM64本轮未新增实机验证。

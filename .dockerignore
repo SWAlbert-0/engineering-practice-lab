@@ -17,6 +17,7 @@
 !scripts/
 !scripts/healthcheck.py
 !scripts/repair_worker.py
+!scripts/train_mlops.py
 !scripts/parse_process_pdf.py
 !scripts/backup_process_data.py
 **/__pycache__

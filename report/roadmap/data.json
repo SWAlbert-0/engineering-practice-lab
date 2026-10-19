@@ -1338,6 +1338,12 @@
       "status": "local_first_release",
       "documentation": "docs/D13_WORKSPACE.md",
       "remaining": "跨领域盲评、学术检索、OCR、结构化参考文献解析、权限"
+    },
+    "D02": {
+      "date": "2026-10-20",
+      "status": "local_first_release",
+      "documentation": "docs/D02_WORKSPACE.md",
+      "remaining": "外部MLflow注册/权重上传、Evidently对照、持续采集、真实业务与并发负载基准"
     }
   }
 }
