@@ -242,6 +242,8 @@ class RequirementsWorkspace:
                 self._insert_analysis(c,analysis,setid,job['document_id'],job['source_version'],job['mode'],result)
                 c.execute("UPDATE jobs SET status='succeeded',phase='用例集已建立，等待人工核查',result=?,updated=? WHERE id=?",(dump({'set_id':setid}),now(),job['id']))
         except Exception as error:
+            if not isinstance(error,ValueError):
+                import traceback;traceback.print_exc()
             with self.lock,self.connect() as c:
                 r=self._row(c,'jobs',job['id']);status='cancelled' if r['cancel'] else 'interrupted' if self.stopping.is_set() else 'failed'
                 message=str(error) if isinstance(error,ValueError) else '分析失败，请检查服务端日志。'
