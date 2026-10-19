@@ -1,2 +1,49 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>文献研读室</title><link rel="stylesheet" href="../../shared/product/style.css"><link rel="stylesheet" href="../../shared/product/themes.css"><link rel="stylesheet" href="../../shared/product/guides.css"><link rel="stylesheet" href="../../shared/product/additional-themes.css"><meta name="theme-color" content="#f4f3ee"></head><body><noscript>请启用JavaScript浏览项目。</noscript><script src="../../shared/product/core.js"></script><script src="../../shared/product/topics.js"></script><script src="../../shared/product/themes.js"></script><script src="../../shared/product/guides-data.js"></script><script src="../../shared/product/guides.js"></script><script src="../../shared/product/additional-guides.js"></script><script src="seed.js"></script><script src="product.js"></script></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f3ed">
+  <title>文献研读台</title>
+  <link rel="stylesheet" href="../../shared/product/workspace-ui.css?v=20261019-d13-1">
+  <link rel="stylesheet" href="workspace.css?v=20261019-d13-1">
+  <style>
+    #workspace-boot{max-width:680px;margin:12vh auto;padding:32px;background:#fcfcfa;border:1px solid #ccd5e0;color:#263c55;font:16px/1.9 system-ui,sans-serif;box-sizing:border-box}
+    #workspace-boot h1{font:600 32px/1.5 "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;margin:0 0 16px}
+    #workspace-boot p{margin:12px 0}#workspace-boot a{color:#365d88}
+    #workspace-boot .boot-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+    @media(max-width:720px){#workspace-boot{margin:10vh 16px;padding:24px}}
+  </style>
+</head>
+<body>
+  <main id="workspace-boot" aria-labelledby="boot-title">
+    <p>工程实践 / D13</p>
+    <h1 id="boot-title">文献研读工作区</h1>
+    <p id="boot-status" role="status">正在准备页面…</p>
+    <p id="boot-error" role="alert" hidden></p>
+    <noscript><p>JavaScript 已停用。请在浏览器中启用 JavaScript 后重新加载。</p></noscript>
+    <div class="boot-actions"><button type="button" id="boot-retry">重新加载</button><a href="../../index.html">返回项目总览</a></div>
+  </main>
+  <script>
+    (() => {
+      const boot=document.getElementById('workspace-boot');
+      const fail=message=>{
+        if(!boot.isConnected)return;
+        document.getElementById('boot-status').textContent='页面暂未能打开';
+        const error=document.getElementById('boot-error');error.textContent=message;error.hidden=false;
+      };
+      document.getElementById('boot-retry').addEventListener('click',()=>location.reload());
+      window.addEventListener('error',event=>{
+        if(event.target instanceof HTMLScriptElement&&event.target.src.includes('/workspace.js'))fail('页面文件未能下载，请检查连接后重新加载。若刚更新项目，请确认服务已重启。');
+        else if(event.target===window)fail('页面未能完成初始化，请重新加载。若仍无法打开，请更新项目并重启服务。');
+      },true);
+      window.addEventListener('unhandledrejection',()=>fail('页面未能完成初始化，请重新加载或重启服务。'));
+      setTimeout(()=>fail('页面加载时间较长，请检查连接后重新加载，或确认项目服务已启动。'),12000);
+    })();
+  </script>
+  <script src="../../shared/product/workspace-icons.js?v=20261019-d13-1"></script>
+  <script src="../../shared/product/topics.js"></script>
+  <!-- The standalone workspace must not reuse the legacy product.js cache key. -->
+  <script src="workspace.js?v=20261019-d13-1"></script>
+</body>
+</html>

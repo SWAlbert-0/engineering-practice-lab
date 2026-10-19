@@ -207,3 +207,17 @@ CI增加真实Docker边界测试：实际用户、禁网、只读根、无数据
 当前环境没有Docker，因此本地Firefox/单元测试不代替上述真实容器检查。未做Windows/macOS或手机硬件实测，未完成5个开源仓库/30缺陷质量评测；公开教学测试通过率不是泛化解决率。
 
 D11 首次真实容器验收 [运行39277075668](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39277075668) 全部通过：实际Compose构建/启动、worker UID10001、5项真实Docker隔离/回收检查、Chromium完整流程与重启持久化。隔离探针实际确认 `network_none/readonly/socket_absent/database_absent/keys_absent/uid` 均为真。随后补充从指定候选创建手写修订任务的页面/API/验收，并将CI启动路径改为README的一条 `docker compose up --build -d --wait`；最新结果仍以对应提交为准。
+
+
+## 2026-10-19 D13 持久文献与综述工作区
+
+新增实际 PDF/TXT/Markdown 文件、原文范围与版本、筛选协议、带页码/Unicode 偏移的证据矩阵、阶段式阅读/写作任务、节点检查点、章节编辑、自动草稿与并发冲突恢复、逐条核对和不可变发布。离线摘录不做语义综合，模型质量与专家盲评没有标为完成。
+
+- `python -m unittest discover -s tests -v`：144 项，139 通过、5 项真实 Docker 测试在本地跳过。D13 新增 36 项（33 领域 + 3 HTTP），涵盖文本 PDF/空页/编码、来源定位、去重、失败修订、证据过期、筛选/提纲/发布门禁、两写入者乐观锁、旧版本、导出、不可变发布、取消、中断恢复、模型伪造引文拒绝、成功节点重试复用及上下文变化阻断。模型使用离线桩。
+- `node tests/test_products.cjs` 与 `node tests/test_ui.cjs`：保留的教学流程、引擎连接和报告交互回归通过；这些 DOM 适配器测试不证明浏览器布局。
+- `node tests/test_literature_browser.cjs`：真实 Firefox + 实际服务通过。覆盖脚本加载失败/重新加载、选题弹窗、UTF-8 文件上传、筛选、阅读、证据类别编辑/核对、含 emoji 的原文高亮、草稿自动保存、版本提交、跨浏览器读取、并发冲突/本地下载、逐章核对、发布、三种原生下载、来源更新与旧发布冻结。390px 下检查 17 个页面状态无整页横向溢出。
+- 服务重新启动后，`--check-persistence` 验证文献 v2、草案 v2/来源过期及发布 v2 仍存在。
+
+桌面/窄屏截图位于 CI 工件 `d01-browser-evidence`（沿用名称）。工作流新增 D13 Chromium 端到端及重启检查，并继续运行其余三个工作区、真实 Docker 隔离和权限检查。最终容器结果以对应提交的 Actions 为准。
+
+未使用真实供应商密钥；未进行跨领域专家盲评，也未将逐字匹配率作为语义支持率。Windows/Conda 和 ARM64 本轮没有新增实机验收；运行依赖与三种启动方式保持一致。

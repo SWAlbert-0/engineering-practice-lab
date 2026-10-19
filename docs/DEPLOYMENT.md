@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 资料、D09 需求/用例与 D11 修复任务/证据保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 和 [D11 工作区说明](D11_WORKSPACE.md)。其余三项仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
+D01 资料、D09 需求/用例、D11 修复任务/证据与 D13 文献/综述保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 和 [D13 工作区说明](D13_WORKSPACE.md)。D02 与 D12 仍使用浏览器 LocalStorage，不自动跨设备同步。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
 
 ## 端口与可选配置
 

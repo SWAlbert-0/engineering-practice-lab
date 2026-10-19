@@ -1326,6 +1326,18 @@
       "status": "local_first_release",
       "documentation": "docs/D01_WORKSPACE.md",
       "remaining": "独立工艺保留集/语义评估、权限与共用架构迁移"
+    },
+    "D11": {
+      "date": "2026-10-19",
+      "status": "local_first_release",
+      "documentation": "docs/D11_WORKSPACE.md",
+      "remaining": "5仓库/30缺陷质量评估、真实Git接入、权限"
+    },
+    "D13": {
+      "date": "2026-10-19",
+      "status": "local_first_release",
+      "documentation": "docs/D13_WORKSPACE.md",
+      "remaining": "跨领域盲评、学术检索、OCR、结构化参考文献解析、权限"
     }
   }
 }
