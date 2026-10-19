@@ -76,7 +76,7 @@ D01 已改为服务端持久化入口，不再使用 iframe + LocalStorage 保�
 - `shared/product/core.js`：路由、页面组件、存储、表单事件与工作台消息桥接。
 - `shared/product/style.css`：公共组件；`themes.css`、`themes.js`：独立主题与首页；`topics.js`：选题介绍数据。
 - `shared/product/guides-data.js`：六项目指南内容；`guides.js`、`guides.css`：图示、章节与排版。
-- 各项目 `product.js`：页面定义、初始数据与操作流程。
+- D01 的 `workspace.js`：服务端工作区页面与交互；其他项目的 `product.js`：页面定义、初始数据与操作流程。
 - 各项目 `workbench.html`、`app.js`：实际计算界面。
 - 原 Python 引擎与接口保持原有职责，Windows UTF-8 修复继续生效。
 

@@ -12,6 +12,7 @@ async function waitFor(fn){for(let i=0;i<180;i++){const x=await fn();if(x)return
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const artifact='/tmp/lab-browser-artifacts';fs.mkdirSync(artifact,{recursive:true});
  try{
+  await require('./test_process_bootstrap.cjs')(browser,base,artifact);
   const go=async(route)=>{await page.goto(base+'/demos/02-process-rag/#'+route);await page.locator('#rag-view h1').waitFor();};
   await go('upload');await page.getByLabel('资料名称',{exact:true}).fill('浏览器验收工艺卡');await page.getByLabel('适用材料',{exact:true}).fill('铌钛合金');
   await page.locator('input[type=file]').setInputFiles({name:'acceptance.md',mimeType:'text/markdown',buffer:Buffer.from('铌钛合金 QXTRACER 声发射检测规范。检验前确认量具校准状态，检验后记录批次与结果。')});

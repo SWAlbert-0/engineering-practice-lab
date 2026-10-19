@@ -17,6 +17,12 @@ from shared.process_workspace import get_workspace, WorkspaceError
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
+    def end_headers(self):
+        # Revalidate UI files after upgrades; API/binary replies already use no-store.
+        # A cached legacy script and the new HTML have incompatible dependencies.
+        if getattr(self,'_serving_static',False):
+            self.send_header('Cache-Control','no-cache')
+        super().end_headers()
     def do_GET(self):
         path=urlsplit(self.path).path
         if path=='/healthz':return self.reply(200,{'status':'ok','projects':6})
@@ -50,7 +56,9 @@ class Handler(SimpleHTTPRequestHandler):
         import os
         data=Path(os.environ.get('LAB_DATA_DIR',str(ROOT/'data'))).resolve()
         if not resolved.is_relative_to(ROOT) or resolved.is_relative_to(data):return self.reply(404,{'error':'资源不存在。'})
-        return super().do_HEAD() if self.command=='HEAD' else super().do_GET()
+        self._serving_static=True
+        try:return super().do_HEAD() if self.command=='HEAD' else super().do_GET()
+        finally:self._serving_static=False
     def do_HEAD(self):
         # HEAD follows the same resource restrictions; no private-file metadata leaks.
         return self.do_GET()

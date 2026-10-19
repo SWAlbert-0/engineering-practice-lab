@@ -23,7 +23,7 @@
 
 **演示流程**：上传资料 → 检查解析索引任务 → 检索与核对原文 → 生成草案 → 保存修改版本 → 逐工序核查 → 导出。替换或删除来源后验证旧草案不可通过审核。
 
-**代码入口**：`shared/process_workspace.py`、`scripts/parse_process_pdf.py` 与 `demos/02-process-rag/product.js`。旧 `engine.py` / `/api/rag` 仅为固定语料基线。
+**代码入口**：`shared/process_workspace.py`、`scripts/parse_process_pdf.py` 与 `demos/02-process-rag/workspace.js`。旧 `engine.py` / `/api/rag` 仅为固定语料基线。
 
 **边界与后续**：本机单工作区，不提供账户或企业审批；OCR、复杂表格、独立工艺保留集和真实模型质量评测仍需完成。存储、备份、接口与运行说明见 [D01工作区说明](D01_WORKSPACE.md)。
 

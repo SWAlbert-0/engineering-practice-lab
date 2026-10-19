@@ -33,3 +33,14 @@ class ProcessHttpTests(unittest.TestCase):
             self.assertIn(e.exception.code,[400,404])
         with self.assertRaises(urllib.error.HTTPError) as e:self.request('/api/process/search',{'query':'量具'},{'Content-Type':'application/json','Origin':'https://elsewhere.invalid'})
         self.assertEqual(e.exception.code,403)
+    def test_ui_cache_revalidation(self):
+        for path in ['/demos/02-process-rag/index.html','/demos/02-process-rag/workspace.js?v=20261019-2','/demos/02-process-rag/workspace.css?v=20261019-2']:
+            with self.subTest(path=path):
+                with self.request(path) as response:
+                    self.assertEqual(response.headers['Cache-Control'],'no-cache')
+                    modified=response.headers['Last-Modified']
+                with self.request(path,method='HEAD') as response:self.assertEqual(response.headers['Cache-Control'],'no-cache')
+                with self.assertRaises(urllib.error.HTTPError) as error:
+                    self.request(path,headers={'If-Modified-Since':modified})
+                self.assertEqual(error.exception.code,304)
+                self.assertEqual(error.exception.headers['Cache-Control'],'no-cache')
