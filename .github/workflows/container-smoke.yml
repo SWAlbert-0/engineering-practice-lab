@@ -45,6 +45,10 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_process_browser.cjs
+      - name: D09 real browser acceptance
+        env:
+          NODE_PATH: /tmp/lab-browser/node_modules
+        run: node tests/test_requirements_browser.cjs
       - name: Verify persistent workspace after restart
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
@@ -52,6 +56,7 @@ jobs:
           docker compose restart lab
           docker compose up -d --wait --wait-timeout 90
           node tests/test_process_browser.cjs --check-persistence
+          node tests/test_requirements_browser.cjs --check-persistence
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

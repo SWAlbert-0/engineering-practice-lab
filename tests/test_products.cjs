@@ -75,20 +75,8 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  mlops.c.submit('resolve-alert',{id:m.alerts[0].id,resolution:'标签回流后复核'},m);assert.equal(m.alerts[0].status,'已处理');
  const mlopsCount=routes(mlops,['new-release','new-experiment']);
 
- const video=setup('04-video-understanding'),requirements=setup('05-requirements'),literature=setup('06-literature');
- const old=requirements.s.specs[0];
- requirements.c.onResult({result:structuredClone(results.requirements),context:{spec:old.id,text:old.text}},requirements.s);
- const analysis=requirements.s.runs[0],caseItem=analysis.result.cases[0];
- await requirements.c.submit('case-review',{run:analysis.id,case:caseItem.id,precondition:'已选课学生',steps:'打开任务\n核对本人课堂',expected:'只显示已选课堂',comment:'已核对访问范围'},requirements.s);
- assert.equal(caseItem.status,'已核对');assert.equal(caseItem.steps.length,2);
- await requirements.c.submit('revision',{id:old.id,text:old.text.replace('快速','5秒内')},requirements.s);
- assert.equal(requirements.s.specs.length,2);assert.equal(requirements.s.specs[1].text,old.text);
- requirements.p.api=async()=>structuredClone(results.compare);
- await requirements.c.submit('compare',{before:old.id,after:requirements.s.specs[0].id},requirements.s);
- assert(requirements.s.changes[0].result.changes[0].cases.length>0);
- const before=requirements.s.runs.length;
- requirements.c.onResult({result:structuredClone(results.requirements),context:{spec:old.id,text:'不同原文'}},requirements.s);
- assert.equal(requirements.s.runs[0].spec,'');assert.equal(requirements.s.runs.length,before+1);
+ const video=setup('04-video-understanding'),literature=setup('06-literature');
+ // D09 persistent workspace is tested through domain/API and real browser contracts.
  literature.c.onResult({result:structuredClone(results.literature),context:{scope:'scope-agent'}},literature.s);
  const litDraft=literature.s.runs[0];
  assert.throws(()=>literature.c.action('approve-report',litDraft.id,literature.s),/逐条/);
@@ -99,8 +87,8 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  literature.c.submit('report-note',{id:litDraft.id,note:'更新意见'},literature.s);assert.equal(litDraft.status,'待审核');
  video.c.onResult({result:{question:'问题',provider:'离线采样校验',duration:12,frame_count:2,evidence:[],sampled_times:[3,9],duration_ms:1,answer:'无视觉推理',uncertainty:'待模型',boundary:'采样校验'},context:{material:'样片',frames:[]}},video.s);
  assert.equal(video.s.runs.length,1);
- const additionalCounts=[video,requirements,literature].map(a=>routes(a));
- for(const app of [repair,mlops,video,requirements,literature]) {
+ const additionalCounts=[video,literature].map(a=>routes(a));
+ for(const app of [repair,mlops,video,literature]) {
    assert(app.document.body.className.includes('theme-'+app.c.id));
    assert.match(app.document.body.innerHTML,/aria-controls="topic-dialog"/);
    const html=app.p.topicMarkup(),topic=app.context.ProjectTopics[app.c.id];
@@ -121,5 +109,5 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
    dialog.listeners.click({target:dialog,clientX:1,clientY:1});assert(!dialog.open);
  }
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(rendered,null,2));
- console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, video/requirements/literature ${additionalCounts.join(", ")}.`);
+ console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, video/literature ${additionalCounts.join(", ")}.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});

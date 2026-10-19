@@ -1,6 +1,6 @@
-# 容器部署与团队使用
+# 容器部署与运行管理
 
-六个项目和调研报告打包在同一个镜像中，由根目录 Python 服务提供网页与 API。队友只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
+六个项目和调研报告打包在同一个镜像中，由根目录 Python 服务提供网页与 API。使用者只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
 
 ## 首次启动
 
@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 文档与记录保存在服务端 SQLite，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md)。其余五项仍使用浏览器 LocalStorage，不自动跨设备同步。源码与 Docker socket 均不挂入运行服务。
+D01 资料与 D09 需求/用例保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 和 [D09 工作区说明](D09_WORKSPACE.md)。其余四项仍使用浏览器 LocalStorage，不自动跨设备同步。源码与 Docker socket 均不挂入运行服务。
 
 ## 端口与可选配置
 

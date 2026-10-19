@@ -47,6 +47,6 @@ class HttpTests(unittest.TestCase):
             urllib.request.urlopen(self.base+'/demos/04-tower-defense/')
         self.assertEqual(e.exception.code,404)
     def test_pages_and_assets_exist(self):
-        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/04-video-understanding/','/demos/05-requirements/','/demos/06-literature/','/shared/product/core.js','/shared/product/style.css'] + [f'/demos/{name}/{file}' for name in ['01-repair-agent','02-process-rag','03-mlops','04-video-understanding','05-requirements','06-literature'] for file in ['workbench.html','workspace.js' if name=='02-process-rag' else 'product.js']]:
+        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/04-video-understanding/','/demos/05-requirements/','/demos/06-literature/','/shared/product/core.js','/shared/product/style.css'] + [f'/demos/{name}/{file}' for name in ['01-repair-agent','02-process-rag','03-mlops','04-video-understanding','05-requirements','06-literature'] for file in ['workbench.html','workspace.js' if name in ('02-process-rag','05-requirements') else 'product.js']]:
             with self.subTest(path=path):
                 with urllib.request.urlopen(self.base+path) as r:self.assertEqual(r.status,200);self.assertGreater(len(r.read()),100)
