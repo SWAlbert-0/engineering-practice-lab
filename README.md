@@ -23,31 +23,42 @@
 
 启动服务后可访问 [HTML 调研报告](report/upgrade-plan.html)，其中包含页面结构建议、工期估算与任务筛选。GitHub 中可直接阅读上述 Markdown 文档。
 
-## 快速部署
+## 运行方式选择
 
-### 环境要求
+项目支持 Docker Compose、Conda 和 Python venv 三种运行方式。三种方式均一次启动全部六个项目，默认访问地址为 <http://127.0.0.1:8765>。
 
-- Windows / macOS：Docker Desktop，使用 Linux 容器并保持 Docker 引擎运行。
-- Linux：Docker Engine 与 Docker Compose v2。
-- 使用 Git 获取和更新源码时需安装 Git；下载完整源码 ZIP 后也可部署。
+| 运行方式 | 适用情况 | 前置环境 | 环境管理 |
+|---|---|---|---|
+| **Docker Compose（推荐）** | 使用统一运行环境，减少本机依赖配置 | Docker Desktop，或 Docker Engine + Compose v2 | 自动构建镜像，六个项目共用一个容器 |
+| **Conda** | 已安装 Conda，或需要直接开发与调试 Python 代码 | 可在当前终端调用的 Conda | 自动创建或复用共用环境 `engineering-practice-lab`，依赖通过 Conda 安装 |
+| **Python venv** | 未安装 Conda，希望直接使用本机 Python | Python 3.10–3.13，推荐 3.12 | 自动创建或复用仓库内共用 `.venv`，依赖仅安装到该虚拟环境 |
 
-容器包含全部六个项目的运行依赖，无需在宿主机安装 Python、Conda 或 Node.js。默认离线功能无需模型密钥、数据库或 GPU。Docker 安装与环境检查见 [部署说明](docs/DEPLOYMENT.md)。
+选择其中一种方式即可。Docker 方式无需在宿主机安装 Python、Conda 或 Node.js；本地运行不要求安装 Docker。默认离线功能无需模型密钥、数据库或 GPU。
 
-### 获取源码并启动
+### 获取源码
 
-访问私密仓库需具备相应的仓库权限。
+使用 Git 获取和更新源码时需安装 Git；访问私密仓库需具备相应权限。
 
 ```bash
 git clone https://github.com/SWAlbert-0/engineering-practice-lab.git
 cd engineering-practice-lab
+```
+
+也可下载并解压完整源码 ZIP，然后在仓库根目录打开终端执行以下任一启动命令。
+
+### 方式一：Docker Compose
+
+Windows / macOS 安装并启动 Docker Desktop，使用 Linux 容器；Linux 安装 Docker Engine 与 Docker Compose v2。先确认 `docker info` 和 `docker compose version` 正常。
+
+三个系统使用相同命令：
+
+```bash
 docker compose up --build -d --wait
 ```
 
-启动完成后访问 <http://127.0.0.1:8765>。首次构建需要联网下载基础镜像、系统运行库与 Python 依赖；后续构建复用缓存。`--wait` 等待服务通过健康检查后返回，容器在后台运行。
+首次构建需要联网下载基础镜像、系统运行库与 Python 依赖；后续构建复用缓存。`--wait` 等待健康检查通过后返回，容器在后台运行，Docker 引擎需保持运行。
 
 当前采用源码构建方式，未发布预构建镜像。容器内监听 `0.0.0.0:8765`，Compose 仅向宿主机的 `127.0.0.1` 发布端口。
-
-### 状态、日志与停止
 
 ```bash
 # 查看服务状态
@@ -60,18 +71,9 @@ docker compose logs -f --tail=100
 docker compose down
 ```
 
-### 更新部署
+### 方式二：Conda
 
-```bash
-git pull
-docker compose up --build -d --wait
-```
-
-端口配置、镜像离线交付、健康检查与故障排查见 [部署说明](docs/DEPLOYMENT.md)。
-
-## 本地开发
-
-六个项目共用根目录 `server.py` 与同一个 Python 环境。本地开发支持 Conda 或 `.venv`，启动脚本负责环境准备、依赖检查与服务启动。
+先确认当前终端可执行 `conda --version`，无需提前创建或激活项目环境。
 
 Windows PowerShell：
 
@@ -85,7 +87,38 @@ macOS / Linux：
 bash start.sh --manager conda
 ```
 
-Conda 分支根据 `environment.yml` 创建或复用 `engineering-practice-lab` 环境，依赖通过 Conda 安装。无 Conda 时可指定 `-Manager venv` 或 `--manager venv`，在共用 `.venv` 中安装依赖。完整参数与操作说明见 [本地开发部署](docs/DEPLOYMENT.md#本地-python-开发方式)。
+脚本根据 `environment.yml` 创建或复用 `engineering-practice-lab`，通过 Conda 安装依赖，检查通过后启动服务。六个项目共用一个环境，按 `Ctrl+C` 停止服务。
+
+环境已准备时，也可手动运行：
+
+```bash
+conda activate engineering-practice-lab
+python server.py
+```
+
+### 方式三：Python venv
+
+先安装 Python 3.10–3.13，推荐 3.12，并确认当前终端能调用 Python。Linux 可能需要安装对应版本的 `python3-venv` 系统包。
+
+Windows PowerShell：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\start.ps1 -Manager venv
+```
+
+macOS / Linux：
+
+```bash
+bash start.sh --manager venv
+```
+
+脚本自动创建或复用仓库内的 `.venv`，仅在该虚拟环境中安装 `requirements.txt` 中的运行依赖，随后启动服务。无需提前激活 `.venv`，按 `Ctrl+C` 停止服务。Node.js 仅用于开发测试，不是此方式运行页面的前置条件。
+
+### 更新与配置
+
+使用 Git 获取源码时，先执行 `git pull`，再重新运行所选方式的启动命令。Docker 方式需保留 `--build` 参数；Conda/venv 启动脚本按依赖清单检查并同步环境。使用源码 ZIP 时，以更新后的完整源码替换代码并保留所需配置。
+
+完整的安装步骤、端口设置、环境参数、镜像离线交付与故障排查见 [部署说明](docs/DEPLOYMENT.md)。模型模式的配置方式见 [模型配置说明](docs/MODEL_SETUP.md)。
 
 ## 目录结构
 
