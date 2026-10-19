@@ -6,6 +6,15 @@
 
 Windows/macOS：安装并启动 [Docker Desktop](https://docs.docker.com/desktop/)，Windows 使用 Linux 容器模式。Linux：安装 [Docker Engine](https://docs.docker.com/engine/install/) 和 [Compose 插件](https://docs.docker.com/compose/install/linux/)。先确认 `docker info`、`docker compose version` 正常；推荐当前 Compose v2。旧版不支持 `--wait` 时更新 Compose。
 
+Windows 首次安装可按以下步骤操作：
+
+1. 从 [Docker Desktop for Windows 官方页面](https://docs.docker.com/desktop/setup/install/windows-install/) 下载安装包，Intel/AMD 电脑选择 x86_64，ARM 电脑选择对应版本。
+2. 使用 WSL 2 后端。若未安装 WSL，在管理员 PowerShell 执行 `wsl --install`，按提示重启；已有 WSL 可用 `wsl --update` 更新。
+3. 打开 Docker Desktop，等待引擎启动并保持运行，使用 Linux 容器。
+4. 重新打开 PowerShell，确认 `docker info` 和 `docker compose version` 成功。无需激活 Conda。
+
+若需要用 Git 克隆或更新仓库，还需安装 Git；使用源码 ZIP 启动则无需 Git。仅安装 Docker 命令行而未启动引擎时，无法构建或启动项目。
+
 使用有仓库访问权限的账号获取完整源码，或从 GitHub 下载 ZIP 并解压：
 
 ```bash

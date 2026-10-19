@@ -150,3 +150,8 @@
 新增 Dockerfile、Compose、容器运行依赖精确版本、构建上下文白名单、可选配置模板和健康检查。服务增加显式 host 参数，本地默认回环地址；Compose 容器监听全部内部接口，但宿主端口只发布到本机。
 
 本地 Python 43 项测试、前端行为与六项目流程检查通过；复制镜像计划包含的运行文件到临时目录，以容器监听地址启动后，六项目页面、报告、WebM、所有离线 API、错误补丁拒绝与敏感文件不存在检查通过。工作环境未安装 Docker；这些检查不等于真实镜像构建。GitHub Actions 的 Container smoke test 负责实际 Compose 配置、构建、健康、只读非 root 和接口验证，运行结论以该工作流为准。模型接口仍使用离线模式，未验证真实外部模型服务或不同 CPU 架构。
+
+
+### 容器 CI 已通过
+
+[GitHub Actions 运行 39192530062](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39192530062) 对提交 `dc0336c99a5b4058d20d0b2c1d625e1eba04ff23` 的真实容器检查全部通过：Compose 配置、镜像构建、健康启动、六项目页面和离线 API、UID 10001、只读根文件系统、临时目录可写，以及镜像不含 `.env` 和 `.git`。此前本地环境没有 Docker 的限制已由这次远端构建验证补充；不代表完成 Windows/macOS 实机、ARM64 或真实模型服务验收。

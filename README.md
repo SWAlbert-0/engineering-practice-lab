@@ -1,10 +1,25 @@
 # 工程实践项目
 
-基于丁箐老师14题、白天老师11题的选题研究，以及6个独立目录的多页面交互原型。调研日期：2026-10-01。
+本仓库包含 25 个课程选题的调研报告，以及 6 个独立目录的交互项目原型。调研材料来自丁箐老师 14 题和白天老师 11 题；当前实现的六项均来自丁箐老师，塔防演示已移除。调研日期：2026-10-01；项目文档更新：2026-10-19。
+
+每个项目提供独立主题、选题介绍弹窗、完整页面导航和六章图文指南。部分功能执行真实计算，部分业务状态保存在浏览器；尚未完整实现原题的全部要求。
+
+## 当前六个选题
+
+| 原选题 | 项目页面 | 当前可体验的内容 |
+|---|---|---|
+| **D01** · 基于 RAG 的轻量级企业工艺生成 | [工艺资料检索](demos/02-process-rag/README.md) | BM25、LSA 与 RRF 检索，材料过滤，引用与拒答，草案人工审核。 |
+| **D02** · 基于 MLOps 的全链路 AI 模型部署与监控系统 | [模型发布平台](demos/03-mlops/README.md) | 实际训练两个逻辑回归模型，计算准确率与 PSI，实验内切换模型重新预测。 |
+| **D09** · 基于大模型 API 的智能需求分析与用例生成工具 | [需求设计台](demos/05-requirements/README.md) | 需求版本、规则或可选模型提取、模板用例、人工核对、追踪矩阵与文本变更关联。 |
+| **D11** · 基于大语言模型智能体的自动化软件测试与缺陷修复系统 | [测试与修复](demos/01-repair-agent/README.md) | 执行三类内置缺陷的真实 Python 测试，展示补丁差异、回归与独立验收结果。 |
+| **D12** · 轻量级多模态大模型的视频理解与推理系统 | [视频观察台](demos/04-video-understanding/README.md) | 浏览器实际预览与抽帧，时间戳校验、分析记录，以及可选视觉模型 API 问答。 |
+| **D13** · 基于多智能体协同的科研文献智能综述生成系统 | [文献研读室](demos/06-literature/README.md) | 五篇论文摘要摘记，离线、单次综合与并行阅读模式，引用位置检查和人工审核。 |
+
+详细用途、演示流程、代码入口与待开发范围见 [六个选题说明](docs/PROJECTS.md)。目录中的 `01`–`06` 不是老师的题号。
 
 ## 一条命令启动（Docker）
 
-队友只需安装 Git 和 Docker。Windows/macOS 使用已启动的 Docker Desktop（Linux 容器）；Linux 使用 Docker Engine 与 Compose v2。无需安装 Python、Conda、Node.js，也无需逐个部署六个项目。
+队友首次使用前需安装 Git 和 Docker，并启动 Docker 引擎；已有源码 ZIP 时可不装 Git。Windows/macOS 使用已启动的 Docker Desktop（Linux 容器）；Linux 使用 Docker Engine 与 Compose v2。无需安装 Python、Conda、Node.js，也无需逐个部署六个项目。
 
 首次获取私密仓库需要自己的协作者权限：
 
@@ -47,7 +62,7 @@ docker compose down
 | `tests/` | 引擎与HTTP验收测试 |
 | `docs/` | 验收记录、后续开发范围 |
 
-每个 demo 的主要实现和说明在其独立文件夹，Python 服务端与样式共用。复制单个目录时应同时保留根目录 server.py 和 shared；无需拆成多个仓库。
+每个项目的主要实现和说明放在独立目录，六项共用根目录 `server.py` 和 `shared/`。团队使用时保留完整仓库；单独复制一个目录无法直接运行，服务启动时会加载全部六个引擎。
 
 ## 页面与操作流程
 
@@ -83,7 +98,7 @@ docker compose down
 
 设计 skills 的调研来源、主题说明与验证边界见 [docs/DESIGN_SKILLS.md](docs/DESIGN_SKILLS.md)。所有资源随仓库提供，不需要安装新依赖。
 
-## Demo边界
+## 当前实现边界
 
 这些项目包含完整的页面导航、详情与功能引导；真实运行部分与本地模拟流程分别标明。尚未完成课程要求中的全部后端集成。
 
@@ -98,9 +113,23 @@ docker compose down
 
 ## 可选模型模式
 
-新增三个项目默认离线可用。项目九支持模型提取，项目十三支持单次模型综合与并行阅读角色，项目十二支持采样图像问答。密钥只从服务端 `LAB_LLM_BASE_URL`、`LAB_LLM_MODEL`、`LAB_LLM_API_KEY` 环境变量读取，启动后由页面显式选择模型模式。视频模式需要支持图像输入的模型。配置与调用次数见 [MODEL_SETUP.md](docs/MODEL_SETUP.md)。
+六个项目的默认功能均可离线运行。项目九支持模型提取，项目十三支持单次模型综合与并行阅读角色，项目十二支持采样图像问答。密钥只从服务端 `LAB_LLM_BASE_URL`、`LAB_LLM_MODEL`、`LAB_LLM_API_KEY` 环境变量读取，启动后由页面显式选择模型模式。视频模式需要支持图像输入的模型。配置与调用次数见 [MODEL_SETUP.md](docs/MODEL_SETUP.md)。
+
+## 文档导航
+
+| 文档 | 内容 |
+|---|---|
+| [六个选题说明](docs/PROJECTS.md) | 选题用途、演示流程、实现入口、边界与后续评估 |
+| [部署说明](docs/DEPLOYMENT.md) | Docker 安装与一键启动、更新、排错、Conda/venv 开发 |
+| [页面与交互流程](docs/PRODUCT_FLOWS.md) | 页面范围、记录状态与人工审核规则 |
+| [模型配置](docs/MODEL_SETUP.md) | 可选模型参数、调用预算与数据发送范围 |
+| [验收记录](docs/VALIDATION.md) | 实际测试与容器 CI、未验证范围 |
+| [开发记录](docs/WORKLOG.md) | 各次项目范围与部署方式变更 |
 
 ## 测试
+
+容器镜像构建、启动健康检查、六项目离线 API、非 root 和只读文件系统已通过 [GitHub Actions 验证](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39192530062)。当前 Python 测试 43 项；以下命令用于本地开发环境，运行镜像不包含 Node.js 或测试目录。
+
 
 ```bash
 conda activate engineering-practice-lab
