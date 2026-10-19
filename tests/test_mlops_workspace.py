@@ -125,6 +125,8 @@ class MlopsTests(unittest.TestCase):
         self.approve(self.models[0])
         with self.w.connect(True) as c:c.execute('UPDATE models SET sha=? WHERE id=?',('changed',self.models[0]))
         self.assertEqual(self.w.model(self.models[0])['decision'],'pending')
+    def test_training_file_reused_as_monitoring_is_explicit(self):
+        self.deploy(self.models[0]);raw=self.w.export('datasets',self.data)[0];d=self.w.import_dataset({'title':'重用训练文件','kind':'monitoring','content_base64':base64.b64encode(raw).decode()})['dataset_id'];j=self.w.monitor({'dataset':d,'revision':1})['job_id'];self.w.process_one();w=self.w.window(self.w.job(j)['result']['window_id']);self.assertTrue(w['report']['training_data_reused']);self.assertIn('training_overlap',[a['kind'] for a in w['alerts']])
     def test_optional_mlflow_sync_uses_saved_run_on_retry(self):
         calls=[]
         def remote(path,body=None):

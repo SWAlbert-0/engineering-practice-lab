@@ -580,6 +580,8 @@ class MlopsWorkspace:
         policy = p['policy']
         with self.connect() as c:
             a, sha = self._load(p['model'], c)
+            source=self.model(p['model'],c)['experiment']['dataset']
+            training_reused=self.dataset(source,c)['sha']==d['sha']
             if sha != p['sha']:
                 raise WorkspaceError('模型制品已变化，监控任务未执行。', 409)
             baseline = None
@@ -614,8 +616,9 @@ class MlopsWorkspace:
         enough = len(valid) >= policy['min_rows']
         quality_ready = enough and len(labeled) >= policy['min_rows'] and (coverage >= policy['min_label_coverage'])
         drop = baseline_accuracy - accuracy if quality_ready and baseline_accuracy is not None else None
-        report = {'total_rows': len(data['rows']), 'valid_rows': len(valid), 'labeled_rows': len(labeled), 'label_coverage': coverage, 'quality': data['quality'], 'accuracy': accuracy, 'quality_ready': quality_ready, 'baseline_accuracy': baseline_accuracy, 'baseline_error': baseline_error, 'accuracy_drop': drop, 'features': features, 'samples': [{'row': valid[i] + 1, **x} for i, x in enumerate(output[:10])], 'boundary': '显式导入的数据快照；并非持续采集。PSI 漂移不等同模型效果下降。'}
+        report = {'training_data_reused':training_reused,'total_rows': len(data['rows']), 'valid_rows': len(valid), 'labeled_rows': len(labeled), 'label_coverage': coverage, 'quality': data['quality'], 'accuracy': accuracy, 'quality_ready': quality_ready, 'baseline_accuracy': baseline_accuracy, 'baseline_error': baseline_error, 'accuracy_drop': drop, 'features': features, 'samples': [{'row': valid[i] + 1, **x} for i, x in enumerate(output[:10])], 'boundary': '显式导入的数据快照；并非持续采集。PSI 漂移不等同模型效果下降。'}
         alerts = []
+        if training_reused:alerts.append(('training_overlap','info','窗口原文件与训练快照完全相同，结果不是独立留出评估。'))
         if data['quality']['invalid_feature_rows'] or data['quality']['invalid_labels']:
             alerts.append(('data_quality', 'warning', '数据含缺失或无效值；检查质量统计与跳过行。'))
         if not enough:
