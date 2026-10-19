@@ -2073,3 +2073,5 @@ body {
     font-size:13px
   }
 }
+
+.patch-explanation>.button{margin-bottom:18px}.task-form>p.muted{margin:0 0 25px;padding:13px 16px;background:var(--wash);border-radius:8px}

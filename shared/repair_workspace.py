@@ -93,6 +93,7 @@ class RepairWorkspace:
         return {'schema':1,'repositories':[snapshot(k) for k in CASES],'tasks':tasks,'capabilities':self.capabilities(),
                 'boundary':'三个原创教学快照；独立验收为公开测试，不等于跨仓库泛化评测。'}
     def create(self,value,parent_id=None):
+        parent_id=parent_id or value.get('parent_id')
         key=value.get('repository');mode=value.get('mode','offline');candidate=value.get('candidate','correct');budget=value.get('max_attempts',2)
         if key not in CASES or mode not in ('offline','llm','manual'):raise WorkspaceError('请选择受控快照和有效生成方式。')
         if candidate not in ('correct','wrong','progressive'):raise WorkspaceError('未知离线候选。')
@@ -106,6 +107,9 @@ class RepairWorkspace:
             try:source=validate_proposal({'files':[{'path':value.get('path'),'content':value.get('source')}],'summary':'人工提交候选'},key)['content']
             except ValueError as e:raise WorkspaceError(str(e)) from None
             budget=1
+        if parent_id:
+            parent=self.task(text(parent_id,'来源任务',80))
+            if parent['status'] not in FINAL or parent['repository']!=key or parent['snapshot']['snapshot_sha256']!=snapshot(key)['snapshot_sha256']:raise WorkspaceError('来源任务尚未结束或代码快照不一致，请重新选择。',409)
         title=text(value.get('title') or CASES[key]['category']+' · '+CASES[key]['title'],'任务名称');tid=uid('repair');stamp=now()
         body={'snapshot':snapshot(key),'candidate':candidate,'max_attempts':budget,'manual_source':source,'parent_id':parent_id,'baseline':None,'attempts':[],
               'environment':None,'model':os.environ.get('LAB_LLM_MODEL') if mode=='llm' else None,'prompt_version':PROTOCOL,'usage':None,'cost':None,'model_config_sha256':digest({'base':os.environ.get('LAB_LLM_BASE_URL'),'model':os.environ.get('LAB_LLM_MODEL')}) if mode=='llm' else None}

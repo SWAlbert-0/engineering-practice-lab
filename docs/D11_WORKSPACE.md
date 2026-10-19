@@ -29,7 +29,7 @@ worker 仅连接固定 `/var/run/docker.sock`。Windows/macOS Docker Desktop 使
 4. 候选必须为指定路径的一个完整函数文件。服务端生成统一 diff，测试不接受修改。每轮分别运行回归和独立验收，保留每项输入、预期、实际值、错误及耗时。
 5. 在任务页切换轮次。点击失败用例可查看日志并返回对应修改文件；执行过程可定位阶段和停止原因。
 6. 通过候选进入人工审查，结论绑定候选哈希和任务修订号。失败轮次不能被误认可；并发审查使用修订冲突检测。记录人为本机填写字段，尚未认证身份。
-7. 下载 `.patch` 或完整 JSON。重试创建新任务，不覆盖原证据，不继承认可记录，也不自动创建远程 PR。
+7. 下载 `.patch` 或完整 JSON。可从选定候选继续手写修订；重试创建新任务，不覆盖原证据，不继承认可记录，也不自动创建远程 PR。
 
 原 `workbench.html`、`engine.py` 和 `/api/repair` 继续作为可信样例教学基线。旧 LocalStorage 记录可在设置中下载；不会转换成新运行器的执行或审查证据。
 
@@ -101,7 +101,7 @@ docker compose up -d --wait
 | 方法与路径 | 用途 |
 |---|---|
 | `GET /api/repair-workspace/workspace` | 快照、最近200任务和运行器能力 |
-| `POST /api/repair-workspace/tasks` | 固定输入并入队；`repository/mode/candidate/max_attempts/title`，人工模式另含 `path/source` |
+| `POST /api/repair-workspace/tasks` | 固定输入并入队；`repository/mode/candidate/max_attempts/title`，人工模式另含 `path/source`，从原候选修订可指定 `parent_id` |
 | `GET /api/repair-workspace/tasks/{id}` | 基线、每轮补丁与测试、门禁、事件和审查 |
 | `GET /api/repair-workspace/tasks/{id}/events` | 顺序事件 |
 | `POST /api/repair-workspace/tasks/{id}/cancel` | 停止任务 |

@@ -12,12 +12,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - name: Validate Compose and build image
+      - name: Validate Compose
         run: |
           docker compose config --quiet
-          docker compose build --pull
-      - name: Start and wait for readiness
-        run: docker compose up -d --wait --wait-timeout 90
+      - name: Build, start and wait for readiness
+        run: docker compose up --build -d --wait --wait-timeout 90
       - name: Check six projects and offline APIs
         run: python3 scripts/container_smoke.py
       - name: Check runtime permissions and image contents

@@ -60,6 +60,11 @@ class RepairWorkspaceTests(unittest.TestCase):
         for source in ('import os\ndef shipping(total):\n return 0\n','def shipping(total):\n return open("/data/repair.sqlite3").read()\n','def shipping(total):\n return total.__class__\n','def shipping(other=1):\n return 0\n'):
             with self.subTest(source=source),self.assertRaises(ValueError):validate_source(source,'boundary')
         self.assertEqual(runner.sources,[])
+    def test_manual_revision_keeps_parent_and_rejects_different_snapshot(self):
+        runner=self.docker();tid=self.task(candidate='wrong');self.w.process_one(runner)
+        child=self.w.create({'repository':'boundary','mode':'manual','path':'src/shipping.py','source':CASES['boundary']['correct'],'parent_id':tid})['task_id']
+        self.w.process_one(runner);t=self.w.task(child);self.assertEqual(t['parent_id'],tid);self.assertEqual(t['status'],'succeeded');self.assertEqual(t['reviews'],[])
+        with self.assertRaises(WorkspaceError):self.w.create({'repository':'empty','parent_id':tid})
     def test_valid_manual_patch_uses_runner(self):
         runner=self.docker();tid=self.task(mode='manual',path='src/shipping.py',source=CASES['boundary']['correct']);self.w.process_one(runner)
         self.assertEqual(self.w.task(tid)['status'],'succeeded');self.assertEqual(len(runner.sources),2)

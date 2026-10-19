@@ -46,6 +46,7 @@ services:
 
   repair-worker:
     image: engineering-practice-lab:local
+    pull_policy: never
     command: [python, scripts/repair_worker.py]
     user: "0:10001"
     environment:
