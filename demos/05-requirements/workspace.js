@@ -10,7 +10,7 @@ const heading=(title,desc,actions='')=>`<header class="page-heading"><div><p cla
 const empty=(name,desc,action='')=>`<section class="empty"><h2>${h(name)}</h2><p>${h(desc)}</p>${action}</section>`;
 const table=(heads,rows)=>`<div class="table-scroll"><table><thead><tr>${heads.map(x=>`<th scope="col">${h(x)}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 const field=(label,name,value='',extra='')=>`<label>${h(label)}<input name="${h(name)}" value="${h(value)}" ${extra}></label>`;
-const area=(label,name,value='',extra='')=>`<label>${h(label)}<textarea name="${h(name)}" ${extra}>${h(value)}</textarea></label>`;
+const area=(label,name,value='',extra='')=>`<label>${h(label)}<textarea aria-label="${h(label)}" name="${h(name)}" ${extra}>${h(value)}</textarea></label>`;
 const note=(title,content)=>`<aside class="note"><strong>${h(title)}</strong><p>${h(content)}</p></aside>`;
 let state,detail,edit=null,route='',renderToken=0,timer,rawDirty=false,reviewSelection=[];
 function notify(message){$('#toast').textContent=message;$('#toast').hidden=false;setTimeout(()=>$('#toast').hidden=true,4500);}
