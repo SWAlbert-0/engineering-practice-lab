@@ -59,17 +59,8 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  const repairCount=routes(repair,['new-repo','new-task','run/'+task.id]);
  const reload=setup('01-repair-agent',repair.store);assert.equal(reload.s.tasks[0].id,task.id);assert.equal(reload.s.runs.length,2);
 
- const rag=setup('02-process-rag'),k=rag.s;
- rag.c.onResult({result:results.rag,context:{query:'铝合金薄壁精加工'}},k);
- await rag.c.action('make-draft',k.searches[0].id,k);const draft=k.drafts[0];assert.equal(draft.sources[0],'AL-02');
- await rag.c.action('approve-draft',draft.id,k);assert.equal(draft.status,'已审核');
- await rag.c.submit('draft-text',{id:draft.id,text:'改写后的内容'},k);assert.equal(draft.status,'待审核');
- await rag.c.submit('document',{title:'<img onerror=x>',material:'通用',version:'1.0',text:'新文档内容',file:null},k);
- assert.equal(k.documents.at(-1).indexed,false);assert.match(rag.render('document',k.documents.at(-1).id),/&lt;img/);
- await assert.rejects(rag.c.submit('document',{title:'x',material:'通用',version:'1',text:'',file:null},k),/粘贴/);
- rag.p.api=async(_path,body)=>({refused:body.query==='量子纠缠实验',hits:[{id:{'铝合金薄壁精加工':'AL-02','不锈钢钻孔':'ST-01','量具校准':'QA-01'}[body.query]}]});
- await rag.c.action('evaluate','',k,{textContent:''});assert.equal(k.evaluations[0].checks.filter(c=>c.pass).length,4);
- const ragCount=routes(rag,['upload']);
+ // D01 now uses the server workspace; covered by test_process_workspace.py and real browser checks.
+ const ragCount='server workspace';
 
  const mlops=setup('03-mlops'),m=mlops.s;
  mlops.c.onResult({result:results.bad},m);assert.equal(m.runs.length,1);assert.equal(m.versions.length,3);assert.equal(m.alerts.length,1);
@@ -109,7 +100,7 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  video.c.onResult({result:{question:'问题',provider:'离线采样校验',duration:12,frame_count:2,evidence:[],sampled_times:[3,9],duration_ms:1,answer:'无视觉推理',uncertainty:'待模型',boundary:'采样校验'},context:{material:'样片',frames:[]}},video.s);
  assert.equal(video.s.runs.length,1);
  const additionalCounts=[video,requirements,literature].map(a=>routes(a));
- for(const app of [repair,rag,mlops,video,requirements,literature]) {
+ for(const app of [repair,mlops,video,requirements,literature]) {
    assert(app.document.body.className.includes('theme-'+app.c.id));
    assert.match(app.document.body.innerHTML,/aria-controls="topic-dialog"/);
    const html=app.p.topicMarkup(),topic=app.context.ProjectTopics[app.c.id];
@@ -129,8 +120,6 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
    dialog.listeners.click({target:dialog,clientX:50,clientY:50});assert(dialog.open);
    dialog.listeners.click({target:dialog,clientX:1,clientY:1});assert(!dialog.open);
  }
- await rag.c.submit('quick-search',{query:'铝合金薄壁零件'},k);
- assert(rag.context.location.hash.includes('search?query='));
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(rendered,null,2));
  console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, video/requirements/literature ${additionalCounts.join(", ")}.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});

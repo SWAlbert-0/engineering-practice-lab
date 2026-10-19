@@ -2,3 +2,4 @@
 # Keep runtime ranges in sync with environment.yml; Node.js is optional for tests.
 numpy>=2.0,<3
 scikit-learn>=1.5,<2
+pypdf>=6.10,<7

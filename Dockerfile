@@ -11,14 +11,17 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 lab \
     && useradd --uid 10001 --gid lab --no-create-home lab
+RUN mkdir -p /data && chown 10001:10001 /data
+ENV LAB_DATA_DIR=/data
 COPY requirements.container.txt ./
-RUN python -m pip install --no-cache-dir --only-binary=:all: -r requirements.container.txt
+ARG PIP_INDEX_URL=https://pypi.org/simple
+RUN --mount=type=cache,target=/root/.cache/pip python -m pip install --disable-pip-version-check --timeout 120 --retries 6 --only-binary=:all: --index-url "$PIP_INDEX_URL" -r requirements.container.txt
 COPY server.py index.html README.md ./
 COPY demos/ ./demos/
 COPY shared/ ./shared/
 COPY report/ ./report/
 COPY docs/ ./docs/
-COPY scripts/healthcheck.py ./scripts/healthcheck.py
+COPY scripts/healthcheck.py scripts/parse_process_pdf.py scripts/backup_process_data.py ./scripts/
 USER 10001:10001
 EXPOSE 8765
 HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=3 \

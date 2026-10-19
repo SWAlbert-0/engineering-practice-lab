@@ -1,0 +1,6 @@
+[
+  {"query":"铝合金薄壁精加工","expected_document_ids":["AL-02"]},
+  {"query":"不锈钢钻孔","expected_document_ids":["ST-01"]},
+  {"query":"量具校准","expected_document_ids":["QA-01"]},
+  {"query":"量子纠缠实验","should_refuse":true}
+]

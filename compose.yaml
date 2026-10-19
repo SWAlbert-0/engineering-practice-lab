@@ -4,12 +4,19 @@ services:
     image: engineering-practice-lab:local
     build:
       context: .
+      args:
+        PIP_INDEX_URL: "${LAB_PIP_INDEX_URL:-https://pypi.org/simple}"
     ports:
       - "127.0.0.1:${LAB_PORT:-8765}:8765"
     environment:
       LAB_LLM_BASE_URL: "${LAB_LLM_BASE_URL:-}"
       LAB_LLM_MODEL: "${LAB_LLM_MODEL:-}"
       LAB_LLM_API_KEY: "${LAB_LLM_API_KEY:-}"
+      LAB_EMBED_BASE_URL: "${LAB_EMBED_BASE_URL:-}"
+      LAB_EMBED_MODEL: "${LAB_EMBED_MODEL:-}"
+      LAB_EMBED_API_KEY: "${LAB_EMBED_API_KEY:-}"
+    volumes:
+      - process-data:/data
     init: true
     restart: unless-stopped
     read_only: true
@@ -24,3 +31,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  process-data:

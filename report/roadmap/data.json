@@ -892,7 +892,7 @@
       ],
       "work": "TXT/Markdown/文本 PDF 入库，哈希、页码、段落与版本落库。",
       "done": "上传新文档进入索引；解析失败可重试且不污染旧版本。",
-      "status": "planned"
+      "status": "first_release"
     },
     {
       "id": "D01-02",
@@ -908,7 +908,7 @@
       ],
       "work": "BM25、嵌入、融合适配器与索引版本；替换/删除和原子切换。",
       "done": "删除后不可命中；同一问题可比较策略与证据。",
-      "status": "planned"
+      "status": "first_release"
     },
     {
       "id": "D01-03",
@@ -925,7 +925,7 @@
       ],
       "work": "结构化工艺步骤和字段引用，参数/单位/缺证据校验，审核发布。",
       "done": "未经来源或人工确认的参数不可被当作已审核值。",
-      "status": "planned"
+      "status": "first_release"
     },
     {
       "id": "D01-04",
@@ -942,7 +942,7 @@
       ],
       "work": "三栏核对、分块预览、导入队列与字段审核抽屉。",
       "done": "点击引用回原页，替换文档后旧草案显示过期。",
-      "status": "planned"
+      "status": "first_release"
     },
     {
       "id": "D01-05",
@@ -962,7 +962,7 @@
       ],
       "work": "20 份文档、100 个问题，比较检索和拒答，人工核验参数证据。",
       "done": "输出保留集指标、失败类别、复核记录与完整导出草案。",
-      "status": "planned"
+      "status": "in_progress"
     },
     {
       "id": "D11-01",
@@ -1319,5 +1319,13 @@
       "done": "区分子集/完整评测，输出量化或采样的精度效率曲线与原始结果。",
       "status": "planned"
     }
-  ]
+  ],
+  "implementation_updates": {
+    "D01": {
+      "date": "2026-10-19",
+      "status": "local_first_release",
+      "documentation": "docs/D01_WORKSPACE.md",
+      "remaining": "独立工艺保留集/语义评估、权限与共用架构迁移"
+    }
+  }
 }

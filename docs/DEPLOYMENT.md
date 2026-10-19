@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-浏览器操作记录仍保存于该浏览器的 LocalStorage。重新构建或删除容器不会删除它；换电脑、浏览器、访问地址或端口不会自动同步。设置页可导出工作区记录。当前后端无业务数据库，因此没有待挂载的数据卷，也不把源码或 Docker socket 挂进容器。
+D01 文档与记录保存在服务端 SQLite，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md)。其余五项仍使用浏览器 LocalStorage，不自动跨设备同步。源码与 Docker socket 均不挂入运行服务。
 
 ## 端口与可选配置
 
@@ -64,7 +64,7 @@ cp .env.example .env
 
 | 项目 | 约定 |
 |---|---|
-| Python 与运行依赖 | Python 3.12；五个运行包在 `requirements.container.txt` 固定版本 |
+| Python 与运行依赖 | Python 3.12；六个运行包在 `requirements.container.txt` 固定版本 |
 | 服务进程 | 容器内监听 `0.0.0.0:8765`；宿主机仅发布 `127.0.0.1` |
 | 权限 | UID/GID 10001，根文件系统只读，移除 Linux capabilities |
 | 临时文件 | `/tmp` 使用 64 MiB tmpfs，供内置可信测试样例使用，重建容器即清空 |
@@ -97,7 +97,7 @@ docker compose up --no-build --pull never -d --wait
 |---|---|
 | Cannot connect to Docker daemon | 启动 Docker Desktop 或系统 Docker 服务，确认 `docker info` 正常 |
 | Windows 报镜像 OS 不匹配 | 切换到 Linux containers |
-| 拉基础镜像 / apt / Python 包失败 | 检查 Docker daemon 的代理、镜像源和网络；构建失败时不会启动新服务 |
+| 拉基础镜像 / apt / Python 包失败 | 检查 Docker 的代理与网络。Python 下载已增加 120 秒读取超时、连接重试和构建缓存；可在 `.env` 设置 `LAB_PIP_INDEX_URL` 指向可访问的公开 HTTPS PyPI 镜像，再执行 `docker compose build`。不要在地址中写凭据或关闭证书验证 |
 | 端口被占用 | 修改 `.env` 的 `LAB_PORT`，重跑启动命令 |
 | 服务 unhealthy 或启动超时 | `docker compose logs --tail=100` 查看引擎加载错误，修复后重新构建 |
 | 更新后仍看到旧页面 | 确认执行带 `--build` 的命令并刷新浏览器；镜像使用复制的源码，不热挂载宿主机文件 |

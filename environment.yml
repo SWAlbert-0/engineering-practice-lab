@@ -7,5 +7,6 @@ dependencies:
   - python=3.12
   - "numpy>=2.0,<3"
   - "scikit-learn>=1.5,<2"
+  - "pypdf>=6.10,<7"
   # Used by engine and frontend flow tests; installed in the same env.
   - nodejs=22

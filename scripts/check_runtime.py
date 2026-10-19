@@ -16,7 +16,7 @@ def main():
         raise RuntimeError('Conda environment must use Python 3.12.')
     if not (3, 10) <= version < (3, 14):
         raise RuntimeError('Supported Python range: 3.10-3.13; Python 3.12 recommended.')
-    for package, lower, upper in [('numpy', (2, 0), (3, 0)), ('scikit-learn', (1, 5), (2, 0))]:
+    for package, lower, upper in [('numpy', (2, 0), (3, 0)), ('scikit-learn', (1, 5), (2, 0)), ('pypdf', (6, 10), (7, 0))]:
         raw = importlib.metadata.version(package)
         match = re.match(r'^(\d+)\.(\d+)', raw)
         if not match or not lower <= tuple(map(int, match.groups())) < upper:
