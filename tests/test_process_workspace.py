@@ -122,6 +122,15 @@ class ProcessWorkspaceTests(unittest.TestCase):
             self.w.job_action(job['job_id'],'cancel');release.set();result=self.job(job['job_id'])
         self.assertEqual(result['status'],'cancelled');self.assertEqual(self.w.state()['index']['id'],before)
 
+    def test_inconsistent_embedding_batches_never_publish(self):
+        import numpy as np
+        self.w.close();idle=Workspace(self.tmp.name,start_worker=False);self.addCleanup(idle.close)
+        before=idle.state()['index']['id'];job=idle.enqueue('rebuild',{'strategy':'embedding'})
+        chunks=[{'text':'检索段落'} for _ in range(33)]
+        with patch('shared.process_workspace.embed_fingerprint',return_value='fixed'),patch('shared.process_workspace.embeddings',side_effect=lambda values:np.ones((len(values),2 if len(values)==32 else 3))):
+            with self.assertRaisesRegex(WorkspaceError,'不一致的维度'):idle._build(job['job_id'],chunks,'embedding')
+        self.assertEqual(idle.state()['index']['id'],before)
+
     def test_cancel_queued_and_failed_build_does_not_publish(self):
         self.w.close();idle=Workspace(self.tmp.name,start_worker=False);self.addCleanup(idle.close)
         job=idle.enqueue('rebuild',{'strategy':'lsa'});idle.job_action(job['job_id'],'cancel')

@@ -281,6 +281,11 @@ class Workspace:
             for n in range(0,len(chunks),32):
                 self._phase(job,f'嵌入编码 {n}/{len(chunks)}')
                 vectors+=embeddings([x['text'] for x in chunks[n:n+32]]).tolist()
+            if chunks:
+                try:
+                    matrix=np.asarray(vectors,dtype=float)
+                    if matrix.ndim!=2 or matrix.shape[0]!=len(chunks) or not np.isfinite(matrix).all():raise ValueError()
+                except (ValueError,TypeError):raise WorkspaceError('嵌入服务在批次间返回不一致的维度，旧索引保持不变。') from None
             return vectors,fp
         Index(chunks)  # Validate lexical/LSA construction before publishing.
         return None,''
