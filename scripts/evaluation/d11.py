@@ -8,6 +8,7 @@ import argparse
 import io
 import json
 import os
+import posixpath
 from pathlib import Path, PurePosixPath
 import re
 import shlex
@@ -52,18 +53,37 @@ def safe_path(name):
 
 
 def extract_archive(raw, destination):
-    """Only regular files/directories; reject links, devices and path traversal."""
+    """Materialize safe internal file links; never create host filesystem links."""
+    omitted = []
     with tarfile.open(fileobj=io.BytesIO(raw)) as archive:
+        def regular(member, seen=()):
+            if member.name in seen or len(seen) >= 8:
+                raise ValueError('cyclic archive link')
+            if member.isfile():
+                return archive.extractfile(member).read()
+            if member.issym():
+                target = posixpath.normpath(posixpath.join(posixpath.dirname(member.name), member.linkname))
+                safe_path(target)
+                return regular(archive.getmember(target), (*seen, member.name))
+            raise ValueError('repository archive contains a special file')
         for member in archive:
             path = safe_path(member.name)
             target = destination.joinpath(*path.parts)
             if member.isdir():
                 target.mkdir(parents=True, exist_ok=True)
-            elif member.isfile():
+            elif member.isfile() or member.issym():
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(archive.extractfile(member).read())
+                try:
+                    content = regular(member)
+                except KeyError:
+                    if not member.name.startswith('docs/'):
+                        raise ValueError('missing non-documentation link target') from None
+                    omitted.append(member.name)
+                    continue
+                target.write_bytes(content)
             else:
                 raise ValueError('repository archive contains a link or special file')
+    return omitted
 
 
 def is_test(path):
@@ -112,7 +132,7 @@ def prepare(case, cache, destination):
         command(['git', 'cat-file', '-e', case[key] + '^{commit}'], repo)
     source = destination / 'source'
     source.mkdir()
-    extract_archive(command(['git', 'archive', case['buggy_commit']], repo, binary=True), source)
+    omitted = extract_archive(command(['git', 'archive', case['buggy_commit']], repo, binary=True), source)
     # Follow BugsInPy's checkout semantics: the fix commit's changed files, not
     # an unrestricted diff across potentially distant buggy/fixed commits.
     changed = command(['git', 'diff-tree', '--no-commit-id', '--name-only', '-r', case['fixed_commit']], repo).splitlines()
@@ -142,6 +162,9 @@ def prepare(case, cache, destination):
     config = {'project': case['project'], 'trigger': targets(case),
               'regression': sorted({t.split('::')[0] for t in targets(case)})}
     (destination / 'config.json').write_text(json.dumps(config))
+    (destination / 'source-preparation.json').write_text(json.dumps({'omitted_broken_documentation_links': omitted,
+        'safe_internal_links': 'materialized as regular files; no host symlinks created',
+        'base_snapshot_sha256': digest({str(p.relative_to(source)): digest(p.read_bytes()) for p in sorted(source.rglob('*')) if p.is_file()})}))
     return gold, frozen
 
 
@@ -276,6 +299,7 @@ def main():
                     directory = Path(tmp)
                     directory.chmod(0o755)
                     gold, tests = prepare(case, args.cache, directory)
+                    row['source_preparation'] = load(directory / 'source-preparation.json')
                     row['frozen_test_sha256'] = tests
                     row['production_files'] = sorted(gold)
                     row['buggy'] = execute(directory, image)
@@ -304,7 +328,7 @@ def main():
             print(case['id'], row['status'], flush=True)
     summary = {**header, 'selected': len(cases), 'reproduced': sum(r['status'] == 'reproduced' for r in results),
                'statuses': {s: sum(r['status'] == s for r in results) for s in sorted({r['status'] for r in results})},
-               'model_repair_rate': None, 'results': results}
+            'model_repair_rate': None, 'results': results}
     write_new(args.output / 'summary.json', summary)
     print(json.dumps({'project': args.project, 'selected': len(cases), 'reproduced': summary['reproduced'], 'statuses': summary['statuses']}))
 

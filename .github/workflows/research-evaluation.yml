@@ -5,11 +5,33 @@ on:
     paths:
       - 'scripts/evaluation/**'
       - 'evaluations/d11/manifest.json'
+      - 'evaluations/d13/manifest.json'
       - '.github/workflows/research-evaluation.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  literature-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Rebuild and check the original annotated releases
+        run: python3 -m scripts.evaluation.d13_data --cache /tmp/d13-cache --output /tmp/d13-data.json
+      - name: Measure the lexical baseline and record unavailable models
+        run: |
+          python3 -m scripts.evaluation.d13 --data /tmp/d13-data.json --mode lexical --output /tmp/d13-lexical
+          python3 -m scripts.evaluation.d13 --data /tmp/d13-data.json --mode single --output /tmp/d13-single-preflight
+          python3 -m scripts.evaluation.d13 --data /tmp/d13-data.json --mode staged --output /tmp/d13-staged-preflight
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d13-annotated-baseline
+          path: |
+            /tmp/d13-lexical/
+            /tmp/d13-single-preflight/
+            /tmp/d13-staged-preflight/
+          retention-days: 30
   reproduce:
     runs-on: ubuntu-latest
     timeout-minutes: 40
@@ -36,6 +58,9 @@ jobs:
               for variant in ('buggy','upstream_repair'):
                   if variant in row:
                       print('LAB_BENCHMARK_TESTS='+json.dumps({'id':row['id'],'variant':variant,'image':row[variant]['environment_image_id'],'phases':{k:{f:v for f,v in p.items() if f!='log'} for k,p in row[variant]['phases'].items()}}))
+                      if row['status']!='reproduced':
+                          for phase,data in row[variant]['phases'].items():
+                              print('LAB_BENCHMARK_DIAGNOSTIC='+json.dumps({'id':row['id'],'variant':variant,'phase':phase,'log':data['log'][-5000:]}))
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
               f.write('```json\n'+json.dumps(summary,indent=2)+'\n```\nHistorical upstream repairs are positive controls, not model-generated repairs. Setup failures remain in the denominator.\n')
           PY

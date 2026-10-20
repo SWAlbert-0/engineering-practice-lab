@@ -1,0 +1,6 @@
+# Large source corpora and model outputs are rebuilt/archived separately.
+cache/
+local-runs/
+data.json
+**/reviewer-*.csv
+**/unblinding.json

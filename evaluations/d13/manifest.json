@@ -1,0 +1,815 @@
+{
+  "schema": 1,
+  "sources": {
+    "scifact": {
+      "url": "https://scifact.s3-us-west-2.amazonaws.com/release/latest/data.tar.gz",
+      "sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+      "license": "Claims/evidence: CC BY 4.0; abstracts: ODC-By 1.0 (S2ORC)",
+      "citation": "Wadden et al. (2020), Fact or Fiction: Verifying Scientific Claims",
+      "license_url": "https://github.com/allenai/scifact/blob/master/LICENSE.md"
+    },
+    "qasper": {
+      "url": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+      "sha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+      "license": "QASPER annotations: CC BY 4.0; paper text extracted from S2ORC, underlying paper rights retained",
+      "citation": "Dasigi et al. (2021), A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "license_url": "https://allenai.org/data/qasper"
+    }
+  },
+  "selection": "Original development splits only. SciFact: first 10 numeric document IDs with >=3 cited claims, first 3 claim IDs each. QASPER: first 10 lexicographic paper IDs with <=24000 extracted characters and >=3 answerable questions whose annotated evidence exactly matches provided paragraphs, first 3 question IDs each. Selection before model calls; not a hidden holdout.",
+  "dataset_sha256": "e54b73208eba9f9b699020a6843c88849e6500cd10bc443e48710be4cd5d944e",
+  "documents": [
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "1215116",
+      "title": "“Rapid-Impact Interventions”: How a Policy of Integrated Control for Africa's Neglected Tropical Diseases Could Benefit the Poor",
+      "scope": "abstract",
+      "sha256": "e63d6cdf4c9dfdb8df2026786d62a1020f92eb02561a36a4902ff2fe5db125c3",
+      "units": 8
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "4387784",
+      "title": "Structure of the proton-gated urea channel from the gastric pathogen Helicobacter pylori",
+      "scope": "abstract",
+      "sha256": "d6fa519d189ed630c6c37d3aead7d108ff8049e3a80977794578ec9f565a80b7",
+      "units": 11
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "4388470",
+      "title": "Somatic sex identity is cell-autonomous in the chicken",
+      "scope": "abstract",
+      "sha256": "94c0963d63abbf8e0daa6effadd297ca63742599a146aea25dad5a7eceb64d1a",
+      "units": 8
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "8290953",
+      "title": "Scaffold-based three-dimensional human fibroblast culture provides a structural matrix that supports angiogenesis in infarcted heart tissue.",
+      "scope": "abstract",
+      "sha256": "a5ea7957ba57405e43a0ee6b615cdc65ca1772515be723f05bf3a2360a247574",
+      "units": 10
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "9433958",
+      "title": "Differential innate immune response programs in neuronal subtypes determine susceptibility to infection in the brain by positive stranded RNA viruses",
+      "scope": "abstract",
+      "sha256": "651fba296c23130608cc531c0ab9eb3ac02d7ef7d7d3cefdd8d64036432b55bb",
+      "units": 6
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "10582939",
+      "title": "Induction therapy with autologous mesenchymal stem cells in living-related kidney transplants: a randomized controlled trial.",
+      "scope": "abstract",
+      "sha256": "2342e8394d817f18e53aea0cb1b14e4bfb10f5b7e87bb1c251740a8c37f24479",
+      "units": 14
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "21366394",
+      "title": "CX3CR1 is required for airway inflammation by promoting T helper cell survival and maintenance in inflamed lung",
+      "scope": "abstract",
+      "sha256": "7c81bb6fcf7b389ddc7c196360f673175473721a1240def9a32e46114a354e24",
+      "units": 7
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "25649714",
+      "title": "Mental health problems of homeless children and families: longitudinal study.",
+      "scope": "abstract",
+      "sha256": "ec77089350c25cffa65f40b33bdfa333bd50243b58878e3acb11529558b39b2f",
+      "units": 10
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "27910499",
+      "title": "Quantitative assessment of T-cell repertoire recovery after hematopoietic stem cell transplantation",
+      "scope": "abstract",
+      "sha256": "9195d8a23d6ce1d858331eb7aa1b1074350f2c19435e299616e3d2bfe720b490",
+      "units": 7
+    },
+    {
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "id": "31272411",
+      "title": "Immune signaling by RIG-I-like receptors.",
+      "scope": "abstract",
+      "sha256": "03890a70fe236116902fa03063d1776a98c5aa314bdbc361a14970ac59f3cc3e",
+      "units": 6
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1503.00841",
+      "title": "Robustly Leveraging Prior Knowledge in Text Classification",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1503.00841",
+      "sha256": "a78f8898d3f8799fa9eb95dcdae35975d24a4a0965aa38231e584ee2fbf1164f",
+      "units": 69
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1603.01514",
+      "title": "A Bayesian Model of Multilingual Unsupervised Semantic Role Induction",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1603.01514",
+      "sha256": "3b74a2b43a01d9af943a0717b363dbcadfd55d96b3dd2986d1381de223430fce",
+      "units": 55
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1605.03481",
+      "title": "Tweet2Vec: Character-Based Distributed Representations for Social Media",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1605.03481",
+      "sha256": "3114f0502d54a5b41632c32017fa450b519f7f5bd49d0f21fe722b4109057a77",
+      "units": 30
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1605.06083",
+      "title": "Stereotyping and Bias in the Flickr30K Dataset",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1605.06083",
+      "sha256": "fcf3a77cc421be623bcdb544cafb068d7da185e692bc5ee4b6ce8d480e842a15",
+      "units": 30
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1605.07333",
+      "title": "Combining Recurrent and Convolutional Neural Networks for Relation Classification",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1605.07333",
+      "sha256": "e1225dd5e9d6023fc882390d4b9eca7c02c978650a4a2a10c2afaaea8fc937b2",
+      "units": 36
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1608.01884",
+      "title": "Winograd Schemas and Machine Translation",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1608.01884",
+      "sha256": "5850dbfd726b11c2f9283e5bc0a7f9fd6ac52e21c8c7b17cf0b33b811754d6d3",
+      "units": 36
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1610.07809",
+      "title": "How Document Pre-processing affects Keyphrase Extraction Performance",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1610.07809",
+      "sha256": "948b968e56f31fdbca92b3ef752516a34525ee14b0942f85fe7803c627a16896",
+      "units": 23
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1611.02988",
+      "title": "Distant supervision for emotion detection using Facebook reactions",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1611.02988",
+      "sha256": "0ba03da03d32b4638ecae7ee01d239033cee3c2223979a4e6eb6b54b6baae65b",
+      "units": 38
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1611.08661",
+      "title": "Knowledge Graph Representation with Jointly Structural and Textual Encoding",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1611.08661",
+      "sha256": "9a17a44a654745e9c0b08abd600cb27e1af3389ab014e2f56c2c5710791ebc7d",
+      "units": 73
+    },
+    {
+      "domain": "nlp",
+      "dataset": "qasper",
+      "id": "1612.03226",
+      "title": "Active Learning for Speech Recognition: the Power of Gradients",
+      "scope": "extracted_text_without_tables_or_images",
+      "url": "https://arxiv.org/abs/1612.03226",
+      "sha256": "a99100e5cd5e5b17906728fd5299e80e6fab62dd18001f17d5c50a23f5a3afe1",
+      "units": 24
+    }
+  ],
+  "cases": [
+    {
+      "id": "scifact-94-1215116",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "1215116",
+      "question": "Albendazole is used to treat lymphatic filariasis.",
+      "task": "claim_verification",
+      "document_sha256": "e63d6cdf4c9dfdb8df2026786d62a1020f92eb02561a36a4902ff2fe5db125c3",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-659-1215116",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "1215116",
+      "question": "Ivermectin is used to treat lymphatic filariasis.",
+      "task": "claim_verification",
+      "document_sha256": "e63d6cdf4c9dfdb8df2026786d62a1020f92eb02561a36a4902ff2fe5db125c3",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-660-1215116",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "1215116",
+      "question": "Ivermectin is used to treat onchocerciasis.",
+      "task": "claim_verification",
+      "document_sha256": "e63d6cdf4c9dfdb8df2026786d62a1020f92eb02561a36a4902ff2fe5db125c3",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-75-4387784",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4387784",
+      "question": "Active H. pylori urease has a polymeric structure that compromises two subunits, UreA and UreB.",
+      "task": "claim_verification",
+      "document_sha256": "d6fa519d189ed630c6c37d3aead7d108ff8049e3a80977794578ec9f565a80b7",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1280-4387784",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4387784",
+      "question": "The ureABIEFGH gene cluster encodes urease maturation proteins : UreD/UreH, UreE, UreF, and UreG.",
+      "task": "claim_verification",
+      "document_sha256": "d6fa519d189ed630c6c37d3aead7d108ff8049e3a80977794578ec9f565a80b7",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1281-4387784",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4387784",
+      "question": "The ureABIEFGH gene cluster is induced by nickel (II) ion.",
+      "task": "claim_verification",
+      "document_sha256": "d6fa519d189ed630c6c37d3aead7d108ff8049e3a80977794578ec9f565a80b7",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-233-4388470",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4388470",
+      "question": "Cell autonomous sex determination in somatic cells does not occur in Galliformes.",
+      "task": "claim_verification",
+      "document_sha256": "94c0963d63abbf8e0daa6effadd297ca63742599a146aea25dad5a7eceb64d1a",
+      "annotation_sha256": "62f22eb4de4f4c50e06f4815056b24572da84508871d67819a5314e3078886ad"
+    },
+    {
+      "id": "scifact-236-4388470",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4388470",
+      "question": "Cell autonomous sex determination in somatic cells occurs in Passeriformes.",
+      "task": "claim_verification",
+      "document_sha256": "94c0963d63abbf8e0daa6effadd297ca63742599a146aea25dad5a7eceb64d1a",
+      "annotation_sha256": "28753240110ea0b155c0216a7f05c32f8e60fac045fafee251324e3e6dfb32c8"
+    },
+    {
+      "id": "scifact-303-4388470",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "4388470",
+      "question": "DMRT1 is a sex-determining gene that is epigenetically regulated by the MHM region.",
+      "task": "claim_verification",
+      "document_sha256": "94c0963d63abbf8e0daa6effadd297ca63742599a146aea25dad5a7eceb64d1a",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-128-8290953",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "8290953",
+      "question": "Arterioles have a larger lumen diameter than venules.",
+      "task": "claim_verification",
+      "document_sha256": "a5ea7957ba57405e43a0ee6b615cdc65ca1772515be723f05bf3a2360a247574",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1362-8290953",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "8290953",
+      "question": "Venules have a larger lumen diameter than arterioles.",
+      "task": "claim_verification",
+      "document_sha256": "a5ea7957ba57405e43a0ee6b615cdc65ca1772515be723f05bf3a2360a247574",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1363-8290953",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "8290953",
+      "question": "Venules have a thinner or absent smooth layer compared to arterioles.",
+      "task": "claim_verification",
+      "document_sha256": "a5ea7957ba57405e43a0ee6b615cdc65ca1772515be723f05bf3a2360a247574",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-549-9433958",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "9433958",
+      "question": "IRG1 has antiviral effects against neurotropic viruses.",
+      "task": "claim_verification",
+      "document_sha256": "651fba296c23130608cc531c0ab9eb3ac02d7ef7d7d3cefdd8d64036432b55bb",
+      "annotation_sha256": "94a4aa7234349c6cc95e164b4016988fb4c2fdc73ecb034b9054b60daba7e2e4"
+    },
+    {
+      "id": "scifact-1020-9433958",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "9433958",
+      "question": "Rapid up-regulation and higher basal expression of interferon-induced genes increase survival of granule cell neurons that are infected by West Nile virus.",
+      "task": "claim_verification",
+      "document_sha256": "651fba296c23130608cc531c0ab9eb3ac02d7ef7d7d3cefdd8d64036432b55bb",
+      "annotation_sha256": "94a4aa7234349c6cc95e164b4016988fb4c2fdc73ecb034b9054b60daba7e2e4"
+    },
+    {
+      "id": "scifact-1021-9433958",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "9433958",
+      "question": "Rapid up-regulation and higher basal expression of interferon-induced genes reduce survival of granule cell neurons that are infected by West Nile virus.",
+      "task": "claim_verification",
+      "document_sha256": "651fba296c23130608cc531c0ab9eb3ac02d7ef7d7d3cefdd8d64036432b55bb",
+      "annotation_sha256": "70f59567a2325ff34f4e1b33c4623870a9ff59743b2bb5fc86b3b66a96f54b4e"
+    },
+    {
+      "id": "scifact-142-10582939",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "10582939",
+      "question": "Autologous transplantation of mesenchymal stem cells causes a higher rate of opportunistic infections than induction therapy with anti-interleukin-2 receptor antibodies.",
+      "task": "claim_verification",
+      "document_sha256": "2342e8394d817f18e53aea0cb1b14e4bfb10f5b7e87bb1c251740a8c37f24479",
+      "annotation_sha256": "4ed930c234f6a7c20b9128b6bcfcbeaaecce93fb510df39cacbe946fabc145e4"
+    },
+    {
+      "id": "scifact-143-10582939",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "10582939",
+      "question": "Autologous transplantation of mesenchymal stem cells causes fewer opportunistic infections than induction therapy with anti-interleukin-2 receptor antibodies.",
+      "task": "claim_verification",
+      "document_sha256": "2342e8394d817f18e53aea0cb1b14e4bfb10f5b7e87bb1c251740a8c37f24479",
+      "annotation_sha256": "78113626c365c6ad67502e95aedf8e11fb2f629fbfe96730a18773a25e509262"
+    },
+    {
+      "id": "scifact-146-10582939",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "10582939",
+      "question": "Autologous transplantation of mesenchymal stem cells has lower rates of rejection than induction therapy with anti-interleukin-2 receptor antibodies.",
+      "task": "claim_verification",
+      "document_sha256": "2342e8394d817f18e53aea0cb1b14e4bfb10f5b7e87bb1c251740a8c37f24479",
+      "annotation_sha256": "4e5be394f7be343f4c0dd117e675991c710eacb538244b6a9ab79f704d3d5ba1"
+    },
+    {
+      "id": "scifact-216-21366394",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "21366394",
+      "question": "CX3CR1 on the Th2 cells impairs T cell survival",
+      "task": "claim_verification",
+      "document_sha256": "7c81bb6fcf7b389ddc7c196360f673175473721a1240def9a32e46114a354e24",
+      "annotation_sha256": "d6e8119ba04de25bcae1ed4a8bde509c18fe8671c3fce5d40c784193c318aca5"
+    },
+    {
+      "id": "scifact-217-21366394",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "21366394",
+      "question": "CX3CR1 on the Th2 cells promotes T cell survival",
+      "task": "claim_verification",
+      "document_sha256": "7c81bb6fcf7b389ddc7c196360f673175473721a1240def9a32e46114a354e24",
+      "annotation_sha256": "fed995f72369845d6181a02532691a91a996c1eb56cb85505815697ff7944c4d"
+    },
+    {
+      "id": "scifact-218-21366394",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "21366394",
+      "question": "CX3CR1 on the Th2 cells promotes airway inflammation.",
+      "task": "claim_verification",
+      "document_sha256": "7c81bb6fcf7b389ddc7c196360f673175473721a1240def9a32e46114a354e24",
+      "annotation_sha256": "1b80bd652e92d302164c2e02407a2676ebf14ba913ff8c10508ed48bddb56267"
+    },
+    {
+      "id": "scifact-637-25649714",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "25649714",
+      "question": "Input from  mental and physical health care professionals is effective at decreasing homelessness.",
+      "task": "claim_verification",
+      "document_sha256": "ec77089350c25cffa65f40b33bdfa333bd50243b58878e3acb11529558b39b2f",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1196-25649714",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "25649714",
+      "question": "The availability of safe places to study is effective at decreasing homelessness.",
+      "task": "claim_verification",
+      "document_sha256": "ec77089350c25cffa65f40b33bdfa333bd50243b58878e3acb11529558b39b2f",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1197-25649714",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "25649714",
+      "question": "The availability of safe places to study is not effective at decreasing homelessness.",
+      "task": "claim_verification",
+      "document_sha256": "ec77089350c25cffa65f40b33bdfa333bd50243b58878e3acb11529558b39b2f",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1316-27910499",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "27910499",
+      "question": "Transferred UCB T cells acquire a memory-like phenotype in recipients.",
+      "task": "claim_verification",
+      "document_sha256": "9195d8a23d6ce1d858331eb7aa1b1074350f2c19435e299616e3d2bfe720b490",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1335-27910499",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "27910499",
+      "question": "UCB T cells maintain high TCR diversity after transplantation.",
+      "task": "claim_verification",
+      "document_sha256": "9195d8a23d6ce1d858331eb7aa1b1074350f2c19435e299616e3d2bfe720b490",
+      "annotation_sha256": "fed995f72369845d6181a02532691a91a996c1eb56cb85505815697ff7944c4d"
+    },
+    {
+      "id": "scifact-1336-27910499",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "27910499",
+      "question": "UCB T cells reduce TCR diversity after transplantation.",
+      "task": "claim_verification",
+      "document_sha256": "9195d8a23d6ce1d858331eb7aa1b1074350f2c19435e299616e3d2bfe720b490",
+      "annotation_sha256": "d6e8119ba04de25bcae1ed4a8bde509c18fe8671c3fce5d40c784193c318aca5"
+    },
+    {
+      "id": "scifact-1175-31272411",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "31272411",
+      "question": "The PPR MDA5 has two N-terminal CARD domains.",
+      "task": "claim_verification",
+      "document_sha256": "03890a70fe236116902fa03063d1776a98c5aa314bdbc361a14970ac59f3cc3e",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1179-31272411",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "31272411",
+      "question": "The PRR MDA5 has a central DExD/H RNA helices domain.",
+      "task": "claim_verification",
+      "document_sha256": "03890a70fe236116902fa03063d1776a98c5aa314bdbc361a14970ac59f3cc3e",
+      "annotation_sha256": "8b4d222fa89eabf71973fa13532d9c890ccf19856768a2cff5cc7c9362dcdfc8"
+    },
+    {
+      "id": "scifact-1180-31272411",
+      "domain": "biomedicine",
+      "dataset": "scifact",
+      "paper": "31272411",
+      "question": "The PRR MDA5 is a sensor of RNA virus infection.",
+      "task": "claim_verification",
+      "document_sha256": "03890a70fe236116902fa03063d1776a98c5aa314bdbc361a14970ac59f3cc3e",
+      "annotation_sha256": "1ad97b35c71964fc14e213defec95c0af5b5351592edf61a30d31c3aa4597570"
+    },
+    {
+      "id": "qasper-02428a8fec9788f6dc3a86b5d5f3aa679935678d",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1503.00841",
+      "question": "How do they define robustness of a model?",
+      "task": "paper_qa",
+      "document_sha256": "a78f8898d3f8799fa9eb95dcdae35975d24a4a0965aa38231e584ee2fbf1164f",
+      "annotation_sha256": "e9eb8edabd811d9aa44dde69286aada4ca55d96409e703b64617c108e98a8ba5"
+    },
+    {
+      "id": "qasper-50be4a737dc0951b35d139f51075011095d77f2a",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1503.00841",
+      "question": "What background knowledge do they leverage?",
+      "task": "paper_qa",
+      "document_sha256": "a78f8898d3f8799fa9eb95dcdae35975d24a4a0965aa38231e584ee2fbf1164f",
+      "annotation_sha256": "bb0b72a7bd5deaed7ff4245a5150ff56a4938a36a2f6dd6144c3cb3766867f0c"
+    },
+    {
+      "id": "qasper-6becff2967fe7c5256fe0b00231765be5b9db9f1",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1503.00841",
+      "question": "What are the three regularization terms?",
+      "task": "paper_qa",
+      "document_sha256": "a78f8898d3f8799fa9eb95dcdae35975d24a4a0965aa38231e584ee2fbf1164f",
+      "annotation_sha256": "79ba6139d7b14f9bc63513610fd1372e263f34ef14dd5d48d53d30c66ddfa2b2"
+    },
+    {
+      "id": "qasper-0fc2b5bc2ead08a6fe0280fb3a47477c6df1587c",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1603.01514",
+      "question": "Do they improve on state-of-the-art semantic role induction?",
+      "task": "paper_qa",
+      "document_sha256": "3b74a2b43a01d9af943a0717b363dbcadfd55d96b3dd2986d1381de223430fce",
+      "annotation_sha256": "cd10cbcbcb4684db76fb5c6b6c27e4857c7fed24d060f170b54c334033aa7594"
+    },
+    {
+      "id": "qasper-111afb77cfbf4c98e0458606378fa63a0e965e36",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1603.01514",
+      "question": "Overall, does having parallel data improve semantic role induction across multiple languages?",
+      "task": "paper_qa",
+      "document_sha256": "3b74a2b43a01d9af943a0717b363dbcadfd55d96b3dd2986d1381de223430fce",
+      "annotation_sha256": "11a7ec93961ffcc1c2fd46cd0741bbe53c378fd64fc6e1e23663f86176159fa5"
+    },
+    {
+      "id": "qasper-4986f420884f917d1f60d3cea04dc8e64d3b5bf1",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1603.01514",
+      "question": "Which additional latent variables are used in the model?",
+      "task": "paper_qa",
+      "document_sha256": "3b74a2b43a01d9af943a0717b363dbcadfd55d96b3dd2986d1381de223430fce",
+      "annotation_sha256": "bc175177602affab675338913f3362504c8c32183decac99e3012ff4833e5318"
+    },
+    {
+      "id": "qasper-127d5ddfabec5c58832e5865cbd8ed0978c25a13",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.03481",
+      "question": "What is the word-level baseline?",
+      "task": "paper_qa",
+      "document_sha256": "3114f0502d54a5b41632c32017fa450b519f7f5bd49d0f21fe722b4109057a77",
+      "annotation_sha256": "56c83487d4495fdf5361b8cd657f0f623f1a09364b94b37cc091c62903637802"
+    },
+    {
+      "id": "qasper-792f6d76d2befba2af07198584aac1b189583ae4",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.03481",
+      "question": "Is this hashtag prediction task an established task, or something new?",
+      "task": "paper_qa",
+      "document_sha256": "3114f0502d54a5b41632c32017fa450b519f7f5bd49d0f21fe722b4109057a77",
+      "annotation_sha256": "bf0dffed2372edd87ce934351c88457c5b8d81fea03fe01900dfbb1433f6dc19"
+    },
+    {
+      "id": "qasper-a6d37b5975050da0b1959232ae756fc09e5f87e8",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.03481",
+      "question": "what is the word level baseline they compare to?",
+      "task": "paper_qa",
+      "document_sha256": "3114f0502d54a5b41632c32017fa450b519f7f5bd49d0f21fe722b4109057a77",
+      "annotation_sha256": "c211100f0a3639a19d911b0d00bc855bd7f3da628390ce58588249f0f56f3467"
+    },
+    {
+      "id": "qasper-26c2e1eb12143d985e4fb50543cf0d1eb4395e67",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.06083",
+      "question": "What biases are found in the dataset?",
+      "task": "paper_qa",
+      "document_sha256": "fcf3a77cc421be623bcdb544cafb068d7da185e692bc5ee4b6ce8d480e842a15",
+      "annotation_sha256": "12189ce07dba6c0f90dd413d82bb0527f6b3f4cb8800803ed72e9df60571a74e"
+    },
+    {
+      "id": "qasper-6d4400f45bd97b812e946b8a682b018826e841f1",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.06083",
+      "question": "Which methods are considered to find examples of biases and unwarranted inferences??",
+      "task": "paper_qa",
+      "document_sha256": "fcf3a77cc421be623bcdb544cafb068d7da185e692bc5ee4b6ce8d480e842a15",
+      "annotation_sha256": "082f2ec801413d785a82234020ccc19a8f29d310fe3e3ead43f1875102d804d3"
+    },
+    {
+      "id": "qasper-7561a968470a8936d10e1ba722d2f38b5a9a4d38",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.06083",
+      "question": "What is the size of the dataset?",
+      "task": "paper_qa",
+      "document_sha256": "fcf3a77cc421be623bcdb544cafb068d7da185e692bc5ee4b6ce8d480e842a15",
+      "annotation_sha256": "532d10c9322714dafb74ccf0b76e0296cf5f98309f854dac201c8586999bb4d9"
+    },
+    {
+      "id": "qasper-0cfe0e33fbb100751fc0916001a5a19498ae8cb5",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.07333",
+      "question": "How do they obtain the new context represetation?",
+      "task": "paper_qa",
+      "document_sha256": "e1225dd5e9d6023fc882390d4b9eca7c02c978650a4a2a10c2afaaea8fc937b2",
+      "annotation_sha256": "976661f40a51abce6ab7d3517c9c6347c3c8cc83cd752fe40b0bd1d40eda106d"
+    },
+    {
+      "id": "qasper-0f7867f888109b9e000ef68965df4dde2511a55f",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.07333",
+      "question": "How does their simple voting scheme work?",
+      "task": "paper_qa",
+      "document_sha256": "e1225dd5e9d6023fc882390d4b9eca7c02c978650a4a2a10c2afaaea8fc937b2",
+      "annotation_sha256": "5c34b8e4e35b12feeb804128df599640ccdb8a1bb8d76dc8a8e53ef00ebab2e6"
+    },
+    {
+      "id": "qasper-30eacb4595014c9c0e5ee9669103d003cfdfe1e5",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1605.07333",
+      "question": "Which dataset do they train their models on?",
+      "task": "paper_qa",
+      "document_sha256": "e1225dd5e9d6023fc882390d4b9eca7c02c978650a4a2a10c2afaaea8fc937b2",
+      "annotation_sha256": "919d373d8d3f9ed1521e68bbcecd620fda27318265804100aab0ca9c9c5c871f"
+    },
+    {
+      "id": "qasper-1dc2da5078a7e5ea82ccd1c90d81999a922bc9bf",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1608.01884",
+      "question": "Do the authors conduct experiments on the tasks mentioned?",
+      "task": "paper_qa",
+      "document_sha256": "5850dbfd726b11c2f9283e5bc0a7f9fd6ac52e21c8c7b17cf0b33b811754d6d3",
+      "annotation_sha256": "573d7d793bbb9d1709c140d19ac37f56bc52083593f35d1618045c7f0c9d4733"
+    },
+    {
+      "id": "qasper-662870a90890c620a964720b2ca122a1139410ea",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1608.01884",
+      "question": "What language do they explore?",
+      "task": "paper_qa",
+      "document_sha256": "5850dbfd726b11c2f9283e5bc0a7f9fd6ac52e21c8c7b17cf0b33b811754d6d3",
+      "annotation_sha256": "009689fb38d16c56a059102a52257cbe5c131e3eaf772d3d1b372793a8c4efae"
+    },
+    {
+      "id": "qasper-7fa3c2c0cf7f559d43e84076a9113a390c5ba03a",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1608.01884",
+      "question": "Did they collect their own datasets?",
+      "task": "paper_qa",
+      "document_sha256": "5850dbfd726b11c2f9283e5bc0a7f9fd6ac52e21c8c7b17cf0b33b811754d6d3",
+      "annotation_sha256": "123a7d128b36a5b6e1d22e6fcd8d4ace96994aebec00f4a9886ec2a708f025d9"
+    },
+    {
+      "id": "qasper-06eb9f2320451df83e27362c22eb02f4a426a018",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1610.07809",
+      "question": "what levels of document preprocessing are looked at?",
+      "task": "paper_qa",
+      "document_sha256": "948b968e56f31fdbca92b3ef752516a34525ee14b0942f85fe7803c627a16896",
+      "annotation_sha256": "60d3dbda43f3a4138fc5925d4583a49389c90518010341e2a7a1f3ccfc38c92d"
+    },
+    {
+      "id": "qasper-2a3e36c220e7b47c1b652511a4fdd7238a74a68f",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1610.07809",
+      "question": "how many articles are in the dataset?",
+      "task": "paper_qa",
+      "document_sha256": "948b968e56f31fdbca92b3ef752516a34525ee14b0942f85fe7803c627a16896",
+      "annotation_sha256": "6ad239fce3ce290d10a691f84a16a64afa1d057e74834dab43ed4e1f94bcc4a5"
+    },
+    {
+      "id": "qasper-e54257585cc75564341eb02bdc63ff8111992f82",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1610.07809",
+      "question": "what keyphrase extraction models were reassessed?",
+      "task": "paper_qa",
+      "document_sha256": "948b968e56f31fdbca92b3ef752516a34525ee14b0942f85fe7803c627a16896",
+      "annotation_sha256": "1cd5a08ac23debb7c9ee5cb148bc80154f465eafa03bd84e83bd2bc060b76125"
+    },
+    {
+      "id": "qasper-de53af4eddbc30c808d90b8a11a29217d377569e",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.02988",
+      "question": "Which Facebook pages did they look at?",
+      "task": "paper_qa",
+      "document_sha256": "0ba03da03d32b4638ecae7ee01d239033cee3c2223979a4e6eb6b54b6baae65b",
+      "annotation_sha256": "cbc065c5e9a592923b4d42a2c64c69a5778fdacc16d453c0c8f45b6afc236932"
+    },
+    {
+      "id": "qasper-f875337f2ecd686cd7789e111174d0f14972638d",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.02988",
+      "question": "Which existing benchmarks did they compare to?",
+      "task": "paper_qa",
+      "document_sha256": "0ba03da03d32b4638ecae7ee01d239033cee3c2223979a4e6eb6b54b6baae65b",
+      "annotation_sha256": "a88315e5d9b4e6d40a81414454c29ffedf85d6da95abae32fc2f111f7c57bdc4"
+    },
+    {
+      "id": "qasper-fa30a938b58fc05131c3854f12efe376cbad887f",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.02988",
+      "question": "What was their performance on emotion detection?",
+      "task": "paper_qa",
+      "document_sha256": "0ba03da03d32b4638ecae7ee01d239033cee3c2223979a4e6eb6b54b6baae65b",
+      "annotation_sha256": "2de911c6ebfe27c3e4ea8bec767ec1ca9993722018b15bb262c0b8f2ba9107a5"
+    },
+    {
+      "id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.08661",
+      "question": "What baselines are used for comparison?",
+      "task": "paper_qa",
+      "document_sha256": "9a17a44a654745e9c0b08abd600cb27e1af3389ab014e2f56c2c5710791ebc7d",
+      "annotation_sha256": "852dfe159535e27ef675bae8988635c5c2dd22797a0527979edf15ae7adeb1bc"
+    },
+    {
+      "id": "qasper-b36f867fcda5ad62c46d23513369337352aa01d2",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.08661",
+      "question": "What datasets are used to evaluate this paper?",
+      "task": "paper_qa",
+      "document_sha256": "9a17a44a654745e9c0b08abd600cb27e1af3389ab014e2f56c2c5710791ebc7d",
+      "annotation_sha256": "e0f0bcb6e80a42dc1865ca21919ced25ec09c32442ed6bc17dff3c2f22d59599"
+    },
+    {
+      "id": "qasper-b49598b05358117ab1471b8ebd0b042d2f04b2a4",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1611.08661",
+      "question": "What neural models are used to encode the text?",
+      "task": "paper_qa",
+      "document_sha256": "9a17a44a654745e9c0b08abd600cb27e1af3389ab014e2f56c2c5710791ebc7d",
+      "annotation_sha256": "a2578d1e1d1a5494be57397b2c8cfc0b584fbf35069abebb751ff4beae5d30b4"
+    },
+    {
+      "id": "qasper-551457ed34ca7fc0878c85bc664b135c21059b58",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1612.03226",
+      "question": "Which dataset do they use?",
+      "task": "paper_qa",
+      "document_sha256": "a99100e5cd5e5b17906728fd5299e80e6fab62dd18001f17d5c50a23f5a3afe1",
+      "annotation_sha256": "d378d3f7fab66f3ab74a30ad870a4c4be3773c6aa955cb769e56ce9a02457815"
+    },
+    {
+      "id": "qasper-aa7d327ef98f9f9847b447d4def04889b4508d7a",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1612.03226",
+      "question": "How much data samples do they start with before obtaining the initial model labels?",
+      "task": "paper_qa",
+      "document_sha256": "a99100e5cd5e5b17906728fd5299e80e6fab62dd18001f17d5c50a23f5a3afe1",
+      "annotation_sha256": "06a9931757df130bfb3d5410b5098d09208e92eb6f1c5324afebf2c98deb3abf"
+    },
+    {
+      "id": "qasper-b8d7d055ddb94f5826a9aad7479b4a92a9c8a2f0",
+      "domain": "nlp",
+      "dataset": "qasper",
+      "paper": "1612.03226",
+      "question": "Which model do they use for end-to-end speech recognition?",
+      "task": "paper_qa",
+      "document_sha256": "a99100e5cd5e5b17906728fd5299e80e6fab62dd18001f17d5c50a23f5a3afe1",
+      "annotation_sha256": "7a111f1c8dbd8308408dbb4698b30bc7b9b4e4b53b6fc3d867e78ae0d20b56a5"
+    }
+  ]
+}
