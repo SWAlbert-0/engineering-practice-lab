@@ -1,0 +1,379 @@
+{
+  "id": "httpie-1",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "httpie-legacy-fixtures",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "fbba7b6916d80a8a60f849b36353ef0f9f2f5a6f6b41870c86be440aee5c44ce"
+  },
+  "frozen_test_sha256": {
+    "tests/test_downloads.py": "589ab04cb4584890527e6d7604ac6af2457182d53eac6df022132759dce92dad"
+  },
+  "production_files": [
+    "CHANGELOG.rst",
+    "httpie/downloads.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:ea4ff9d16e68e991d163b21a09da88690c312e5f5b336ad5dbfe750327e0576e",
+    "seconds": 10.695188592999997,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 1.519167222,
+        "tests": [
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+            "status": "failure"
+          }
+        ],
+        "log": "FFFFFFFFFFF\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=================================== FAILURES ===================================\n__________ TestDownloadUtils.test_unique_filename[foo.bar-0-foo.bar] ___________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358ceaf0>,)\nkeywargs = {'expected': 'foo.bar', 'orig_name': 'foo.bar', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_________ TestDownloadUtils.test_unique_filename[foo.bar-1-foo.bar-1] __________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358db430>,)\nkeywargs = {'expected': 'foo.bar-1', 'orig_name': 'foo.bar', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n________ TestDownloadUtils.test_unique_filename[foo.bar-10-foo.bar-10] _________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358cebe0>,)\nkeywargs = {'expected': 'foo.bar-10', 'orig_name': 'foo.bar', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA] ___\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff535767e20>,)\nkeywargs = {'expected': 'AAAAAAAAAA', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1] ___\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff53595b8e0>,)\nkeywargs = {'expected': 'AAAAAAAA-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10] __\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff53575eee0>,)\nkeywargs = {'expected': 'AAAAAAA-10', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff53574f3a0>,)\nkeywargs = {'expected': 'AAAAAA.txt', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358a4880>,)\nkeywargs = {'expected': 'AAAA.txt-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff535c22e20>,)\nkeywargs = {'expected': 'foo.AAAAAA', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358a4ac0>,)\nkeywargs = {'expected': 'foo.AAAA-1', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7ff5358d9b50>,)\nkeywargs = {'expected': 'foo.AAA-10', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7ff53636e820>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n11 failed in 1.06 seconds\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 8.889974460000005,
+        "tests": [
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Range_parsing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=hello-WORLD_123.txt-hello-WORLD_123.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\".hello-WORLD_123.txt\"-hello-WORLD_123.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"white space.txt\"-white space.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"\\\\\"quotes\\\\\".txt\"-\"quotes\".txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=/etc/hosts-hosts]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=-None]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_filename_from_url",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_actual_download[http]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_interrupted[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_actual_download[https]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[https]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[https]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_interrupted[https]",
+            "status": "passed"
+          }
+        ],
+        "log": "........FFFFFFFFFFFF...F...\n------------------- generated xml file: /work/regression.xml -------------------\n=================================== FAILURES ===================================\n__________ TestDownloadUtils.test_unique_filename[foo.bar-0-foo.bar] ___________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c269ac0>,)\nkeywargs = {'expected': 'foo.bar', 'orig_name': 'foo.bar', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_________ TestDownloadUtils.test_unique_filename[foo.bar-1-foo.bar-1] __________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c4f8f40>,)\nkeywargs = {'expected': 'foo.bar-1', 'orig_name': 'foo.bar', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n________ TestDownloadUtils.test_unique_filename[foo.bar-10-foo.bar-10] _________\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c0e60a0>,)\nkeywargs = {'expected': 'foo.bar-10', 'orig_name': 'foo.bar', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA] ___\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c4ff910>,)\nkeywargs = {'expected': 'AAAAAAAAAA', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1] ___\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c151f10>,)\nkeywargs = {'expected': 'AAAAAAAA-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n__ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10] __\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c0d7fa0>,)\nkeywargs = {'expected': 'AAAAAAA-10', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c4d4430>,)\nkeywargs = {'expected': 'AAAAAA.txt', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c1db730>,)\nkeywargs = {'expected': 'AAAA.txt-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c27cf40>,)\nkeywargs = {'expected': 'foo.AAAAAA', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c26cfd0>,)\nkeywargs = {'expected': 'foo.AAAA-1', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n_ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10] _\n\nargs = (<test_downloads.TestDownloadUtils object at 0x7f462c385460>,)\nkeywargs = {'expected': 'foo.AAA-10', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}\n\n    @wraps(func)\n    def patched(*args, **keywargs):\n>       with self.decoration_helper(patched,\n                                    args,\n                                    keywargs) as (newargs, newkeywargs):\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1343: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/local/lib/python3.8/contextlib.py:113: in __enter__\n    return next(self.gen)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1325: in decoration_helper\n    arg = exit_stack.enter_context(patching)\n/usr/local/lib/python3.8/contextlib.py:425: in enter_context\n    result = _cm_type.__enter__(cm)\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1414: in __enter__\n    original, local = self.get_original()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <mock.mock._patch object at 0x7f462c84d8b0>\n\n    def get_original(self):\n        target = self.getter()\n        name = self.attribute\n    \n        original = DEFAULT\n        local = False\n    \n        try:\n            original = target.__dict__[name]\n        except (AttributeError, KeyError):\n            original = getattr(target, name, DEFAULT)\n        else:\n            local = True\n    \n        if name in _builtins and isinstance(target, ModuleType):\n            self.create = True\n    \n        if not self.create and original is DEFAULT:\n>           raise AttributeError(\n                \"%s does not have the attribute %r\" % (target, name)\n            )\nE           AttributeError: <module 'httpie.downloads' from '/work/source/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'\n\n/usr/local/lib/python3.8/site-packages/mock/mock.py:1387: AttributeError\n___________________ TestDownloads.test_actual_download[http] ___________________\n\nself = <test_downloads.TestDownloads object at 0x7f462c0c92b0>\nhttpbin_both = <pytest_httpbin.serve.Server object at 0x7f462c0c97c0>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f462c0c97c0>\n\n    def test_actual_download(self, httpbin_both, httpbin):\n        robots_txt = '/robots.txt'\n        body = urlopen(httpbin + robots_txt).read().decode()\n        env = TestEnvironment(stdin_isatty=True, stdout_isatty=False)\n>       r = http('--download', httpbin_both.url + robots_txt, env=env)\n\ntests/test_downloads.py:127: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:207: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:224: in main\n    exit_status = program(\nhttpie/core.py:99: in program\n    final_response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:63: in get_response\n    requests_session = get_requests_session(ssl_version)\nhttpie/client.py:47: in get_requests_session\n    HTTPieHTTPAdapter(ssl_version=ssl_version)\nhttpie/client.py:36: in __init__\n    super(HTTPieHTTPAdapter, self).__init__(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/adapters.py:83: in __init__\n    self.init_poolmanager(pool_connections, pool_maxsize, block=pool_block)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <httpie.client.HTTPieHTTPAdapter object at 0x7f462dd90a00>\nargs = (10, 10), kwargs = {'block': False, 'ssl_version': None}\n\n    def init_poolmanager(self, *args, **kwargs):\n        kwargs['ssl_version'] = self._ssl_version\n>       super(HTTPieHTTPAdapter, self).init_poolmanager(*args, **kwargs)\nE       TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n\nhttpie/client.py:40: TypeError\n----------------------------- Captured stderr call -----------------------------\n127.0.0.1 - - [20/Oct/2026 10:41:21] \"GET /robots.txt HTTP/1.1\" 200 30\n\nhttp: error: TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n__________________ TestDownloads.test_actual_download[https] ___________________\n\nself = <test_downloads.TestDownloads object at 0x7f462be35280>\nhttpbin_both = <pytest_httpbin.serve.SecureServer object at 0x7f462c0d2c10>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f462c0c97c0>\n\n    def test_actual_download(self, httpbin_both, httpbin):\n        robots_txt = '/robots.txt'\n        body = urlopen(httpbin + robots_txt).read().decode()\n        env = TestEnvironment(stdin_isatty=True, stdout_isatty=False)\n>       r = http('--download', httpbin_both.url + robots_txt, env=env)\n\ntests/test_downloads.py:127: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:207: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:224: in main\n    exit_status = program(\nhttpie/core.py:99: in program\n    final_response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:63: in get_response\n    requests_session = get_requests_session(ssl_version)\nhttpie/client.py:47: in get_requests_session\n    HTTPieHTTPAdapter(ssl_version=ssl_version)\nhttpie/client.py:36: in __init__\n    super(HTTPieHTTPAdapter, self).__init__(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/adapters.py:83: in __init__\n    self.init_poolmanager(pool_connections, pool_maxsize, block=pool_block)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <httpie.client.HTTPieHTTPAdapter object at 0x7f462c26c6d0>\nargs = (10, 10), kwargs = {'block': False, 'ssl_version': None}\n\n    def init_poolmanager(self, *args, **kwargs):\n        kwargs['ssl_version'] = self._ssl_version\n>       super(HTTPieHTTPAdapter, self).init_poolmanager(*args, **kwargs)\nE       TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n\nhttpie/client.py:40: TypeError\n----------------------------- Captured stderr call -----------------------------\n127.0.0.1 - - [20/Oct/2026 10:41:24] \"GET /robots.txt HTTP/1.1\" 200 30\n\nhttp: error: TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n=============================== warnings summary ===============================\ntests/test_downloads.py::TestEnvironment\n  cannot collect test class 'TestEnvironment' because it has a __init__ constructor\n\n-- Docs: http://doc.pytest.org/en/latest/warnings.html\n13 failed, 14 passed, 1 warnings in 8.44 seconds\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:ea4ff9d16e68e991d163b21a09da88690c312e5f5b336ad5dbfe750327e0576e",
+    "seconds": 8.736977026999995,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.5669039559999902,
+        "tests": [
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+            "status": "passed"
+          }
+        ],
+        "log": "...........\n-------------------- generated xml file: /work/trigger.xml ---------------------\n11 passed in 0.10 seconds\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 7.936727779999998,
+        "tests": [
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Range_parsing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=hello-WORLD_123.txt-hello-WORLD_123.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\".hello-WORLD_123.txt\"-hello-WORLD_123.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"white space.txt\"-white space.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"\\\\\"quotes\\\\\".txt\"-\"quotes\".txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=/etc/hosts-hosts]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=-None]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_filename_from_url",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_actual_download[http]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_interrupted[http]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_actual_download[https]",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[https]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[https]",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_downloads.TestDownloads::test_download_interrupted[https]",
+            "status": "passed"
+          }
+        ],
+        "log": "...................F...F...\n------------------- generated xml file: /work/regression.xml -------------------\n=================================== FAILURES ===================================\n___________________ TestDownloads.test_actual_download[http] ___________________\n\nself = <test_downloads.TestDownloads object at 0x7f14863e1250>\nhttpbin_both = <pytest_httpbin.serve.Server object at 0x7f14860ef670>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f14860ef670>\n\n    def test_actual_download(self, httpbin_both, httpbin):\n        robots_txt = '/robots.txt'\n        body = urlopen(httpbin + robots_txt).read().decode()\n        env = TestEnvironment(stdin_isatty=True, stdout_isatty=False)\n>       r = http('--download', httpbin_both.url + robots_txt, env=env)\n\ntests/test_downloads.py:127: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:207: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:224: in main\n    exit_status = program(\nhttpie/core.py:99: in program\n    final_response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:63: in get_response\n    requests_session = get_requests_session(ssl_version)\nhttpie/client.py:47: in get_requests_session\n    HTTPieHTTPAdapter(ssl_version=ssl_version)\nhttpie/client.py:36: in __init__\n    super(HTTPieHTTPAdapter, self).__init__(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/adapters.py:83: in __init__\n    self.init_poolmanager(pool_connections, pool_maxsize, block=pool_block)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <httpie.client.HTTPieHTTPAdapter object at 0x7f14863e6f70>\nargs = (10, 10), kwargs = {'block': False, 'ssl_version': None}\n\n    def init_poolmanager(self, *args, **kwargs):\n        kwargs['ssl_version'] = self._ssl_version\n>       super(HTTPieHTTPAdapter, self).init_poolmanager(*args, **kwargs)\nE       TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n\nhttpie/client.py:40: TypeError\n----------------------------- Captured stderr call -----------------------------\n127.0.0.1 - - [20/Oct/2026 10:41:30] \"GET /robots.txt HTTP/1.1\" 200 30\n\nhttp: error: TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n__________________ TestDownloads.test_actual_download[https] ___________________\n\nself = <test_downloads.TestDownloads object at 0x7f14863e4880>\nhttpbin_both = <pytest_httpbin.serve.SecureServer object at 0x7f14863c6820>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f14860ef670>\n\n    def test_actual_download(self, httpbin_both, httpbin):\n        robots_txt = '/robots.txt'\n        body = urlopen(httpbin + robots_txt).read().decode()\n        env = TestEnvironment(stdin_isatty=True, stdout_isatty=False)\n>       r = http('--download', httpbin_both.url + robots_txt, env=env)\n\ntests/test_downloads.py:127: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:207: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:224: in main\n    exit_status = program(\nhttpie/core.py:99: in program\n    final_response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:63: in get_response\n    requests_session = get_requests_session(ssl_version)\nhttpie/client.py:47: in get_requests_session\n    HTTPieHTTPAdapter(ssl_version=ssl_version)\nhttpie/client.py:36: in __init__\n    super(HTTPieHTTPAdapter, self).__init__(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/adapters.py:83: in __init__\n    self.init_poolmanager(pool_connections, pool_maxsize, block=pool_block)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <httpie.client.HTTPieHTTPAdapter object at 0x7f14863e66a0>\nargs = (10, 10), kwargs = {'block': False, 'ssl_version': None}\n\n    def init_poolmanager(self, *args, **kwargs):\n        kwargs['ssl_version'] = self._ssl_version\n>       super(HTTPieHTTPAdapter, self).init_poolmanager(*args, **kwargs)\nE       TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n\nhttpie/client.py:40: TypeError\n----------------------------- Captured stderr call -----------------------------\n127.0.0.1 - - [20/Oct/2026 10:41:33] \"GET /robots.txt HTTP/1.1\" 200 30\n\nhttp: error: TypeError: init_poolmanager() got an unexpected keyword argument 'ssl_version'\n=============================== warnings summary ===============================\ntests/test_downloads.py::TestEnvironment\n  cannot collect test class 'TestEnvironment' because it has a __init__ constructor\n\n-- Docs: http://doc.pytest.org/en/latest/warnings.html\n2 failed, 25 passed, 1 warnings in 7.49 seconds\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

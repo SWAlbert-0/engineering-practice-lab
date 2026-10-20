@@ -1,0 +1,74 @@
+{
+  "id": "qasper-b36f867fcda5ad62c46d23513369337352aa01d2",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.4,
+    "answer_token_f1": 0.16666666666666666
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "The datasets used to evaluate this paper are WN18 and FB15K.",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          14,
+          46,
+          50
+        ]
+      },
+      "seconds": 2.935152272999858,
+      "input_sha256": "db63b70a158da26fa6bf89ca25058b33b5f211374921aad99c70815a50921540",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 458,
+        "completion_tokens": 64,
+        "total_tokens": 522
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "The datasets used to evaluate this paper are WN18 and FB15K.",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          14,
+          46,
+          50
+        ]
+      },
+      "seconds": 3.014439130000028,
+      "input_sha256": "1244afcbeea06b0ccccf0efb195dcfb61c230f4423ac574dcd3b5ade7ac04532",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 526,
+        "completion_tokens": 57,
+        "total_tokens": 583
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    4,
+    14,
+    46,
+    50
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "prediction": {
+    "answer": "The datasets used to evaluate this paper are WN18 and FB15K.",
+    "label": "SUPPORT",
+    "evidence": [
+      4,
+      14,
+      46,
+      50
+    ]
+  }
+}

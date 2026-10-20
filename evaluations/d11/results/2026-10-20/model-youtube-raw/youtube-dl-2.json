@@ -1,0 +1,153 @@
+{
+  "id": "youtube-dl-2",
+  "status": "reproduced",
+  "model": {
+    "status": "input_out_of_scope",
+    "attempts": []
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "c7cf7f5ccaf9886c75396789c3b5de982312074e40b2f07d2ec83073401da662"
+  },
+  "frozen_test_sha256": {
+    "test/test_InfoExtractor.py": "a9078e7547b5c5c596dc0473eba42906341c27ec83bd82bae45658d6fbdbaf08"
+  },
+  "production_files": [
+    "youtube_dl/extractor/common.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:08b369a817dcccc073020fc6792001117132fc531758673844bdc454f06a99b0",
+    "seconds": 2.51770177100002,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 1.0175578660000042,
+        "tests": [
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________ TestInfoExtractor.test_parse_mpd_formats ___________________\n\nself = <test.test_InfoExtractor.TestInfoExtractor testMethod=test_parse_mpd_formats>\n\n    def test_parse_mpd_formats(self):\n        _TEST_CASES = [\n            (\n                # https://github.com/rg3/youtube-dl/issues/13919\n                # Also tests duplicate representation ids, see\n                # https://github.com/rg3/youtube-dl/issues/15111\n                'float_duration',\n                'http://unknown/manifest.mpd',\n                [{\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'm4a',\n                    'format_id': '318597',\n                    'format_note': 'DASH audio',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'none',\n                    'tbr': 61.587,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '318597',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.42001f',\n                    'tbr': 318.597,\n                    'width': 340,\n                    'height': 192,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '638590',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.42001f',\n                    'tbr': 638.59,\n                    'width': 512,\n                    'height': 288,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '1022565',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.4d001f',\n                    'tbr': 1022.565,\n                    'width': 688,\n                    'height': 384,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '2046506',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.4d001f',\n                    'tbr': 2046.506,\n                    'width': 1024,\n                    'height': 576,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '3998017',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.640029',\n                    'tbr': 3998.017,\n                    'width': 1280,\n                    'height': 720,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '5997485',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.640032',\n                    'tbr': 5997.485,\n                    'width': 1920,\n                    'height': 1080,\n                }]\n            ), (\n                # https://github.com/rg3/youtube-dl/pull/14844\n                'urls_only',\n                'http://unknown/manifest.mpd',\n                [{\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_144p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 200,\n                    'width': 256,\n                    'height': 144,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_240p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 400,\n                    'width': 424,\n                    'height': 240,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_360p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 800,\n                    'width': 640,\n                    'height': 360,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_480p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 1200,\n                    'width': 856,\n                    'height': 480,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_576p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 1600,\n                    'width': 1024,\n                    'height': 576,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_720p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 2400,\n                    'width': 1280,\n                    'height': 720,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_1080p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 4400,\n                    'width': 1920,\n                    'height': 1080,\n                }]\n            )\n        ]\n    \n        for mpd_file, mpd_url, expected_formats in _TEST_CASES:\n            with io.open('./test/testdata/mpd/%s.mpd' % mpd_file,\n                         mode='r', encoding='utf-8') as f:\n                formats = self.ie._parse_mpd_formats(\n                    compat_etree_fromstring(f.read().encode('utf-8')),\n                    mpd_url=mpd_url)\n                self.ie._sort_formats(formats)\n>               expect_value(self, formats, expected_formats, None)\n\ntest/test_InfoExtractor.py:668: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest/helper.py:137: in expect_value\n    self.assertEqual(\nE   AssertionError: 7 != 6 : Expect a list of length 7, but got a list of length 6 for field None\n=============================== warnings summary ===============================\nyoutube_dl/extractor/pandatv.py:39\n  /work/source/youtube_dl/extractor/pandatv.py:39: SyntaxWarning: \"is not\" with a literal. Did you mean \"!=\"?\n    if error_code is not 0:\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED test/test_InfoExtractor.py::TestInfoExtractor::test_parse_mpd_formats\n1 failed, 1 warning in 0.79s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.0677984419999973,
+        "tests": [
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_download_json",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_extract_jwplayer_data_realworld",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_meta",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_regex",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_ie_key",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_opengraph",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_f4m_formats",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_m3u8_formats",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+            "status": "failure"
+          }
+        ],
+        "log": "........F                                                                [100%]\n=================================== FAILURES ===================================\n___________________ TestInfoExtractor.test_parse_mpd_formats ___________________\n\nself = <test.test_InfoExtractor.TestInfoExtractor testMethod=test_parse_mpd_formats>\n\n    def test_parse_mpd_formats(self):\n        _TEST_CASES = [\n            (\n                # https://github.com/rg3/youtube-dl/issues/13919\n                # Also tests duplicate representation ids, see\n                # https://github.com/rg3/youtube-dl/issues/15111\n                'float_duration',\n                'http://unknown/manifest.mpd',\n                [{\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'm4a',\n                    'format_id': '318597',\n                    'format_note': 'DASH audio',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'none',\n                    'tbr': 61.587,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '318597',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.42001f',\n                    'tbr': 318.597,\n                    'width': 340,\n                    'height': 192,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '638590',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.42001f',\n                    'tbr': 638.59,\n                    'width': 512,\n                    'height': 288,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '1022565',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.4d001f',\n                    'tbr': 1022.565,\n                    'width': 688,\n                    'height': 384,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '2046506',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.4d001f',\n                    'tbr': 2046.506,\n                    'width': 1024,\n                    'height': 576,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '3998017',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.640029',\n                    'tbr': 3998.017,\n                    'width': 1280,\n                    'height': 720,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': '5997485',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'none',\n                    'vcodec': 'avc1.640032',\n                    'tbr': 5997.485,\n                    'width': 1920,\n                    'height': 1080,\n                }]\n            ), (\n                # https://github.com/rg3/youtube-dl/pull/14844\n                'urls_only',\n                'http://unknown/manifest.mpd',\n                [{\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_144p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 200,\n                    'width': 256,\n                    'height': 144,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_240p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 400,\n                    'width': 424,\n                    'height': 240,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_360p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 800,\n                    'width': 640,\n                    'height': 360,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_480p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 1200,\n                    'width': 856,\n                    'height': 480,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_576p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 1600,\n                    'width': 1024,\n                    'height': 576,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_720p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 2400,\n                    'width': 1280,\n                    'height': 720,\n                }, {\n                    'manifest_url': 'http://unknown/manifest.mpd',\n                    'ext': 'mp4',\n                    'format_id': 'h264_aac_1080p_m4s',\n                    'format_note': 'DASH video',\n                    'protocol': 'http_dash_segments',\n                    'acodec': 'mp4a.40.2',\n                    'vcodec': 'avc3.42c01e',\n                    'tbr': 4400,\n                    'width': 1920,\n                    'height': 1080,\n                }]\n            )\n        ]\n    \n        for mpd_file, mpd_url, expected_formats in _TEST_CASES:\n            with io.open('./test/testdata/mpd/%s.mpd' % mpd_file,\n                         mode='r', encoding='utf-8') as f:\n                formats = self.ie._parse_mpd_formats(\n                    compat_etree_fromstring(f.read().encode('utf-8')),\n                    mpd_url=mpd_url)\n                self.ie._sort_formats(formats)\n>               expect_value(self, formats, expected_formats, None)\n\ntest/test_InfoExtractor.py:668: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest/helper.py:137: in expect_value\n    self.assertEqual(\nE   AssertionError: 7 != 6 : Expect a list of length 7, but got a list of length 6 for field None\n=============================== warnings summary ===============================\nyoutube_dl/extractor/pandatv.py:39\n  /work/source/youtube_dl/extractor/pandatv.py:39: SyntaxWarning: \"is not\" with a literal. Did you mean \"!=\"?\n    if error_code is not 0:\n\ntest/test_InfoExtractor.py:19\n  /work/source/test/test_InfoExtractor.py:19: PytestCollectionWarning: cannot collect test class 'TestIE' because it has a __init__ constructor (from: test/test_InfoExtractor.py)\n    class TestIE(InfoExtractor):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED test/test_InfoExtractor.py::TestInfoExtractor::test_parse_mpd_formats\n1 failed, 8 passed, 2 warnings in 0.82s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:08b369a817dcccc073020fc6792001117132fc531758673844bdc454f06a99b0",
+    "seconds": 2.4058263539999984,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.967887601000001,
+        "tests": [
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\nyoutube_dl/extractor/pandatv.py:39\n  /work/source/youtube_dl/extractor/pandatv.py:39: SyntaxWarning: \"is not\" with a literal. Did you mean \"!=\"?\n    if error_code is not 0:\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 1 warning in 0.74s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 1.0178911529999937,
+        "tests": [
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_download_json",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_extract_jwplayer_data_realworld",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_meta",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_regex",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_ie_key",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_opengraph",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_f4m_formats",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_m3u8_formats",
+            "status": "passed"
+          },
+          {
+            "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+            "status": "passed"
+          }
+        ],
+        "log": ".........                                                                [100%]\n=============================== warnings summary ===============================\nyoutube_dl/extractor/pandatv.py:39\n  /work/source/youtube_dl/extractor/pandatv.py:39: SyntaxWarning: \"is not\" with a literal. Did you mean \"!=\"?\n    if error_code is not 0:\n\ntest/test_InfoExtractor.py:19\n  /work/source/test/test_InfoExtractor.py:19: PytestCollectionWarning: cannot collect test class 'TestIE' because it has a __init__ constructor (from: test/test_InfoExtractor.py)\n    class TestIE(InfoExtractor):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n9 passed, 2 warnings in 0.77s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

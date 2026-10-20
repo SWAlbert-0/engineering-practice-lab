@@ -1,0 +1,2462 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409",
+  "run_id": 39409631610,
+  "job_id": 118583907910,
+  "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907910",
+  "evidence": "Structured records from final GitHub Actions job logs. Full original artifacts retained by workflow policy.",
+  "records": [
+    {
+      "marker": "LAB_BENCHMARK_SUMMARY",
+      "data": {
+        "project": "tqdm",
+        "selected": 6,
+        "reproduced": 6,
+        "statuses": {
+          "reproduced": 6
+        },
+        "model_repair_rate": null
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-1",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "80e0b8436719bd02fe046ad928156062480c923cbb9b2419cfd2a65a06c2fc64"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_contrib.py": "046b9696e36355e7838db47fff762a8049c6e06ff21c0188deab12697baaf528"
+        },
+        "production_files": [
+          "tqdm/contrib/__init__.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-1",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.3664569289999946,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "error"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.36599121100000076,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate_numpy",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_zip",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_map",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-1",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.315817912,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.2655716439999978,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_enumerate_numpy",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_zip",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_contrib::test_map",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-2",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "d0c9d83c0d2614b8158b3851c757659da0408e7abd98d2213ea1fff3554d4f32"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_tqdm.py": "d2b488b92e200f692017f01f7217dd0b373ce0256e4a870a836e18bd3d67531e"
+        },
+        "production_files": [
+          "tqdm/std.py",
+          "tqdm/utils.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-2",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.41634380100000357,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 2.6217782760000006,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_formatspec",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_reset",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_reset",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_wrapattr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_float_progress",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_float_progress",
+                "status": "error"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-2",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.3659796080000035,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.6667327420000007,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_formatspec",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_reset",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_wrapattr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_float_progress",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-3",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "6b2e61f980bc8af5cd8fcfc83cc40bf96edad9d2d70ce7a4bcb4390040186d1b"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_tqdm.py": "2d602e53492f5b75c78cefd9bec0d2713a67dcf5e23c119bc82738d9b086440e"
+        },
+        "production_files": [
+          "tqdm/_tqdm.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-3",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.3667543130000013,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.6668089790000025,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_reset",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-3",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.3659527450000013,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.6275528300000062,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_reset",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-4",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "36fca028feb0ec93741f07603fd9011e3e60b42c3db7084c9ac79ad4ef6c0c28"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_tqdm.py": "9d0914f40b0fbbb69e37e2a949a1e3b962de3e1919d7be2a414b5bedc2b9839e"
+        },
+        "production_files": [
+          "tqdm/_tqdm.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-4",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.41616442099999773,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "error"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.6164875260000002,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "error"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-4",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.3658756029999992,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.6166473310000029,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_num",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_nototal",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_custom_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_auto",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-5",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "93e64ad49e15dccc7384e756a0ba1f3f7750f8169e2b50a87765885bfae26705"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_tqdm.py": "cbc1a3367ec5b91d19279b2852b1a642bb4ed675a13f67df9b3d86d3ab27e6d0"
+        },
+        "production_files": [
+          "tqdm/_tqdm.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-5",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.3660797579999979,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.4660429260000001,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "failure"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autonotebook",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-5",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.36707024799999743,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.36808397500000467,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_format_meter",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_si_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_output",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_leave_option",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_trange",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_max_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_ascii",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_update",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_close",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_smoothing",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bar_format",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unpause",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_position",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_set_description",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_cmp",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_repr",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_len",
+                "status": "skipped"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_external_write",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_threading",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_bool",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_tqdm::test_autonotebook",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "tqdm-6",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "08259fd43daa6ccefd6f35686e762ba258a31157317414cc50df34ba7d2b7fa4"
+        },
+        "frozen_test_sha256": {
+          "tqdm/tests/tests_synchronisation.py": "b0b425c609b77bd6f0765795eca5688a406c67f8ed14e17cd5a297e693998f7c"
+        },
+        "production_files": [
+          "tqdm/_tqdm.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-6",
+        "variant": "buggy",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.36574492500000133,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_imap",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 6.326852760000001,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitor_thread",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitoring_and_cleanup",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitoring_multi",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_imap",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "tqdm-6",
+        "variant": "upstream_repair",
+        "image": "sha256:be5c5f2f63303eb8bae8bded4eaed151eda9c59feba2e9fd3b16740d4768fb54",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.31565129299998773,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_imap",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 6.379326346999989,
+            "tests": [
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitor_thread",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitoring_and_cleanup",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_monitoring_multi",
+                "status": "passed"
+              },
+              {
+                "id": "tqdm.tests.tests_synchronisation::test_imap",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,880 @@
+{
+  "id": "black-5",
+  "status": "reproduced",
+  "model": {
+    "status": "input_out_of_scope",
+    "attempts": []
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [
+      "docs/authors.md",
+      "docs/blackd.md",
+      "docs/change_log.md",
+      "docs/contributing_to_black.md",
+      "docs/editor_integration.md",
+      "docs/ignoring_unmodified_files.md",
+      "docs/installation_and_usage.md",
+      "docs/license.md",
+      "docs/pyproject_toml.md",
+      "docs/show_your_style.md",
+      "docs/testimonials.md",
+      "docs/the_black_code_style.md",
+      "docs/version_control_integration.md"
+    ],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "5d4cd01afdcb6722dd06f75513dea34a4e7f75d1eef6a73ca43b8c6729b80522"
+  },
+  "frozen_test_sha256": {
+    "tests/data/function_trailing_comma.py": "fc49f25188d2010de7dd3d87439c837eaaefb03cfbf8d54471e89689d04462f7",
+    "tests/test_black.py": "a549aa7185d61746942c16facd939c0471f0eb30b39bad0372be81013a2005b8"
+  },
+  "production_files": [
+    "black.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:ea6450e45a45735f1ac03d5ac8ae0a592ce1d7861cc96f45d0d0858cfd86a15a",
+    "seconds": 9.181718071999967,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.4660419539999907,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________ BlackTestCase.test_function_trailing_comma __________________\n\nself = <tests.test_black.BlackTestCase testMethod=test_function_trailing_comma>\n\n    @patch(\"black.dump_to_file\", dump_to_stderr)\n    def test_function_trailing_comma(self) -> None:\n        source, expected = read_data(\"function_trailing_comma\")\n        actual = fs(source)\n>       self.assertFormatEqual(expected, actual)\n\ntests/test_black.py:271: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_black.py:159: in assertFormatEqual\n    self.assertEqual(expected, actual)\nE   AssertionError: 'def f(a):\\n    ...\\n\\n\\ndef f(a: int = 1):\\n    ...\\n' != 'def f(a,):\\n    ...\\n\\n\\ndef f(a: int = 1,):\\n    ...\\n'\nE   - def f(a):\nE   + def f(a,):\nE   ?        +\nE         ...\nE     \nE     \nE   - def f(a: int = 1):\nE   + def f(a: int = 1,):\nE   ?                 +\nE         ...\n----------------------------- Captured stderr call -----------------------------\nExpected tree:\nfile_input\n  funcdef\n    NAME 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      NAME 'a'\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  funcdef\n    NAME '\\n\\n' 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        tname\n          NAME 'a'\n          COLON ':'\n          NAME ' ' 'int'\n        /tname\n        EQUAL ' ' '='\n        NUMBER ' ' '1'\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  ENDMARKER ''\n/file_input\nActual tree:\nfile_input\n  funcdef\n    NAME 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        NAME 'a'\n        COMMA ','\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  funcdef\n    NAME '\\n\\n' 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        tname\n          NAME 'a'\n          COLON ':'\n          NAME ' ' 'int'\n        /tname\n        EQUAL ' ' '='\n        NUMBER ' ' '1'\n        COMMA ','\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  ENDMARKER ''\n/file_input\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tests/test_black.py::BlackTestCase::test_function_trailing_comma - Ass...\n1 failed in 0.29s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 8.473421856000016,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_async_as_identifier",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_black",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_invalid_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_invalid_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_main",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_needs_formatting",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_no_change",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_syntax_error",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_supported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_unsupported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_bracket_match",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cantfit",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comment_after_escaped_newline",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments5",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments6",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments7",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_composition",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_include",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_lines",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_endmarker",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_filter_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_features_used",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_import_spacing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python37",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_parens",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_normal",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_quiet",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_verbose",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_self",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_setup",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_shhh_click",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_slices",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_quotes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_stub",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+            "status": "passed"
+          }
+        ],
+        "log": ".................................................F...................... [ 73%]\n..........................                                               [100%]\n=================================== FAILURES ===================================\n__________________ BlackTestCase.test_function_trailing_comma __________________\n\nself = <tests.test_black.BlackTestCase testMethod=test_function_trailing_comma>\n\n    @patch(\"black.dump_to_file\", dump_to_stderr)\n    def test_function_trailing_comma(self) -> None:\n        source, expected = read_data(\"function_trailing_comma\")\n        actual = fs(source)\n>       self.assertFormatEqual(expected, actual)\n\ntests/test_black.py:271: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_black.py:159: in assertFormatEqual\n    self.assertEqual(expected, actual)\nE   AssertionError: 'def f(a):\\n    ...\\n\\n\\ndef f(a: int = 1):\\n    ...\\n' != 'def f(a,):\\n    ...\\n\\n\\ndef f(a: int = 1,):\\n    ...\\n'\nE   - def f(a):\nE   + def f(a,):\nE   ?        +\nE         ...\nE     \nE     \nE   - def f(a: int = 1):\nE   + def f(a: int = 1,):\nE   ?                 +\nE         ...\n----------------------------- Captured stderr call -----------------------------\nExpected tree:\nfile_input\n  funcdef\n    NAME 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      NAME 'a'\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  funcdef\n    NAME '\\n\\n' 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        tname\n          NAME 'a'\n          COLON ':'\n          NAME ' ' 'int'\n        /tname\n        EQUAL ' ' '='\n        NUMBER ' ' '1'\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  ENDMARKER ''\n/file_input\nActual tree:\nfile_input\n  funcdef\n    NAME 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        NAME 'a'\n        COMMA ','\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  funcdef\n    NAME '\\n\\n' 'def'\n    NAME ' ' 'f'\n    parameters\n      LPAR '('\n      typedargslist\n        tname\n          NAME 'a'\n          COLON ':'\n          NAME ' ' 'int'\n        /tname\n        EQUAL ' ' '='\n        NUMBER ' ' '1'\n        COMMA ','\n      /typedargslist\n      RPAR ')'\n    /parameters\n    COLON ':'\n    suite\n      NEWLINE '\\n'\n      INDENT ''\n      simple_stmt\n        atom\n          DOT '    ' '.'\n          DOT '.'\n          DOT '.'\n        /atom\n        NEWLINE '\\n'\n      /simple_stmt\n      DEDENT ''\n    /suite\n  /funcdef\n  ENDMARKER ''\n/file_input\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_black.py::BlackTestCase::test_function_trailing_comma - Ass...\n1 failed, 97 passed in 8.23s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:ea6450e45a45735f1ac03d5ac8ae0a592ce1d7861cc96f45d0d0858cfd86a15a",
+    "seconds": 8.989397476000022,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.4159305289999793,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed in 0.23s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 8.364861023999993,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_async_as_identifier",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_black",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_invalid_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_invalid_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_main",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_needs_formatting",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_no_change",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_request_syntax_error",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_supported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_unsupported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_bracket_match",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cantfit",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comment_after_escaped_newline",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments5",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments6",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments7",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_composition",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_include",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_lines",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_endmarker",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_filter_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_features_used",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_import_spacing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python37",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_parens",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_normal",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_quiet",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_verbose",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_self",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_setup",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_shhh_click",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_slices",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_quotes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_stub",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+            "status": "passed"
+          }
+        ],
+        "log": "........................................................................ [ 73%]\n..........................                                               [100%]\n------------------- generated xml file: /work/regression.xml -------------------\n98 passed in 8.11s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "qasper-02428a8fec9788f6dc3a86b5d5f3aa679935678d",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.2
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "The model's robustness is defined as the ability to maintain performance when faced with adversarial or noisy inputs.",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          35,
+          54,
+          63
+        ]
+      },
+      "seconds": 3.523316412999975,
+      "input_sha256": "e0cc340b9c909f83a2371bcac4137e25b9a62c6e21ca2f8cb7e279726a18bb56",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 636,
+        "completion_tokens": 67,
+        "total_tokens": 703
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "The model's robustness is defined as the ability to maintain performance when faced with adversarial or noisy inputs.",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          35,
+          54,
+          63
+        ]
+      },
+      "seconds": 3.741184584000166,
+      "input_sha256": "f76506468a8aa29a540f157857d168d48c934cfd4036eaa9d7af3459229cc5ad",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 707,
+        "completion_tokens": 61,
+        "total_tokens": 768
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    35,
+    54,
+    61,
+    63
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "The model's robustness is defined as the ability to maintain performance when faced with adversarial or noisy inputs.",
+    "label": "NOT_ENOUGH_INFO",
+    "evidence": [
+      35,
+      54,
+      63
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "mode": "single",
+  "dataset_sha256": "e54b73208eba9f9b699020a6843c88849e6500cd10bc443e48710be4cd5d944e",
+  "selected": 60,
+  "model": {
+    "available": true,
+    "missing": [],
+    "model": "qwen3-0.6b-q8-eval",
+    "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+  },
+  "max_calls": 60,
+  "task_scope": "Given-document evidence selection and scientific claim verification / paper QA; NOT complete D13 reading-writing workflow or expert synthesis assessment",
+  "prompt_version": "d13-semantic-subtask-v3",
+  "input_policy": "lexical-top4",
+  "max_output_tokens_per_case": 1500,
+  "started_utc": "2026-10-20T10:28:07Z"
+}

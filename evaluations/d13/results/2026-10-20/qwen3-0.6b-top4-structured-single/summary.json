@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "mode": "single",
+  "dataset_sha256": "e54b73208eba9f9b699020a6843c88849e6500cd10bc443e48710be4cd5d944e",
+  "selected": 60,
+  "model": {
+    "available": true,
+    "missing": [],
+    "model": "qwen3-0.6b-q8-eval",
+    "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+  },
+  "max_calls": 60,
+  "task_scope": "Given-document evidence selection and scientific claim verification / paper QA; NOT complete D13 reading-writing workflow or expert synthesis assessment",
+  "prompt_version": "d13-semantic-subtask-v3",
+  "input_policy": "lexical-top4",
+  "structured_decoding": true,
+  "max_output_tokens_per_case": 1500,
+  "started_utc": "2026-10-20T10:34:03Z",
+  "actual_calls_started": 60,
+  "statuses": {
+    "completed": 59,
+    "call_or_validation_failed": 1
+  },
+  "domains": {
+    "biomedicine": {
+      "selected": 30,
+      "completed": 29,
+      "metrics_all_selected": {
+        "evidence_f1": 0.31333333333333335,
+        "label_correct": 0.36666666666666664
+      },
+      "semantic_expert_score": null
+    },
+    "nlp": {
+      "selected": 30,
+      "completed": 30,
+      "metrics_all_selected": {
+        "evidence_f1": 0.2822222222222222,
+        "answer_token_f1": 0.2201692555251434
+      },
+      "semantic_expert_score": null
+    }
+  },
+  "usage": {
+    "prompt_tokens": 32381,
+    "completion_tokens": 2786,
+    "total_tokens": 35167
+  },
+  "cost": null,
+  "results_sha256": "c3aa0efed7c1c90ea9af845a04c40e59bab9752731b899061b41a14d7a4f10d1"
+}

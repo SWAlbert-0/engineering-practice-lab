@@ -1,0 +1,71 @@
+{
+  "id": "qasper-06eb9f2320451df83e27362c22eb02f4a426a018",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.5,
+    "answer_token_f1": 0.16666666666666666
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "Three levels of document preprocessing are looked at",
+        "label": "SUPPORT",
+        "evidence": [
+          2,
+          5,
+          11
+        ]
+      },
+      "seconds": 2.6279364520000854,
+      "input_sha256": "f2bbd9ad245d746c78c451a1c52304315adc74e15ee3831fb9c9b21f47c1fd22",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 588,
+        "completion_tokens": 50,
+        "total_tokens": 638
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "Three levels of document preprocessing are looked at",
+        "label": "SUPPORT",
+        "evidence": [
+          2,
+          5,
+          11
+        ]
+      },
+      "seconds": 2.401411984000333,
+      "input_sha256": "04cd326aa1a77733775d84387350056b7d3ab8c401588dfdb230bed1fb670905",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 642,
+        "completion_tokens": 44,
+        "total_tokens": 686
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    2,
+    5,
+    11,
+    21
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "prediction": {
+    "answer": "Three levels of document preprocessing are looked at",
+    "label": "SUPPORT",
+    "evidence": [
+      2,
+      5,
+      11
+    ]
+  }
+}

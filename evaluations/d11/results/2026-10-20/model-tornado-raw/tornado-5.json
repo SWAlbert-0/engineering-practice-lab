@@ -1,0 +1,548 @@
+{
+  "id": "tornado-5",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [
+      "maint/test/appengine/py27/tornado"
+    ],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "54c8adba628dd0b3afcc310b7d0327b7cebd30cbbff16c9afea5df7a48433c51"
+  },
+  "frozen_test_sha256": {
+    "tornado/test/ioloop_test.py": "ed18d9df5aaaac8794a1a6755739a1202d05bd7cc073de12fb9abca7e2c61b14"
+  },
+  "production_files": [
+    "tornado/ioloop.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 2.110908848000008,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.5170791559999941,
+        "tests": [
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_clock_backwards",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n________________ TestPeriodicCallbackMath.test_clock_backwards _________________\n\nself = <tornado.test.ioloop_test.TestPeriodicCallbackMath testMethod=test_clock_backwards>\n\n    def test_clock_backwards(self):\n        pc = PeriodicCallback(None, 10000)\n        # Backwards jumps are ignored, potentially resulting in a\n        # slightly slow schedule (although we assume that when\n        # time.time() and time.monotonic() are different, time.time()\n        # is getting adjusted by NTP and is therefore more accurate)\n>       self.assertEqual(self.simulate_calls(pc, [-2, -1, -3, -2, 0]),\n                         [1010, 1020, 1030, 1040, 1050])\nE       AssertionError: Lists differ: [1010.0, 1010.0, 1010.0, 1010.0, 1010.0] != [1010, 1020, 1030, 1040, 1050]\nE       \nE       First differing element 1:\nE       1010.0\nE       1020\nE       \nE       - [1010.0, 1010.0, 1010.0, 1010.0, 1010.0]\nE       + [1010, 1020, 1030, 1040, 1050]\n\ntornado/test/ioloop_test.py:837: AssertionError\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tornado/test/ioloop_test.py::TestPeriodicCallbackMath::test_clock_backwards\n1 failed, 2 warnings in 0.23s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.2192491469999993,
+        "tests": [
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_from_signal",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_from_signal_other_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_return_sequence",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_wakeup",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_wakeup_other_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_while_closing",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_timeout_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_timeout_timedelta",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_call_at_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_call_later_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_close_file_object",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging_future",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging_native_coro",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_handle_callback_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_handler_callback_file_object",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_mixed_fd_fileobj",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_multiple_add",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_read_while_writeable",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_reentrant",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_handler_from_handler",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_after_fire",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_cleanup",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_from_timeout",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_without_add",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_spawn_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_timeout_with_arguments",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_default_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_force_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_non_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrentAsync::test_clear_without_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallback::test_pre_wrap",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallback::test_pre_wrap_with_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallbackFromSignal::test_pre_wrap",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallbackFromSignal::test_pre_wrap_with_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_add_future_stack_context",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_add_future_threads",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_run_in_executor_gen",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_run_in_executor_native",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_set_default_executor",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_async_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_async_result",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_native_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_sync_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_sync_result",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_timeout",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_basic",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_io_loop_set_at_start",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_overrun",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_basic",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_clock_backwards",
+            "status": "failure"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_overrun",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_asyncio",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_asyncio_main",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_default",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_explicit_select",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_twisted",
+            "status": "skipped"
+          }
+        ],
+        "log": "...............................................sss.F....ss               [100%]\n=================================== FAILURES ===================================\n________________ TestPeriodicCallbackMath.test_clock_backwards _________________\n\nself = <tornado.test.ioloop_test.TestPeriodicCallbackMath testMethod=test_clock_backwards>\n\n    def test_clock_backwards(self):\n        pc = PeriodicCallback(None, 10000)\n        # Backwards jumps are ignored, potentially resulting in a\n        # slightly slow schedule (although we assume that when\n        # time.time() and time.monotonic() are different, time.time()\n        # is getting adjusted by NTP and is therefore more accurate)\n>       self.assertEqual(self.simulate_calls(pc, [-2, -1, -3, -2, 0]),\n                         [1010, 1020, 1030, 1040, 1050])\nE       AssertionError: Lists differ: [1010.0, 1010.0, 1010.0, 1010.0, 1010.0] != [1010, 1020, 1030, 1040, 1050]\nE       \nE       First differing element 1:\nE       1010.0\nE       1020\nE       \nE       - [1010.0, 1010.0, 1010.0, 1010.0, 1010.0]\nE       + [1010, 1020, 1030, 1040, 1050]\n\ntornado/test/ioloop_test.py:837: AssertionError\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tornado/test/ioloop_test.py::TestPeriodicCallbackMath::test_clock_backwards\n1 failed, 52 passed, 5 skipped, 2 warnings in 0.92s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 2.034987037999997,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.46735262199999283,
+        "tests": [
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_clock_backwards",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 2 warnings in 0.17s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 1.2197823359999802,
+        "tests": [
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_from_signal",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_from_signal_other_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_return_sequence",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_wakeup",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_wakeup_other_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_callback_while_closing",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_timeout_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_add_timeout_timedelta",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_call_at_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_call_later_return",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_close_file_object",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging_future",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_exception_logging_native_coro",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_handle_callback_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_handler_callback_file_object",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_mixed_fd_fileobj",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_multiple_add",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_read_while_writeable",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_reentrant",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_handler_from_handler",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_after_fire",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_cleanup",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_timeout_from_timeout",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_remove_without_add",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_spawn_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoop::test_timeout_with_arguments",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_default_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_force_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrent::test_non_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopCurrentAsync::test_clear_without_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallback::test_pre_wrap",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallback::test_pre_wrap_with_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallbackFromSignal::test_pre_wrap",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopAddCallbackFromSignal::test_pre_wrap_with_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_add_future_stack_context",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_add_future_threads",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_run_in_executor_gen",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_run_in_executor_native",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopFutures::test_set_default_executor",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_async_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_async_result",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_current",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_native_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_sync_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_sync_result",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopRunSync::test_timeout",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_basic",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_io_loop_set_at_start",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallback::test_overrun",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_basic",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_clock_backwards",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestPeriodicCallbackMath::test_overrun",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_asyncio",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_asyncio_main",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_default",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_explicit_select",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.ioloop_test.TestIOLoopConfiguration::test_twisted",
+            "status": "skipped"
+          }
+        ],
+        "log": "...............................................sss......ss               [100%]\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n53 passed, 5 skipped, 2 warnings in 0.97s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

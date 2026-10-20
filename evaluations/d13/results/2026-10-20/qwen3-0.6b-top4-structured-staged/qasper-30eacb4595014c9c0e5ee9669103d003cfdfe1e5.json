@@ -1,0 +1,68 @@
+{
+  "id": "qasper-30eacb4595014c9c0e5ee9669103d003cfdfe1e5",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.5
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "the SemEval 2010 benchmark dataset",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          24
+        ]
+      },
+      "seconds": 2.0755527689998416,
+      "input_sha256": "69b21399a12d10e92c38e0fa25aa6fadade50215c24ccf875c757dfa2592cf3f",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 446,
+        "completion_tokens": 48,
+        "total_tokens": 494
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "the SemEval 2010 benchmark dataset",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          24
+        ]
+      },
+      "seconds": 2.215958978999879,
+      "input_sha256": "3d7320c57575b679955789da690ae40297554c8de813baa5e7b71351d34e23bb",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 499,
+        "completion_tokens": 43,
+        "total_tokens": 542
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    3,
+    4,
+    24,
+    27
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "the SemEval 2010 benchmark dataset",
+    "label": "SUPPORT",
+    "evidence": [
+      4,
+      24
+    ]
+  }
+}

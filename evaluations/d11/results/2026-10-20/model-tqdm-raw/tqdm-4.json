@@ -1,0 +1,506 @@
+{
+  "id": "tqdm-4",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "36fca028feb0ec93741f07603fd9011e3e60b42c3db7084c9ac79ad4ef6c0c28"
+  },
+  "frozen_test_sha256": {
+    "tqdm/tests/tests_tqdm.py": "9d0914f40b0fbbb69e37e2a949a1e3b962de3e1919d7be2a414b5bedc2b9839e"
+  },
+  "production_files": [
+    "tqdm/_tqdm.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 2.7157200369999828,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.9179724310000097,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "error"
+          }
+        ],
+        "log": "FE                                                                       [100%]\n==================================== ERRORS ====================================\n______________________ ERROR at teardown of test_nototal _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:131: OSError\n=================================== FAILURES ===================================\n_________________________________ test_nototal _________________________________\n\n    @with_setup(pretest, posttest)\n    def test_nototal():\n        \"\"\"Test unknown total length\"\"\"\n        with closing(StringIO()) as our_file:\n>           for i in tqdm((i for i in range(10)), file=our_file, unit_scale=10):\n\ntqdm/tests/tests_tqdm.py:779: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/_tqdm.py:927: in __init__\n    self.display()\ntqdm/_tqdm.py:1297: in display\n    self.sp(self.__repr__() if msg is None else msg)\ntqdm/_tqdm.py:966: in __repr__\n    return self.format_meter(**self.format_dict)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nn = 0, total = None, elapsed = 0, ncols = None, prefix = '', ascii = True\nunit = 'it', unit_scale = 10, rate = None, bar_format = None, postfix = None\nunit_divisor = 1000, extra_kwargs = {}\n\n    @staticmethod\n    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,\n                     unit='it', unit_scale=False, rate=None, bar_format=None,\n                     postfix=None, unit_divisor=1000, **extra_kwargs):\n        \"\"\"\n        Return a string-based progress bar given some parameters\n    \n        Parameters\n        ----------\n        n  : int\n            Number of finished iterations.\n        total  : int\n            The expected total number of iterations. If meaningless (), only\n            basic progress statistics are displayed (no ETA).\n        elapsed  : float\n            Number of seconds passed since start.\n        ncols  : int, optional\n            The width of the entire output message. If specified,\n            dynamically resizes the progress meter to stay within this bound\n            [default: None]. The fallback meter width is 10 for the progress\n            bar + no limit for the iterations counter and statistics. If 0,\n            will not print any meter (only stats).\n        prefix  : str, optional\n            Prefix message (included in total width) [default: ''].\n            Use as {desc} in bar_format string.\n        ascii  : bool, optional\n            If not set, use unicode (smooth blocks) to fill the meter\n            [default: False]. The fallback is to use ASCII characters\n            (1-9 #).\n        unit  : str, optional\n            The iteration unit [default: 'it'].\n        unit_scale  : bool or int or float, optional\n            If 1 or True, the number of iterations will be printed with an\n            appropriate SI metric prefix (k = 10^3, M = 10^6, etc.)\n            [default: False]. If any other non-zero number, will scale\n            `total` and `n`.\n        rate  : float, optional\n            Manual override for iteration rate.\n            If [default: None], uses n/elapsed.\n        bar_format  : str, optional\n            Specify a custom bar string formatting. May impact performance.\n            [default: '{l_bar}{bar}{r_bar}'], where\n            l_bar='{desc}: {percentage:3.0f}%|' and\n            r_bar='| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, '\n              '{rate_fmt}{postfix}]'\n            Possible vars: l_bar, bar, r_bar, n, n_fmt, total, total_fmt,\n              percentage, rate, rate_fmt, rate_noinv, rate_noinv_fmt,\n              rate_inv, rate_inv_fmt, elapsed, elapsed_s,\n              remaining, remaining_s, desc, postfix, unit.\n            Note that a trailing \": \" is automatically removed after {desc}\n            if the latter is empty.\n        postfix  : *, optional\n            Similar to `prefix`, but placed at the end\n            (e.g. for additional stats).\n            Note: postfix is usually a string (not a dict) for this method,\n            and will if possible be set to postfix = ', ' + postfix.\n            However other types are supported (#382).\n        unit_divisor  : float, optional\n            [default: 1000], ignored unless `unit_scale` is True.\n    \n        Returns\n        -------\n        out  : Formatted meter and stats, ready to display.\n        \"\"\"\n    \n        # sanity check: total\n        if total and n > total:\n            total = None\n    \n        # apply custom scale if necessary\n        if unit_scale and unit_scale not in (True, 1):\n>           total *= unit_scale\nE           TypeError: unsupported operand type(s) for *=: 'NoneType' and 'int'\n\ntqdm/_tqdm.py:323: TypeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_nototal - TypeError: unsupported operan...\nERROR tqdm/tests/tests_tqdm.py::test_nototal - OSError: 1 `tqdm` instances st...\n1 failed, 1 warning, 1 error in 0.60s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.470635566000027,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "passed"
+          }
+        ],
+        "log": "....................FE...................s...........                    [100%]\n==================================== ERRORS ====================================\n______________________ ERROR at teardown of test_nototal _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:131: OSError\n=================================== FAILURES ===================================\n_________________________________ test_nototal _________________________________\n\n    @with_setup(pretest, posttest)\n    def test_nototal():\n        \"\"\"Test unknown total length\"\"\"\n        with closing(StringIO()) as our_file:\n>           for i in tqdm((i for i in range(10)), file=our_file, unit_scale=10):\n\ntqdm/tests/tests_tqdm.py:779: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/_tqdm.py:927: in __init__\n    self.display()\ntqdm/_tqdm.py:1297: in display\n    self.sp(self.__repr__() if msg is None else msg)\ntqdm/_tqdm.py:966: in __repr__\n    return self.format_meter(**self.format_dict)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nn = 0, total = None, elapsed = 0, ncols = None, prefix = '', ascii = True\nunit = 'it', unit_scale = 10, rate = None, bar_format = None, postfix = None\nunit_divisor = 1000, extra_kwargs = {}\n\n    @staticmethod\n    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,\n                     unit='it', unit_scale=False, rate=None, bar_format=None,\n                     postfix=None, unit_divisor=1000, **extra_kwargs):\n        \"\"\"\n        Return a string-based progress bar given some parameters\n    \n        Parameters\n        ----------\n        n  : int\n            Number of finished iterations.\n        total  : int\n            The expected total number of iterations. If meaningless (), only\n            basic progress statistics are displayed (no ETA).\n        elapsed  : float\n            Number of seconds passed since start.\n        ncols  : int, optional\n            The width of the entire output message. If specified,\n            dynamically resizes the progress meter to stay within this bound\n            [default: None]. The fallback meter width is 10 for the progress\n            bar + no limit for the iterations counter and statistics. If 0,\n            will not print any meter (only stats).\n        prefix  : str, optional\n            Prefix message (included in total width) [default: ''].\n            Use as {desc} in bar_format string.\n        ascii  : bool, optional\n            If not set, use unicode (smooth blocks) to fill the meter\n            [default: False]. The fallback is to use ASCII characters\n            (1-9 #).\n        unit  : str, optional\n            The iteration unit [default: 'it'].\n        unit_scale  : bool or int or float, optional\n            If 1 or True, the number of iterations will be printed with an\n            appropriate SI metric prefix (k = 10^3, M = 10^6, etc.)\n            [default: False]. If any other non-zero number, will scale\n            `total` and `n`.\n        rate  : float, optional\n            Manual override for iteration rate.\n            If [default: None], uses n/elapsed.\n        bar_format  : str, optional\n            Specify a custom bar string formatting. May impact performance.\n            [default: '{l_bar}{bar}{r_bar}'], where\n            l_bar='{desc}: {percentage:3.0f}%|' and\n            r_bar='| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, '\n              '{rate_fmt}{postfix}]'\n            Possible vars: l_bar, bar, r_bar, n, n_fmt, total, total_fmt,\n              percentage, rate, rate_fmt, rate_noinv, rate_noinv_fmt,\n              rate_inv, rate_inv_fmt, elapsed, elapsed_s,\n              remaining, remaining_s, desc, postfix, unit.\n            Note that a trailing \": \" is automatically removed after {desc}\n            if the latter is empty.\n        postfix  : *, optional\n            Similar to `prefix`, but placed at the end\n            (e.g. for additional stats).\n            Note: postfix is usually a string (not a dict) for this method,\n            and will if possible be set to postfix = ', ' + postfix.\n            However other types are supported (#382).\n        unit_divisor  : float, optional\n            [default: 1000], ignored unless `unit_scale` is True.\n    \n        Returns\n        -------\n        out  : Formatted meter and stats, ready to display.\n        \"\"\"\n    \n        # sanity check: total\n        if total and n > total:\n            total = None\n    \n        # apply custom scale if necessary\n        if unit_scale and unit_scale not in (True, 1):\n>           total *= unit_scale\nE           TypeError: unsupported operand type(s) for *=: 'NoneType' and 'int'\n\ntqdm/_tqdm.py:323: TypeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_nototal - TypeError: unsupported operan...\nERROR tqdm/tests/tests_tqdm.py::test_nototal - OSError: 1 `tqdm` instances st...\n1 failed, 50 passed, 1 skipped, 1 warning, 1 error in 1.15s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 2.3751544249999768,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.7676715050000098,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 1 warning in 0.42s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 1.3200599520000083,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "passed"
+          }
+        ],
+        "log": "........................................s...........                     [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n51 passed, 1 skipped, 1 warning in 0.99s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "weight_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "quantization": "Q8_0",
+  "runtime": "llama.cpp b11753",
+  "binary_archive_sha256": "af40d3acec2ebae7ca3c26cdfa012d4cb6d4ae598aa668194d27c5252a435b62",
+  "cpu_only": true,
+  "threads": 2,
+  "context": 32768,
+  "thinking": false,
+  "seed": 0,
+  "scope": "Small-model diagnostic baseline; not a recommended production model or independent expert assessment",
+  "model_source": "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/23749fefcc72300e3a2ad315e1317431b06b590a/Qwen3-0.6B-Q8_0.gguf",
+  "runtime_source": "https://github.com/ggml-org/llama.cpp/releases/download/b11753/llama-b11753-bin-ubuntu-x64.tar.gz"
+}

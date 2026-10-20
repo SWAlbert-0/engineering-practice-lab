@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "status": "interrupted",
+  "selected": 60,
+  "recorded": 38,
+  "statuses": {
+    "call_or_validation_failed": 35,
+    "completed": 3
+  },
+  "missing_ids": [
+    "qasper-a6d37b5975050da0b1959232ae756fc09e5f87e8",
+    "qasper-26c2e1eb12143d985e4fb50543cf0d1eb4395e67",
+    "qasper-6d4400f45bd97b812e946b8a682b018826e841f1",
+    "qasper-7561a968470a8936d10e1ba722d2f38b5a9a4d38",
+    "qasper-0cfe0e33fbb100751fc0916001a5a19498ae8cb5",
+    "qasper-0f7867f888109b9e000ef68965df4dde2511a55f",
+    "qasper-30eacb4595014c9c0e5ee9669103d003cfdfe1e5",
+    "qasper-1dc2da5078a7e5ea82ccd1c90d81999a922bc9bf",
+    "qasper-662870a90890c620a964720b2ca122a1139410ea",
+    "qasper-7fa3c2c0cf7f559d43e84076a9113a390c5ba03a",
+    "qasper-06eb9f2320451df83e27362c22eb02f4a426a018",
+    "qasper-2a3e36c220e7b47c1b652511a4fdd7238a74a68f",
+    "qasper-e54257585cc75564341eb02bdc63ff8111992f82",
+    "qasper-de53af4eddbc30c808d90b8a11a29217d377569e",
+    "qasper-f875337f2ecd686cd7789e111174d0f14972638d",
+    "qasper-fa30a938b58fc05131c3854f12efe376cbad887f",
+    "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+    "qasper-b36f867fcda5ad62c46d23513369337352aa01d2",
+    "qasper-b49598b05358117ab1471b8ebd0b042d2f04b2a4",
+    "qasper-551457ed34ca7fc0878c85bc664b135c21059b58",
+    "qasper-aa7d327ef98f9f9847b447d4def04889b4508d7a",
+    "qasper-b8d7d055ddb94f5826a9aad7479b4a92a9c8a2f0"
+  ],
+  "reason": "Connection closed by local runtime; no final quality aggregate produced. Later client handles RemoteDisconnected safely. Not included in the main comparison.",
+  "metrics": null,
+  "model": "Qwen/Qwen3-0.6B-GGUF",
+  "recorded_rows_sha256": "91d5150351889a270dcf729dfa2c723276bb475b2fefd27c7eec6231c9994224"
+}

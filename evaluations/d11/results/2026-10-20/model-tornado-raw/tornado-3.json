@@ -1,0 +1,463 @@
+{
+  "id": "tornado-3",
+  "status": "not_reproduced",
+  "model": null,
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "ebf583450314a7e63ee7a6c21d83f72c4a20bef056af6fff14bd882996d8e4e8"
+  },
+  "frozen_test_sha256": {
+    "tornado/test/httpclient_test.py": "7ee5249bc21144409e56b85a74d6bf1e54ce88ebc2ae8b4f3c7f1d968493243b"
+  },
+  "production_files": [
+    ".travis.yml",
+    "tornado/httpclient.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.716786405999983,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.5167592749999983,
+        "tests": [
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientSubprocessTest::test_destructor_log",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed in 0.27s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 0.8688586649999763,
+        "tests": [
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_304_with_content_length",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_all_methods",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth_explicit_mode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth_unicode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_bind_source_ip",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_body_encoding",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_body_sanity_checks",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_chunked",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_chunked_close",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_configure_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_credentials_in_url",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_follow_redirect",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_http_error",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_http_error_no_raise",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_interface",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_header_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_header_types",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_hello_world",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_multi_line_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_non_ascii_header",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_patch_receives_payload",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_post",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_put_307",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_response_times",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_reuse_request_from_response",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_streaming_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_types",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_unsupported_auth_mode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_bad_attribute",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_both_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_default_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_defaults_none",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_neither_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_request_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPResponseTestCase::test_str",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientTest::test_sync_client",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientTest::test_sync_client_error",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientSubprocessTest::test_destructor_log",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_body",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_body_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_headers_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_if_modified_since",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_null_headers_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_copy",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_error_with_response",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_plain_error",
+            "status": "passed"
+          }
+        ],
+        "log": "................................................                         [100%]\n=============================== warnings summary ===============================\ntornado/test/httpclient_test.py::HTTPClientCommonTestCase::test_header_callback\n  /work/source/tornado/test/httpclient_test.py:370: DeprecationWarning: Please use assertRegex instead.\n    self.assertRegexpMatches(first_line[0], \"HTTP/[0-9]\\\\.[0-9] 200.*\\r\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n48 passed, 1 warning in 0.58s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.915097363000001,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.6669697689999907,
+        "tests": [
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientSubprocessTest::test_destructor_log",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed in 0.39s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 0.9188181690000192,
+        "tests": [
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_304_with_content_length",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_all_methods",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth_explicit_mode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_basic_auth_unicode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_bind_source_ip",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_body_encoding",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_body_sanity_checks",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_chunked",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_chunked_close",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_configure_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_credentials_in_url",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_follow_redirect",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_http_error",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_http_error_no_raise",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_future_interface",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_header_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_header_types",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_hello_world",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_multi_line_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_non_ascii_header",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_patch_receives_payload",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_post",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_put_307",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_response_times",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_reuse_request_from_response",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_streaming_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_types",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPClientCommonTestCase::test_unsupported_auth_mode",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_bad_attribute",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_both_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_default_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_defaults_none",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_neither_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.RequestProxyTest::test_request_set",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPResponseTestCase::test_str",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientTest::test_sync_client",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientTest::test_sync_client_error",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.SyncHTTPClientSubprocessTest::test_destructor_log",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_body",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_body_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_headers_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_if_modified_since",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPRequestTestCase::test_null_headers_setter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_copy",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_error_with_response",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.httpclient_test.HTTPErrorTestCase::test_plain_error",
+            "status": "passed"
+          }
+        ],
+        "log": "................................................                         [100%]\n=============================== warnings summary ===============================\ntornado/test/httpclient_test.py::HTTPClientCommonTestCase::test_header_callback\n  /work/source/tornado/test/httpclient_test.py:370: DeprecationWarning: Please use assertRegex instead.\n    self.assertRegexpMatches(first_line[0], \"HTTP/[0-9]\\\\.[0-9] 200.*\\r\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n48 passed, 1 warning in 0.64s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "httpie-3",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "8d2943a911649e509b02011fc5050fb9a073af32fbb364d4c8e5b735e7e5ba3e"
+  },
+  "frozen_test_sha256": {
+    "tests/test_sessions.py": "42345b4bb38bfff6f0a8e3e9e4071822cfe80d9dd8e9bd9f1763b17e54874bbb"
+  },
+  "production_files": [
+    "httpie/sessions.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:17bc82f0d4efc64d6484cf735036ec7d75adecf54bfeaf7a3f26cddfb379d1c0",
+    "seconds": 2.6877907460000188,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 1.1191262489999758,
+        "tests": [
+          {
+            "id": "tests.test_sessions.TestSession::test_download_in_session",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_____________________ TestSession.test_download_in_session _____________________\n\nself = <test_sessions.TestSession object at 0x7f8c79af58b0>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f8c79af5a00>\n\n    def test_download_in_session(self, httpbin):\n        # https://github.com/jkbrzt/httpie/issues/412\n        self.start_session(httpbin)\n        cwd = os.getcwd()\n        try:\n            os.chdir(gettempdir())\n>           http('--session=test', '--download',\n                 httpbin.url + '/get', env=self.env())\n\ntests/test_sessions.py:185: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:136: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:115: in main\n    response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:50: in get_response\n    response = sessions.get_response(\nhttpie/sessions.py:52: in get_response\n    session.update_headers(kwargs['headers'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = {'headers': {}, 'cookies': {}, 'auth': {'type': None, 'username': None, 'password': None}}\nrequest_headers = {'Accept-Encoding': None, 'User-Agent': b'HTTPie/1.0.0-dev'}\n\n    def update_headers(self, request_headers):\n        \"\"\"\n        Update the session headers with the request ones while ignoring\n        certain name prefixes.\n    \n        :type request_headers: dict\n    \n        \"\"\"\n        for name, value in request_headers.items():\n>           value = value.decode('utf8')\nE           AttributeError: 'NoneType' object has no attribute 'decode'\n\nhttpie/sessions.py:104: AttributeError\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:457\n  /work/source/httpie/input.py:457: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `string`. There are only two token types - strings\n\nhttpie/input.py:11\n  /work/source/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import namedtuple, Iterable\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tests/test_sessions.py::TestSession::test_download_in_session - Attrib...\n1 failed, 5 warnings in 0.65s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.268802227000009,
+        "tests": [
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_by_path",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_unicode",
+            "status": "skipped"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_download_in_session",
+            "status": "failure"
+          }
+        ],
+        "log": "...F.s.F                                                                 [100%]\n=================================== FAILURES ===================================\n_______________ TestSession.test_session_ignored_header_prefixes _______________\n\nself = <test_sessions.TestSession object at 0x7f6ea83e74c0>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f6ea841cd90>\n\n    def test_session_ignored_header_prefixes(self, httpbin):\n        self.start_session(httpbin)\n>       r1 = http('--session=test', 'GET', httpbin.url + '/get',\n                  'Content-Type: text/plain',\n                  'If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT',\n                  env=self.env())\n\ntests/test_sessions.py:121: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:136: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:115: in main\n    response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:50: in get_response\n    response = sessions.get_response(\nhttpie/sessions.py:66: in get_response\n    response = requests_session.request(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/sessions.py:528: in request\n    prep = self.prepare_request(req)\n/usr/local/lib/python3.8/site-packages/requests/sessions.py:456: in prepare_request\n    p.prepare(\n/usr/local/lib/python3.8/site-packages/requests/models.py:317: in prepare\n    self.prepare_headers(headers)\n/usr/local/lib/python3.8/site-packages/requests/models.py:451: in prepare_headers\n    check_header_validity(header)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nheader = ('Content-Type', b' text/plain')\n\n    def check_header_validity(header):\n        \"\"\"Verifies that header value is a string which doesn't contain\n        leading whitespace or return characters. This prevents unintended\n        header injection.\n    \n        :param header: tuple, in the format (name, value).\n        \"\"\"\n        name, value = header\n    \n        if isinstance(value, bytes):\n            pat = _CLEAN_HEADER_REGEX_BYTE\n        else:\n            pat = _CLEAN_HEADER_REGEX_STR\n        try:\n            if not pat.match(value):\n>               raise InvalidHeader(\"Invalid return character or leading space in header: %s\" % name)\nE               requests.exceptions.InvalidHeader: Invalid return character or leading space in header: Content-Type\n\n/usr/local/lib/python3.8/site-packages/requests/utils.py:957: InvalidHeader\n_____________________ TestSession.test_download_in_session _____________________\n\nself = <test_sessions.TestSession object at 0x7f6ea81805e0>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7f6ea841cd90>\n\n    def test_download_in_session(self, httpbin):\n        # https://github.com/jkbrzt/httpie/issues/412\n        self.start_session(httpbin)\n        cwd = os.getcwd()\n        try:\n            os.chdir(gettempdir())\n>           http('--session=test', '--download',\n                 httpbin.url + '/get', env=self.env())\n\ntests/test_sessions.py:185: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:136: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:115: in main\n    response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:50: in get_response\n    response = sessions.get_response(\nhttpie/sessions.py:52: in get_response\n    session.update_headers(kwargs['headers'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = {'headers': {}, 'cookies': {}, 'auth': {'type': None, 'username': None, 'password': None}}\nrequest_headers = {'Accept-Encoding': None, 'User-Agent': b'HTTPie/1.0.0-dev'}\n\n    def update_headers(self, request_headers):\n        \"\"\"\n        Update the session headers with the request ones while ignoring\n        certain name prefixes.\n    \n        :type request_headers: dict\n    \n        \"\"\"\n        for name, value in request_headers.items():\n>           value = value.decode('utf8')\nE           AttributeError: 'NoneType' object has no attribute 'decode'\n\nhttpie/sessions.py:104: AttributeError\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:457\n  /work/source/httpie/input.py:457: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `string`. There are only two token types - strings\n\nhttpie/input.py:11\n  /work/source/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import namedtuple, Iterable\n\ntests/utils.py:46\n  /work/source/tests/utils.py:46: PytestCollectionWarning: cannot collect test class 'TestEnvironment' because it has a __init__ constructor (from: tests/test_sessions.py)\n    class TestEnvironment(Environment):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_sessions.py::TestSession::test_session_ignored_header_prefixes\nFAILED tests/test_sessions.py::TestSession::test_download_in_session - Attrib...\n2 failed, 5 passed, 1 skipped, 6 warnings in 0.81s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:17bc82f0d4efc64d6484cf735036ec7d75adecf54bfeaf7a3f26cddfb379d1c0",
+    "seconds": 3.6178434959999777,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 1.6198206029999938,
+        "tests": [
+          {
+            "id": "tests.test_sessions.TestSession::test_download_in_session",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:457\n  /work/source/httpie/input.py:457: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `string`. There are only two token types - strings\n\nhttpie/input.py:11\n  /work/source/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import namedtuple, Iterable\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 5 warnings in 1.16s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.7703236190000098,
+        "tests": [
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_by_path",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_unicode",
+            "status": "skipped"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_sessions.TestSession::test_download_in_session",
+            "status": "passed"
+          }
+        ],
+        "log": "...F.s..                                                                 [100%]\n=================================== FAILURES ===================================\n_______________ TestSession.test_session_ignored_header_prefixes _______________\n\nself = <test_sessions.TestSession object at 0x7fdd5513e430>\nhttpbin = <pytest_httpbin.serve.Server object at 0x7fdd5514bd30>\n\n    def test_session_ignored_header_prefixes(self, httpbin):\n        self.start_session(httpbin)\n>       r1 = http('--session=test', 'GET', httpbin.url + '/get',\n                  'Content-Type: text/plain',\n                  'If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT',\n                  env=self.env())\n\ntests/test_sessions.py:121: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/utils.py:136: in http\n    exit_status = main(args=args, **kwargs)\nhttpie/core.py:115: in main\n    response = get_response(args, config_dir=env.config.directory)\nhttpie/client.py:50: in get_response\n    response = sessions.get_response(\nhttpie/sessions.py:66: in get_response\n    response = requests_session.request(**kwargs)\n/usr/local/lib/python3.8/site-packages/requests/sessions.py:528: in request\n    prep = self.prepare_request(req)\n/usr/local/lib/python3.8/site-packages/requests/sessions.py:456: in prepare_request\n    p.prepare(\n/usr/local/lib/python3.8/site-packages/requests/models.py:317: in prepare\n    self.prepare_headers(headers)\n/usr/local/lib/python3.8/site-packages/requests/models.py:451: in prepare_headers\n    check_header_validity(header)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nheader = ('Content-Type', b' text/plain')\n\n    def check_header_validity(header):\n        \"\"\"Verifies that header value is a string which doesn't contain\n        leading whitespace or return characters. This prevents unintended\n        header injection.\n    \n        :param header: tuple, in the format (name, value).\n        \"\"\"\n        name, value = header\n    \n        if isinstance(value, bytes):\n            pat = _CLEAN_HEADER_REGEX_BYTE\n        else:\n            pat = _CLEAN_HEADER_REGEX_STR\n        try:\n            if not pat.match(value):\n>               raise InvalidHeader(\"Invalid return character or leading space in header: %s\" % name)\nE               requests.exceptions.InvalidHeader: Invalid return character or leading space in header: Content-Type\n\n/usr/local/lib/python3.8/site-packages/requests/utils.py:957: InvalidHeader\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:457\n  /work/source/httpie/input.py:457: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `string`. There are only two token types - strings\n\nhttpie/input.py:11\n  /work/source/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import namedtuple, Iterable\n\ntests/utils.py:46\n  /work/source/tests/utils.py:46: PytestCollectionWarning: cannot collect test class 'TestEnvironment' because it has a __init__ constructor (from: tests/test_sessions.py)\n    class TestEnvironment(Environment):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_sessions.py::TestSession::test_session_ignored_header_prefixes\n1 failed, 6 passed, 1 skipped, 6 warnings in 1.32s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

@@ -262,3 +262,18 @@ MLflow测试为隔离HTTP协议fixture和离线桩，未在外部MLflow实机服
 [完整容器CI运行39387613776](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39387613776) 已对实现提交 `ce866c3b23e312bebc50d47a75d029ed0d3f2559` 全部验证通过：真实Compose构建/健康与权限检查、209项Python回归（204通过、5项在此阶段跳过）、另行执行的5项真实Docker隔离/取消/回收检查、六项目全部Chromium流程、新增D11/D13复查功能和容器重启持久化。桌面/窄屏截图归档于该运行的 `d01-browser-evidence` 工件。
 
 没有扩大跨仓库缺陷、真实供应商或跨领域语义质量评估的完成范围。
+
+## 2026-10-20 真实研究评测与六项目体验引导
+
+最终实现提交 `ce5f24dfc3040bbcde78695b3072e800d3774409`：
+
+- 全仓Python测试224项：219通过、5项真实Docker测试在普通阶段跳过。新增15项研究测试覆盖固定资料/哈希、候选检查、模型错误与telemetry隐私、检索索引和指标、盲评空项/身份/输出哈希、工作流内嵌Python语法。
+- 本地实际Firefox与服务运行六项目体验引导：明显入口、每一步真实路由/操作区高亮、无自动业务写入、手动确认/刷新恢复/重新体验、桌面与390px无整页横向溢出；沿引导完成D11真实两轮离线任务。桌面D11/D12及手机D13等截图已检查。
+- [最终容器CI 39409631847](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631847)成功：Compose构建、健康检查、权限/私有文件隔离、224项普通回归，以及另外执行的5项真实Docker隔离/取消/清理测试全部通过。六项目全部Chromium业务流程、D11/D13复查增强、新增六项目引导、全部工作区重启持久化通过。浏览器截图保存在`d01-browser-evidence`工件（14天保留）；结构化成功日志另存`evaluations/validation-2026-10-20.json`。
+- [历史缺陷CI 39409631610](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610)成功产出5仓库30例结果：black7/7、httpie5/5、tornado5/6、tqdm6/6、youtube-dl6/6，共29/30复现。tornado-3在本次环境中缺陷/修复均通过，保留未复现状态。每阶段有实际测试身份、镜像ID和返回码，不把上游补丁算作模型修复。
+- [真实Qwen CPU诊断CI 39409631644](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631644)五仓库全部执行并产出记录。11例输入超限、17例请求失败/超时、1例三轮候选均被拒绝、1例未复现不进入模型阶段。没有test-plausible补丁；3次已解析输出不等于所有实际发起请求，完整usage未知，语义修复率未定。
+- D13从原SciFact/QASPER包重建固定20篇/60例。实际本地Qwen3-0.6B Q8_0完成v3词法top4/结构约束的60次单次请求与120次分阶段请求：医学标签准确率0.3667/0.4000，NLP答案token F1为0.2202/0.2214；总token35,167/73,090，累计请求160.70/304.50秒。无结构约束与早期中断运行分开记录，不混入配对成绩。没有稳定分工质量优势的证据。
+
+原始逐例输出、实际usage/时间、运行身份、失败诊断和固定哈希已保存于`evaluations/d11/results/2026-10-20/`及`evaluations/d13/results/2026-10-20/`；方法与限制见[真实资料评测](RESEARCH_EVALUATION.md)。真实模型是可校验公开权重的本地CPU推理，不是付费云端验收；金额未知。Q8_0已执行，但没有FP16/Q4/Q8成对质量/内存/速度对照，也没有D12视觉模型或GPU成绩。
+
+D13的120项随机盲评包已用实际输出生成，两名评审表均保持空白；没有新人工专家评分。当前只评给定文献的核验/问答子任务，整篇综述、独立保留集、更强模型及完整D11修复效能仍待完成。Windows/Conda、ARM64本轮未新增实机验证；Docker/Conda/venv入口和原项目环境保留，未使用宿主全局pip。

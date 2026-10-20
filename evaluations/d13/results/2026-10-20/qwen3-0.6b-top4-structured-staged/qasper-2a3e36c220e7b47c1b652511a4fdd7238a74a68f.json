@@ -1,0 +1,71 @@
+{
+  "id": "qasper-2a3e36c220e7b47c1b652511a4fdd7238a74a68f",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.5,
+    "answer_token_f1": 0.0
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "3",
+        "label": "SUPPORT",
+        "evidence": [
+          1,
+          2,
+          3
+        ]
+      },
+      "seconds": 3.960759760000201,
+      "input_sha256": "c195dd2a92d82b669833168e39da4278fb5f8476f1deeb1e04eaae98fd8762fd",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 42,
+        "total_tokens": 930
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "3",
+        "label": "SUPPORT",
+        "evidence": [
+          1,
+          2,
+          3
+        ]
+      },
+      "seconds": 3.304605690000244,
+      "input_sha256": "e9248800f5d2cfdbb3db8ef39e1931d24a32210fa710c3fced99d97c58c85e69",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 934,
+        "completion_tokens": 36,
+        "total_tokens": 970
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "prediction": {
+    "answer": "3",
+    "label": "SUPPORT",
+    "evidence": [
+      1,
+      2,
+      3
+    ]
+  }
+}

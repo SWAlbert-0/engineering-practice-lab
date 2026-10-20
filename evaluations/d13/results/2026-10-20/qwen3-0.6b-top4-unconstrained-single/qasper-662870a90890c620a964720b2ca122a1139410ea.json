@@ -1,0 +1,46 @@
+{
+  "id": "qasper-662870a90890c620a964720b2ca122a1139410ea",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.5,
+    "answer_token_f1": 0.5
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "French",
+        "label": "SUPPORT",
+        "evidence": [
+          11
+        ]
+      },
+      "seconds": 2.2480955609999,
+      "input_sha256": "964498e1e49c553c9b77d747f5b0d83f87a1cbf5e830adeba4d23a23a57e9b92",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 582,
+        "completion_tokens": 35,
+        "total_tokens": 617
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    11,
+    17,
+    34,
+    35
+  ],
+  "retrieved_gold_evidence_f1": 0.2857142857142857,
+  "prediction": {
+    "answer": "French",
+    "label": "SUPPORT",
+    "evidence": [
+      11
+    ]
+  }
+}

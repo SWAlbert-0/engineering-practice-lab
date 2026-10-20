@@ -1,0 +1,45 @@
+{
+  "id": "qasper-6becff2967fe7c5256fe0b00231765be5b9db9f1",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "answer": "three regularization terms",
+        "label": "SUPPORT",
+        "evidence": [
+          {
+            "index": 5
+          },
+          {
+            "index": 47
+          },
+          {
+            "index": 54
+          }
+        ]
+      },
+      "seconds": 2.587991787000192,
+      "input_sha256": "2f1b189c1a41f42634c477c49c7937c3336907d5db692bbba521b4a189b37d6b",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 593,
+        "completion_tokens": 67,
+        "total_tokens": 660
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    5,
+    47,
+    54,
+    64
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "invalid evidence indices"
+}

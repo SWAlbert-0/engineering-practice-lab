@@ -1,0 +1,45 @@
+{
+  "id": "qasper-06eb9f2320451df83e27362c22eb02f4a426a018",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "answer": "Three levels of document preprocessing are looked at",
+        "label": "SUPPORT",
+        "evidence": [
+          {
+            "index": 2
+          },
+          {
+            "index": 5
+          },
+          {
+            "index": 11
+          }
+        ]
+      },
+      "seconds": 2.8126601430003575,
+      "input_sha256": "f2bbd9ad245d746c78c451a1c52304315adc74e15ee3831fb9c9b21f47c1fd22",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 588,
+        "completion_tokens": 59,
+        "total_tokens": 647
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    2,
+    5,
+    11,
+    21
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "invalid evidence indices"
+}

@@ -1,0 +1,157 @@
+{
+  "id": "tornado-6",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [
+      "maint/test/appengine/py27/tornado"
+    ],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "6f5be1efccb3cbb3051cd70ac48dd6002cae190bbb4a699b589f987d147c3e55"
+  },
+  "frozen_test_sha256": {
+    "tornado/test/asyncio_test.py": "6d19e195740160d414b90f9bff8438d34ba3deb8660a3c3ff29532a1ec8bbddd"
+  },
+  "production_files": [
+    "tornado/ioloop.py",
+    "tornado/platform/asyncio.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.2041194709999843,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.4175711119999903,
+        "tests": [
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_ioloop_close_leak",
+            "status": "failure"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_asyncio_close_leak",
+            "status": "failure"
+          }
+        ],
+        "log": "FF                                                                       [100%]\n=================================== FAILURES ===================================\n_______________________ LeakTest.test_ioloop_close_leak ________________________\n\nself = <tornado.test.asyncio_test.LeakTest testMethod=test_ioloop_close_leak>\n\n    def test_ioloop_close_leak(self):\n        orig_count = len(IOLoop._ioloop_for_asyncio)\n        for i in range(10):\n            # Create and close an AsyncIOLoop using Tornado interfaces.\n            loop = AsyncIOLoop()\n            loop.close()\n        new_count = len(IOLoop._ioloop_for_asyncio) - orig_count\n>       self.assertEqual(new_count, 0)\nE       AssertionError: 10 != 0\n\ntornado/test/asyncio_test.py:146: AssertionError\n_______________________ LeakTest.test_asyncio_close_leak _______________________\n\nself = <tornado.test.asyncio_test.LeakTest testMethod=test_asyncio_close_leak>\n\n    def test_asyncio_close_leak(self):\n        orig_count = len(IOLoop._ioloop_for_asyncio)\n        for i in range(10):\n            # Create and close an AsyncIOMainLoop using asyncio interfaces.\n            loop = asyncio.new_event_loop()\n            loop.call_soon(IOLoop.current)\n            loop.call_soon(loop.stop)\n            loop.run_forever()\n            loop.close()\n        new_count = len(IOLoop._ioloop_for_asyncio) - orig_count\n        # Because the cleanup is run on new loop creation, we have one\n        # dangling entry in the map (but only one).\n>       self.assertEqual(new_count, 1)\nE       AssertionError: 10 != 1\n\ntornado/test/asyncio_test.py:160: AssertionError\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tornado/test/asyncio_test.py::LeakTest::test_ioloop_close_leak - Asser...\nFAILED tornado/test/asyncio_test.py::LeakTest::test_asyncio_close_leak - Asse...\n2 failed, 2 warnings in 0.14s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 0.4177044099999989,
+        "tests": [
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_adapter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_future",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_yield_from",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_asyncio_close_leak",
+            "status": "failure"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_ioloop_close_leak",
+            "status": "failure"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AnyThreadEventLoopPolicyTest::test_asyncio_accessor",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AnyThreadEventLoopPolicyTest::test_tornado_accessor",
+            "status": "passed"
+          }
+        ],
+        "log": "....FF..                                                                 [100%]\n=================================== FAILURES ===================================\n_______________________ LeakTest.test_asyncio_close_leak _______________________\n\nself = <tornado.test.asyncio_test.LeakTest testMethod=test_asyncio_close_leak>\n\n    def test_asyncio_close_leak(self):\n        orig_count = len(IOLoop._ioloop_for_asyncio)\n        for i in range(10):\n            # Create and close an AsyncIOMainLoop using asyncio interfaces.\n            loop = asyncio.new_event_loop()\n            loop.call_soon(IOLoop.current)\n            loop.call_soon(loop.stop)\n            loop.run_forever()\n            loop.close()\n        new_count = len(IOLoop._ioloop_for_asyncio) - orig_count\n        # Because the cleanup is run on new loop creation, we have one\n        # dangling entry in the map (but only one).\n>       self.assertEqual(new_count, 1)\nE       AssertionError: 10 != 1\n\ntornado/test/asyncio_test.py:160: AssertionError\n_______________________ LeakTest.test_ioloop_close_leak ________________________\n\nself = <tornado.test.asyncio_test.LeakTest testMethod=test_ioloop_close_leak>\n\n    def test_ioloop_close_leak(self):\n        orig_count = len(IOLoop._ioloop_for_asyncio)\n        for i in range(10):\n            # Create and close an AsyncIOLoop using Tornado interfaces.\n            loop = AsyncIOLoop()\n            loop.close()\n        new_count = len(IOLoop._ioloop_for_asyncio) - orig_count\n>       self.assertEqual(new_count, 0)\nE       AssertionError: 10 != 0\n\ntornado/test/asyncio_test.py:146: AssertionError\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tornado/test/asyncio_test.py::LeakTest::test_asyncio_close_leak - Asse...\nFAILED tornado/test/asyncio_test.py::LeakTest::test_ioloop_close_leak - Asser...\n2 failed, 6 passed, 2 warnings in 0.15s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.1154711589999806,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.36635531499999274,
+        "tests": [
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_ioloop_close_leak",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_asyncio_close_leak",
+            "status": "passed"
+          }
+        ],
+        "log": "..                                                                       [100%]\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n2 passed, 2 warnings in 0.12s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 0.4666196290000073,
+        "tests": [
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_adapter",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_callback",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_future",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AsyncIOLoopTest::test_asyncio_yield_from",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_asyncio_close_leak",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.LeakTest::test_ioloop_close_leak",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AnyThreadEventLoopPolicyTest::test_asyncio_accessor",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.asyncio_test.AnyThreadEventLoopPolicyTest::test_tornado_accessor",
+            "status": "passed"
+          }
+        ],
+        "log": "........                                                                 [100%]\n=============================== warnings summary ===============================\ntornado/util.py:255\n  /work/source/tornado/util.py:255: DeprecationWarning: invalid escape sequence \\d\n    \"\"\"Unescape a string escaped by `re.escape`.\n\ntornado/httputil.py:105\n  /work/source/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class HTTPHeaders(collections.MutableMapping):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n8 passed, 2 warnings in 0.18s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

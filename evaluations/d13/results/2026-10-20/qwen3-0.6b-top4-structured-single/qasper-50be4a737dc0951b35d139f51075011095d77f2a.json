@@ -1,0 +1,46 @@
+{
+  "id": "qasper-50be4a737dc0951b35d139f51075011095d77f2a",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.0
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "They leverage prior knowledge through regularization terms on top of generalized expectation criteria.",
+        "label": "SUPPORT",
+        "evidence": [
+          63
+        ]
+      },
+      "seconds": 2.89177876299982,
+      "input_sha256": "e1121533c7ca9cd1775a33372395ea72e3bbbca5551a9c422090c6afd2b2abe6",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 680,
+        "completion_tokens": 47,
+        "total_tokens": 727
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    1,
+    59,
+    61,
+    63
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "They leverage prior knowledge through regularization terms on top of generalized expectation criteria.",
+    "label": "SUPPORT",
+    "evidence": [
+      63
+    ]
+  }
+}

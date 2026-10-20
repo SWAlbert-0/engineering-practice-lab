@@ -1,0 +1,65 @@
+{
+  "id": "qasper-551457ed34ca7fc0878c85bc664b135c21059b58",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.08888888888888889
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "The dataset they use is not explicitly mentioned in the provided text. However, based on the context, it is implied that they use a held-out test dataset for training.",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          11
+        ]
+      },
+      "seconds": 2.979960408000352,
+      "input_sha256": "d6ffd8879e93de9b1e194ed1cd9088582f957dc9dfb3d13968cc00306a6f6845",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 540,
+        "completion_tokens": 69,
+        "total_tokens": 609
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "The dataset they use is not explicitly mentioned in the provided text. However, based on the context, it is implied that they use a held-out test dataset for training.",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          11
+        ]
+      },
+      "seconds": 3.1934275789999447,
+      "input_sha256": "1e98fd2e57b5f499d4ecbed1273a4b6508b54aae33e36e89dd58df5d742474dd",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 615,
+        "completion_tokens": 65,
+        "total_tokens": 680
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    4,
+    11,
+    12,
+    22
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "The dataset they use is not explicitly mentioned in the provided text. However, based on the context, it is implied that they use a held-out test dataset for training.",
+    "label": "NOT_ENOUGH_INFO",
+    "evidence": [
+      11
+    ]
+  }
+}

@@ -1,0 +1,458 @@
+{
+  "id": "tornado-1",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "48bc41580ca8a7f013ab1942d9b5749522b66f03048628b4f57972018be5cd1b"
+  },
+  "frozen_test_sha256": {
+    "tornado/test/websocket_test.py": "9678331d294b7ef3137ddbca0a94c73c16366b04112cefdeacae42380c00fb53"
+  },
+  "production_files": [
+    "tornado/websocket.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.5785317429999992,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.4159328369999997,
+        "tests": [
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_nodelay",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________ WebSocketTest.test_nodelay __________________________\n\nself = <tornado.test.websocket_test.WebSocketTest testMethod=test_nodelay>\n\n    @gen_test\n    def test_nodelay(self):\n        ws = yield self.ws_connect(\"/nodelay\")\n        res = yield ws.read_message()\n>       self.assertEqual(res, \"hello\")\nE       AssertionError: None != 'hello'\n\ntornado/test/websocket_test.py:576: AssertionError\n------------------------------ Captured log call -------------------------------\nERROR    tornado.application:web.py:1784 Uncaught exception GET /nodelay (127.0.0.1)\nHTTPServerRequest(protocol='http', host='127.0.0.1:34331', method='GET', uri='/nodelay', version='HTTP/1.1', remote_ip='127.0.0.1')\nTraceback (most recent call last):\n  File \"/work/source/tornado/websocket.py\", line 952, in _accept_connection\n    open_result = handler.open(*handler.open_args, **handler.open_kwargs)\n  File \"/work/source/tornado/test/websocket_test.py\", line 203, in open\n    self.set_nodelay(True)\n  File \"/work/source/tornado/websocket.py\", line 561, in set_nodelay\n    assert self.stream is not None\nAssertionError\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tornado/test/websocket_test.py::WebSocketTest::test_nodelay - Assertio...\n1 failed in 0.20s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 0.8172095090000013,
+        "tests": [
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_async_prepare",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_bad_websocket_version",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_binary_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid_partial_url",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid_subdomains",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_valid_no_path",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_valid_with_path",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_client_close_reason",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_async_open",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_on_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_open",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_http_request",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_missing_websocket_key",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_nodelay",
+            "status": "failure"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_open_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_path_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_render_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_server_close_reason",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_subprotocols",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_subprotocols_not_offered",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_unicode_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_callbacks",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_close_buffered_data",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_gen",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_header_echo",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_http_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_http_success",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_network_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_write_after_close",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketNativeCoroutineTest::test_native_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.NoCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.NoCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerOnlyCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerOnlyCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientOnlyCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientOnlyCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.DefaultCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.DefaultCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.PythonMaskFunctionTest::test_mask",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.CythonMaskFunctionTest::test_mask",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerPeriodicPingTest::test_server_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientPeriodicPingTest::test_client_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ManualPingTest::test_manual_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.MaxMessageSizeTest::test_large_message",
+            "status": "passed"
+          }
+        ],
+        "log": "...............F..........................s....                          [100%]\n=================================== FAILURES ===================================\n__________________________ WebSocketTest.test_nodelay __________________________\n\nself = <tornado.test.websocket_test.WebSocketTest testMethod=test_nodelay>\n\n    @gen_test\n    def test_nodelay(self):\n        ws = yield self.ws_connect(\"/nodelay\")\n        res = yield ws.read_message()\n>       self.assertEqual(res, \"hello\")\nE       AssertionError: None != 'hello'\n\ntornado/test/websocket_test.py:576: AssertionError\n------------------------------ Captured log call -------------------------------\nERROR    tornado.application:web.py:1784 Uncaught exception GET /nodelay (127.0.0.1)\nHTTPServerRequest(protocol='http', host='127.0.0.1:42919', method='GET', uri='/nodelay', version='HTTP/1.1', remote_ip='127.0.0.1')\nTraceback (most recent call last):\n  File \"/work/source/tornado/websocket.py\", line 952, in _accept_connection\n    open_result = handler.open(*handler.open_args, **handler.open_kwargs)\n  File \"/work/source/tornado/test/websocket_test.py\", line 203, in open\n    self.set_nodelay(True)\n  File \"/work/source/tornado/websocket.py\", line 561, in set_nodelay\n    assert self.stream is not None\nAssertionError\n=============================== warnings summary ===============================\ntornado/test/websocket_test.py:40\n  /work/source/tornado/test/websocket_test.py:40: PytestCollectionWarning: cannot collect test class 'TestWebSocketHandler' because it has a __init__ constructor (from: tornado/test/websocket_test.py)\n    class TestWebSocketHandler(WebSocketHandler):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tornado/test/websocket_test.py::WebSocketTest::test_nodelay - Assertio...\n1 failed, 45 passed, 1 skipped, 1 warning in 0.59s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:f9e0beb174a086ac0be50f21743c612e4cdc98df475d977d43b73f1ad85b8f75",
+    "seconds": 1.3800860099999994,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.36557530500000013,
+        "tests": [
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_nodelay",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed in 0.17s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 0.7665816450000023,
+        "tests": [
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_async_prepare",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_bad_websocket_version",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_binary_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid_partial_url",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_invalid_subdomains",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_valid_no_path",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_check_origin_valid_with_path",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_client_close_reason",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_async_open",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_on_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_error_in_open",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_http_request",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_missing_websocket_key",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_nodelay",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_open_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_path_args",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_render_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_server_close_reason",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_subprotocols",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_subprotocols_not_offered",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_unicode_message",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_callbacks",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_close_buffered_data",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_gen",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_header_echo",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_headers",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_http_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_http_success",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_websocket_network_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketTest::test_write_after_close",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.WebSocketNativeCoroutineTest::test_native_coroutine",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.NoCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.NoCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerOnlyCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerOnlyCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientOnlyCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientOnlyCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.DefaultCompressionTest::test_message_sizes",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.DefaultCompressionTest::test_size_limit",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.PythonMaskFunctionTest::test_mask",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.CythonMaskFunctionTest::test_mask",
+            "status": "skipped"
+          },
+          {
+            "id": "tornado.test.websocket_test.ServerPeriodicPingTest::test_server_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ClientPeriodicPingTest::test_client_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.ManualPingTest::test_manual_ping",
+            "status": "passed"
+          },
+          {
+            "id": "tornado.test.websocket_test.MaxMessageSizeTest::test_large_message",
+            "status": "passed"
+          }
+        ],
+        "log": "..........................................s....                          [100%]\n=============================== warnings summary ===============================\ntornado/test/websocket_test.py:40\n  /work/source/tornado/test/websocket_test.py:40: PytestCollectionWarning: cannot collect test class 'TestWebSocketHandler' because it has a __init__ constructor (from: tornado/test/websocket_test.py)\n    class TestWebSocketHandler(WebSocketHandler):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n46 passed, 1 skipped, 1 warning in 0.56s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

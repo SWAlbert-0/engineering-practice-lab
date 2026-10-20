@@ -1,0 +1,699 @@
+{
+  "id": "tqdm-2",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "d0c9d83c0d2614b8158b3851c757659da0408e7abd98d2213ea1fff3554d4f32"
+  },
+  "frozen_test_sha256": {
+    "tqdm/tests/tests_tqdm.py": "d2b488b92e200f692017f01f7217dd0b373ce0256e4a870a836e18bd3d67531e"
+  },
+  "production_files": [
+    "tqdm/std.py",
+    "tqdm/utils.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 4.929556422999994,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.5669348340000084,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n______________________________ test_format_meter _______________________________\n\n    def test_format_meter():\n        \"\"\"Test statistics and progress bar formatting\"\"\"\n        try:\n            unich = unichr\n        except NameError:\n            unich = chr\n    \n        format_meter = tqdm.format_meter\n    \n>       assert format_meter(0, 1000, 13) == \\\n            \"  0%|          | 0/1000 [00:13<?, ?it/s]\"\nE       AssertionError: assert None == '  0%|          | 0/1000 [00:13<?, ?it/s]'\nE        +  where None = <function tqdm.format_meter at 0x7f68453484c0>(0, 1000, 13)\n\ntqdm/tests/tests_tqdm.py:259: AssertionError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_format_meter - AssertionError: assert N...\n1 failed, 1 warning in 0.34s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 4.12778933700001,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_formatspec",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_reset",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_reset",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "error"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_wrapattr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_float_progress",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_float_progress",
+            "status": "error"
+          }
+        ],
+        "log": "..FFF.FEFException ignored in: <function tqdm.__del__ at 0x7f724145cd30>\nTraceback (most recent call last):\n  File \"/work/source/tqdm/std.py\", line 1064, in __del__\n    self.close()\n  File \"/work/source/tqdm/std.py\", line 1270, in close\n    self.display(pos=0)\n  File \"/work/source/tqdm/std.py\", line 1437, in display\n    self.sp(self.__repr__() if msg is None else msg)\n  File \"/work/source/tqdm/std.py\", line 304, in print_status\n    len_s = len(s)\nTypeError: object of type 'NoneType' has no len()\nEFEFException ignored in: <function tqdm.__del__ at 0x7f724145cd30>\nTraceback (most recent call last):\n  File \"/work/source/tqdm/std.py\", line 1064, in __del__\n    self.close()\n  File \"/work/source/tqdm/std.py\", line 1270, in close\n    self.display(pos=0)\n  File \"/work/source/tqdm/std.py\", line 1437, in display\n    self.sp(self.__repr__() if msg is None else msg)\n  File \"/work/source/tqdm/std.py\", line 304, in print_status\n    len_s = len(s)\nTypeError: object of type 'NoneType' has no len()\nException ignored in: <function tqdm.__del__ at 0x7f724145cd30>\nTraceback (most recent call last):\n  File \"/work/source/tqdm/std.py\", line 1064, in __del__\n    self.close()\n  File \"/work/source/tqdm/std.py\", line 1270, in close\n    self.display(pos=0)\n  File \"/work/source/tqdm/std.py\", line 1437, in display\n    self.sp(self.__repr__() if msg is None else msg)\n  File \"/work/source/tqdm/std.py\", line 304, in print_status\n    len_s = len(s)\nTypeError: object of type 'NoneType' has no len()\nE.FEFException ignored in: <function tqdm.__del__ at 0x7f724145cd30>\nTraceback (most recent call last):\n  File \"/work/source/tqdm/std.py\", line 1064, in __del__\n    self.close()\n  File \"/work/source/tqdm/std.py\", line 1270, in close\n    self.display(pos=0)\n  File \"/work/source/tqdm/std.py\", line 1437, in display\n    self.sp(self.__repr__() if msg is None else msg)\n  File \"/work/source/tqdm/std.py\", line 304, in print_status\n    len_s = len(s)\nTypeError: object of type 'NoneType' has no len()\nEFEFEFEFEFEFEFEFE...FEFEFEFEFEFE.FEFEFEFEFEFEFEFEFE... [ 72%]\n..s.FE...FEFEFException ignored in: <function tqdm.__del__ at 0x7f724145cd30>\nTraceback (most recent call last):\n  File \"/work/source/tqdm/std.py\", line 1064, in __del__\n    self.close()\n  File \"/work/source/tqdm/std.py\", line 1270, in close\n    self.display(pos=0)\n  File \"/work/source/tqdm/std.py\", line 1437, in display\n    self.sp(self.__repr__() if msg is None else msg)\n  File \"/work/source/tqdm/std.py\", line 304, in print_status\n    len_s = len(s)\nTypeError: object of type 'NoneType' has no len()\nE.FEFE.FE                                                  [100%]\n==================================== ERRORS ====================================\n____________________ ERROR at teardown of test_all_defaults ____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_________ ERROR at teardown of test_native_string_io_for_default_file __________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________ ERROR at teardown of test_unicode_string_io_for_specified_file ________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____________________ ERROR at teardown of test_write_bytes _____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____________________ ERROR at teardown of test_file_output _____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____________________ ERROR at teardown of test_leave_option ____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_______________________ ERROR at teardown of test_trange _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____________________ ERROR at teardown of test_min_interval ____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____________________ ERROR at teardown of test_max_interval ____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_____________________ ERROR at teardown of test_min_iters ______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_________________ ERROR at teardown of test_dynamic_min_iters __________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n__________________ ERROR at teardown of test_big_min_interval __________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_____________ ERROR at teardown of test_smoothed_dynamic_min_iters _____________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n____ ERROR at teardown of test_smoothed_dynamic_min_iters_with_min_interval ____\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n______________________ ERROR at teardown of test_nototal _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________________________ ERROR at teardown of test_unit ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_______________________ ERROR at teardown of test_ascii ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_______________________ ERROR at teardown of test_update _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_______________________ ERROR at teardown of test_close ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_____________________ ERROR at teardown of test_smoothing ______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_____________________ ERROR at teardown of test_bar_format _____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n___________________ ERROR at teardown of test_custom_format ____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n______________________ ERROR at teardown of test_unpause _______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_______________________ ERROR at teardown of test_reset ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n______________________ ERROR at teardown of test_position ______________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n__________________ ERROR at teardown of test_set_description ___________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n___________________ ERROR at teardown of test_deprecated_gui ___________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________________________ ERROR at teardown of test_cmp _________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________________________ ERROR at teardown of test_repr ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_________________ ERROR at teardown of test_autodisable_enable _________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n__________________ ERROR at teardown of test_file_redirection __________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n___________________ ERROR at teardown of test_external_write ___________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n_____________________ ERROR at teardown of test_unit_scale _____________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________________________ ERROR at teardown of test_bool ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n________________________ ERROR at teardown of test_auto ________________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n___________________ ERROR at teardown of test_float_progress ___________________\n\n    def posttest():\n        if getattr(tqdm, \"_instances\", False):\n            n = len(tqdm._instances)\n            if n:\n                tqdm._instances.clear()\n>               raise EnvironmentError(\n                    \"{0} `tqdm` instances still in existence POST-test\".format(n))\nE               OSError: 1 `tqdm` instances still in existence POST-test\n\ntqdm/tests/tests_tqdm.py:141: OSError\n=================================== FAILURES ===================================\n______________________________ test_format_meter _______________________________\n\n    def test_format_meter():\n        \"\"\"Test statistics and progress bar formatting\"\"\"\n        try:\n            unich = unichr\n        except NameError:\n            unich = chr\n    \n        format_meter = tqdm.format_meter\n    \n>       assert format_meter(0, 1000, 13) == \\\n            \"  0%|          | 0/1000 [00:13<?, ?it/s]\"\nE       AssertionError: assert None == '  0%|          | 0/1000 [00:13<?, ?it/s]'\nE        +  where None = <function tqdm.format_meter at 0x7f724145c430>(0, 1000, 13)\n\ntqdm/tests/tests_tqdm.py:259: AssertionError\n____________________________ test_ansi_escape_codes ____________________________\n\n    def test_ansi_escape_codes():\n        \"\"\"Test stripping of ANSI escape codes\"\"\"\n        format_meter = tqdm.format_meter\n        ansi = {'BOLD': '\\033[1m',\n                'RED': '\\033[91m',\n                'END': '\\033[0m'}\n        desc = '{BOLD}{RED}Colored{END} description'.format(**ansi)\n        ncols = 123\n        ansi_len = sum([len(code) for code in ansi.values()])\n        meter = format_meter(0, 100, 0, ncols=ncols, prefix=desc)\n>       assert len(meter) == ncols + ansi_len\nE       AssertionError: assert 140 == (123 + 13)\nE        +  where 140 = len('\\x1b[1m\\x1b[91mColored\\x1b[0m description:   0%|                                                                         | 0/100 [00:00<?, ?it/s]\\x1b[0m')\n\ntqdm/tests/tests_tqdm.py:351: AssertionError\n________________________________ test_si_format ________________________________\n\n    def test_si_format():\n        \"\"\"Test SI unit prefixes\"\"\"\n        format_meter = tqdm.format_meter\n    \n>       assert '9.00 ' in format_meter(1, 9, 1, unit_scale=True, unit='B')\nE       TypeError: argument of type 'NoneType' is not iterable\n\ntqdm/tests/tests_tqdm.py:358: TypeError\n______________________________ test_all_defaults _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_all_defaults():\n        \"\"\"Test default kwargs\"\"\"\n        with closing(UnicodeIO()) as our_file:\n>           with tqdm(range(10), file=our_file) as progressbar:\n\ntqdm/tests/tests_tqdm.py:395: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n____________________ test_native_string_io_for_default_file ____________________\n\n    @with_setup(pretest, posttest)\n    def test_native_string_io_for_default_file():\n        \"\"\"Native strings written to unspecified files\"\"\"\n        stderr = sys.stderr\n        try:\n            sys.stderr = WriteTypeChecker(expected_type=type(''))\n>           for _ in tqdm(range(3)):\n\ntqdm/tests/tests_tqdm.py:423: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________ test_unicode_string_io_for_specified_file ___________________\n\n    @with_setup(pretest, posttest)\n    def test_unicode_string_io_for_specified_file():\n        \"\"\"Unicode strings written to specified files\"\"\"\n>       for _ in tqdm(range(3), file=WriteTypeChecker(expected_type=type(u''))):\n\ntqdm/tests/tests_tqdm.py:435: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_______________________________ test_write_bytes _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_write_bytes():\n        \"\"\"Test write_bytes argument with and without `file`\"\"\"\n        # specified file (and bytes)\n>       for _ in tqdm(range(3), file=WriteTypeChecker(expected_type=type(b'')),\n                      write_bytes=True):\n\ntqdm/tests/tests_tqdm.py:443: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_______________________________ test_file_output _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_file_output():\n        \"\"\"Test output to arbitrary file-like objects\"\"\"\n        with closing(StringIO()) as our_file:\n>           for i in tqdm(_range(3), file=our_file):\n\ntqdm/tests/tests_tqdm.py:478: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n______________________________ test_leave_option _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_leave_option():\n        \"\"\"Test `leave=True` always prints info about the last iteration\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(3), file=our_file, leave=True):\n\ntqdm/tests/tests_tqdm.py:488: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_________________________________ test_trange __________________________________\n\n    @with_setup(pretest, posttest)\n    def test_trange():\n        \"\"\"Test trange\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in trange(3, file=our_file, leave=True):\n\ntqdm/tests/tests_tqdm.py:504: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n______________________________ test_min_interval _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_min_interval():\n        \"\"\"Test mininterval\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(3), file=our_file, mininterval=1e-10):\n\ntqdm/tests/tests_tqdm.py:518: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n______________________________ test_max_interval _______________________________\n\n    @with_setup(pretest, posttest)\n    def test_max_interval():\n        \"\"\"Test maxinterval\"\"\"\n        total = 100\n        bigstep = 10\n        smallstep = 5\n    \n        # Test without maxinterval\n        timer = DiscreteTimer()\n        with closing(StringIO()) as our_file:\n            with closing(StringIO()) as our_file2:\n                # with maxinterval but higher than loop sleep time\n>               t = tqdm(total=total, file=our_file, miniters=None, mininterval=0,\n                         smoothing=1, maxinterval=1e-2)\n\ntqdm/tests/tests_tqdm.py:535: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n________________________________ test_min_iters ________________________________\n\n    @with_setup(pretest, posttest)\n    def test_min_iters():\n        \"\"\"Test miniters\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(3), file=our_file, leave=True, miniters=4):\n\ntqdm/tests/tests_tqdm.py:659: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n____________________________ test_dynamic_min_iters ____________________________\n\n    @with_setup(pretest, posttest)\n    def test_dynamic_min_iters():\n        \"\"\"Test purely dynamic miniters (and manual updates and __del__)\"\"\"\n        with closing(StringIO()) as our_file:\n            total = 10\n>           t = tqdm(total=total, file=our_file, miniters=None, mininterval=0,\n                     smoothing=1)\n\ntqdm/tests/tests_tqdm.py:675: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n____________________________ test_big_min_interval _____________________________\n\n    @with_setup(pretest, posttest)\n    def test_big_min_interval():\n        \"\"\"Test large mininterval\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(2), file=our_file, mininterval=1E10):\n\ntqdm/tests/tests_tqdm.py:743: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_______________________ test_smoothed_dynamic_min_iters ________________________\n\n    @with_setup(pretest, posttest)\n    def test_smoothed_dynamic_min_iters():\n        \"\"\"Test smoothed dynamic miniters\"\"\"\n        timer = DiscreteTimer()\n    \n        with closing(StringIO()) as our_file:\n>           with tqdm(total=100, file=our_file, miniters=None, mininterval=0,\n                      smoothing=0.5, maxinterval=0) as t:\n\ntqdm/tests/tests_tqdm.py:760: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n______________ test_smoothed_dynamic_min_iters_with_min_interval _______________\n\n    @with_setup(pretest, posttest)\n    def test_smoothed_dynamic_min_iters_with_min_interval():\n        \"\"\"Test smoothed dynamic miniters with mininterval\"\"\"\n        timer = DiscreteTimer()\n    \n        # In this test, `miniters` should gradually decline\n        total = 100\n    \n        with closing(StringIO()) as our_file:\n            # Test manual updating tqdm\n>           with tqdm(total=total, file=our_file, miniters=None, mininterval=1e-3,\n                      smoothing=1, maxinterval=0) as t:\n\ntqdm/tests/tests_tqdm.py:794: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_________________________________ test_nototal _________________________________\n\n    @with_setup(pretest, posttest)\n    def test_nototal():\n        \"\"\"Test unknown total length\"\"\"\n        with closing(StringIO()) as our_file:\n            for i in tqdm((i for i in range(10)), file=our_file, unit_scale=10):\n                pass\n            assert \"100it\" in our_file.getvalue()\n    \n        with closing(StringIO()) as our_file:\n>           for i in tqdm((i for i in range(10)), file=our_file,\n                          bar_format=\"{l_bar}{bar}{r_bar}\"):\n\ntqdm/tests/tests_tqdm.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_unit ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_unit():\n        \"\"\"Test SI unit prefix\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(3), file=our_file, miniters=1, unit=\"bytes\"):\n\ntqdm/tests/tests_tqdm.py:907: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_ascii __________________________________\n\n    @with_setup(pretest, posttest)\n    def test_ascii():\n        \"\"\"Test ascii/unicode bar\"\"\"\n        # Test ascii autodetection\n        with closing(StringIO()) as our_file:\n>           with tqdm(total=10, file=our_file, ascii=None) as t:\n\ntqdm/tests/tests_tqdm.py:917: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_________________________________ test_update __________________________________\n\n    @with_setup(pretest, posttest)\n    def test_update():\n        \"\"\"Test manual creation and updates\"\"\"\n        res = None\n        with closing(StringIO()) as our_file:\n>           with tqdm(total=2, file=our_file, miniters=1, mininterval=0) \\\n                    as progressbar:\n\ntqdm/tests/tests_tqdm.py:956: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_close __________________________________\n\n    @with_setup(pretest, posttest)\n    def test_close():\n        \"\"\"Test manual creation and closure and n_instances\"\"\"\n    \n        # With `leave` option\n        with closing(StringIO()) as our_file:\n>           progressbar = tqdm(total=3, file=our_file, miniters=10)\n\ntqdm/tests/tests_tqdm.py:976: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n________________________________ test_smoothing ________________________________\n\n    @with_setup(pretest, posttest)\n    def test_smoothing():\n        \"\"\"Test exponential weighted average smoothing\"\"\"\n        timer = DiscreteTimer()\n    \n        # -- Test disabling smoothing\n        with closing(StringIO()) as our_file:\n>           with tqdm(_range(3), file=our_file, smoothing=None, leave=True) as t:\n\ntqdm/tests/tests_tqdm.py:1027: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_______________________________ test_bar_format ________________________________\n\n    @with_setup(pretest, posttest)\n    def test_bar_format():\n        \"\"\"Test custom bar formatting\"\"\"\n        with closing(StringIO()) as our_file:\n            bar_format = r'{l_bar}{bar}|{n_fmt}/{total_fmt}-{n}/{total}{percentage}{rate}{rate_fmt}{elapsed}{remaining}'  # NOQA\n>           for _ in trange(2, file=our_file, leave=True, bar_format=bar_format):\n\ntqdm/tests/tests_tqdm.py:1143: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n______________________________ test_custom_format ______________________________\n\n    @with_setup(pretest, posttest)\n    def test_custom_format():\n        \"\"\"Test adding additional derived format arguments\"\"\"\n        class TqdmExtraFormat(tqdm):\n            \"\"\"Provides a `total_time` format parameter\"\"\"\n            @property\n            def format_dict(self):\n                d = super(TqdmExtraFormat, self).format_dict\n                total_time = d[\"elapsed\"] * (d[\"total\"] or 0) / max(d[\"n\"], 1)\n                d.update(total_time=self.format_interval(total_time) + \" in total\")\n                return d\n    \n        with closing(StringIO()) as our_file:\n>           for i in TqdmExtraFormat(\n                    range(10), file=our_file,\n                    bar_format=\"{total_time}: {percentage:.0f}%|{bar}{r_bar}\"):\n\ntqdm/tests/tests_tqdm.py:1168: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_________________________________ test_unpause _________________________________\n\n    @with_setup(pretest, posttest)\n    def test_unpause():\n        \"\"\"Test unpause\"\"\"\n        timer = DiscreteTimer()\n        with closing(StringIO()) as our_file:\n>           t = trange(10, file=our_file, leave=True, mininterval=0)\n\ntqdm/tests/tests_tqdm.py:1180: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_reset __________________________________\n\n    @with_setup(pretest, posttest)\n    def test_reset():\n        \"\"\"Test resetting a bar for re-use\"\"\"\n        with closing(StringIO()) as our_file:\n>           with tqdm(total=10, file=our_file,\n                      miniters=1, mininterval=0, maxinterval=0) as t:\n\ntqdm/tests/tests_tqdm.py:1202: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n________________________________ test_position _________________________________\n\n    @with_setup(pretest, posttest)\n    def test_position():\n        \"\"\"Test positioned progress bars\"\"\"\n        if nt_and_no_colorama:\n            raise SkipTest\n    \n        # Artificially test nested loop printing\n        # Without leave\n        our_file = StringIO()\n        kwargs = dict(file=our_file, miniters=1, mininterval=0, maxinterval=0)\n>       t = tqdm(total=2, desc='pos2 bar', leave=False, position=2, **kwargs)\n\ntqdm/tests/tests_tqdm.py:1223: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_____________________________ test_set_description _____________________________\n\n    @with_setup(pretest, posttest)\n    def test_set_description():\n        \"\"\"Test set description\"\"\"\n        with closing(StringIO()) as our_file:\n            with tqdm(desc='Hello', file=our_file) as t:\n                assert t.desc == 'Hello'\n                t.set_description_str('World')\n                assert t.desc == 'World'\n                t.set_description()\n                assert t.desc == ''\n                t.set_description('Bye')\n                assert t.desc == 'Bye: '\n            assert \"World\" in our_file.getvalue()\n    \n        # without refresh\n        with closing(StringIO()) as our_file:\n            with tqdm(desc='Hello', file=our_file) as t:\n                assert t.desc == 'Hello'\n                t.set_description_str('World', False)\n                assert t.desc == 'World'\n                t.set_description(None, False)\n                assert t.desc == ''\n            assert \"World\" not in our_file.getvalue()\n    \n        # unicode\n        with closing(StringIO()) as our_file:\n>           with tqdm(total=10, file=our_file) as t:\n\ntqdm/tests/tests_tqdm.py:1361: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_____________________________ test_deprecated_gui ______________________________\n\n    @with_setup(pretest, posttest)\n    def test_deprecated_gui():\n        \"\"\"Test internal GUI properties\"\"\"\n        # Check: StatusPrinter iff gui is disabled\n        with closing(StringIO()) as our_file:\n            t = tqdm(total=2, gui=True, file=our_file, miniters=1, mininterval=0)\n            assert not hasattr(t, \"sp\")\n            try:\n                t.update(1)\n            except TqdmDeprecationWarning as e:\n                if ('Please use `tqdm.gui.tqdm(...)` instead of'\n                    ' `tqdm(..., gui=True)`') \\\n                        not in our_file.getvalue():\n                    raise e\n            else:\n                raise DeprecationError('Should not allow manual gui=True without'\n                                       ' overriding __iter__() and update()')\n            finally:\n                t._instances.clear()\n                # t.close()\n                # len(tqdm._instances) += 1  # undo the close() decrement\n    \n            t = tqdm(_range(3), gui=True, file=our_file, miniters=1, mininterval=0)\n            try:\n                for _ in t:\n                    pass\n            except TqdmDeprecationWarning as e:\n                if ('Please use `tqdm.gui.tqdm(...)` instead of'\n                    ' `tqdm(..., gui=True)`') \\\n                        not in our_file.getvalue():\n                    raise e\n            else:\n                raise DeprecationError('Should not allow manual gui=True without'\n                                       ' overriding __iter__() and update()')\n            finally:\n                t._instances.clear()\n                # t.close()\n                # len(tqdm._instances) += 1  # undo the close() decrement\n    \n>           with tqdm(total=1, gui=False, file=our_file) as t:\n\ntqdm/tests/tests_tqdm.py:1404: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n___________________________________ test_cmp ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_cmp():\n        \"\"\"Test comparison functions\"\"\"\n        with closing(StringIO()) as our_file:\n>           t0 = tqdm(total=10, file=our_file)\n\ntqdm/tests/tests_tqdm.py:1412: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_repr ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_repr():\n        \"\"\"Test representation\"\"\"\n        with closing(StringIO()) as our_file:\n>           with tqdm(total=10, ascii=True, file=our_file) as t:\n\ntqdm/tests/tests_tqdm.py:1441: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n___________________________ test_autodisable_enable ____________________________\n\n    @with_setup(pretest, posttest)\n    def test_autodisable_enable():\n        \"\"\"Test autodisable will not disable on TTY\"\"\"\n        with closing(StringIO()) as our_file:\n            setattr(our_file, \"isatty\", lambda: True)\n>           with tqdm(total=10, disable=None, file=our_file) as t:\n\ntqdm/tests/tests_tqdm.py:1615: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n____________________________ test_file_redirection _____________________________\n\n    @with_setup(pretest, posttest)\n    def test_file_redirection():\n        \"\"\"Test redirection of output\"\"\"\n        with closing(StringIO()) as our_file:\n            # Redirect stdout to tqdm.write()\n            with std_out_err_redirect_tqdm(tqdm_file=our_file):\n>               for _ in trange(3):\n\ntqdm/tests/tests_tqdm.py:1737: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_____________________________ test_external_write ______________________________\n\n    @with_setup(pretest, posttest)\n    def test_external_write():\n        \"\"\"Test external write mode\"\"\"\n        with closing(StringIO()) as our_file:\n            # Redirect stdout to tqdm.write()\n>           for _ in trange(3, file=our_file):\n\ntqdm/tests/tests_tqdm.py:1750: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_______________________________ test_unit_scale ________________________________\n\n    @with_setup(pretest, posttest)\n    def test_unit_scale():\n        \"\"\"Test numeric `unit_scale`\"\"\"\n        with closing(StringIO()) as our_file:\n>           for _ in tqdm(_range(9), unit_scale=9, file=our_file,\n                          miniters=1, mininterval=0):\n\ntqdm/tests/tests_tqdm.py:1764: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_bool ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_bool():\n        \"\"\"Test boolean cast\"\"\"\n        def internal(our_file, disable):\n            kwargs = dict(file=our_file, disable=disable)\n            with trange(10, **kwargs) as t:\n                assert t\n            with trange(0, **kwargs) as t:\n                assert not t\n            with tqdm(total=10, **kwargs) as t:\n                assert bool(t)\n            with tqdm(total=0, **kwargs) as t:\n                assert not bool(t)\n            with tqdm([], **kwargs) as t:\n                assert not t\n            with tqdm([0], **kwargs) as t:\n                assert t\n            with tqdm((x for x in []), **kwargs) as t:\n                assert t\n            with tqdm((x for x in [1, 2, 3]), **kwargs) as t:\n                assert t\n            with tqdm(**kwargs) as t:\n                try:\n                    print(bool(t))\n                except TypeError:\n                    pass\n                else:\n                    raise TypeError(\"Expected bool(tqdm()) to fail\")\n    \n        # test with and without disable\n        with closing(StringIO()) as our_file:\n>           internal(our_file, False)\n\ntqdm/tests/tests_tqdm.py:1815: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/tests/tests_tqdm.py:1789: in internal\n    with trange(10, **kwargs) as t:\ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n__________________________________ test_auto ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_auto():\n        \"\"\"Test auto fallback\"\"\"\n        from tqdm import autonotebook, auto\n>       backendCheck(autonotebook)\n\ntqdm/tests/tests_tqdm.py:1835: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/tests/tests_tqdm.py:1825: in backendCheck\n    with tn(total=10, file=our_file) as t:\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n_____________________________ test_float_progress ______________________________\n\n    @with_setup(pretest, posttest)\n    def test_float_progress():\n        \"\"\"Test float totals\"\"\"\n        with closing(StringIO()) as our_file:\n>           with trange(10, total=9.6, file=our_file) as t:\n\ntqdm/tests/tests_tqdm.py:1867: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/std.py:1468: in trange\n    return tqdm(_range(*args), **kwargs)\ntqdm/std.py:1028: in __init__\n    self.refresh(lock_args=self.lock_args)\ntqdm/std.py:1313: in refresh\n    self.display()\ntqdm/std.py:1437: in display\n    self.sp(self.__repr__() if msg is None else msg)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ns = None\n\n    def print_status(s):\n>       len_s = len(s)\nE       TypeError: object of type 'NoneType' has no len()\n\ntqdm/std.py:304: TypeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_format_meter - AssertionError: assert N...\nFAILED tqdm/tests/tests_tqdm.py::test_ansi_escape_codes - AssertionError: ass...\nFAILED tqdm/tests/tests_tqdm.py::test_si_format - TypeError: argument of type...\nFAILED tqdm/tests/tests_tqdm.py::test_all_defaults - TypeError: object of typ...\nFAILED tqdm/tests/tests_tqdm.py::test_native_string_io_for_default_file - Typ...\nFAILED tqdm/tests/tests_tqdm.py::test_unicode_string_io_for_specified_file - ...\nFAILED tqdm/tests/tests_tqdm.py::test_write_bytes - TypeError: object of type...\nFAILED tqdm/tests/tests_tqdm.py::test_file_output - TypeError: object of type...\nFAILED tqdm/tests/tests_tqdm.py::test_leave_option - TypeError: object of typ...\nFAILED tqdm/tests/tests_tqdm.py::test_trange - TypeError: object of type 'Non...\nFAILED tqdm/tests/tests_tqdm.py::test_min_interval - TypeError: object of typ...\nFAILED tqdm/tests/tests_tqdm.py::test_max_interval - TypeError: object of typ...\nFAILED tqdm/tests/tests_tqdm.py::test_min_iters - TypeError: object of type '...\nFAILED tqdm/tests/tests_tqdm.py::test_dynamic_min_iters - TypeError: object o...\nFAILED tqdm/tests/tests_tqdm.py::test_big_min_interval - TypeError: object of...\nFAILED tqdm/tests/tests_tqdm.py::test_smoothed_dynamic_min_iters - TypeError:...\nFAILED tqdm/tests/tests_tqdm.py::test_smoothed_dynamic_min_iters_with_min_interval\nFAILED tqdm/tests/tests_tqdm.py::test_nototal - TypeError: object of type 'No...\nFAILED tqdm/tests/tests_tqdm.py::test_unit - TypeError: object of type 'NoneT...\nFAILED tqdm/tests/tests_tqdm.py::test_ascii - TypeError: object of type 'None...\nFAILED tqdm/tests/tests_tqdm.py::test_update - TypeError: object of type 'Non...\nFAILED tqdm/tests/tests_tqdm.py::test_close - TypeError: object of type 'None...\nFAILED tqdm/tests/tests_tqdm.py::test_smoothing - TypeError: object of type '...\nFAILED tqdm/tests/tests_tqdm.py::test_bar_format - TypeError: object of type ...\nFAILED tqdm/tests/tests_tqdm.py::test_custom_format - TypeError: object of ty...\nFAILED tqdm/tests/tests_tqdm.py::test_unpause - TypeError: object of type 'No...\nFAILED tqdm/tests/tests_tqdm.py::test_reset - TypeError: object of type 'None...\nFAILED tqdm/tests/tests_tqdm.py::test_position - TypeError: object of type 'N...\nFAILED tqdm/tests/tests_tqdm.py::test_set_description - TypeError: object of ...\nFAILED tqdm/tests/tests_tqdm.py::test_deprecated_gui - TypeError: object of t...\nFAILED tqdm/tests/tests_tqdm.py::test_cmp - TypeError: object of type 'NoneTy...\nFAILED tqdm/tests/tests_tqdm.py::test_repr - TypeError: object of type 'NoneT...\nFAILED tqdm/tests/tests_tqdm.py::test_autodisable_enable - TypeError: object ...\nFAILED tqdm/tests/tests_tqdm.py::test_file_redirection - TypeError: object of...\nFAILED tqdm/tests/tests_tqdm.py::test_external_write - TypeError: object of t...\nFAILED tqdm/tests/tests_tqdm.py::test_unit_scale - TypeError: object of type ...\nFAILED tqdm/tests/tests_tqdm.py::test_bool - TypeError: object of type 'NoneT...\nFAILED tqdm/tests/tests_tqdm.py::test_auto - TypeError: object of type 'NoneT...\nFAILED tqdm/tests/tests_tqdm.py::test_float_progress - TypeError: object of t...\nERROR tqdm/tests/tests_tqdm.py::test_all_defaults - OSError: 1 `tqdm` instanc...\nERROR tqdm/tests/tests_tqdm.py::test_native_string_io_for_default_file - OSEr...\nERROR tqdm/tests/tests_tqdm.py::test_unicode_string_io_for_specified_file - O...\nERROR tqdm/tests/tests_tqdm.py::test_write_bytes - OSError: 1 `tqdm` instance...\nERROR tqdm/tests/tests_tqdm.py::test_file_output - OSError: 1 `tqdm` instance...\nERROR tqdm/tests/tests_tqdm.py::test_leave_option - OSError: 1 `tqdm` instanc...\nERROR tqdm/tests/tests_tqdm.py::test_trange - OSError: 1 `tqdm` instances sti...\nERROR tqdm/tests/tests_tqdm.py::test_min_interval - OSError: 1 `tqdm` instanc...\nERROR tqdm/tests/tests_tqdm.py::test_max_interval - OSError: 1 `tqdm` instanc...\nERROR tqdm/tests/tests_tqdm.py::test_min_iters - OSError: 1 `tqdm` instances ...\nERROR tqdm/tests/tests_tqdm.py::test_dynamic_min_iters - OSError: 1 `tqdm` in...\nERROR tqdm/tests/tests_tqdm.py::test_big_min_interval - OSError: 1 `tqdm` ins...\nERROR tqdm/tests/tests_tqdm.py::test_smoothed_dynamic_min_iters - OSError: 1 ...\nERROR tqdm/tests/tests_tqdm.py::test_smoothed_dynamic_min_iters_with_min_interval\nERROR tqdm/tests/tests_tqdm.py::test_nototal - OSError: 1 `tqdm` instances st...\nERROR tqdm/tests/tests_tqdm.py::test_unit - OSError: 1 `tqdm` instances still...\nERROR tqdm/tests/tests_tqdm.py::test_ascii - OSError: 1 `tqdm` instances stil...\nERROR tqdm/tests/tests_tqdm.py::test_update - OSError: 1 `tqdm` instances sti...\nERROR tqdm/tests/tests_tqdm.py::test_close - OSError: 1 `tqdm` instances stil...\nERROR tqdm/tests/tests_tqdm.py::test_smoothing - OSError: 1 `tqdm` instances ...\nERROR tqdm/tests/tests_tqdm.py::test_bar_format - OSError: 1 `tqdm` instances...\nERROR tqdm/tests/tests_tqdm.py::test_custom_format - OSError: 1 `tqdm` instan...\nERROR tqdm/tests/tests_tqdm.py::test_unpause - OSError: 1 `tqdm` instances st...\nERROR tqdm/tests/tests_tqdm.py::test_reset - OSError: 1 `tqdm` instances stil...\nERROR tqdm/tests/tests_tqdm.py::test_position - OSError: 1 `tqdm` instances s...\nERROR tqdm/tests/tests_tqdm.py::test_set_description - OSError: 1 `tqdm` inst...\nERROR tqdm/tests/tests_tqdm.py::test_deprecated_gui - OSError: 1 `tqdm` insta...\nERROR tqdm/tests/tests_tqdm.py::test_cmp - OSError: 1 `tqdm` instances still ...\nERROR tqdm/tests/tests_tqdm.py::test_repr - OSError: 1 `tqdm` instances still...\nERROR tqdm/tests/tests_tqdm.py::test_autodisable_enable - OSError: 1 `tqdm` i...\nERROR tqdm/tests/tests_tqdm.py::test_file_redirection - OSError: 1 `tqdm` ins...\nERROR tqdm/tests/tests_tqdm.py::test_external_write - OSError: 1 `tqdm` insta...\nERROR tqdm/tests/tests_tqdm.py::test_unit_scale - OSError: 1 `tqdm` instances...\nERROR tqdm/tests/tests_tqdm.py::test_bool - OSError: 1 `tqdm` instances still...\nERROR tqdm/tests/tests_tqdm.py::test_auto - OSError: 1 `tqdm` instances still...\nERROR tqdm/tests/tests_tqdm.py::test_float_progress - OSError: 1 `tqdm` insta...\n39 failed, 19 passed, 1 skipped, 1 warning, 36 errors in 3.91s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 1.7213113720000024,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.5167469449999942,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 1 warning in 0.28s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 0.9784530980000028,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_formatspec",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_reset",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_wrapattr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_float_progress",
+            "status": "passed"
+          }
+        ],
+        "log": "...F.........................................s.............              [100%]\n=================================== FAILURES ===================================\n____________________________ test_ansi_escape_codes ____________________________\n\n    def test_ansi_escape_codes():\n        \"\"\"Test stripping of ANSI escape codes\"\"\"\n        format_meter = tqdm.format_meter\n        ansi = {'BOLD': '\\033[1m',\n                'RED': '\\033[91m',\n                'END': '\\033[0m'}\n        desc = '{BOLD}{RED}Colored{END} description'.format(**ansi)\n        ncols = 123\n        ansi_len = sum([len(code) for code in ansi.values()])\n        meter = format_meter(0, 100, 0, ncols=ncols, prefix=desc)\n>       assert len(meter) == ncols + ansi_len\nE       AssertionError: assert 140 == (123 + 13)\nE        +  where 140 = len('\\x1b[1m\\x1b[91mColored\\x1b[0m description:   0%|                                                                         | 0/100 [00:00<?, ?it/s]\\x1b[0m')\n\ntqdm/tests/tests_tqdm.py:351: AssertionError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_ansi_escape_codes - AssertionError: ass...\n1 failed, 57 passed, 1 skipped, 1 warning in 0.74s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

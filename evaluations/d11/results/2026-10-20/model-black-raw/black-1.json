@@ -1,0 +1,1127 @@
+{
+  "id": "black-1",
+  "status": "reproduced",
+  "model": {
+    "status": "input_out_of_scope",
+    "attempts": []
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [
+      "docs/authors.md",
+      "docs/blackd.md",
+      "docs/change_log.md",
+      "docs/contributing_to_black.md",
+      "docs/editor_integration.md",
+      "docs/ignoring_unmodified_files.md",
+      "docs/installation_and_usage.md",
+      "docs/license.md",
+      "docs/pyproject_toml.md",
+      "docs/show_your_style.md",
+      "docs/testimonials.md",
+      "docs/the_black_code_style.md",
+      "docs/version_control_integration.md"
+    ],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "884d51811b16290ad10697592eca059b6bb1e2d8f01508e0ea72d69f62e9b1ed"
+  },
+  "frozen_test_sha256": {
+    "tests/test_black.py": "3a690fb9c66f3d85b89594f4577e3632ec069389e3af669becb3b899ded59373"
+  },
+  "production_files": [
+    "black.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:ea6450e45a45735f1ac03d5ac8ae0a592ce1d7861cc96f45d0d0858cfd86a15a",
+    "seconds": 17.73444630299997,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.5162630330000297,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_works_in_mono_process_only_environment",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________ BlackTestCase.test_works_in_mono_process_only_environment ___________\n\nself = <tests.test_black.BlackTestCase testMethod=test_works_in_mono_process_only_environment>\nmock_executor = <MagicMock name='ProcessPoolExecutor' spec='ProcessPoolExecutor' id='139878662123376'>\n\n    @patch(\"black.ProcessPoolExecutor\", autospec=True)\n    def test_works_in_mono_process_only_environment(self, mock_executor) -> None:\n        mock_executor.side_effect = OSError()\n        mode = black.FileMode()\n        with cache_dir() as workspace:\n            one = (workspace / \"one.py\").resolve()\n            with one.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            two = (workspace / \"two.py\").resolve()\n            with two.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            black.write_cache({}, [one], mode)\n>           self.invokeBlack([str(workspace)])\n\ntests/test_black.py:1288: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_black.py:162: in invokeBlack\n    self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())\nE   AssertionError: 1 != 0 :\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tests/test_black.py::BlackTestCase::test_works_in_mono_process_only_environment\n1 failed in 0.33s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 16.89536389799997,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_async_as_identifier",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_beginning_backslash",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_black",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_main",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_bracket_match",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cantfit",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_collections",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comment_after_escaped_newline",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments5",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments6",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments7",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_composition",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_conv",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_detect_pos_only_arguments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_docstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_driver",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_include",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_lines",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_endmarker",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff_with_color",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_filter_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_features_used",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_gitignore_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_grammar",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_import_spacing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_config_return_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings__edge_case",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings__regression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_570",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_572",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_572_version_detection",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pgen",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff_with_color",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pygram",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python37",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python38",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pytree",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_parens",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_normal",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_quiet",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_verbose",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_self",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_setup",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_shhh_click",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_slices",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_quotes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_stub",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_token",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tokenize",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tricky_unicode_symbols",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_works_in_mono_process_only_environment",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_invalid_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_invalid_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_needs_formatting",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_no_change",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_syntax_error",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_response_black_version_header",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_supported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_unsupported_version",
+            "status": "passed"
+          }
+        ],
+        "log": "........................................................................ [ 55%]\n.........................................F...............                [100%]\n=================================== FAILURES ===================================\n__________ BlackTestCase.test_works_in_mono_process_only_environment ___________\n\nself = <tests.test_black.BlackTestCase testMethod=test_works_in_mono_process_only_environment>\nmock_executor = <MagicMock name='ProcessPoolExecutor' spec='ProcessPoolExecutor' id='139833637156656'>\n\n    @patch(\"black.ProcessPoolExecutor\", autospec=True)\n    def test_works_in_mono_process_only_environment(self, mock_executor) -> None:\n        mock_executor.side_effect = OSError()\n        mode = black.FileMode()\n        with cache_dir() as workspace:\n            one = (workspace / \"one.py\").resolve()\n            with one.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            two = (workspace / \"two.py\").resolve()\n            with two.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            black.write_cache({}, [one], mode)\n>           self.invokeBlack([str(workspace)])\n\ntests/test_black.py:1288: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_black.py:162: in invokeBlack\n    self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())\nE   AssertionError: 1 != 0 :\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_black.py::BlackTestCase::test_works_in_mono_process_only_environment\n1 failed, 128 passed in 16.66s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:ea6450e45a45735f1ac03d5ac8ae0a592ce1d7861cc96f45d0d0858cfd86a15a",
+    "seconds": 18.74830383799997,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.46618897400003334,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_works_in_mono_process_only_environment",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed in 0.28s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 17.915170003000014,
+        "tests": [
+          {
+            "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_async_as_identifier",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_beginning_backslash",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_black",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_blackd_main",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_bracket_match",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_cantfit",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_collections",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comment_after_escaped_newline",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments5",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments6",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_comments7",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_composition",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_conv",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_detect_pos_only_arguments",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_docstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_driver",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_include",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_empty_lines",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_endmarker",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_diff_with_color",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_expression_ff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_filter_cached",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff3",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fmtonoff4",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_fstring",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_function_trailing_comma",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_features_used",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_gitignore_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_grammar",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_import_spacing",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_config_return_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings__edge_case",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_long_strings__regression",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_no_files",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_parse",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_570",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_572",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pep_572_version_detection",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pgen",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_piping_diff_with_color",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pygram",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python37",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_python38",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_pytree",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_remove_parens",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_normal",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_quiet",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_report_verbose",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_self",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_setup",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_shhh_click",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_slices",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_string_quotes",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_stub",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_token",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tokenize",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tricky_unicode_symbols",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_works_in_mono_process_only_environment",
+            "status": "failure"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_diff",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_invalid_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_invalid_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_line_length",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_pyi",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_python_variant",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_needs_formatting",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_no_change",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_request_syntax_error",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_response_black_version_header",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_supported_version",
+            "status": "passed"
+          },
+          {
+            "id": "tests.test_black.BlackDTestCase::test_blackd_unsupported_version",
+            "status": "passed"
+          }
+        ],
+        "log": "........................................................................ [ 55%]\n.........................................F...............                [100%]\n=================================== FAILURES ===================================\n__________ BlackTestCase.test_works_in_mono_process_only_environment ___________\n\nself = <tests.test_black.BlackTestCase testMethod=test_works_in_mono_process_only_environment>\nmock_executor = <MagicMock name='ProcessPoolExecutor' spec='ProcessPoolExecutor' id='140274954006688'>\n\n    @patch(\"black.ProcessPoolExecutor\", autospec=True)\n    def test_works_in_mono_process_only_environment(self, mock_executor) -> None:\n        mock_executor.side_effect = OSError()\n        mode = black.FileMode()\n        with cache_dir() as workspace:\n            one = (workspace / \"one.py\").resolve()\n            with one.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            two = (workspace / \"two.py\").resolve()\n            with two.open(\"w\") as fobj:\n                fobj.write(\"print('hello')\")\n            black.write_cache({}, [one], mode)\n>           self.invokeBlack([str(workspace)])\n\ntests/test_black.py:1288: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_black.py:162: in invokeBlack\n    self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())\nE   AssertionError: 1 != 0 :\n=============================== warnings summary ===============================\ntests/test_black.py::BlackDTestCase::test_blackd_diff\n  /usr/local/lib/python3.8/site-packages/aiohttp/test_utils.py:536: RuntimeWarning: coroutine 'schedule_formatting' was never awaited\n    gc.collect()\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_black.py::BlackTestCase::test_works_in_mono_process_only_environment\n1 failed, 128 passed, 1 warning in 17.68s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

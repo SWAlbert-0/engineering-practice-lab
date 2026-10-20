@@ -1,0 +1,68 @@
+{
+  "id": "qasper-b8d7d055ddb94f5826a9aad7479b4a92a9c8a2f0",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.14285714285714285
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "The model used for end-to-end speech recognition is described as a Recurrent Neural Network (RNN) in the context of the EGL method.",
+        "label": "SUPPORT",
+        "evidence": [
+          3,
+          14
+        ]
+      },
+      "seconds": 3.714678248999917,
+      "input_sha256": "07dec8528fb35a2ed55c01f322a6938067725ff995083ed0e936cb2733a4787a",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 685,
+        "completion_tokens": 66,
+        "total_tokens": 751
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "The model used for end-to-end speech recognition is described as a Recurrent Neural Network (RNN).",
+        "label": "SUPPORT",
+        "evidence": [
+          3,
+          14
+        ]
+      },
+      "seconds": 3.5962216780003473,
+      "input_sha256": "f04b026f5640e8908ee9facfdcc9c02f7f5de4ecc5b6624e7af2a591226ecc76",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 756,
+        "completion_tokens": 54,
+        "total_tokens": 810
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    3,
+    14,
+    22
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "The model used for end-to-end speech recognition is described as a Recurrent Neural Network (RNN).",
+    "label": "SUPPORT",
+    "evidence": [
+      3,
+      14
+    ]
+  }
+}

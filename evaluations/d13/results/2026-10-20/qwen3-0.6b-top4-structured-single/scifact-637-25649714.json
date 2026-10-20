@@ -1,0 +1,50 @@
+{
+  "id": "scifact-637-25649714",
+  "domain": "biomedicine",
+  "dataset": "scifact",
+  "task": "claim_verification",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "label_correct": 0
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "SUPPORT",
+        "label": "SUPPORT",
+        "evidence": [
+          0,
+          4,
+          7
+        ]
+      },
+      "seconds": 1.7154628160001266,
+      "input_sha256": "8b0105ff0477ee791a8560d5dc71c931c7fd6a54479b03b3041240cab8e59b60",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 385,
+        "completion_tokens": 43,
+        "total_tokens": 428
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    4,
+    7,
+    9
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "SUPPORT",
+    "label": "SUPPORT",
+    "evidence": [
+      0,
+      4,
+      7
+    ]
+  }
+}

@@ -1,0 +1,2878 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409",
+  "run_id": 39409631610,
+  "job_id": 118583907511,
+  "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907511",
+  "evidence": "Structured records from final GitHub Actions job logs. Full original artifacts retained by workflow policy.",
+  "records": [
+    {
+      "marker": "LAB_BENCHMARK_SUMMARY",
+      "data": {
+        "project": "youtube-dl",
+        "selected": 6,
+        "reproduced": 6,
+        "statuses": {
+          "reproduced": 6
+        },
+        "model_repair_rate": null
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-1",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "236da3fb3b547a7d4b071d4a38f924c11a4dd907101b83c58936e4302d25a548"
+        },
+        "frozen_test_sha256": {
+          "test/test_utils.py": "9f89df328fda10e6249c7fd89d85f62eec7888508c6c1e5c5fc7aefe44949054"
+        },
+        "production_files": [
+          "youtube_dl/utils.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-1",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.068223144000001,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.2700647789999948,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_base_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_expand_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_malformed",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_mimetype2ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_month_by_name",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_multipart_encode",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_age_limit",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_resolution",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_pkcs1pad",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urljoin",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-1",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 1.0184108190000032,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 1.1186589060000003,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_base_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_expand_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_malformed",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_mimetype2ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_month_by_name",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_multipart_encode",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_age_limit",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_resolution",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_pkcs1pad",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urljoin",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-2",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "c7cf7f5ccaf9886c75396789c3b5de982312074e40b2f07d2ec83073401da662"
+        },
+        "frozen_test_sha256": {
+          "test/test_InfoExtractor.py": "a9078e7547b5c5c596dc0473eba42906341c27ec83bd82bae45658d6fbdbaf08"
+        },
+        "production_files": [
+          "youtube_dl/extractor/common.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-2",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.0685120419999947,
+            "tests": [
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.1195251729999995,
+            "tests": [
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_download_json",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_extract_jwplayer_data_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_meta",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_regex",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_ie_key",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_opengraph",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_f4m_formats",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_m3u8_formats",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-2",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 1.0191498450000012,
+            "tests": [
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 1.0685721180000058,
+            "tests": [
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_download_json",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_extract_jwplayer_data_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_meta",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_html_search_regex",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_ie_key",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_opengraph",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_f4m_formats",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_m3u8_formats",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_InfoExtractor.TestInfoExtractor::test_parse_mpd_formats",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-3",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "1e93370fce6f45e7a2da47a121e575715374e4d75fb34ad164c45d033e67ee08"
+        },
+        "frozen_test_sha256": {
+          "test/test_utils.py": "71b29a0c87d1863e015f135f42bc4b5af1f9ecdd05e3f1299533fbca307593e5"
+        },
+        "production_files": [
+          "ChangeLog",
+          "youtube_dl/utils.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-3",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.0683996759999985,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.2191284040000028,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_base_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_expand_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_mimetype2ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_month_by_name",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_multipart_encode",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_age_limit",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_pkcs1pad",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urljoin",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-3",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 1.018276291999996,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 1.119203081000002,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_base_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_expand_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_attribute",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_elements_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_mimetype2ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_month_by_name",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_multipart_encode",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_age_limit",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_pkcs1pad",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urljoin",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-4",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "511565b04a77a663619d6a8025fb94ba9ddc63ffd6760d9869feb0e8c681eb5f"
+        },
+        "frozen_test_sha256": {
+          "test/test_jsinterp.py": "a97675db14151af73ff69f4fb477aebdc95e29ed93619dc24feaac41e6a05f90"
+        },
+        "production_files": [
+          "youtube_dl/jsinterp.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-4",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.0690349390000051,
+            "tests": [
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_call",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.069141228999996,
+            "tests": [
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_array_access",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_assignments",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_basic",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_calc",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_call",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_comments",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_empty_return",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_morespace",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_operators",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_parens",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_precedence",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_strange_chars",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-4",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.9683123940000087,
+            "tests": [
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_call",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.968170826000005,
+            "tests": [
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_array_access",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_assignments",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_basic",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_calc",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_call",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_comments",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_empty_return",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_morespace",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_operators",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_parens",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_precedence",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_jsinterp.TestJSInterpreter::test_strange_chars",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-5",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "82da4c8de65777c24862f6fd058adb379cba0b750b97d6cba8f11b3446249ec8"
+        },
+        "frozen_test_sha256": {
+          "test/test_utils.py": "452f68e8601f530377e6c126251720a97ac674bcac2e9ab5cb5115ebdc3c6902"
+        },
+        "production_files": [
+          "youtube_dl/utils.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-5",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.0688636999999943,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.1188174720000035,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-5",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.9681388650000002,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 1.0189352450000086,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_date_from_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dict_get",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_base_n",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_encode_compat_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_extract_attributes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_get_element_by_class",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ohdave_rsa_encrypt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_codecs",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_count",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_end",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_start",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_timestamps",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_update_url_query",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urshift",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "youtube-dl-6",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "7d47ffa4aa2df638f5d38adf058b12269e66d9c2b5233c5868a317e07470a543"
+        },
+        "frozen_test_sha256": {
+          "test/test_utils.py": "e2d16fa05d486b4c0cd67bc0830be153f3ba9010dada36551097305c6d3ec217"
+        },
+        "production_files": [
+          "youtube_dl/utils.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-6",
+        "variant": "buggy",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.8678746820000072,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.9686728339999888,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "failure"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_struct_unpack",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "youtube-dl-6",
+        "variant": "upstream_repair",
+        "image": "sha256:480573c1711524ea884f910440d9b51bdb2aecd51a60e3d7dea544601e8b42cb",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.817960522000007,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.8682685980000002,
+            "tests": [
+              {
+                "id": "test.test_utils.TestUtil::test_age_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_args_to_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_clean_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_bool_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_cli_valueless_option",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_daterange",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_detect_exe_version",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_determine_ext",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_dfxp2srt",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_rfc3986",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_escape_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_find_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_fix_xml_ampersands",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_intlist_to_bytes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_is_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_edgecases",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_js_to_json_realworld",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_limit_length",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_lowercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_match_str",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_ordered_set",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_paged_list",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_dfxp_time_expr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_duration",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_filesize",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_parse_iso8601",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_prepend_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_read_batch_urls",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_remove_quotes",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_render_table",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_replace_extension",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_filename_restricted",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_ids",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_sanitize_path",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_shell_quote",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_smuggle_url",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_str_to_int",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_strip_jsonp",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_struct_unpack",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_timeconvert",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unescape_html",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_unified_dates",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_uppercase_escape",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_url_basename",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_urlencode_postdata",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_version_tuple",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_attr",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_element",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_text",
+                "status": "passed"
+              },
+              {
+                "id": "test.test_utils.TestUtil::test_xpath_with_ns",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    }
+  ]
+}

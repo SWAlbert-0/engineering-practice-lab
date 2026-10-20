@@ -1,0 +1,71 @@
+{
+  "id": "qasper-7fa3c2c0cf7f559d43e84076a9113a390c5ba03a",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.0,
+    "answer_token_f1": 0.0
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "Not enough information",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          5,
+          9,
+          11
+        ]
+      },
+      "seconds": 2.2633894420000615,
+      "input_sha256": "4a9ab340707823910c7b0744a410feec510f24b65627fc4fb468788295439672",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 494,
+        "completion_tokens": 47,
+        "total_tokens": 541
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "Not enough information",
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          5,
+          9,
+          11
+        ]
+      },
+      "seconds": 2.1378392080000594,
+      "input_sha256": "efb6834853512b42f5b840bd20b20fffe67e3c456e4c4184ca05c3f8efff3176",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 546,
+        "completion_tokens": 41,
+        "total_tokens": 587
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    5,
+    9,
+    11,
+    25
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "prediction": {
+    "answer": "Not enough information",
+    "label": "NOT_ENOUGH_INFO",
+    "evidence": [
+      5,
+      9,
+      11
+    ]
+  }
+}

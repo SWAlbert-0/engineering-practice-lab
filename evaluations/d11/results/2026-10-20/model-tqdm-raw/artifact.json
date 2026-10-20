@@ -1,0 +1,7 @@
+{
+  "artifact_id": 12258817823,
+  "archive_sha256": "109a83ac0da3b7fbaeb4e4137c024815b1cb5784cfbde804005ec8afa553e9e0",
+  "run_id": 39409631644,
+  "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409",
+  "source": "Actual downloaded GitHub Actions artifact; result/provenance JSON only; no source archives or runtime binaries."
+}

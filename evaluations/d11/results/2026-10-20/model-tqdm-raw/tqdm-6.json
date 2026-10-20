@@ -1,0 +1,114 @@
+{
+  "id": "tqdm-6",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "08259fd43daa6ccefd6f35686e762ba258a31157317414cc50df34ba7d2b7fa4"
+  },
+  "frozen_test_sha256": {
+    "tqdm/tests/tests_synchronisation.py": "b0b425c609b77bd6f0765795eca5688a406c67f8ed14e17cd5a297e693998f7c"
+  },
+  "production_files": [
+    "tqdm/_tqdm.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 7.537666784999999,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.5178597329999661,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_imap",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________________ test_imap ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_imap():\n        \"\"\"Test multiprocessing.Pool\"\"\"\n        try:\n            from multiprocessing import Pool\n        except ImportError:\n            raise SkipTest\n    \n        pool = Pool()\n>       res = list(tqdm(pool.imap(incr, range(100)), disable=True))\n\ntqdm/tests/tests_synchronisation.py:180: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <[AttributeError(\"'tqdm' object has no attribute 'total'\") raised in repr()] tqdm object at 0x7f13afddb130>\n\n    def __len__(self):\n        return self.total if self.iterable is None else \\\n            (self.iterable.shape[0] if hasattr(self.iterable, \"shape\")\n             else len(self.iterable) if hasattr(self.iterable, \"__len__\")\n>            else self.total)\nE       AttributeError: 'tqdm' object has no attribute 'total'\n\ntqdm/_tqdm.py:856: AttributeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_synchronisation.py::test_imap - AttributeError: 'tqdm...\n1 failed, 1 warning in 0.27s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 6.731507303000001,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitor_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitoring_and_cleanup",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitoring_multi",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_imap",
+            "status": "failure"
+          }
+        ],
+        "log": "...F                                                                     [100%]\n=================================== FAILURES ===================================\n__________________________________ test_imap ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_imap():\n        \"\"\"Test multiprocessing.Pool\"\"\"\n        try:\n            from multiprocessing import Pool\n        except ImportError:\n            raise SkipTest\n    \n        pool = Pool()\n>       res = list(tqdm(pool.imap(incr, range(100)), disable=True))\n\ntqdm/tests/tests_synchronisation.py:180: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <[AttributeError(\"'tqdm' object has no attribute 'total'\") raised in repr()] tqdm object at 0x7f42c056b9a0>\n\n    def __len__(self):\n        return self.total if self.iterable is None else \\\n            (self.iterable.shape[0] if hasattr(self.iterable, \"shape\")\n             else len(self.iterable) if hasattr(self.iterable, \"__len__\")\n>            else self.total)\nE       AttributeError: 'tqdm' object has no attribute 'total'\n\ntqdm/_tqdm.py:856: AttributeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_synchronisation.py::test_imap - AttributeError: 'tqdm...\n1 failed, 3 passed, 1 warning in 6.41s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 7.580269576999967,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.6674625229999833,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_imap",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 1 warning in 0.34s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 6.631918885999994,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitor_thread",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitoring_and_cleanup",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_monitoring_multi",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_synchronisation::test_imap",
+            "status": "passed"
+          }
+        ],
+        "log": "....                                                                     [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n4 passed, 1 warning in 6.31s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

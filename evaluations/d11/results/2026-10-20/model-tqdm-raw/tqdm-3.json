@@ -1,0 +1,530 @@
+{
+  "id": "tqdm-3",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "default",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": null,
+    "base_snapshot_sha256": "6b2e61f980bc8af5cd8fcfc83cc40bf96edad9d2d70ce7a4bcb4390040186d1b"
+  },
+  "frozen_test_sha256": {
+    "tqdm/tests/tests_tqdm.py": "2d602e53492f5b75c78cefd9bec0d2713a67dcf5e23c119bc82738d9b086440e"
+  },
+  "production_files": [
+    "tqdm/_tqdm.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 2.6673526219999815,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.8685837010000057,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________________ test_bool ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_bool():\n        \"\"\"Test boolean cast\"\"\"\n    \n        def internal(our_file, disable):\n            with trange(10, file=our_file, disable=disable) as t:\n                assert t\n            with trange(0, file=our_file, disable=disable) as t:\n                assert not t\n    \n            def get_bool_for_tqdm(*args, **kwargs):\n                kwargs['file'] = our_file\n                kwargs['disable'] = disable\n                with tqdm(*args, **kwargs) as t:\n                    return bool(t)\n    \n            assert get_bool_for_tqdm(total=10)\n            assert not get_bool_for_tqdm(total=0)\n            assert not get_bool_for_tqdm([])\n            assert get_bool_for_tqdm([0])\n            assert get_bool_for_tqdm((x for x in []))\n            assert get_bool_for_tqdm((x for x in [1,2,3]))\n            try:\n                get_bool_for_tqdm()\n            except TypeError:\n                pass\n            else:\n                raise TypeError(\n                    \"Expected tqdm() with neither total nor iterable to fail\")\n    \n        # test with and without disable\n        with closing(StringIO()) as our_file:\n>           internal(our_file, False)\n\ntqdm/tests/tests_tqdm.py:1742: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/tests/tests_tqdm.py:1730: in internal\n    assert get_bool_for_tqdm((x for x in []))\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nargs = (<generator object test_bool.<locals>.internal.<locals>.<genexpr> at 0x7f3c47036430>,)\nkwargs = {'disable': False, 'file': <_io.StringIO object at 0x7f3c471f6430>}\nt = 0it [00:00, ?it/s]\n\n    def get_bool_for_tqdm(*args, **kwargs):\n        kwargs['file'] = our_file\n        kwargs['disable'] = disable\n        with tqdm(*args, **kwargs) as t:\n>           return bool(t)\nE           TypeError: 'NoneType' object cannot be interpreted as an integer\n\ntqdm/tests/tests_tqdm.py:1724: TypeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_bool - TypeError: 'NoneType' object can...\n1 failed, 1 warning in 0.54s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 1.4774138139999877,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_reset",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "failure"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "passed"
+          }
+        ],
+        "log": "............................................s.........F.                 [100%]\n=================================== FAILURES ===================================\n__________________________________ test_bool ___________________________________\n\n    @with_setup(pretest, posttest)\n    def test_bool():\n        \"\"\"Test boolean cast\"\"\"\n    \n        def internal(our_file, disable):\n            with trange(10, file=our_file, disable=disable) as t:\n                assert t\n            with trange(0, file=our_file, disable=disable) as t:\n                assert not t\n    \n            def get_bool_for_tqdm(*args, **kwargs):\n                kwargs['file'] = our_file\n                kwargs['disable'] = disable\n                with tqdm(*args, **kwargs) as t:\n                    return bool(t)\n    \n            assert get_bool_for_tqdm(total=10)\n            assert not get_bool_for_tqdm(total=0)\n            assert not get_bool_for_tqdm([])\n            assert get_bool_for_tqdm([0])\n            assert get_bool_for_tqdm((x for x in []))\n            assert get_bool_for_tqdm((x for x in [1,2,3]))\n            try:\n                get_bool_for_tqdm()\n            except TypeError:\n                pass\n            else:\n                raise TypeError(\n                    \"Expected tqdm() with neither total nor iterable to fail\")\n    \n        # test with and without disable\n        with closing(StringIO()) as our_file:\n>           internal(our_file, False)\n\ntqdm/tests/tests_tqdm.py:1742: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntqdm/tests/tests_tqdm.py:1730: in internal\n    assert get_bool_for_tqdm((x for x in []))\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nargs = (<generator object test_bool.<locals>.internal.<locals>.<genexpr> at 0x7f900f47acf0>,)\nkwargs = {'disable': False, 'file': <_io.StringIO object at 0x7f900f55c280>}\nt = 0it [00:00, ?it/s]\n\n    def get_bool_for_tqdm(*args, **kwargs):\n        kwargs['file'] = our_file\n        kwargs['disable'] = disable\n        with tqdm(*args, **kwargs) as t:\n>           return bool(t)\nE           TypeError: 'NoneType' object cannot be interpreted as an integer\n\ntqdm/tests/tests_tqdm.py:1724: TypeError\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tqdm/tests/tests_tqdm.py::test_bool - TypeError: 'NoneType' object can...\n1 failed, 54 passed, 1 skipped, 1 warning in 1.17s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:d7a4377a1b59cc5b60a3136b4950c8188503af93397dd7a8f9da40d9bdede802",
+    "seconds": 2.289286218000001,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.6182525939999834,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 1 warning in 0.29s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 1.3713300969999977,
+        "tests": [
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_num",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_format_meter",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ansi_escape_codes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_si_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_all_defaults",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_native_string_io_for_default_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unicode_string_io_for_specified_file",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write_bytes",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_iterate_over_csv_rows",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_output",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_leave_option",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_trange",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_max_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_big_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothed_dynamic_min_iters_with_min_interval",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_rlock_creation",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_infinite_total",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_nototal",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_ascii",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_update",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_close",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_smoothing",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_nested",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bar_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_custom_format",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unpause",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_reset",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_position",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_set_description",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecated_gui",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_cmp",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_repr",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_clear_disabled",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_disabled_refresh",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_len",
+            "status": "skipped"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_disable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_autodisable_enable",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_deprecation_exception",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_postfix_direct",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_file_redirection",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_external_write",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_unit_scale",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_threading",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_bool",
+            "status": "passed"
+          },
+          {
+            "id": "tqdm.tests.tests_tqdm::test_auto",
+            "status": "passed"
+          }
+        ],
+        "log": "............................................s...........                 [100%]\n=============================== warnings summary ===============================\n../../usr/local/lib/python3.8/site-packages/nose/importer.py:12\n  /usr/local/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses\n    from imp import find_module, load_module, acquire_lock, release_lock\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n55 passed, 1 skipped, 1 warning in 1.03s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

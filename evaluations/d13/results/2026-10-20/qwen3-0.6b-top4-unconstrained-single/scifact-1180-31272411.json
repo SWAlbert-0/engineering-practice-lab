@@ -1,0 +1,44 @@
+{
+  "id": "scifact-1180-31272411",
+  "domain": "biomedicine",
+  "dataset": "scifact",
+  "task": "claim_verification",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "SUPPORT",
+        "answer": "The PRR MDA5 is a sensor of RNA virus infection.",
+        "evidence": [
+          {
+            "index": 0,
+            "text": "The RIG-I-like receptors (RLRs) RIG-I, MDA5, and LGP2 play a major role in pathogen sensing of RNA virus infection to initiate and modulate antiviral immunity."
+          },
+          {
+            "index": 1,
+            "text": "The RLRs detect viral RNA ligands or processed self RNA in the cytoplasm to trigger innate immunity and inflammation and to impart gene expression that serves to control infection."
+          }
+        ]
+      },
+      "seconds": 4.09951062600021,
+      "input_sha256": "1ae3b9311dd796a69740bbe402f7fedba8630dc577144515994edaf91ed7a57f",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 399,
+        "completion_tokens": 144,
+        "total_tokens": 543
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "invalid evidence indices"
+}

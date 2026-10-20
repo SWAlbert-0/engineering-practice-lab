@@ -1,0 +1,35 @@
+{
+  "id": "qasper-b8d7d055ddb94f5826a9aad7479b4a92a9c8a2f0",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [],
+        "answer": "Not enough information to determine the model used for end-to-end speech recognition."
+      },
+      "seconds": 2.9524662360004186,
+      "input_sha256": "07dec8528fb35a2ed55c01f322a6938067725ff995083ed0e936cb2733a4787a",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 685,
+        "completion_tokens": 43,
+        "total_tokens": 728
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    3,
+    14,
+    22
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "error": "answerable QA requires evidence"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "qasper-f875337f2ecd686cd7789e111174d0f14972638d",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "SUPPORT",
+        "answer": "Support Vector Machine models",
+        "evidence": [
+          {
+            "index": 3
+          },
+          {
+            "index": 10
+          }
+        ]
+      },
+      "seconds": 3.535684444999788,
+      "input_sha256": "b8e1238aeb90f1285bd69e8d0b8695aaa880800ee87e85d7c51fef6d8fdeff13",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 903,
+        "completion_tokens": 48,
+        "total_tokens": 951
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    3,
+    10,
+    13,
+    32
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "invalid evidence indices"
+}

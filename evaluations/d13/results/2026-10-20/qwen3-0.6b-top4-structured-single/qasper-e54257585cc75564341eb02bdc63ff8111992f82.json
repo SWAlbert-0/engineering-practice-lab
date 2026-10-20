@@ -1,0 +1,52 @@
+{
+  "id": "qasper-e54257585cc75564341eb02bdc63ff8111992f82",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.4,
+    "answer_token_f1": 0.0
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "keyphrase extraction models",
+        "label": "SUPPORT",
+        "evidence": [
+          5,
+          7,
+          9,
+          21
+        ]
+      },
+      "seconds": 2.827049535000242,
+      "input_sha256": "af7d7cf806cd19dc96e6d3fd71461b7051489c0e20f2667e381f1f8aa9119532",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 574,
+        "completion_tokens": 50,
+        "total_tokens": 624
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    5,
+    7,
+    9,
+    21
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "prediction": {
+    "answer": "keyphrase extraction models",
+    "label": "SUPPORT",
+    "evidence": [
+      5,
+      7,
+      9,
+      21
+    ]
+  }
+}

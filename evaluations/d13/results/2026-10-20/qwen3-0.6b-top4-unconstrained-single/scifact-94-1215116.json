@@ -1,0 +1,42 @@
+{
+  "id": "scifact-94-1215116",
+  "domain": "biomedicine",
+  "dataset": "scifact",
+  "task": "claim_verification",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "SUPPORT",
+        "answer": "Albendazole is used to treat lymphatic filariasis.",
+        "evidence": [
+          {
+            "index": 1
+          },
+          {
+            "index": 4
+          }
+        ]
+      },
+      "seconds": 2.899913374999869,
+      "input_sha256": "9b71cb39998fbe4db28f92fe1b7416b171b00b6a87f6baf78d6f40c35e47d565",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 437,
+        "completion_tokens": 56,
+        "total_tokens": 493
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "error": "invalid evidence indices"
+}

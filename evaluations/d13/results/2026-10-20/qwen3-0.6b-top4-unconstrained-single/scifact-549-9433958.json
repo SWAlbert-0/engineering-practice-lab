@@ -1,0 +1,39 @@
+{
+  "id": "scifact-549-9433958",
+  "domain": "biomedicine",
+  "dataset": "scifact",
+  "task": "claim_verification",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "SUPPORT",
+        "answer": "IRG1 has antiviral effects against neurotropic viruses.",
+        "evidence": [
+          {
+            "index": 3
+          }
+        ]
+      },
+      "seconds": 1.8028762949998054,
+      "input_sha256": "d30658b0125041c637aed913aa72bb32cb0695d616679c646b00b91b308a3c90",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 438,
+        "completion_tokens": 49,
+        "total_tokens": 487
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "invalid evidence indices"
+}

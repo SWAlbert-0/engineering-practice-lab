@@ -1,0 +1,90 @@
+{
+  "id": "httpie-4",
+  "status": "reproduced",
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "dependency_profile": "httpie-legacy",
+  "source_preparation": {
+    "omitted_non_runtime_links": [],
+    "safe_internal_links": "materialized as regular files; no host symlinks created",
+    "httpbin_fixture": "httpbin.org mapped to loopback HTTPbin 0.7.0 port 80; no external network",
+    "base_snapshot_sha256": "602d381dbceec1ce0a68b1ffd6b95471dfce2486d15944bdad2d253cb52fc8ce"
+  },
+  "frozen_test_sha256": {
+    "tests/test_regressions.py": "647fe2a52ab18e18fce5415092ca710bce9b4d9b85ca56572c9cafac88a9e8a1"
+  },
+  "production_files": [
+    "httpie/models.py"
+  ],
+  "buggy": {
+    "environment_image_id": "sha256:7f562ad17d68760a13cfde15dc8a94985b5a4997b004797f363e5d5ecd54157d",
+    "seconds": 1.6208987900000125,
+    "phases": {
+      "trigger": {
+        "returncode": 1,
+        "seconds": 0.5668529329999785,
+        "tests": [
+          {
+            "id": "tests.test_regressions::test_Host_header_overwrite",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________ test_Host_header_overwrite __________________________\n\n    def test_Host_header_overwrite():\n        \"\"\"\n        https://github.com/jakubroztocil/httpie/issues/235\n    \n        \"\"\"\n        host = 'httpbin.org'\n        url = 'http://{httpbin_ip}/get'.format(\n            httpbin_ip=socket.gethostbyname(host))\n        r = http('--print=hH', url, 'host:{}'.format(host))\n        assert HTTP_OK in r\n>       assert r.lower().count('host:') == 1\nE       assert 2 == 1\nE        +  where 2 = <built-in method count of str object at 0x7f1ec14cfdb0>('host:')\nE        +    where <built-in method count of str object at 0x7f1ec14cfdb0> = \"get /get http/1.1\\r\\naccept: */*\\r\\naccept-encoding: gzip, deflate, compress\\r\\nhost: 127.0.0.1\\r\\nuser-agent: b'http...content-type: application/json\\r\\ndate: tue, 20 oct 2026 10:44:14 gmt\\r\\nserver: wsgiserver/0.2 cpython/3.8.20\\r\\n\\r\\n\".count\nE        +      where \"get /get http/1.1\\r\\naccept: */*\\r\\naccept-encoding: gzip, deflate, compress\\r\\nhost: 127.0.0.1\\r\\nuser-agent: b'http...content-type: application/json\\r\\ndate: tue, 20 oct 2026 10:44:14 gmt\\r\\nserver: wsgiserver/0.2 cpython/3.8.20\\r\\n\\r\\n\" = <built-in method lower of StrCLIResponse object at 0x7f1ec1510f20>()\nE        +        where <built-in method lower of StrCLIResponse object at 0x7f1ec1510f20> = \"GET /get HTTP/1.1\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate, compress\\r\\nHost: 127.0.0.1\\r\\nUser-Agent: b'HTTP...Content-Type: application/json\\r\\nDate: Tue, 20 Oct 2026 10:44:14 GMT\\r\\nServer: WSGIServer/0.2 CPython/3.8.20\\r\\n\\r\\n\".lower\n\ntests/test_regressions.py:17: AssertionError\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:440\n  /work/source/httpie/input.py:440: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `s`. There are only two token types - strings\n\ntests/test_regressions.py::test_Host_header_overwrite\n  /usr/local/lib/python3.8/site-packages/requests/models.py:153: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if isinstance(hook, collections.Callable):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n=========================== short test summary info ============================\nFAILED tests/test_regressions.py::test_Host_header_overwrite - assert 2 == 1\n1 failed, 5 warnings in 0.19s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 1,
+        "seconds": 0.5668441109999947,
+        "tests": [
+          {
+            "id": "tests.test_regressions::test_Host_header_overwrite",
+            "status": "failure"
+          }
+        ],
+        "log": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________________ test_Host_header_overwrite __________________________\n\n    def test_Host_header_overwrite():\n        \"\"\"\n        https://github.com/jakubroztocil/httpie/issues/235\n    \n        \"\"\"\n        host = 'httpbin.org'\n        url = 'http://{httpbin_ip}/get'.format(\n            httpbin_ip=socket.gethostbyname(host))\n        r = http('--print=hH', url, 'host:{}'.format(host))\n        assert HTTP_OK in r\n>       assert r.lower().count('host:') == 1\nE       assert 2 == 1\nE        +  where 2 = <built-in method count of str object at 0x7fe4e9154540>('host:')\nE        +    where <built-in method count of str object at 0x7fe4e9154540> = \"get /get http/1.1\\r\\naccept: */*\\r\\naccept-encoding: gzip, deflate, compress\\r\\nhost: 127.0.0.1\\r\\nuser-agent: b'http...content-type: application/json\\r\\ndate: tue, 20 oct 2026 10:44:15 gmt\\r\\nserver: wsgiserver/0.2 cpython/3.8.20\\r\\n\\r\\n\".count\nE        +      where \"get /get http/1.1\\r\\naccept: */*\\r\\naccept-encoding: gzip, deflate, compress\\r\\nhost: 127.0.0.1\\r\\nuser-agent: b'http...content-type: application/json\\r\\ndate: tue, 20 oct 2026 10:44:15 gmt\\r\\nserver: wsgiserver/0.2 cpython/3.8.20\\r\\n\\r\\n\" = <built-in method lower of StrCLIResponse object at 0x7fe4e94494a0>()\nE        +        where <built-in method lower of StrCLIResponse object at 0x7fe4e94494a0> = \"GET /get HTTP/1.1\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate, compress\\r\\nHost: 127.0.0.1\\r\\nUser-Agent: b'HTTP...Content-Type: application/json\\r\\nDate: Tue, 20 Oct 2026 10:44:15 GMT\\r\\nServer: WSGIServer/0.2 CPython/3.8.20\\r\\n\\r\\n\".lower\n\ntests/test_regressions.py:17: AssertionError\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:440\n  /work/source/httpie/input.py:440: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `s`. There are only two token types - strings\n\ntests/test_regressions.py::test_Host_header_overwrite\n  /usr/local/lib/python3.8/site-packages/requests/models.py:153: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if isinstance(hook, collections.Callable):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n=========================== short test summary info ============================\nFAILED tests/test_regressions.py::test_Host_header_overwrite - assert 2 == 1\n1 failed, 5 warnings in 0.19s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  },
+  "upstream_repair": {
+    "environment_image_id": "sha256:7f562ad17d68760a13cfde15dc8a94985b5a4997b004797f363e5d5ecd54157d",
+    "seconds": 1.6156097330000136,
+    "phases": {
+      "trigger": {
+        "returncode": 0,
+        "seconds": 0.5666529050000122,
+        "tests": [
+          {
+            "id": "tests.test_regressions::test_Host_header_overwrite",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:440\n  /work/source/httpie/input.py:440: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `s`. There are only two token types - strings\n\ntests/test_regressions.py::test_Host_header_overwrite\n  /usr/local/lib/python3.8/site-packages/requests/models.py:153: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if isinstance(hook, collections.Callable):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n-------------------- generated xml file: /work/trigger.xml ---------------------\n1 passed, 5 warnings in 0.15s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      },
+      "regression": {
+        "returncode": 0,
+        "seconds": 0.5668746760000261,
+        "tests": [
+          {
+            "id": "tests.test_regressions::test_Host_header_overwrite",
+            "status": "passed"
+          }
+        ],
+        "log": ".                                                                        [100%]\n=============================== warnings summary ===============================\nhttpie/output/formatters/xml.py:8\n  /work/source/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \\?\n    DECLARATION_RE = re.compile('<\\?xml[^\\n]+?\\?>', flags=re.I)\n\nhttpie/downloads.py:56\n  /work/source/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \\d\n    '^bytes (?P<first_byte_pos>\\d+)-(?P<last_byte_pos>\\d+)'\n\nhttpie/downloads.py:57\n  /work/source/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \\*\n    '/(\\*|(?P<instance_length>\\d+))$'\n\nhttpie/input.py:440\n  /work/source/httpie/input.py:440: DeprecationWarning: invalid escape sequence \\=\n    \"\"\"Tokenize `s`. There are only two token types - strings\n\ntests/test_regressions.py::test_Host_header_overwrite\n  /usr/local/lib/python3.8/site-packages/requests/models.py:153: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if isinstance(hook, collections.Callable):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n------------------- generated xml file: /work/regression.xml -------------------\n1 passed, 5 warnings in 0.15s\n",
+        "log_truncated": false,
+        "test_files_unchanged": true,
+        "fixture_files_changed": []
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409",
+  "run_id": 39409631644,
+  "job_id": 118583907360,
+  "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631644/job/118583907360",
+  "evidence": "Structured records from final GitHub Actions job logs. Full original artifacts retained by workflow policy.",
+  "records": [
+    {
+      "marker": "LAB_REAL_MODEL_SUMMARY",
+      "data": {
+        "schema": 1,
+        "project": "tqdm",
+        "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+        "model": {
+          "available": true,
+          "missing": [],
+          "model": "qwen3-0.6b-q8-eval",
+          "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+        },
+        "model_requested": true,
+        "source": {
+          "name": "BugsInPy",
+          "repository": "https://github.com/soarsmu/BugsInPy",
+          "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+        },
+        "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+        "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+        "started_utc": "2026-10-20T10:40:59Z",
+        "selected": 6,
+        "reproduced": 6,
+        "statuses": {
+          "reproduced": 6
+        },
+        "model_repair_rate": null,
+        "model_comparison": {
+          "eligible_reproduced": 6,
+          "single_round_test_plausible": 0,
+          "bounded_loop_test_plausible": 0,
+          "bounded_loop_rate_all_selected": 0,
+          "bounded_loop_rate_reproduced": 0,
+          "rejected_candidate_count": 3,
+          "actual_recorded_calls": 3,
+          "usage": null,
+          "cost": null,
+          "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+        }
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-1",
+        "status": "reproduced",
+        "model_status": "budget_exhausted",
+        "calls": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "status": "rejected",
+            "seconds": 32.246729052,
+            "input_sha256": "14d50862f4a4293282321f0620713abefd63e66d3db14ab36c839920d6526d71",
+            "usage": {
+              "prompt_tokens": 2904,
+              "completion_tokens": 23,
+              "total_tokens": 2927
+            },
+            "phases": {}
+          },
+          {
+            "number": 2,
+            "status": "rejected",
+            "seconds": 1.1275831720000014,
+            "input_sha256": "b9410263edc3dadab50ad4eaea7ef829f016ba7e7bb4bdc7a48f83df23264874",
+            "usage": {
+              "prompt_tokens": 780,
+              "completion_tokens": 23,
+              "total_tokens": 803
+            },
+            "phases": {}
+          },
+          {
+            "number": 3,
+            "status": "rejected",
+            "seconds": 0.8912602820000046,
+            "input_sha256": "b9410263edc3dadab50ad4eaea7ef829f016ba7e7bb4bdc7a48f83df23264874",
+            "usage": {
+              "prompt_tokens": 780,
+              "completion_tokens": 23,
+              "total_tokens": 803
+            },
+            "phases": {}
+          }
+        ]
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-2",
+        "status": "reproduced",
+        "model_status": "model_error",
+        "calls": 0,
+        "attempts": []
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-3",
+        "status": "reproduced",
+        "model_status": "model_error",
+        "calls": 0,
+        "attempts": []
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-4",
+        "status": "reproduced",
+        "model_status": "model_error",
+        "calls": 0,
+        "attempts": []
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-5",
+        "status": "reproduced",
+        "model_status": "model_error",
+        "calls": 0,
+        "attempts": []
+      }
+    },
+    {
+      "marker": "LAB_REAL_MODEL_CASE",
+      "data": {
+        "id": "tqdm-6",
+        "status": "reproduced",
+        "model_status": "model_error",
+        "calls": 0,
+        "attempts": []
+      }
+    }
+  ]
+}

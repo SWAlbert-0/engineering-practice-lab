@@ -1,0 +1,71 @@
+{
+  "id": "qasper-0f7867f888109b9e000ef68965df4dde2511a55f",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "completed",
+  "metrics": {
+    "evidence_f1": 0.5,
+    "answer_token_f1": 0.32653061224489793
+  },
+  "calls": [
+    {
+      "output": {
+        "answer": "Their simple voting scheme combines CNNs and RNNs by applying several models and selecting the class with the most votes.",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          24,
+          31
+        ]
+      },
+      "seconds": 2.9071648569997706,
+      "input_sha256": "5d6d8a4bc91ea71aa8126fe5a25ff10260a1cb6ed1e9b5c9cfcda439d39284e2",
+      "max_tokens": 1000,
+      "usage": {
+        "prompt_tokens": 517,
+        "completion_tokens": 66,
+        "total_tokens": 583
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    },
+    {
+      "output": {
+        "answer": "Their simple voting scheme combines CNNs and RNNs by applying several models and selecting the class with the most votes.",
+        "label": "SUPPORT",
+        "evidence": [
+          4,
+          24,
+          31
+        ]
+      },
+      "seconds": 3.0729487680000602,
+      "input_sha256": "0cbb3b76aeff06d1d1c40c1d2af72b597282f7d3c86d7d26448418ffcdb5e3b5",
+      "max_tokens": 500,
+      "usage": {
+        "prompt_tokens": 587,
+        "completion_tokens": 60,
+        "total_tokens": 647
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    1,
+    4,
+    24,
+    31
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "prediction": {
+    "answer": "Their simple voting scheme combines CNNs and RNNs by applying several models and selecting the class with the most votes.",
+    "label": "SUPPORT",
+    "evidence": [
+      4,
+      24,
+      31
+    ]
+  }
+}

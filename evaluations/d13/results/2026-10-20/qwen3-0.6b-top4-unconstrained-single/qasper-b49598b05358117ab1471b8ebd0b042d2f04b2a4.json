@@ -1,0 +1,42 @@
+{
+  "id": "qasper-b49598b05358117ab1471b8ebd0b042d2f04b2a4",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "answer": "Jointly(CBOW), Jointly(LSTM), and Jointly(A-LSTM)",
+        "label": "SUPPORT",
+        "evidence": [
+          {
+            "index": 13
+          },
+          {
+            "index": 52
+          }
+        ]
+      },
+      "seconds": 2.821745451999959,
+      "input_sha256": "8b8b8b0988f7eb879f9b2651de7341f53fce9b2243cce5ef2607ac1cffea41a4",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 615,
+        "completion_tokens": 62,
+        "total_tokens": 677
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    13,
+    21,
+    52,
+    65
+  ],
+  "retrieved_gold_evidence_f1": 0.0,
+  "error": "invalid evidence indices"
+}

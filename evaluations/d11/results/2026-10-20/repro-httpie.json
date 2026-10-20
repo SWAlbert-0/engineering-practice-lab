@@ -1,0 +1,979 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409",
+  "run_id": 39409631610,
+  "job_id": 118583907912,
+  "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907912",
+  "evidence": "Structured records from final GitHub Actions job logs. Full original artifacts retained by workflow policy.",
+  "records": [
+    {
+      "marker": "LAB_BENCHMARK_SUMMARY",
+      "data": {
+        "project": "httpie",
+        "selected": 5,
+        "reproduced": 5,
+        "statuses": {
+          "reproduced": 5
+        },
+        "model_repair_rate": null
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "httpie-1",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "httpie-legacy-fixtures",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "fbba7b6916d80a8a60f849b36353ef0f9f2f5a6f6b41870c86be440aee5c44ce"
+        },
+        "frozen_test_sha256": {
+          "tests/test_downloads.py": "589ab04cb4584890527e6d7604ac6af2457182d53eac6df022132759dce92dad"
+        },
+        "production_files": [
+          "CHANGELOG.rst",
+          "httpie/downloads.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-1",
+        "variant": "buggy",
+        "image": "sha256:96bfe82a12485edc3511d3f3beb80db6995ecbd05136a7991c945e45ebb585d0",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.7716554349999996,
+            "tests": [
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 9.09874747900001,
+            "tests": [
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Range_parsing",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=hello-WORLD_123.txt-hello-WORLD_123.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\".hello-WORLD_123.txt\"-hello-WORLD_123.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"white space.txt\"-white space.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"\\\\\"quotes\\\\\".txt\"-\"quotes\".txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=/etc/hosts-hosts]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=-None]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_filename_from_url",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_actual_download[http]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_interrupted[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_actual_download[https]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[https]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[https]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_interrupted[https]",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-1",
+        "variant": "upstream_repair",
+        "image": "sha256:96bfe82a12485edc3511d3f3beb80db6995ecbd05136a7991c945e45ebb585d0",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.617528606999997,
+            "tests": [
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 7.993764104999997,
+            "tests": [
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Range_parsing",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=hello-WORLD_123.txt-hello-WORLD_123.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\".hello-WORLD_123.txt\"-hello-WORLD_123.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"white space.txt\"-white space.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=\"\\\\\"quotes\\\\\".txt\"-\"quotes\".txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=/etc/hosts-hosts]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_Content_Disposition_parsing[attachment; filename=-None]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_filename_from_url",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-0-foo.bar]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-1-foo.bar-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.bar-10-foo.bar-10]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloadUtils::test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_actual_download[http]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_interrupted[http]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_actual_download[https]",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_with_Content_Length[https]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_no_Content_Length[https]",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_downloads.TestDownloads::test_download_interrupted[https]",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "httpie-2",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "b046c43083f6c199def2a0ac47ae74e52422cab85c6c06efcbba415646db3ffd"
+        },
+        "frozen_test_sha256": {
+          "tests/test_redirects.py": "62f02a42fdbc6b52184d1feb7eed6fe99b23a0bb604ca4974eb06d19109b8bf4"
+        },
+        "production_files": [
+          "README.rst",
+          "httpie/client.py",
+          "httpie/core.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-2",
+        "variant": "buggy",
+        "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.119167191999992,
+            "tests": [
+              {
+                "id": "tests.test_redirects.TestRedirects::test_max_redirects",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.119220409999997,
+            "tests": [
+              {
+                "id": "tests.test_redirects.TestRedirects::test_follow_no_show_redirects",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_redirects.TestRedirects::test_follow_show_redirects",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_redirects.TestRedirects::test_max_redirects",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-2",
+        "variant": "upstream_repair",
+        "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 1.1190073630000086,
+            "tests": [
+              {
+                "id": "tests.test_redirects.TestRedirects::test_max_redirects",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 1.1189591420000085,
+            "tests": [
+              {
+                "id": "tests.test_redirects.TestRedirects::test_follow_no_show_redirects",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_redirects.TestRedirects::test_follow_show_redirects",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_redirects.TestRedirects::test_max_redirects",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "httpie-3",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "default",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "8d2943a911649e509b02011fc5050fb9a073af32fbb364d4c8e5b735e7e5ba3e"
+        },
+        "frozen_test_sha256": {
+          "tests/test_sessions.py": "42345b4bb38bfff6f0a8e3e9e4071822cfe80d9dd8e9bd9f1763b17e54874bbb"
+        },
+        "production_files": [
+          "httpie/sessions.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-3",
+        "variant": "buggy",
+        "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 1.1697739859999956,
+            "tests": [
+              {
+                "id": "tests.test_sessions.TestSession::test_download_in_session",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.3197449569999975,
+            "tests": [
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_by_path",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_unicode",
+                "status": "skipped"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_download_in_session",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-3",
+        "variant": "upstream_repair",
+        "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 1.671235510999992,
+            "tests": [
+              {
+                "id": "tests.test_sessions.TestSession::test_download_in_session",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.8722857080000068,
+            "tests": [
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+                "status": "failure"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_by_path",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_unicode",
+                "status": "skipped"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+                "status": "passed"
+              },
+              {
+                "id": "tests.test_sessions.TestSession::test_download_in_session",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "httpie-4",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "httpie-legacy",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": "httpbin.org mapped to loopback HTTPbin 0.7.0 port 80; no external network",
+          "base_snapshot_sha256": "602d381dbceec1ce0a68b1ffd6b95471dfce2486d15944bdad2d253cb52fc8ce"
+        },
+        "frozen_test_sha256": {
+          "tests/test_regressions.py": "647fe2a52ab18e18fce5415092ca710bce9b4d9b85ca56572c9cafac88a9e8a1"
+        },
+        "production_files": [
+          "httpie/models.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-4",
+        "variant": "buggy",
+        "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.6679013339999926,
+            "tests": [
+              {
+                "id": "tests.test_regressions::test_Host_header_overwrite",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 0.6676210180000055,
+            "tests": [
+              {
+                "id": "tests.test_regressions::test_Host_header_overwrite",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-4",
+        "variant": "upstream_repair",
+        "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.6175191640000008,
+            "tests": [
+              {
+                "id": "tests.test_regressions::test_Host_header_overwrite",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 0,
+            "seconds": 0.6174758639999993,
+            "tests": [
+              {
+                "id": "tests.test_regressions::test_Host_header_overwrite",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_CASE",
+      "data": {
+        "id": "httpie-5",
+        "status": "reproduced",
+        "model": null,
+        "dependency_profile": "httpie-legacy",
+        "source_preparation": {
+          "omitted_non_runtime_links": [],
+          "safe_internal_links": "materialized as regular files; no host symlinks created",
+          "httpbin_fixture": null,
+          "base_snapshot_sha256": "609644d649ac54e7ad10fe2085c9d8cbefdb2796f9bc31c6d5d0d06f1e7dd1c6"
+        },
+        "frozen_test_sha256": {
+          "tests/tests.py": "38a7ba6ef03edb431aa2310c6cd29c0a76ea7cc1d8ff05301b74221059988e61"
+        },
+        "production_files": [
+          "httpie/cli.py"
+        ]
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-5",
+        "variant": "buggy",
+        "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+        "phases": {
+          "trigger": {
+            "returncode": 1,
+            "seconds": 0.567696030999997,
+            "tests": [
+              {
+                "id": "tests.tests.TestItemParsing::test_escape_longsep",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.9763079940000097,
+            "tests": [
+              {
+                "id": "tests.tests.TestItemParsing::test_escape",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_escape_longsep",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_invalid_items",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_valid_items",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_form",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_get",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_headers",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_json",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_verbose",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_force_pretty",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_force_ugly",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_pretty_enabled_by_default",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_pretty_enabled_by_default_unless_stdin_redirected",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestFileUpload::test_non_existent_file_raises_parse_error",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestFileUpload::test_upload_ok",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestAuth::test_basic_auth",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestAuth::test_digest_auth",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    },
+    {
+      "marker": "LAB_BENCHMARK_TESTS",
+      "data": {
+        "id": "httpie-5",
+        "variant": "upstream_repair",
+        "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+        "phases": {
+          "trigger": {
+            "returncode": 0,
+            "seconds": 0.5174269420000002,
+            "tests": [
+              {
+                "id": "tests.tests.TestItemParsing::test_escape_longsep",
+                "status": "passed"
+              }
+            ],
+            "log_truncated": false,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          },
+          "regression": {
+            "returncode": 1,
+            "seconds": 1.9755888889999937,
+            "tests": [
+              {
+                "id": "tests.tests.TestItemParsing::test_escape",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_escape_longsep",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_invalid_items",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestItemParsing::test_valid_items",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_form",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_get",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_headers",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_json",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestHTTPie::test_verbose",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_force_pretty",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_force_ugly",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_pretty_enabled_by_default",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestPrettyFlag::test_pretty_enabled_by_default_unless_stdin_redirected",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestFileUpload::test_non_existent_file_raises_parse_error",
+                "status": "passed"
+              },
+              {
+                "id": "tests.tests.TestFileUpload::test_upload_ok",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestAuth::test_basic_auth",
+                "status": "failure"
+              },
+              {
+                "id": "tests.tests.TestAuth::test_digest_auth",
+                "status": "failure"
+              }
+            ],
+            "log_truncated": true,
+            "test_files_unchanged": true,
+            "fixture_files_changed": []
+          }
+        }
+      }
+    }
+  ]
+}

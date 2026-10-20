@@ -1,0 +1,47 @@
+{
+  "id": "qasper-e54257585cc75564341eb02bdc63ff8111992f82",
+  "domain": "nlp",
+  "dataset": "qasper",
+  "task": "paper_qa",
+  "status": "call_or_validation_failed",
+  "metrics": null,
+  "calls": [
+    {
+      "output": {
+        "label": "NOT_ENOUGH_INFO",
+        "evidence": [
+          {
+            "index": 5
+          },
+          {
+            "index": 7
+          },
+          {
+            "index": 9
+          },
+          {
+            "index": 21
+          }
+        ]
+      },
+      "seconds": 3.186976604999927,
+      "input_sha256": "af7d7cf806cd19dc96e6d3fd71461b7051489c0e20f2667e381f1f8aa9119532",
+      "max_tokens": 1500,
+      "usage": {
+        "prompt_tokens": 574,
+        "completion_tokens": 70,
+        "total_tokens": 644
+      },
+      "cost": null,
+      "provider_model_sha256": "e082761e98768aaf6b338e883a682b79f82a653e37bf91d9f0f3097147e0216e"
+    }
+  ],
+  "input_unit_indices": [
+    5,
+    7,
+    9,
+    21
+  ],
+  "retrieved_gold_evidence_f1": 0.4,
+  "error": "missing answer"
+}

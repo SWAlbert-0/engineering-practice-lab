@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "project": "tqdm",
+  "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+  "model": {
+    "available": true,
+    "missing": [],
+    "model": "qwen3-0.6b-q8-eval",
+    "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+  },
+  "model_requested": true,
+  "source": {
+    "name": "BugsInPy",
+    "repository": "https://github.com/soarsmu/BugsInPy",
+    "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+  },
+  "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+  "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+  "started_utc": "2026-10-20T10:40:59Z",
+  "selected": 6,
+  "reproduced": 6,
+  "statuses": {
+    "reproduced": 6
+  },
+  "model_repair_rate": null,
+  "model_comparison": {
+    "eligible_reproduced": 6,
+    "single_round_test_plausible": 0,
+    "bounded_loop_test_plausible": 0,
+    "bounded_loop_rate_all_selected": 0.0,
+    "bounded_loop_rate_reproduced": 0.0,
+    "rejected_candidate_count": 3,
+    "actual_recorded_calls": 3,
+    "usage": null,
+    "cost": null,
+    "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+  },
+  "original_artifact_summary_sha256": "7ad87545ae2af3521b14e931e13ade4b97262ed808c5008ff4db8fec289ced4c",
+  "storage_note": "Per-case results stored once in sibling case JSON files; original full summary remains in linked artifact."
+}
