@@ -77,7 +77,17 @@ def lexical(case, document):
     return {'answer': document['units'][index], 'label': 'SUPPORT', 'evidence': [index]}
 
 
-def evaluate(data, mode, output, max_calls=0, limit=None):
+def input_units(case, document, policy):
+    if policy == 'full':
+        indices = list(range(len(document['units'])))
+    else:
+        question = set(normalize(case['question']))
+        ranks = [(len(question & set(normalize(unit))) / max(1, len(set(normalize(unit)))) ** .5, i) for i, unit in enumerate(document['units'])]
+        indices = sorted(i for _, i in sorted(ranks, key=lambda row: (-row[0], row[1]))[:4])
+    return [{'index': i, 'text': document['units'][i]} for i in indices]
+
+
+def evaluate(data, mode, output, max_calls=0, limit=None, input_policy='full', structured=False):
     frozen = load(ROOT / 'evaluations/d13/manifest.json')
     if digest(data) != frozen['dataset_sha256']:
         raise ValueError('dataset differs from frozen manifest')
@@ -87,7 +97,9 @@ def evaluate(data, mode, output, max_calls=0, limit=None):
     header = {'schema': 1, 'mode': mode, 'dataset_sha256': digest(data), 'selected': len(selected),
               'model': status if mode != 'lexical' else None, 'max_calls': max_calls,
               'task_scope': 'Given-document evidence selection and scientific claim verification / paper QA; NOT complete D13 reading-writing workflow or expert synthesis assessment',
-              'prompt_version': 'd13-semantic-subtask-v2', 'max_output_tokens_per_case': 1500,
+              'prompt_version': 'd13-semantic-subtask-v3', 'input_policy': input_policy,
+              'structured_decoding': structured,
+              'max_output_tokens_per_case': 1500,
               'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
     write_new(output / 'run.json', header)
     documents = {(d['dataset'], d['id']): d for d in data['documents']}
@@ -109,17 +121,28 @@ def evaluate(data, mode, output, max_calls=0, limit=None):
                 # Critically, gold labels, answers and rationales never enter input.
                 payload = {'task': case['task'], 'question': case['question'],
                            'title': document['title'], 'scope': document['scope'],
-                           'units': document['units']}
+                           'units': input_units(case, document, input_policy)}
+                row['input_unit_indices'] = [u['index'] for u in payload['units']]
+                row['retrieved_gold_evidence_f1'] = max(set_f1(row['input_unit_indices'], r) for r in case['gold']['rationales'])
+                system = PROMPT + ' Cite only the integer index values shown beside the text units, not their positions in the supplied list.'
+                schema = {'type': 'object', 'additionalProperties': False, 'required': ['answer', 'label', 'evidence'],
+                          'properties': {'answer': {'type': 'string', 'minLength': 1},
+                                         'label': {'type': 'string', 'enum': list(LABELS)},
+                                         'evidence': {'type': 'array', 'maxItems': 4,
+                                                      'minItems': 1 if case['task'] == 'paper_qa' else 0,
+                                                      'items': {'type': 'integer', 'enum': row['input_unit_indices']}}}} if structured else None
                 calls += 1
-                call = measured_call(PROMPT, payload, 1000 if mode == 'staged' else 1500)
+                call = measured_call(system, payload, 1000 if mode == 'staged' else 1500, schema)
                 row['calls'].append(call)
                 if mode == 'staged':
                     # Preserve an invalid reader output for the checker to inspect.
                     calls += 1
-                    call = measured_call(PROMPT + ' Independently verify and, if needed, correct the proposed answer against the original units.',
-                                         {**payload, 'proposal': call['output']}, 500)
+                    call = measured_call(system + ' Independently verify and, if needed, correct the proposed answer against the original units.',
+                                         {**payload, 'proposal': call['output']}, 500, schema)
                     row['calls'].append(call)
                 prediction = validate(call['output'], document, case['task'])
+                if any(i not in row['input_unit_indices'] for i in prediction['evidence']):
+                    raise ValueError('answer cites a source unit not provided to the model')
             if prediction is not None:
                 row.update(status='completed', prediction=prediction, metrics=score(prediction, case))
         except (ValueError, TypeError, KeyError) as error:
@@ -151,12 +174,14 @@ def main():
     parser.add_argument('--data', type=Path, required=True)
     parser.add_argument('--mode', choices=('lexical', 'single', 'staged'), required=True)
     parser.add_argument('--max-calls', type=int, default=0)
+    parser.add_argument('--input-policy', choices=('full', 'lexical-top4'), default='full')
+    parser.add_argument('--structured', action='store_true', help='Opt-in service JSON schema decoding; this constrains syntax, not semantic correctness')
     parser.add_argument('--limit', type=int)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.max_calls < 0 or args.limit is not None and args.limit < 1:
         parser.error('budgets and limits must be positive')
-    evaluate(load(args.data), args.mode, args.output, args.max_calls, args.limit)
+    evaluate(load(args.data), args.mode, args.output, args.max_calls, args.limit, args.input_policy, args.structured)
 
 
 if __name__ == '__main__':

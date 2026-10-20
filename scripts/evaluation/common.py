@@ -31,12 +31,12 @@ def model_status():
             'endpoint_sha256': digest(os.environ['LAB_LLM_BASE_URL'].rstrip('/').encode()) if os.environ.get('LAB_LLM_BASE_URL') else None}
 
 
-def measured_call(system, payload, max_tokens):
+def measured_call(system, payload, max_tokens, response_schema=None):
     """Use the actual production adapter. Never retry or substitute a fixture."""
     from shared.model_client import ask_json
     start = time.monotonic()
     telemetry = {}
-    value = ask_json(system, payload, max_tokens=max_tokens, telemetry=telemetry)
+    value = ask_json(system, payload, max_tokens=max_tokens, telemetry=telemetry, response_schema=response_schema)
     return {'output': value, 'seconds': time.monotonic() - start,
             'input_sha256': digest({'system': system, 'payload': payload}),
             'max_tokens': max_tokens, 'usage': telemetry.get('usage'), 'cost': None,

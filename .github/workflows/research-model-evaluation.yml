@@ -44,7 +44,11 @@ jobs:
           print('LAB_REAL_MODEL_SUMMARY='+json.dumps({k:v for k,v in value.items() if k!='results'}))
           for row in value['results']:
               model=row.get('model') or {}
-              print('LAB_REAL_MODEL_CASE='+json.dumps({'id':row['id'],'status':row['status'],'model_status':model.get('status'),'calls':len(model.get('attempts',[])),'attempts':[{'number':a['number'],'status':a['status'],'seconds':a['seconds'],'input_sha256':a['input_sha256'],'usage':a.get('usage'),'phases':{p:{k:v for k,v in d.items() if k!='log'} for p,d in a.get('execution',{}).get('phases',{}).items()} for a in model.get('attempts',[])]}))
+              attempts=[]
+              for a in model.get('attempts',[]):
+                  phases={p:{k:v for k,v in d.items() if k!='log'} for p,d in a.get('execution',{}).get('phases',{}).items()}
+                  attempts.append({'number':a['number'],'status':a['status'],'seconds':a['seconds'],'input_sha256':a['input_sha256'],'usage':a.get('usage'),'phases':phases})
+              print('LAB_REAL_MODEL_CASE='+json.dumps({'id':row['id'],'status':row['status'],'model_status':model.get('status'),'calls':len(model.get('attempts',[])),'attempts':attempts}))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

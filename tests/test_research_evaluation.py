@@ -5,10 +5,13 @@ import tarfile
 import tempfile
 import unittest
 import os
+import http.client
+import re
+import textwrap
 from unittest.mock import patch
 from scripts.evaluation.common import digest, write_new
 from scripts.evaluation.d11 import extract_archive, targets, validate_candidate, valid_reproduction, plausible, model_summary
-from scripts.evaluation.d13 import score, token_f1, validate
+from scripts.evaluation.d13 import score, token_f1, validate, input_units
 from scripts.evaluation.d13_blind import pack, summarize
 from scripts.evaluation.d11_inner import protected_test
 
@@ -91,6 +94,28 @@ class RepairBenchmarkTests(unittest.TestCase):
 
 
 class LiteratureBenchmarkTests(unittest.TestCase):
+    def test_inline_research_workflows_compile(self):
+        for path in Path('.github/workflows').glob('*evaluation.yml'):
+            for code in re.findall(r"python3 - <<'PY'\n(.*?)\n          PY", path.read_text(), re.S):
+                compile(textwrap.dedent(code), str(path), 'exec')
+
+    def test_retrieval_keeps_original_indices_and_excludes_gold(self):
+        case = {'question': 'rare method', 'gold': {'secret': 'not for the model'}}
+        doc = {'units': ['noise', 'rare method tested', 'another', 'other', 'irrelevant']}
+        rows = input_units(case, doc, 'lexical-top4')
+        self.assertEqual(len(rows), 4)
+        self.assertEqual(rows[1], {'index': 1, 'text': 'rare method tested'})
+        self.assertNotIn('secret', json.dumps(rows))
+
+    def test_remote_disconnect_is_sanitized_without_retry(self):
+        from shared.model_client import ask_json
+        with patch.dict(os.environ, {'LAB_LLM_BASE_URL': 'http://localhost/v1', 'LAB_LLM_MODEL': 'fixture', 'LAB_LLM_API_KEY': 'private-test-key'}):
+            with patch('urllib.request.urlopen', side_effect=http.client.RemoteDisconnected('private upstream details')) as request:
+                with self.assertRaises(ValueError) as result:
+                    ask_json('fixture', {})
+                self.assertNotIn('private', str(result.exception))
+                self.assertEqual(request.call_count, 1)
+
     def test_model_telemetry_preserves_json_and_redacts_endpoint(self):
         from shared.model_client import ask_json
         raw = {'choices': [{'message': {'content': '{"answer":"ok"}'}}], 'model': 'fixture-model',

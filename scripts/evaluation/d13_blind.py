@@ -28,22 +28,25 @@ def pack(data, runs, output):
         selected = []
         for file in sorted(run.glob('*.json')):
             row = load(file)
-            if row.get('status') != 'completed':
+            if row.get('id') not in cases:
                 continue
             selected.append(row['id'])
             case = cases[row['id']]
             document = docs[(case['dataset'], case['paper'])]
             identifier = secrets.token_hex(12)
-            prediction_sha = digest(row['prediction'])
+            prediction = row.get('prediction') or ((row.get('calls') or [{}])[-1].get('output'))
+            prediction_sha = digest({'status': row['status'], 'prediction': prediction})
             rows.append({'item_id': identifier, 'prediction_sha256': prediction_sha,
                          'question': case['question'], 'task': case['task'],
                          'source_title': document['title'], 'source_scope': document['scope'],
-                         'source_units': document['units'], 'prediction': row['prediction']})
+                         'source_units': document['units'], 'prediction': prediction,
+                         'generation_status': row['status'],
+                         'instruction': 'If no usable answer was produced, record that failure explicitly; do not invent an answer or omit this item.'})
             mappings.append({'item_id': identifier, 'case_id': case['id'], 'mode': summary['mode'],
                              'prediction_sha256': prediction_sha, 'run_summary_sha256': digest(summary)})
         ids_by_run.append(set(selected))
     if not rows or len(runs) < 2 or not ids_by_run[0] or any(ids != ids_by_run[0] for ids in ids_by_run[1:]):
-        raise ValueError('at least two runs with identical completed case sets are required; missing cases cannot be silently dropped')
+        raise ValueError('at least two runs with identical recorded case sets are required; failures stay in the pack and missing cases cannot be silently dropped')
     secrets.SystemRandom().shuffle(rows)
     output.mkdir(parents=True, exist_ok=False)
     write_new(output / 'review-pack.json', {'schema': 1, 'instruction': 'Independently inspect source and prediction. supported=0/1; coverage and synthesis=0(poor)/1(partial)/2(good). Record actual review seconds and explain errors. Model identity and dataset gold labels are withheld. Do not share unblinding.json with reviewers.', 'items': rows})
@@ -97,8 +100,9 @@ def summarize(key, review_a, review_b):
                         'support_disagreements': [id for id in ids if a[id]['supported'] != b[id]['supported']],
                         'mean_ratings': {field: sum(int(r[id][field]) for r in (a, b) for id in ids) / (2 * len(ids)) for field in ('supported', 'coverage_0_2', 'synthesis_0_2')},
                         'total_review_seconds': sum(float(r[id]['seconds']) for r in (a, b) for id in ids)}
-    return {'schema': 1, 'dataset_sha256': key['dataset_sha256'], 'reviewers': [aname, bname],
-            'reviewer_identity': 'self-reported; no authentication or expert qualification verification', 'modes': scores}
+    return {'schema': 1, 'dataset_sha256': key['dataset_sha256'],
+            'reviewers': ['reviewer-' + digest(name.encode())[:12] for name in (aname, bname)],
+            'reviewer_identity': 'self-reported identifiers hashed; no authentication or expert qualification verification', 'modes': scores}
 
 
 def main():
