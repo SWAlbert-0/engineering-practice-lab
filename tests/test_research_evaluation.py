@@ -9,9 +9,15 @@ from scripts.evaluation.common import digest, write_new
 from scripts.evaluation.d11 import extract_archive, targets, validate_candidate, valid_reproduction, plausible, model_summary
 from scripts.evaluation.d13 import score, token_f1, validate
 from scripts.evaluation.d13_blind import pack, summarize
+from scripts.evaluation.d11_inner import protected_test
 
 
 class RepairBenchmarkTests(unittest.TestCase):
+    def test_test_code_is_protected_and_formatter_fixtures_are_separate(self):
+        self.assertTrue(protected_test(Path('tests/test_black.py')))
+        self.assertTrue(protected_test(Path('tqdm/tests/tests_tqdm.py')))
+        self.assertTrue(protected_test(Path('tests/conftest.py')))
+        self.assertFalse(protected_test(Path('tests/data/python37.py')))
     def test_fixed_population_and_commands(self):
         manifest = json.loads(Path('evaluations/d11/manifest.json').read_text())
         self.assertEqual(len(manifest['cases']), 30)

@@ -164,10 +164,12 @@ def prepare(case, cache, destination):
     config = {'project': case['project'], 'trigger': targets(case),
               'regression': sorted({t.split('::')[0] for t in targets(case)})}
     config['legacy_pytest'] = case['project'] == 'httpie' and case['bug_id'] == 1
+    config['local_httpbin'] = case['project'] == 'httpie' and case['bug_id'] == 4
     config['commit'] = case['buggy_commit']
     (destination / 'config.json').write_text(json.dumps(config))
     (destination / 'source-preparation.json').write_text(json.dumps({'omitted_non_runtime_links': omitted,
         'safe_internal_links': 'materialized as regular files; no host symlinks created',
+        'httpbin_fixture': 'httpbin.org mapped to loopback HTTPbin 0.7.0 port 80; no external network' if config['local_httpbin'] else None,
         'base_snapshot_sha256': digest({str(p.relative_to(source)): digest(p.read_bytes()) for p in sorted(source.rglob('*')) if p.is_file()})}))
     return gold, frozen
 
@@ -198,6 +200,8 @@ def execute(directory, image):
             '--mount', 'type=bind,src=' + str(directory.resolve()) + ',dst=/input,readonly',
             '--mount', 'type=bind,src=' + str((ROOT / 'scripts/evaluation/d11_inner.py').resolve()) + ',dst=/runner.py,readonly',
             image, 'python', '/runner.py']
+    if load(directory / 'config.json')['local_httpbin']:
+        args[2:2] = ['--add-host=httpbin.org:127.0.0.1', '--sysctl=net.ipv4.ip_unprivileged_port_start=0']
     try:
         raw = command(args, timeout=340)
         line = next((x for x in raw.splitlines() if x.startswith('LAB_EVALUATION_JSON=')), None)

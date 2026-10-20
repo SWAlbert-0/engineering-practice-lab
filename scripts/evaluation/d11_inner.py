@@ -7,23 +7,49 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.request
 import xml.etree.ElementTree as ET
 
 
-def main():
+def prepare_source(config):
+    os.chdir('/work')
+    if Path('/work/source').exists():
+        shutil.rmtree('/work/source')
     shutil.copytree('/input/source', '/work/source', symlinks=False)
-    config = json.loads(Path('/input/config.json').read_text())
     os.chdir('/work/source')
-    sys.path.insert(0, os.getcwd())
     # Black's historical tests need a package marker; no application source change.
     if config['project'] == 'black':
         Path('tests/__init__.py').touch()
         if not Path('_black_version.py').exists():
             Path('_black_version.py').write_text('version = "0+bugsinpy.' + config['commit'][:7] + '"\n')
+
+
+def protected_test(path):
+    # Formatter tests deliberately rewrite source fixtures under tests/data.
+    # Freeze executable test modules; preserve fixture mutations as evidence.
+    return path.suffix == '.py' and (path.name.startswith('test') or path.name in ('conftest.py', '__init__.py'))
+
+
+def main():
+    config = json.loads(Path('/input/config.json').read_text())
+    if config['local_httpbin']:
+        with open('/work/httpbin.log', 'w') as log:
+            service = subprocess.Popen([sys.executable, '-c', 'from httpbin import app; from wsgiref.simple_server import make_server; make_server("127.0.0.1",80,app).serve_forever()'], stdout=log, stderr=log, cwd='/tmp')
+        for _ in range(100):
+            try:
+                urllib.request.urlopen('http://127.0.0.1/get', timeout=.2).close()
+                break
+            except OSError:
+                time.sleep(.05)
+        else:
+            raise RuntimeError('local HTTPbin fixture did not become ready')
     results = {}
-    protected = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('.').rglob('*')
-                 if p.is_file() and any(part in ('test', 'tests', 'testing') for part in p.parts)}
     for phase in ('trigger', 'regression'):
+        # Both phases start from the same original bytes, including fixtures.
+        prepare_source(config)
+        files = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('.').rglob('*')
+                 if p.is_file() and any(part in ('test', 'tests', 'testing') for part in p.parts)}
+        protected = {p: sha for p, sha in files.items() if protected_test(p)}
         start = time.monotonic()
         command = [sys.executable, '-m', 'pytest', '-q', '-o', 'addopts=',
                    '--junitxml=/work/' + phase + '.xml'] + config[phase]
@@ -48,6 +74,7 @@ def main():
         results[phase] = {'returncode': code, 'seconds': time.monotonic() - start,
                           'tests': tests, 'log': log[-80000:], 'log_truncated': len(log) > 80000}
         results[phase]['test_files_unchanged'] = all(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest() == sha for p, sha in protected.items())
+        results[phase]['fixture_files_changed'] = [str(p) for p, sha in files.items() if p not in protected and (not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != sha)]
     print('LAB_EVALUATION_JSON=' + json.dumps(results))
 
 
