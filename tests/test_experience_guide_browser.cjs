@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),pw=require(process.env.LAB_PLAYWRIGHT||'playwright');
 const base=process.env.LAB_TEST_URL||'http://127.0.0.1:8765',art='/tmp/lab-browser-artifacts';
-const projects=[['02-process-rag','D01','overview','upload'],['03-mlops','D02','overview','datasets'],['04-video-understanding','D12','studio','studio'],['05-requirements','D09','overview','import'],['06-literature','D13','overview','new']];
+const projects=[['02-process-rag','D01','overview','upload'],['03-mlops','D02','overview','datasets'],['04-video-understanding','D12','studio','studio'],['06-literature','D13','overview','new']];
 (async()=>{
  const name=process.env.LAB_BROWSER||'chromium',browser=await pw[name].launch({headless:true,executablePath:process.env.LAB_BROWSER_EXECUTABLE||undefined,args:name==='chromium'?['--no-sandbox']:[]});
  const ctx=await browser.newContext({viewport:{width:1440,height:1000}}),page=await ctx.newPage(),errors=[];let posts=0;
@@ -23,6 +23,6 @@ const projects=[['02-process-rag','D01','overview','upload'],['03-mlops','D02','
    await page.setViewportSize({width:390,height:844});await shot(id.toLowerCase()+'-experience-mobile');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile overflow '+id);
    await click('pause');assert.equal(await page.locator('.experience-target').count(),0);
   }
-  assert.deepEqual(errors,[]);console.log('PASS five project experience guides: routes, highlights, manual progress, reload/reset and 390px layouts. D11 is covered by test_repair_tour_browser.py.');
+  assert.deepEqual(errors,[]);console.log('PASS four project experience guides: routes, highlights, manual progress, reload/reset and 390px layouts. D11/D09 are covered by their dedicated tour browser tests.');
  }catch(error){await page.screenshot({path:art+'/experience-failure.png',fullPage:true});fs.writeFileSync(art+'/experience-failure.html',await page.content());throw error;}finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
