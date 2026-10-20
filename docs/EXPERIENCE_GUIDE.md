@@ -24,3 +24,5 @@ D11完整Docker隔离执行需要可用Docker与worker；Conda/venv只运行既�
 `tests/test_experience_guide_browser.cjs`在六项目中检查入口、实际跳转和高亮、无自动业务POST、手动进度、刷新/重置及390px布局，并通过引导创建D11实际两轮离线任务。最终[容器浏览器CI](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631847)全部通过，截图在该运行的`d01-browser-evidence`工件中。每项目的原功能浏览器套件继续覆盖更完整的业务路径和重启持久化，详见[验证记录](VALIDATION.md)。
 
 新增`tests/test_open_examples_browser.cjs`覆盖总览配置保存/刷新/不回显、显式文本协议测试、六项目10项案例填入与实际保存、匹配的三份监控窗口、D11两轮任务、两篇真实论文及D09经统一API的协议任务，并在服务/容器重启后检查配置。协议夹具不代表真实模型语义质量。
+
+本轮最终[容器与浏览器验收](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39439433984)全部通过，包括统一API配置的容器重启持久化；原始成功标记和覆盖范围见[验证记录](VALIDATION.md)。

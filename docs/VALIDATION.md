@@ -288,4 +288,4 @@ D13的120项随机盲评包已用实际输出生成，两名评审表均保持�
 
 [完整容器CI 39438467364](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39438467364)已对实现提交`9fa365dc074f797f1c44c584f5a86fdec0a861dc`全部验证通过：233项普通回归阶段（228通过、5项Docker在此阶段跳过）、另行5项真实Docker隔离、六项目全部Chromium业务流程、六项目原引导、10项开放材料填入与统一API协议调用，以及所有工作区和模型配置的容器重启持久化。结构化成功标记保存在`evaluations/validation-open-cases-2026-10-20.json`；截图归档于该运行的`d01-browser-evidence`工件。
 
-复查追加D13配置切换与重试并发的边界：重试验证、建任务与复用节点固定同一模型配置身份；若执行前来源再次改变则明确失败，不把旧节点记到新模型。新增1项回归以实际切换配置模拟该窗口，D13相关35项本地回归通过。此修正的最终CI结果在完成后补记。
+复查追加D13配置切换与重试并发的边界：重试验证、建任务与复用节点固定同一模型配置身份；若执行前来源再次改变则明确失败，不把旧节点记到新模型。新增1项回归以实际切换配置模拟该窗口，D13相关35项本地回归通过。[最终容器CI 39439433984](https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39439433984)已对修正提交`8c50b2cb354cea145a5d54acd9e38adbdc0c3c05`全部通过：234项普通回归阶段（229通过，5项Docker在此阶段跳过），另行5项真实Docker测试通过；六工作区全部浏览器流程、原体验引导、10项开放材料与统一API协议验证、全部工作区及配置的容器重启持久化通过。最终成功标记保存于`evaluations/validation-open-cases-final-2026-10-20.json`，截图归档于该运行的`d01-browser-evidence`工件。
