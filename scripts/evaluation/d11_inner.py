@@ -1,5 +1,6 @@
 """Runs inside a disposable, network-disabled container; receives public code only."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import shutil
@@ -17,13 +18,19 @@ def main():
     # Black's historical tests need a package marker; no application source change.
     if config['project'] == 'black':
         Path('tests/__init__.py').touch()
+        if not Path('_black_version.py').exists():
+            Path('_black_version.py').write_text('version = "0+bugsinpy.' + config['commit'][:7] + '"\n')
     results = {}
+    protected = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('.').rglob('*')
+                 if p.is_file() and any(part in ('test', 'tests', 'testing') for part in p.parts)}
     for phase in ('trigger', 'regression'):
         start = time.monotonic()
         command = [sys.executable, '-m', 'pytest', '-q', '-o', 'addopts=',
                    '--junitxml=/work/' + phase + '.xml'] + config[phase]
-        if config['project'] == 'httpie':
+        if config['project'] == 'httpie' and not config['legacy_pytest']:
             command += ['-p', 'pytest_httpbin.plugin']
+        if config['legacy_pytest']:
+            command += ['--assert=plain']
         with open('/work/' + phase + '.log', 'w') as log:
             try:
                 result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=150)
@@ -40,6 +47,7 @@ def main():
         log = Path('/work/' + phase + '.log').read_text(errors='replace')
         results[phase] = {'returncode': code, 'seconds': time.monotonic() - start,
                           'tests': tests, 'log': log[-80000:], 'log_truncated': len(log) > 80000}
+        results[phase]['test_files_unchanged'] = all(p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest() == sha for p, sha in protected.items())
     print('LAB_EVALUATION_JSON=' + json.dumps(results))
 
 

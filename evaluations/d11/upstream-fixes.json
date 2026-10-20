@@ -1,0 +1,152 @@
+[
+  {
+    "id": "black-1",
+    "title": "permits black to run in AWS Lambda: (#1141)",
+    "url": "https://github.com/psf/black/commit/c0a7582e3d4cc8bec3b7f5a6c52b36880dcb57d7"
+  },
+  {
+    "id": "black-2",
+    "title": "Fix for \"# fmt: on\" with decorators (#1325)",
+    "url": "https://github.com/psf/black/commit/892eddacd215d685e136686b7f629ade70adca83"
+  },
+  {
+    "id": "black-3",
+    "title": "Change exit code to 2 when config file doesn't exist (#1361)",
+    "url": "https://github.com/psf/black/commit/7a14a37981862ef418f3cdb4a7e2375856f97529"
+  },
+  {
+    "id": "black-4",
+    "title": "Fix unstable format involving backslash + whitespace at beginning of file (#948)",
+    "url": "https://github.com/psf/black/commit/c7495b9aa098ef7a358fc74556359d21c6a4ba11"
+  },
+  {
+    "id": "black-5",
+    "title": "Fix trailing comma for function with one arg (#880) (#891)",
+    "url": "https://github.com/psf/black/commit/9394de150ebf0adc426523f46dc08e8b2b2b0b63"
+  },
+  {
+    "id": "black-6",
+    "title": "Add support for always tokenizing async/await as keywords",
+    "url": "https://github.com/psf/black/commit/f8617f975d56e81cfb4070ce65584f7b29a77e7a"
+  },
+  {
+    "id": "black-7",
+    "title": "Add parentheses around tuple unpack assignment (#832)",
+    "url": "https://github.com/psf/black/commit/de806405d2934b629d67e2a6317ad7e826765a20"
+  },
+  {
+    "id": "tornado-1",
+    "title": "websocket: Fix set_nodelay",
+    "url": "https://github.com/tornadoweb/tornado/commit/4677c54cc18bbfbdf0f4dadf11610fab6203fd63"
+  },
+  {
+    "id": "tornado-2",
+    "title": "http1connection: Fix a bug with redirects and chunked requests",
+    "url": "https://github.com/tornadoweb/tornado/commit/4f486a4aec746e9d66441600ee3b0743228b061c"
+  },
+  {
+    "id": "tornado-3",
+    "title": "httpclient: Fix warning logged by sync HTTPClient destructor",
+    "url": "https://github.com/tornadoweb/tornado/commit/aa622e724f80e0f7fcee369f75d69d1db13d72f2"
+  },
+  {
+    "id": "tornado-4",
+    "title": "Fix #2521: Serve full file when range start is negative and exceeds the total length (#2522)",
+    "url": "https://github.com/tornadoweb/tornado/commit/db529031a1e1a6e951826aba0b7d0b18f05cd4c7"
+  },
+  {
+    "id": "tornado-5",
+    "title": "ioloop: Fix PeriodicCallback when system clock moves backwards",
+    "url": "https://github.com/tornadoweb/tornado/commit/886643965b5cb782503d8d7b374b7a794ec2077b"
+  },
+  {
+    "id": "tornado-6",
+    "title": "asyncio: Fix a leak when event loops are created and destroyed",
+    "url": "https://github.com/tornadoweb/tornado/commit/2905ee4fb3c283d40b10f609359e189c83a0dc06"
+  },
+  {
+    "id": "tqdm-1",
+    "title": "fix `tenumerate(start)`",
+    "url": "https://github.com/tqdm/tqdm/commit/c0dcf39b046d1b4ff6de14ac99ad9a1b10487512"
+  },
+  {
+    "id": "tqdm-2",
+    "title": "fix most tests and logic",
+    "url": "https://github.com/tqdm/tqdm/commit/127af5caf19e7d29c346f5ca8a9c7ef3004b664b"
+  },
+  {
+    "id": "tqdm-3",
+    "title": "tqdm: fix boolean casting to work for sizeless self.iterable",
+    "url": "https://github.com/tqdm/tqdm/commit/73962a47026dd980ac0758820efc9c41cbf938e0"
+  },
+  {
+    "id": "tqdm-4",
+    "title": "fix `TypeError` when `unit_scale` and unknown `total`",
+    "url": "https://github.com/tqdm/tqdm/commit/964dee631d0ed30e2f799b42fc58ba5e73795a08"
+  },
+  {
+    "id": "tqdm-5",
+    "title": "support `bool()` cast when `disable=True`",
+    "url": "https://github.com/tqdm/tqdm/commit/4f340697af69b71850aad496387c9c5aa1904136"
+  },
+  {
+    "id": "tqdm-6",
+    "title": "fix `disable=True` edge case",
+    "url": "https://github.com/tqdm/tqdm/commit/6dad2e89019317e875c46d5a3a82a811ad6de2f9"
+  },
+  {
+    "id": "youtube-dl-1",
+    "title": "[utils] Fix match_str for boolean meta fields",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/1cc47c667419e0eadc0a6989256ab7b276852adf"
+  },
+  {
+    "id": "youtube-dl-2",
+    "title": "[extractor/common] Fix extraction of DASH formats with the same representation id (closes #15111)",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/9d6ac71c27b1dfb662c795ef598dbfd0286682da"
+  },
+  {
+    "id": "youtube-dl-3",
+    "title": "[utils] Fix unescapeHTML for misformed string like \"&a&quot;\" (#13935)",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/95f3f7c20a05e7ac490e768b8470b20538ef8581"
+  },
+  {
+    "id": "youtube-dl-4",
+    "title": "[jsinterp] Fix function calls without arguments.",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/189935f15960300d316e8b07108b076ac6c2186a"
+  },
+  {
+    "id": "youtube-dl-5",
+    "title": "[utils] Fix unified_timestamp for formats parsed by parsedate_tz()",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/7dc2a74e0ac9cfa74cc9de6f586ffd5cc8bac0d9"
+  },
+  {
+    "id": "youtube-dl-6",
+    "title": "[utils] Fix TTML conversion",
+    "url": "https://github.com/ytdl-org/youtube-dl/commit/d631d5f9f27f93767226192e4288990413fa9dbd"
+  },
+  {
+    "id": "httpie-2",
+    "title": "Fixed --max-redirects",
+    "url": "https://github.com/httpie/cli/commit/e18b609ef7d867d6efa0efe42c832be5e0d09338"
+  },
+  {
+    "id": "httpie-3",
+    "title": "Fixed --download with --session",
+    "url": "https://github.com/httpie/cli/commit/589887939507ff26d36ec74bd2c045819cfa3d56"
+  },
+  {
+    "id": "httpie-4",
+    "title": "Fixed custom Host",
+    "url": "https://github.com/httpie/cli/commit/040d981f00c3f6830b2d0db3daf3c64c080e96e3"
+  },
+  {
+    "id": "httpie-5",
+    "title": "Fixed escaping for long separators.",
+    "url": "https://github.com/httpie/cli/commit/90af1f742230831792d74d303d1e7ce56c96d4bd"
+  },
+  {
+    "id": "httpie-1",
+    "title": "Fixed #451 - OSError: [Errno 36] File name too long",
+    "url": "https://github.com/httpie/cli/commit/5300b0b490b8db48fac30b5e32164be93dc574b7"
+  }
+]

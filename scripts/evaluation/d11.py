@@ -61,6 +61,8 @@ def extract_archive(raw, destination):
                 raise ValueError('cyclic archive link')
             if member.isfile():
                 return archive.extractfile(member).read()
+            if member.isdir():
+                raise IsADirectoryError(member.name)
             if member.issym():
                 target = posixpath.normpath(posixpath.join(posixpath.dirname(member.name), member.linkname))
                 safe_path(target)
@@ -75,8 +77,8 @@ def extract_archive(raw, destination):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 try:
                     content = regular(member)
-                except KeyError:
-                    if not member.name.startswith('docs/'):
+                except (KeyError, IsADirectoryError):
+                    if not member.name.startswith(('docs/', 'maint/test/appengine/')):
                         raise ValueError('missing non-documentation link target') from None
                     omitted.append(member.name)
                     continue
@@ -161,15 +163,22 @@ def prepare(case, cache, destination):
             gold[name] = None
     config = {'project': case['project'], 'trigger': targets(case),
               'regression': sorted({t.split('::')[0] for t in targets(case)})}
+    config['legacy_pytest'] = case['project'] == 'httpie' and case['bug_id'] == 1
+    config['commit'] = case['buggy_commit']
     (destination / 'config.json').write_text(json.dumps(config))
-    (destination / 'source-preparation.json').write_text(json.dumps({'omitted_broken_documentation_links': omitted,
+    (destination / 'source-preparation.json').write_text(json.dumps({'omitted_non_runtime_links': omitted,
         'safe_internal_links': 'materialized as regular files; no host symlinks created',
         'base_snapshot_sha256': digest({str(p.relative_to(source)): digest(p.read_bytes()) for p in sorted(source.rglob('*')) if p.is_file()})}))
     return gold, frozen
 
 
-def build_image(project, directory):
+def build_image(project, directory, profile='default'):
     packages = ['pytest==6.2.5', 'setuptools==57.5.0', 'wheel==0.37.1'] + DEPENDENCIES[project]
+    if profile.startswith('httpie-legacy'):
+        packages = [p for p in packages if not p.startswith(('requests==', 'requests-toolbelt=='))]
+        packages.append('requests==2.0.0')
+    if profile == 'httpie-legacy-fixtures':
+        packages = ['pytest==3.2.1' if p.startswith('pytest==') else p for p in packages]
     dockerfile = 'FROM python:3.8.20-slim-bullseye\nRUN python -m pip install --no-cache-dir ' + ' '.join(packages) + '\nUSER 10001:10001\n'
     (directory / 'Dockerfile').write_text(dockerfile)
     tag = 'lab-eval-' + project.lower() + ':' + digest(dockerfile.encode())[:12]
@@ -202,11 +211,47 @@ def execute(directory, image):
 
 def valid_reproduction(buggy, fixed):
     before, after = buggy['phases']['trigger'], fixed['phases']['trigger']
-    b = {t['id']: t['status'] for t in before['tests']}
+    b = {t['id'] for t in before['tests']}
     a = {t['id']: t['status'] for t in after['tests']}
-    return (before['returncode'] == 1 and after['returncode'] == 0 and b.keys() == a.keys()
-            and bool(b) and any(v == 'failure' for v in b.values()) and all(v == 'passed' for v in a.values())
-            and not any(v == 'error' for v in b.values()))
+    failures = {t['id'] for t in before['tests'] if t['status'] == 'failure'}
+    errors = {t['id'] for t in before['tests'] if t['status'] == 'error'}
+    return (before['returncode'] == 1 and after['returncode'] == 0 and b == a.keys()
+            and bool(failures) and all(v == 'passed' for v in a.values())
+            and not errors.difference(failures)
+            and before.get('test_files_unchanged', True) and after.get('test_files_unchanged', True))
+
+
+def plausible(execution, reference):
+    for phase in ('trigger', 'regression'):
+        value = execution['phases'][phase]
+        expected = {t['id'] for t in reference['phases'][phase]['tests']}
+        actual = {t['id'] for t in value['tests']}
+        skipped = {t['id'] for t in reference['phases'][phase]['tests'] if t['status'] == 'skipped'}
+        if (not expected or expected != actual or value['returncode'] != 0
+                or not value.get('test_files_unchanged', False)
+                or any(t['status'] != 'passed' and not (t['status'] == 'skipped' and t['id'] in skipped) for t in value['tests'])):
+            return False
+    return True
+
+
+def model_summary(results, requested, available):
+    measured = requested and available
+    eligible = [r for r in results if r['status'] == 'reproduced']
+    attempts = [a for r in eligible for a in (r.get('model') or {}).get('attempts', [])]
+    first, final = 0, 0
+    for row in eligible:
+        tries = (row.get('model') or {}).get('attempts', [])
+        if tries and tries[0].get('execution') and plausible(tries[0]['execution'], row['upstream_repair']):
+            first += 1
+        if any(a.get('execution') and plausible(a['execution'], row['upstream_repair']) for a in tries):
+            final += 1
+    return {'eligible_reproduced': len(eligible), 'single_round_test_plausible': first if measured else None,
+            'bounded_loop_test_plausible': final if measured else None,
+            'bounded_loop_rate_all_selected': final / len(results) if measured and results else None,
+            'bounded_loop_rate_reproduced': final / len(eligible) if measured and eligible else None,
+            'rejected_candidate_count': sum(a['status'] == 'rejected' for a in attempts) if measured else None,
+            'actual_recorded_calls': len(attempts), 'usage': None, 'cost': None,
+            'interpretation': 'Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim'}
 
 
 def validate_candidate(value, allowed):
@@ -226,7 +271,7 @@ def validate_candidate(value, allowed):
     return result
 
 
-def model_attempts(case, directory, gold, image, baseline, budget):
+def model_attempts(case, directory, gold, image, baseline, reference, budget):
     allowed = sorted(p for p in gold if p.endswith('.py') and not is_test(p))
     originals = {p: (directory / 'source' / p).read_text() for p in allowed if (directory / 'source' / p).exists()}
     if not originals or sum(map(len, originals.values())) > 100000:
@@ -254,7 +299,7 @@ def model_attempts(case, directory, gold, image, baseline, budget):
         attempt['status'] = 'executed'
         attempt['execution'] = execute(directory, image)
         # Entire relevant module regression, not an independent hidden holdout.
-        if all(p['returncode'] == 0 and p['tests'] for p in attempt['execution']['phases'].values()):
+        if plausible(attempt['execution'], reference):
             return {'status': 'test_plausible', 'attempts': attempts}
         originals = {p: (directory / 'source' / p).read_text() for p in originals}
         feedback = attempt['execution']['phases']['trigger']['log'][-12000:]
@@ -292,12 +337,19 @@ def main():
             results.append(row)
             write_new(args.output / (case['id'] + '.json'), row)
     else:
+        images = {'default': image}
         for case in cases:
             row = {'id': case['id'], 'status': 'started', 'model': None}
             try:
                 with tempfile.TemporaryDirectory() as tmp:
                     directory = Path(tmp)
                     directory.chmod(0o755)
+                    profile = 'httpie-legacy-fixtures' if case['project'] == 'httpie' and case['bug_id'] == 1 else ('httpie-legacy' if case['project'] == 'httpie' and case['bug_id'] in (4, 5) else 'default')
+                    if profile not in images:
+                        with tempfile.TemporaryDirectory() as build:
+                            images[profile] = build_image(args.project, Path(build), profile)
+                    image = images[profile]
+                    row['dependency_profile'] = profile
                     gold, tests = prepare(case, args.cache, directory)
                     row['source_preparation'] = load(directory / 'source-preparation.json')
                     row['frozen_test_sha256'] = tests
@@ -320,7 +372,7 @@ def main():
                         else:
                             target.write_bytes(content)
                     if args.model and row['status'] == 'reproduced':
-                        row['model'] = model_attempts(case, directory, gold, image, row['buggy'], 3) if status['available'] else {'status': 'blocked_missing_model', 'attempts': []}
+                        row['model'] = model_attempts(case, directory, gold, image, row['buggy'], row['upstream_repair'], 3) if status['available'] else {'status': 'blocked_missing_model', 'attempts': []}
             except (RuntimeError, ValueError, OSError, subprocess.TimeoutExpired) as error:
                 row['status'], row['error'] = 'execution_error', str(error)[:4000]
             results.append(row)
@@ -328,7 +380,7 @@ def main():
             print(case['id'], row['status'], flush=True)
     summary = {**header, 'selected': len(cases), 'reproduced': sum(r['status'] == 'reproduced' for r in results),
                'statuses': {s: sum(r['status'] == s for r in results) for s in sorted({r['status'] for r in results})},
-            'model_repair_rate': None, 'results': results}
+            'model_repair_rate': None, 'model_comparison': model_summary(results, args.model, status['available']), 'results': results}
     write_new(args.output / 'summary.json', summary)
     print(json.dumps({'project': args.project, 'selected': len(cases), 'reproduced': summary['reproduced'], 'statuses': summary['statuses']}))
 

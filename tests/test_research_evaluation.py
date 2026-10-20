@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from scripts.evaluation.common import digest, write_new
-from scripts.evaluation.d11 import extract_archive, targets, validate_candidate, valid_reproduction
+from scripts.evaluation.d11 import extract_archive, targets, validate_candidate, valid_reproduction, plausible, model_summary
 from scripts.evaluation.d13 import score, token_f1, validate
 from scripts.evaluation.d13_blind import pack, summarize
 
@@ -45,6 +45,22 @@ class RepairBenchmarkTests(unittest.TestCase):
         self.assertTrue(valid_reproduction(run(1, 'failure'), run(0, 'passed')))
         self.assertFalse(valid_reproduction(run(1, 'error'), run(0, 'passed')))
         self.assertFalse(valid_reproduction(run(1, 'failure'), run(0, 'passed', 'B')))
+        compound = run(1, 'failure')
+        compound['phases']['trigger']['tests'].append({'id': 'A', 'status': 'error'})
+        self.assertTrue(valid_reproduction(compound, run(0, 'passed')))
+
+    def test_candidate_cannot_pass_by_omitting_tests_or_modifying_them(self):
+        def execution(ids, unchanged=True):
+            return {'phases': {p: {'returncode': 0, 'test_files_unchanged': unchanged,
+                                  'tests': [{'id': id, 'status': 'passed'} for id in ids]} for p in ('trigger', 'regression')}}
+        reference = execution(['A', 'B'])
+        self.assertTrue(plausible(execution(['A', 'B']), reference))
+        self.assertFalse(plausible(execution(['A']), reference))
+        self.assertFalse(plausible(execution(['A', 'B'], False), reference))
+        rows = [{'status': 'reproduced', 'upstream_repair': reference,
+                 'model': {'attempts': [{'status': 'executed', 'execution': reference}]}}]
+        self.assertEqual(model_summary(rows, True, True)['bounded_loop_test_plausible'], 1)
+        self.assertIsNone(model_summary(rows, False, False)['bounded_loop_test_plausible'])
 
     def test_result_cannot_be_silently_overwritten(self):
         with tempfile.TemporaryDirectory() as directory:

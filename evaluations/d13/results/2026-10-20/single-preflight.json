@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "mode": "single",
+  "dataset_sha256": "e54b73208eba9f9b699020a6843c88849e6500cd10bc443e48710be4cd5d944e",
+  "selected": 60,
+  "model": {
+    "available": false,
+    "missing": [
+      "LAB_LLM_BASE_URL",
+      "LAB_LLM_MODEL",
+      "LAB_LLM_API_KEY"
+    ],
+    "model": null,
+    "endpoint_sha256": null
+  },
+  "max_calls": 0,
+  "task_scope": "Given-document evidence selection and scientific claim verification / paper QA; NOT complete D13 reading-writing workflow or expert synthesis assessment",
+  "prompt_version": "d13-semantic-subtask-v1",
+  "max_output_tokens_per_case": 1500,
+  "started_utc": "2026-10-20T09:50:16Z",
+  "actual_calls_started": 0,
+  "statuses": {
+    "blocked_missing_model": 60
+  },
+  "domains": {
+    "biomedicine": {
+      "selected": 30,
+      "completed": 0,
+      "metrics_all_selected": {
+        "evidence_f1": null,
+        "label_correct": null
+      },
+      "semantic_expert_score": null
+    },
+    "nlp": {
+      "selected": 30,
+      "completed": 0,
+      "metrics_all_selected": {
+        "evidence_f1": null,
+        "answer_token_f1": null
+      },
+      "semantic_expert_score": null
+    }
+  },
+  "usage": null,
+  "cost": null,
+  "results_sha256": "7912b87f123a166a10ef539c431e2d9d685519451fc45488840cd97b754359b9"
+}

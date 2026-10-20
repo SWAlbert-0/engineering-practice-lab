@@ -27,7 +27,9 @@
         "requirements.txt": "0bf753789d959137ae76826b3df5446e232f1034921fe90c8fb1550f040e7b84"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "permits black to run in AWS Lambda: (#1141)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/c0a7582e3d4cc8bec3b7f5a6c52b36880dcb57d7"
     },
     {
       "id": "black-2",
@@ -49,7 +51,9 @@
         "requirements.txt": "9f397c088543e408d3a9611b315d6ced6e94ebbb2f8f67844ab8fa3ec19d401c"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fix for \"# fmt: on\" with decorators (#1325)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/892eddacd215d685e136686b7f629ade70adca83"
     },
     {
       "id": "black-3",
@@ -71,7 +75,9 @@
         "requirements.txt": "884f3f07aa0060f4650fd197f63c27c7d8c0e530afdee5d93e34f533f6e5a8bb"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Change exit code to 2 when config file doesn't exist (#1361)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/7a14a37981862ef418f3cdb4a7e2375856f97529"
     },
     {
       "id": "black-4",
@@ -94,7 +100,9 @@
         "requirements.txt": "2fdb8f4e1cded9c90678d86271ae3d7eb1789754217eee53403e39016b224b15"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fix unstable format involving backslash + whitespace at beginning of file (#948)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/c7495b9aa098ef7a358fc74556359d21c6a4ba11"
     },
     {
       "id": "black-5",
@@ -116,7 +124,9 @@
         "requirements.txt": "350f607591e678cfcbfd0116b3b2056ca5646e9a7fdf2c1092b933f2e67ec8d5"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fix trailing comma for function with one arg (#880) (#891)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/9394de150ebf0adc426523f46dc08e8b2b2b0b63"
     },
     {
       "id": "black-6",
@@ -140,7 +150,9 @@
         "requirements.txt": "3a733e41a07282716d8a80e27cb23ee46fbd50dd57c92258fd4cabaa1ef1c761"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Add support for always tokenizing async/await as keywords",
+      "upstream_fix_url": "https://github.com/psf/black/commit/f8617f975d56e81cfb4070ce65584f7b29a77e7a"
     },
     {
       "id": "black-7",
@@ -163,7 +175,9 @@
         "requirements.txt": "b4b041f0bbda3ee84babd68a0a48e4c80725a58de8f5586147236b2a32337940"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Add parentheses around tuple unpack assignment (#832)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/de806405d2934b629d67e2a6317ad7e826765a20"
     },
     {
       "id": "httpie-1",
@@ -185,7 +199,9 @@
         "requirements.txt": "ebeb6bb518eb982502c174455d55403243a53c8253e4c96dadd792ab69428759"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fixed #451 - OSError: [Errno 36] File name too long",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/5300b0b490b8db48fac30b5e32164be93dc574b7"
     },
     {
       "id": "httpie-2",
@@ -207,7 +223,9 @@
         "requirements.txt": "635e348696ae1e110910784738d1e4c7cf79f89b7670349a0e31c124f2c1fc62"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed --max-redirects",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/e18b609ef7d867d6efa0efe42c832be5e0d09338"
     },
     {
       "id": "httpie-3",
@@ -229,7 +247,9 @@
         "requirements.txt": "635e348696ae1e110910784738d1e4c7cf79f89b7670349a0e31c124f2c1fc62"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed --download with --session",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/589887939507ff26d36ec74bd2c045819cfa3d56"
     },
     {
       "id": "httpie-4",
@@ -251,7 +271,9 @@
         "requirements.txt": "a4b51347d77c828ffc1b3f8165373156251ff0329f17996585a6f7a4f78fd51b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed custom Host",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/040d981f00c3f6830b2d0db3daf3c64c080e96e3"
     },
     {
       "id": "httpie-5",
@@ -273,7 +295,9 @@
         "requirements.txt": "a4b51347d77c828ffc1b3f8165373156251ff0329f17996585a6f7a4f78fd51b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed escaping for long separators.",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/90af1f742230831792d74d303d1e7ce56c96d4bd"
     },
     {
       "id": "tornado-1",
@@ -295,7 +319,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "websocket: Fix set_nodelay",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/4677c54cc18bbfbdf0f4dadf11610fab6203fd63"
     },
     {
       "id": "tornado-2",
@@ -317,7 +343,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "http1connection: Fix a bug with redirects and chunked requests",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/4f486a4aec746e9d66441600ee3b0743228b061c"
     },
     {
       "id": "tornado-3",
@@ -339,7 +367,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "httpclient: Fix warning logged by sync HTTPClient destructor",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/aa622e724f80e0f7fcee369f75d69d1db13d72f2"
     },
     {
       "id": "tornado-4",
@@ -362,7 +392,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fix #2521: Serve full file when range start is negative and exceeds the total length (#2522)",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/db529031a1e1a6e951826aba0b7d0b18f05cd4c7"
     },
     {
       "id": "tornado-5",
@@ -384,7 +416,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "ioloop: Fix PeriodicCallback when system clock moves backwards",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/886643965b5cb782503d8d7b374b7a794ec2077b"
     },
     {
       "id": "tornado-6",
@@ -407,7 +441,9 @@
         "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "asyncio: Fix a leak when event loops are created and destroyed",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/2905ee4fb3c283d40b10f609359e189c83a0dc06"
     },
     {
       "id": "tqdm-1",
@@ -429,7 +465,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `tenumerate(start)`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/c0dcf39b046d1b4ff6de14ac99ad9a1b10487512"
     },
     {
       "id": "tqdm-2",
@@ -451,7 +489,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "fix most tests and logic",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/127af5caf19e7d29c346f5ca8a9c7ef3004b664b"
     },
     {
       "id": "tqdm-3",
@@ -473,7 +513,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "tqdm: fix boolean casting to work for sizeless self.iterable",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/73962a47026dd980ac0758820efc9c41cbf938e0"
     },
     {
       "id": "tqdm-4",
@@ -495,7 +537,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `TypeError` when `unit_scale` and unknown `total`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/964dee631d0ed30e2f799b42fc58ba5e73795a08"
     },
     {
       "id": "tqdm-5",
@@ -517,7 +561,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "support `bool()` cast when `disable=True`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/4f340697af69b71850aad496387c9c5aa1904136"
     },
     {
       "id": "tqdm-6",
@@ -539,7 +585,9 @@
         "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `disable=True` edge case",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/6dad2e89019317e875c46d5a3a82a811ad6de2f9"
     },
     {
       "id": "youtube-dl-1",
@@ -561,7 +609,9 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix match_str for boolean meta fields",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/1cc47c667419e0eadc0a6989256ab7b276852adf"
     },
     {
       "id": "youtube-dl-2",
@@ -583,7 +633,9 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[extractor/common] Fix extraction of DASH formats with the same representation id (closes #15111)",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/9d6ac71c27b1dfb662c795ef598dbfd0286682da"
     },
     {
       "id": "youtube-dl-3",
@@ -605,7 +657,9 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix unescapeHTML for misformed string like \"&a&quot;\" (#13935)",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/95f3f7c20a05e7ac490e768b8470b20538ef8581"
     },
     {
       "id": "youtube-dl-4",
@@ -627,7 +681,9 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "[jsinterp] Fix function calls without arguments.",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/189935f15960300d316e8b07108b076ac6c2186a"
     },
     {
       "id": "youtube-dl-5",
@@ -649,7 +705,9 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix unified_timestamp for formats parsed by parsedate_tz()",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/7dc2a74e0ac9cfa74cc9de6f586ffd5cc8bac0d9"
     },
     {
       "id": "youtube-dl-6",
@@ -671,7 +729,10 @@
         "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "split": "evaluation",
-      "defect_family": "unclassified"
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix TTML conversion",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/d631d5f9f27f93767226192e4288990413fa9dbd"
     }
-  ]
+  ],
+  "classification": "Engineering grouping from upstream fix messages and declared tests; not original dataset labels or independent expert annotations."
 }
