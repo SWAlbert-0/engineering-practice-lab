@@ -1,0 +1,47 @@
+name: D11 public repository evaluation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/evaluation/**'
+      - 'evaluations/d11/manifest.json'
+      - '.github/workflows/research-evaluation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [black, httpie, tornado, tqdm, youtube-dl]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Reproduce fixed historical defects without a model
+        run: python3 -m scripts.evaluation.d11 --project '${{ matrix.project }}' --output '/tmp/evaluation-${{ matrix.project }}'
+      - name: Report measured results
+        run: |
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path('/tmp/evaluation-${{ matrix.project }}/summary.json')
+          value=json.loads(p.read_text())
+          summary={k:value[k] for k in ('project','selected','reproduced','statuses','model_repair_rate')}
+          print('LAB_BENCHMARK_SUMMARY='+json.dumps(summary))
+          # Emit compact per-case evidence into logs as well as downloadable files.
+          for row in value['results']:
+              print('LAB_BENCHMARK_CASE='+json.dumps({k:v for k,v in row.items() if k not in ('buggy','upstream_repair')}))
+              for variant in ('buggy','upstream_repair'):
+                  if variant in row:
+                      print('LAB_BENCHMARK_TESTS='+json.dumps({'id':row['id'],'variant':variant,'image':row[variant]['environment_image_id'],'phases':{k:{f:v for f,v in p.items() if f!='log'} for k,p in row[variant]['phases'].items()}}))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('```json\n'+json.dumps(summary,indent=2)+'\n```\nHistorical upstream repairs are positive controls, not model-generated repairs. Setup failures remain in the denominator.\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d11-bugsinpy-${{ matrix.project }}
+          path: /tmp/evaluation-${{ matrix.project }}/
+          retention-days: 30
