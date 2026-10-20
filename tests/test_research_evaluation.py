@@ -4,6 +4,7 @@ from pathlib import Path
 import tarfile
 import tempfile
 import unittest
+import os
 from unittest.mock import patch
 from scripts.evaluation.common import digest, write_new
 from scripts.evaluation.d11 import extract_archive, targets, validate_candidate, valid_reproduction, plausible, model_summary
@@ -90,6 +91,18 @@ class RepairBenchmarkTests(unittest.TestCase):
 
 
 class LiteratureBenchmarkTests(unittest.TestCase):
+    def test_model_telemetry_preserves_json_and_redacts_endpoint(self):
+        from shared.model_client import ask_json
+        raw = {'choices': [{'message': {'content': '{"answer":"ok"}'}}], 'model': 'fixture-model',
+               'usage': {'prompt_tokens': 12, 'completion_tokens': 3, 'total_tokens': 15}}
+        with patch.dict(os.environ, {'LAB_LLM_BASE_URL': 'https://private.example/v1', 'LAB_LLM_MODEL': 'fixture', 'LAB_LLM_API_KEY': 'private-test-key'}):
+            with patch('urllib.request.urlopen') as open_url:
+                open_url.return_value.__enter__.return_value = io.StringIO(json.dumps(raw))
+                telemetry = {}
+                self.assertEqual(ask_json('fixture', {}, telemetry=telemetry), {'answer': 'ok'})
+        self.assertEqual(telemetry['usage']['total_tokens'], 15)
+        self.assertNotIn('private', json.dumps(telemetry))
+
     def test_annotation_population_and_no_committed_paper_text(self):
         m = json.loads(Path('evaluations/d13/manifest.json').read_text())
         self.assertEqual(len(m['documents']), 20)

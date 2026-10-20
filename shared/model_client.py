@@ -1,5 +1,6 @@
 """Optional OpenAI-compatible JSON calls. Offline demos never call this client."""
 import json
+import hashlib
 import os
 import urllib.error
 import urllib.request
@@ -10,7 +11,7 @@ def configured():
     return all(os.environ.get(k, '').strip() for k in ('LAB_LLM_BASE_URL', 'LAB_LLM_MODEL', 'LAB_LLM_API_KEY'))
 
 
-def ask_json(system, payload, images=None, *, max_tokens=3000):
+def ask_json(system, payload, images=None, *, max_tokens=3000, telemetry=None):
     if not configured():
         raise ValueError('尚未配置模型。请设置 LAB_LLM_BASE_URL、LAB_LLM_MODEL、LAB_LLM_API_KEY 后重启服务。')
     base = os.environ['LAB_LLM_BASE_URL'].rstrip('/')
@@ -31,6 +32,12 @@ def ask_json(system, payload, images=None, *, max_tokens=3000):
     try:
         with urllib.request.urlopen(request, timeout=45) as response:
             data = json.load(response)
+        if isinstance(telemetry, dict):
+            usage = data.get('usage') if isinstance(data, dict) else None
+            keys = ('prompt_tokens', 'completion_tokens', 'total_tokens')
+            telemetry['usage'] = ({key: usage[key] for key in keys}
+                                  if isinstance(usage, dict) and all(type(usage.get(key)) is int and usage[key] >= 0 for key in keys) else None)
+            telemetry['provider_model_sha256'] = hashlib.sha256(str(data.get('model', '') if isinstance(data, dict) else '').encode()).hexdigest()
         content = data['choices'][0]['message']['content']
         if not isinstance(content, str):
             raise ValueError('not text')

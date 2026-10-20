@@ -35,7 +35,9 @@ def measured_call(system, payload, max_tokens):
     """Use the actual production adapter. Never retry or substitute a fixture."""
     from shared.model_client import ask_json
     start = time.monotonic()
-    value = ask_json(system, payload, max_tokens=max_tokens)
+    telemetry = {}
+    value = ask_json(system, payload, max_tokens=max_tokens, telemetry=telemetry)
     return {'output': value, 'seconds': time.monotonic() - start,
             'input_sha256': digest({'system': system, 'payload': payload}),
-            'max_tokens': max_tokens, 'usage': None, 'cost': None}
+            'max_tokens': max_tokens, 'usage': telemetry.get('usage'), 'cost': None,
+            'provider_model_sha256': telemetry.get('provider_model_sha256')}

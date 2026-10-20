@@ -34,7 +34,7 @@ def main():
     config = json.loads(Path('/input/config.json').read_text())
     if config['local_httpbin']:
         with open('/work/httpbin.log', 'w') as log:
-            service = subprocess.Popen([sys.executable, '-c', 'from httpbin import app; from wsgiref.simple_server import make_server; make_server("127.0.0.1",80,app).serve_forever()'], stdout=log, stderr=log, cwd='/tmp')
+            service = subprocess.Popen([sys.executable, '-c', 'from httpbin import app; from wsgiref.simple_server import make_server, ServerHandler; ServerHandler.http_version="1.1"; make_server("127.0.0.1",80,app).serve_forever()'], stdout=log, stderr=log, cwd='/tmp')
         for _ in range(100):
             try:
                 urllib.request.urlopen('http://127.0.0.1/get', timeout=.2).close()

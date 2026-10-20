@@ -1,0 +1,57 @@
+name: D11 real small-model diagnostic
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/research-model-evaluation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  model-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [black, httpie, tornado, tqdm, youtube-dl]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Prepare verified public weights and runtime
+        run: python3 -m scripts.evaluation.local_model --directory /tmp/lab-cpu-model
+      - name: Run actual model proposals and isolated tests
+        env:
+          LAB_LLM_BASE_URL: http://127.0.0.1:8790/v1
+          LAB_LLM_MODEL: qwen3-0.6b-q8-eval
+          LAB_LLM_API_KEY: local-no-billing
+        run: |
+          python3 -m scripts.evaluation.local_model --directory /tmp/lab-cpu-model --serve --threads 2 >/tmp/lab-model.log 2>&1 &
+          model_pid=$!
+          trap 'kill "$model_pid" 2>/dev/null || true' EXIT
+          python3 - <<'PY'
+          import time,urllib.request
+          for i in range(120):
+              try:
+                  urllib.request.urlopen('http://127.0.0.1:8790/health',timeout=1).close()
+                  break
+              except OSError: time.sleep(.5)
+          else: raise SystemExit('model service readiness failed')
+          PY
+          python3 -m scripts.evaluation.d11 --project '${{ matrix.project }}' --model --output '/tmp/model-evaluation-${{ matrix.project }}'
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          value=json.loads(Path('/tmp/model-evaluation-${{ matrix.project }}/summary.json').read_text())
+          print('LAB_REAL_MODEL_SUMMARY='+json.dumps({k:v for k,v in value.items() if k!='results'}))
+          for row in value['results']:
+              model=row.get('model') or {}
+              print('LAB_REAL_MODEL_CASE='+json.dumps({'id':row['id'],'status':row['status'],'model_status':model.get('status'),'calls':len(model.get('attempts',[])),'attempts':[{'number':a['number'],'status':a['status'],'seconds':a['seconds'],'input_sha256':a['input_sha256'],'usage':a.get('usage'),'phases':{p:{k:v for k,v in d.items() if k!='log'} for p,d in a.get('execution',{}).get('phases',{}).items()} for a in model.get('attempts',[])]}))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: d11-real-model-${{ matrix.project }}
+          path: |
+            /tmp/model-evaluation-${{ matrix.project }}/
+            /tmp/lab-cpu-model/provenance.json
+            /tmp/lab-model.log
+          retention-days: 30
