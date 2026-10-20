@@ -34,3 +34,21 @@ class LiteratureHttpTests(unittest.TestCase):
             self.assertEqual(e.exception.code,404)
     def test_large_text_post_allowed(self):
         with self.request('/api/literature-workspace/papers',{'title':'大文本导入','text':'内容'*100000}) as r:self.assertEqual(r.status,202)
+    def test_relation_audit_and_exports(self):
+        root='/api/literature-workspace/'
+        pr=self.w.save_project({'title':'HTTP关系','question':'测试证据','outline_confirmed':True})['project_id']
+        for n in range(2):
+            x=self.w.import_paper({'title':'关系材料'+str(n),'text':'用于接口核对的摘记'+str(n),'scope':'notes'});p=x['paper_id']
+            while self.w.job(x['job_id'])['status'] in ('queued','running'):self.w.process_one()
+            self.w.screen(pr,p,{'decision':'included','reason':'接口测试'})
+            self.w.save_evidence(pr,{'paper':p,'version':1,'page':1,'field':'method','quote':'用于接口核对','summary':'接口协议，非科研结论'})
+        for e in self.w.evidence(pr):self.w.review_evidence(e['id'],{'revision':e['revision'],'status':'confirmed','actor':'接口审核','comment':'核对原文位置'})
+        a,b=self.w.evidence(pr);value={'left':a['id'],'right':b['id'],'source_revisions':{a['id']:a['revision'],b['id']:b['revision']},'kind':'complements','actor':'接口记录','note':'仅测试关系协议'}
+        with self.request(root+'projects/'+pr+'/relations',value) as r:self.assertEqual(r.status,201);rid=json.load(r)['relation_id']
+        with self.request(root+'projects/'+pr+'/audit') as r:self.assertTrue(json.load(r)['ready_for_writing'])
+        with self.request(root+'projects/'+pr+'/relations') as r:self.assertFalse(json.load(r)['relations'][0]['stale'])
+        with self.request(root+'projects/'+pr+'/audit/export?format=csv') as r:self.assertIn('attachment',r.headers['Content-Disposition']);self.assertTrue(r.read().startswith(b'\xef\xbb\xbf'))
+        with self.request(root+'projects/'+pr+'/audit/export?format=json',method='HEAD') as r:self.assertEqual(r.read(),b'')
+        with self.assertRaises(urllib.error.HTTPError) as e:self.request(root+'projects/'+pr+'/relations/'+rid+'/delete',{'revision':0})
+        self.assertEqual(e.exception.code,409)
+        with self.request(root+'projects/'+pr+'/relations/'+rid+'/delete',{'revision':1}) as r:self.assertTrue(json.load(r)['deleted'])

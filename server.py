@@ -72,6 +72,9 @@ class Handler(SimpleHTTPRequestHandler):
                 elif len(parts)==3 and parts[0]=='papers' and parts[2]=='file':return self.binary(*w.raw_paper(parts[1],version))
                 elif len(parts)==2 and parts[0]=='projects':result=w.project(parts[1])
                 elif len(parts)==3 and parts[0]=='projects' and parts[2]=='evidence':result={'evidence':w.evidence(parts[1])}
+                elif len(parts)==3 and parts[0]=='projects' and parts[2]=='relations':result={'relations':w.relations(parts[1])}
+                elif len(parts)==3 and parts[0]=='projects' and parts[2]=='audit':result=w.audit(parts[1])
+                elif len(parts)==4 and parts[0]=='projects' and parts[2:] == ['audit','export']:return self.binary(*w.export_audit(parts[1],q.get('format',['json'])[0]))
                 elif len(parts)==2 and parts[0]=='jobs':result=w.job(parts[1])
                 elif len(parts)==2 and parts[0]=='drafts':result=w.draft(parts[1],version)
                 elif len(parts)==3 and parts[0] in ('drafts','releases') and parts[2]=='export':return self.binary(*w.export(parts[1],q.get('format',['markdown'])[0],parts[0]=='releases',version))
@@ -85,6 +88,9 @@ class Handler(SimpleHTTPRequestHandler):
             try:
                 w=get_repair_workspace();parts=path.removeprefix('/api/repair-workspace/').strip('/').split('/');q=parse_qs(urlsplit(self.path).query)
                 if parts==['workspace']:result=w.state()
+                elif parts==['comparisons']:result={'comparisons':w.comparisons()}
+                elif len(parts)==2 and parts[0]=='comparisons':result=w.comparison(parts[1])
+                elif len(parts)==3 and parts[0]=='comparisons' and parts[2]=='export':return self.binary(*w.export_comparison(parts[1],q.get('format',['json'])[0]))
                 elif len(parts)==2 and parts[0]=='tasks':result=w.task(parts[1])
                 elif len(parts)==3 and parts[0]=='tasks' and parts[2]=='events':result={'events':w.task(parts[1])['events']}
                 elif len(parts)==3 and parts[0]=='tasks' and parts[2]=='export':return self.binary(*w.export(parts[1],q.get('format',['json'])[0],q.get('attempt',[None])[0]))
@@ -214,6 +220,9 @@ class Handler(SimpleHTTPRequestHandler):
                 elif len(parts)==4 and parts[0]=='projects' and parts[2]=='screen':result=w.screen(parts[1],parts[3],data)
                 elif len(parts)==3 and parts[0]=='projects' and parts[2]=='evidence':result=w.save_evidence(parts[1],data)
                 elif len(parts)==4 and parts[0]=='projects' and parts[2]=='evidence':result=w.save_evidence(parts[1],data,parts[3])
+                elif len(parts)==3 and parts[0]=='projects' and parts[2]=='relations':result=w.save_relation(parts[1],data);status=201
+                elif len(parts)==4 and parts[0]=='projects' and parts[2]=='relations':result=w.save_relation(parts[1],data,parts[3])
+                elif len(parts)==5 and parts[0]=='projects' and parts[2]=='relations' and parts[4]=='delete':result=w.delete_relation(parts[1],parts[3],data)
                 elif len(parts)==3 and parts[0]=='projects' and parts[2] in ('read','write'):result=w.enqueue(parts[1],parts[2],data);status=202
                 elif len(parts)==3 and parts[0]=='evidence' and parts[2]=='review':result=w.review_evidence(parts[1],data)
                 elif len(parts)==3 and parts[0]=='evidence' and parts[2]=='delete':result=w.delete_evidence(parts[1],data)
@@ -226,7 +235,8 @@ class Handler(SimpleHTTPRequestHandler):
                 return self.reply(status,result)
             if self.path.startswith('/api/repair-workspace/'):
                 parts=urlsplit(self.path).path.removeprefix('/api/repair-workspace/').strip('/').split('/');w=get_repair_workspace();status=200
-                if parts==['tasks']:result=w.create(data);status=202
+                if parts==['comparisons']:result=w.create_comparison(data);status=201
+                elif parts==['tasks']:result=w.create(data);status=202
                 elif len(parts)==3 and parts[0]=='tasks':
                     if parts[2]=='reviews':result=w.review(parts[1],data)
                     else:result=w.action(parts[1],parts[2]);status=202

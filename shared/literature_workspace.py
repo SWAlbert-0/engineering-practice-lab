@@ -107,7 +107,9 @@ def validate_sections(rows, outline, evidence):
         raise WorkspaceError('单份草案最多40条论述。')
     return result
 
-class LiteratureWorkspace:
+from shared.literature_review import LiteratureReviewMixin
+
+class LiteratureWorkspace(LiteratureReviewMixin):
 
     def __init__(self, directory, start_worker=True):
         self.db = Path(directory) / 'literature.sqlite3'
@@ -118,6 +120,8 @@ class LiteratureWorkspace:
         self.thread = None
         with self.connect() as c:
             c.executescript('PRAGMA journal_mode=WAL;\n            CREATE TABLE IF NOT EXISTS papers(id TEXT PRIMARY KEY,current INTEGER NOT NULL DEFAULT 0,active INTEGER NOT NULL DEFAULT 1,created TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS paper_versions(paper TEXT,number INTEGER,metadata TEXT,filename TEXT,sha TEXT,raw BLOB,pages TEXT,status TEXT,error TEXT,created TEXT,PRIMARY KEY(paper,number));\n            CREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY,revision INTEGER NOT NULL,data TEXT NOT NULL,created TEXT NOT NULL,updated TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS selections(project TEXT,paper TEXT,revision INTEGER,decision TEXT,reason TEXT,updated TEXT,PRIMARY KEY(project,paper));\n            CREATE TABLE IF NOT EXISTS evidence(id TEXT PRIMARY KEY,project TEXT,paper TEXT,version INTEGER,revision INTEGER,data TEXT,status TEXT,actor TEXT,comment TEXT,created TEXT,updated TEXT);\n            CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY,project TEXT,kind TEXT,mode TEXT,status TEXT,payload TEXT,context TEXT,model TEXT,model_fp TEXT,owner TEXT,heartbeat REAL,cancel INTEGER DEFAULT 0,error TEXT,result TEXT,created TEXT,updated TEXT);\n            CREATE TABLE IF NOT EXISTS nodes(job TEXT,key TEXT,status TEXT,result TEXT,error TEXT,reused_from TEXT,PRIMARY KEY(job,key));\n            CREATE TABLE IF NOT EXISTS drafts(id TEXT PRIMARY KEY,project TEXT,current INTEGER,context TEXT,draft TEXT,draft_revision INTEGER,created TEXT);\n            CREATE TABLE IF NOT EXISTS draft_versions(draft TEXT,number INTEGER,sections TEXT,created TEXT,PRIMARY KEY(draft,number));\n            CREATE TABLE IF NOT EXISTS reviews(id TEXT PRIMARY KEY,draft TEXT,version INTEGER,claim TEXT,decision TEXT,actor TEXT,comment TEXT,created TEXT);\n            CREATE TABLE IF NOT EXISTS releases(id TEXT PRIMARY KEY,draft TEXT,version INTEGER,bundle TEXT,created TEXT);\n            CREATE INDEX IF NOT EXISTS queue ON jobs(status,created);CREATE INDEX IF NOT EXISTS evidence_project ON evidence(project);')
+        with self.connect() as c:
+            c.execute('CREATE TABLE IF NOT EXISTS evidence_relations(id TEXT PRIMARY KEY,project TEXT NOT NULL,revision INTEGER NOT NULL,body TEXT NOT NULL)')
         if start_worker:
             self.thread = threading.Thread(target=self.loop, daemon=True)
             self.thread.start()
@@ -357,6 +361,9 @@ class LiteratureWorkspace:
                 papers.append({'id': s['paper'], 'version': doc['paper']['current'], 'active': doc['paper']['active'], 'metadata': doc['version']['metadata'], 'sha': doc['version']['sha'], 'pages': doc['version']['pages'], 'status': doc['version']['status']})
         evidence = self.evidence(project, c)
         body = {'project': {k: p[k] for k in ('id', 'revision', 'title', 'question', 'inclusion', 'exclusion', 'outline', 'outline_confirmed')}, 'selections': p['selections'], 'papers': papers, 'evidence': evidence}
+        relations = self.relations(project, c)
+        if relations:
+            body['relations'] = relations
         body['fingerprint'] = sha(body)
         return body
 
@@ -397,6 +404,8 @@ class LiteratureWorkspace:
             if not ctx['papers'] or any((not p['active'] or p['version'] == 0 or p['status'] != 'ready' for p in ctx['papers'])):
                 raise WorkspaceError('请先纳入已就绪的文献。', 409)
             if kind == 'write':
+                if any(r['stale'] for r in ctx.get('relations', [])):
+                    raise WorkspaceError('证据关系已过期，请重新核对或移除后写作。', 409)
                 if not ctx['project']['outline_confirmed']:
                     raise WorkspaceError('请先确认章节提纲。', 409)
                 confirmed = [e for e in ctx['evidence'] if not e['stale'] and e['status'] == 'confirmed']
@@ -405,7 +414,7 @@ class LiteratureWorkspace:
                 if {p['id'] for p in ctx['papers']} != {e['paper'] for e in confirmed}:
                     raise WorkspaceError('每篇纳入文献至少需要一条已核对证据。', 409)
             if mode != 'offline':
-                length = sum((len(p['text']) for paper in ctx['papers'] for p in paper['pages'])) if kind == 'read' else len(dump(ctx['evidence']))
+                length = sum((len(p['text']) for paper in ctx['papers'] for p in paper['pages'])) if kind == 'read' else len(dump({'evidence': ctx['evidence'], 'relations': ctx.get('relations', [])}))
                 if length > 24000:
                     raise WorkspaceError('模型输入超过24000字；请缩小专题或手工摘录，不截断原文后冒充全文阅读。')
             id = self._enqueue(c, project, kind, mode, {}, ctx)
@@ -547,7 +556,7 @@ class LiteratureWorkspace:
         evidence = [e for e in ctx['evidence'] if e['status'] == 'confirmed' and (not e['stale'])]
         outline = ctx['project']['outline']
         mode = job['mode']
-        prompt = '你是综述章节作者。只依据输入证据说明与逐字引文，返回 {"sections":[{"id":"输入章节id","claims":[{"text":"可审核论述","evidence_ids":["输入证据id"]}]}]}。章节顺序与输入一致。每章1–4条论述，每条绑定1–4个输入证据。不要编造外部文献、数值或把不同条件的实验当作可比。区分原文、摘要和阅读摘记。'
+        prompt = '你是综述章节作者。只依据输入证据说明与逐字引文，返回 {"sections":[{"id":"输入章节id","claims":[{"text":"可审核论述","evidence_ids":["输入证据id"]}]}]}。章节顺序与输入一致。每章1–4条论述，每条绑定1–4个输入证据。不要编造外部文献、数值或把不同条件的实验当作可比。区分原文、摘要和阅读摘记。关系由人记录，注意分歧中的条件差异，不将不同实验的发现直接当作可比。'
 
         def one(sections, key):
 
@@ -559,7 +568,7 @@ class LiteratureWorkspace:
                         items = [e for e in evidence if e['field'] == FIELDS[index % 3]] or evidence
                         result.append({'id': section['id'], 'claims': [{'text': '证据摘编（待解释）：' + e['summary'], 'evidence_ids': [e['id']]} for e in items[:6]]})
                 else:
-                    result = ask_json(prompt, {'question': ctx['project']['question'], 'outline': sections, 'papers': [{'id': p['id'], 'metadata': p['metadata']} for p in ctx['papers']], 'evidence': evidence}, max_tokens=4500).get('sections')
+                    result = ask_json(prompt, {'question': ctx['project']['question'], 'outline': sections, 'papers': [{'id': p['id'], 'metadata': p['metadata']} for p in ctx['papers']], 'evidence': evidence, 'relations': [{k: r[k] for k in ('left', 'right', 'kind', 'note')} for r in ctx.get('relations', [])]}, max_tokens=4500).get('sections')
                 return validate_sections(result, sections, evidence)
             return self._node(job['id'], key, call)
         if mode == 'multi':

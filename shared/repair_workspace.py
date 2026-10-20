@@ -47,6 +47,7 @@ class RepairWorkspace:
             created TEXT NOT NULL,updated TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 1,data TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY AUTOINCREMENT,task_id TEXT NOT NULL,created TEXT NOT NULL,phase TEXT NOT NULL,detail TEXT NOT NULL,attempt INTEGER);
             CREATE TABLE IF NOT EXISTS reviews(id TEXT PRIMARY KEY,task_id TEXT NOT NULL,attempt_sha256 TEXT NOT NULL,decision TEXT NOT NULL,actor TEXT NOT NULL,comment TEXT NOT NULL,created TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS comparisons(id TEXT PRIMARY KEY,title TEXT NOT NULL,created TEXT NOT NULL,body TEXT NOT NULL);
             CREATE INDEX IF NOT EXISTS queue ON tasks(status,created);
             CREATE INDEX IF NOT EXISTS task_events ON events(task_id,seq);''')
             c.execute("INSERT OR IGNORE INTO meta VALUES('workspace',?)",(uid('repair-workspace'),));c.execute("INSERT OR IGNORE INTO meta VALUES('schema','1')")
@@ -91,6 +92,7 @@ class RepairWorkspace:
                 t=self._task(row);reviews=[dict(r) for r in c.execute('SELECT * FROM reviews WHERE task_id=? ORDER BY rowid',(t['id'],))]
                 tasks.append({k:t[k] for k in ('id','title','repository','mode','runner','status','phase','reason','created','updated','revision')}|{'attempt_count':len(t['attempts']),'review':reviews[-1] if reviews else None,'parent_id':t['parent_id']})
         return {'schema':1,'repositories':[snapshot(k) for k in CASES],'tasks':tasks,'capabilities':self.capabilities(),
+                'comparisons':self.comparisons(),
                 'boundary':'三个原创教学快照；独立验收为公开测试，不等于跨仓库泛化评测。'}
     def create(self,value,parent_id=None):
         parent_id=parent_id or value.get('parent_id')
@@ -153,6 +155,41 @@ class RepairWorkspace:
         except (ValueError,StopIteration,TypeError):raise WorkspaceError('候选轮次不存在。',404) from None
         if not a.get('diff'):raise WorkspaceError('本轮没有可导出的有效补丁。',409)
         return a['diff'].encode(),'text/x-diff; charset=utf-8',tid+'-attempt-'+str(a['number'])+'.patch'
+    def comparisons(self):
+        with self.connect() as c:
+            return [dict(r) for r in c.execute('SELECT id,title,created FROM comparisons ORDER BY rowid DESC LIMIT 100')]
+    def create_comparison(self,value):
+        from shared.repair_reports import build_comparison
+        ids=value.get('task_ids')
+        if not isinstance(ids,list) or not 2<=len(ids)<=4 or any(not isinstance(i,str) for i in ids) or len(set(ids))!=len(ids):
+            raise WorkspaceError('请选择2–4个不重复的已结束任务。')
+        title=text(value.get('title'),'对照名称',120)
+        with self.connect(True) as c:
+            tasks=[]
+            for tid in ids:
+                t=self._task(self._row(c,tid))
+                if t['status'] not in FINAL or not t.get('baseline'):
+                    raise WorkspaceError('任务尚未结束或没有实际基线证据，不能建立对照。',409)
+                t['reviews']=[dict(r) for r in c.execute('SELECT * FROM reviews WHERE task_id=? ORDER BY rowid',(tid,))]
+                t['events']=[dict(r) for r in c.execute('SELECT * FROM events WHERE task_id=? ORDER BY seq',(tid,))]
+                t['gates']=gates(t);tasks.append(t)
+            report=build_comparison(tasks)
+            report.update(id=uid('comparison'),title=title,created=now())
+            if c.execute('SELECT count(*) FROM comparisons').fetchone()[0]>=100:
+                raise WorkspaceError('已保存100份对照，请复用或导出已有记录。',409)
+            c.execute('INSERT INTO comparisons VALUES(?,?,?,?)',(report['id'],title,report['created'],canonical(report)))
+        return {'comparison_id':report['id']}
+    def comparison(self,id):
+        with self.connect() as c:
+            r=c.execute('SELECT body FROM comparisons WHERE id=?',(id,)).fetchone()
+            if not r:raise WorkspaceError('对照报告不存在。',404)
+            return json.loads(r[0])
+    def export_comparison(self,id,fmt='json'):
+        from shared.repair_reports import markdown
+        report=self.comparison(id)
+        if fmt=='json':return canonical(report).encode(),'application/json; charset=utf-8',id+'.json'
+        if fmt=='markdown':return markdown(report),'text/markdown; charset=utf-8',id+'.md'
+        raise WorkspaceError('对照报告支持JSON或Markdown。')
     def heartbeat_worker(self,info):
         with self.connect(True) as c:c.execute("INSERT OR REPLACE INTO meta VALUES('worker',?)",(canonical({**info,'heartbeat':time.time(),'llm':configured(),'worker_uid':os.getuid() if hasattr(os,'getuid') else None}),))
     def recover(self):

@@ -72,6 +72,10 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_literature_browser.cjs
+      - name: D11 and D13 review extensions
+        env:
+          NODE_PATH: /tmp/lab-browser/node_modules
+        run: node tests/test_review_workspaces_browser.cjs
       - name: D02 real browser acceptance
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
@@ -92,6 +96,7 @@ jobs:
           node tests/test_literature_browser.cjs --check-persistence
           node tests/test_mlops_browser.cjs --check-persistence
           node tests/test_video_browser.cjs --check-persistence
+          node tests/test_review_workspaces_browser.cjs --check-persistence
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

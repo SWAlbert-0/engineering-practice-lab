@@ -31,3 +31,18 @@ class RepairHttpTests(unittest.TestCase):
         for method in ('GET','HEAD'):
             with self.assertRaises(urllib.error.HTTPError) as err:self.request('/data/repair.sqlite3',method=method)
             self.assertEqual(err.exception.code,404)
+    def test_comparison_create_head_download_and_mixed_snapshot(self):
+        root='/api/repair-workspace/'
+        tasks=[]
+        for candidate in ('wrong','correct'):
+            with self.request(root+'tasks',{'repository':'boundary','candidate':candidate}) as r:tasks.append(json.load(r)['task_id'])
+            self.w.process_one()
+        with self.request(root+'comparisons',{'title':'HTTP固定对照','task_ids':tasks}) as r:
+            self.assertEqual(r.status,201);rid=json.load(r)['comparison_id']
+        with self.request(root+'comparisons/'+rid) as r:self.assertEqual(len(json.load(r)['tests']),7)
+        with self.request(root+'comparisons/'+rid+'/export?format=markdown',method='HEAD') as r:
+            self.assertIn('attachment',r.headers['Content-Disposition']);self.assertEqual(r.read(),b'')
+        with self.request(root+'comparisons/'+rid+'/export') as r:self.assertEqual(json.load(r)['schema'],'d11-comparison-v1')
+        with self.request(root+'comparisons') as r:self.assertTrue(json.load(r)['comparisons'])
+        with self.assertRaises(urllib.error.HTTPError) as err:self.request(root+'comparisons',{'title':'重复','task_ids':[tasks[0]]*2})
+        self.assertEqual(err.exception.code,400)

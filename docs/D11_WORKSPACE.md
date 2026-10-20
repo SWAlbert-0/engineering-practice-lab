@@ -116,3 +116,24 @@ docker compose up -d --wait
 任意仓库检出、依赖镜像构建、外部 Git 提交、多人认证、GitHub PR 集成、覆盖率和跨仓库质量评测均未在本首版实现。原任务清单的共同 FastAPI/ORM/权限迁移继续保留。
 
 实现依据：[Docker Engine API](https://docs.docker.com/reference/api/engine/)、[容器运行选项](https://docs.docker.com/reference/cli/docker/container/run/)、[资源约束](https://docs.docker.com/engine/containers/resource_constraints/)。
+
+## 2026-10-20：逐测试变化与固定任务对照
+
+任务详情新增“测试变化”：将指定候选与原始基线逐项比较，分别标明新修复、新增失败、保持不变和未执行，点击用例继续查看原始日志。通过数量与人工结论保持分离。
+
+“任务对照”可从同一教学快照选择2–4个已结束且有实际基线的任务。服务端在同一事务内读取任务、每轮证据和当时的审查，核对源码/测试哈希、测试集合及执行环境后保存不可变报告。容器ID属于每次执行实例，不作为环境差异；镜像ID、隔离策略或Python版本变化会阻止混比。一个工作区最多100份报告。
+
+报告包含逐用例结果、相对基线的新修复/新失败、最终候选间统一diff、实际轮数、候选测试累计耗时、模型与提示标识、未知用量/费用和证据SHA256。JSON包含冻结的完整任务；Markdown便于验收阅读。后续任务追加审核不会修改旧报告，重新保存对照才会获取新审查。
+
+新增接口（前缀`/api/repair-workspace/`）：
+
+| 方法与路径 | 用途 |
+|---|---|
+| POST comparisons | title、task_ids（2–4个不同任务），保存对照，返回comparison_id |
+| GET comparisons | 最近100份对照摘要 |
+| GET comparisons/{id} | 完整固定对照 |
+| GET comparisons/{id}/export?format=json或markdown | 原生下载，支持HEAD |
+
+数据库新增`comparisons`表，启动时兼容建立，不改变原任务数据。SQLite备份继续包含此表。本轮修正D11启动兜底页误写成D09的问题，调整对照信息密度、失败状态与窄屏表格；不新增运行依赖。
+
+边界不变：原始输入仍是三个原创教学快照，未接入任意Git仓库、自动生成单测或完成5仓库/30缺陷质量评估。对照工具提供证据组织能力，不将预置候选的结果当作真实模型修复成绩；测试耗时不含模型、网络、排队或整体服务延迟。
