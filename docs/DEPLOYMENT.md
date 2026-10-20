@@ -56,7 +56,7 @@ cp .env.example .env
 
 编辑 `.env`，例如将 `LAB_PORT=8765` 改为 `LAB_PORT=8766`，再执行 `docker compose up --build -d --wait`。访问地址改为 <http://127.0.0.1:8766>；容器内部端口保持 8765。环境变量优先于 `.env`；如果修改文件不生效，检查终端是否已经设置了同名变量。
 
-模型配置的三个变量默认留空，开启方法见 [MODEL_SETUP.md](MODEL_SETUP.md)。Compose 自动读取根目录 `.env` 并注入服务端环境；Python 直接启动不会读取该文件。修改模型参数后重建容器进程即可：`docker compose up -d --force-recreate --wait`。本地模型服务的 `127.0.0.1` 在容器内指向容器自身，不能直接沿用宿主机回环地址；Docker Desktop 可使用 `host.docker.internal`，Linux 需要另行配置可达地址。
+模型参数默认留空，可直接在总览“统一模型API”保存配置，无需重启；也可使用以下环境变量方式，详见[MODEL_SETUP.md](MODEL_SETUP.md)。页面保存项优先于环境变量，清除后恢复环境配置。Compose 自动读取根目录 `.env` 并注入服务端环境；Python 直接启动不会读取该文件。修改模型参数后重建容器进程即可：`docker compose up -d --force-recreate --wait`。本地模型服务的 `127.0.0.1` 在容器内指向容器自身，不能直接沿用宿主机回环地址；Docker Desktop 可使用 `host.docker.internal`，Linux 需要另行配置可达地址。
 
 `.env` 被 Git 和 Docker 构建上下文排除。不要把密钥写进 Dockerfile、镜像或截图，也不要分享包含密钥展开结果的 `docker compose config` 输出。镜像只复制所需运行文件，不包含 `.git`、本机环境和测试依赖。
 

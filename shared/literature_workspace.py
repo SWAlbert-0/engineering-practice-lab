@@ -435,6 +435,7 @@ class LiteratureWorkspace(LiteratureReviewMixin):
             r['context'] = json.loads(r['context']) if r['context'] else None
             return r
 
+    @model_session
     def job_action(self, id, action):
         with self.connect(True) as c:
             old = dict(self.required(c, 'jobs', id))

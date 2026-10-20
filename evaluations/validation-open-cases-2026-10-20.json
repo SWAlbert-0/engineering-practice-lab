@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-20",
+  "head_sha": "9fa365dc074f797f1c44c584f5a86fdec0a861dc",
+  "run_id": 39438467364,
+  "job_id": 118681682960,
+  "url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39438467364",
+  "markers": [
+    "2026-10-20T14:22:19.7880056Z PASS: readiness, six project pages, report, media, offline APIs, private-file exclusion",
+    "2026-10-20T14:23:16.3718395Z Ran 233 tests in 54.705s",
+    "2026-10-20T14:23:16.3718599Z OK (skipped=5)",
+    "2026-10-20T14:23:25.9862074Z Ran 5 tests in 8.223s",
+    "2026-10-20T14:23:25.9862202Z OK",
+    "2026-10-20T14:23:50.4548203Z PASS: D01 exact index URL, legacy cache isolation, script failure, startup exception, API recovery and disabled JavaScript",
+    "2026-10-20T14:23:57.1365792Z PASS: D01 real browser upload/index/search/source/draft/review/edit/export/cross-browser/replace/delete/mobile/dialog flow",
+    "2026-10-20T14:24:10.9383137Z PASS: D09 file import, source offsets, generation, autosave/reload, immutable versions, review gates, publication, exports/restore, concurrent conflict recovery, source impact and 390px layouts",
+    "2026-10-20T14:24:17.2343653Z PASS: redesigned D01 homepage search/material filters, D09 homepage file import/case outline/autosave/select-all, desktop and 390px layouts",
+    "2026-10-20T14:24:31.2975982Z PASS: D11 startup recovery, task creation, bounded revisions, failed-test/log/diff navigation, gated review, native exports, cross-context records, optimistic review conflict, retry/cancel, 390px routes and topic dialog",
+    "2026-10-20T14:24:39.3038560Z PASS D13: boot recovery, UTF8 file import, screening, evidence edit/review, original highlight, chapter autosave/commit, cross-browser read, optimistic conflict/local recovery, claim review/publish/three native exports, revision staleness and 17 mobile routes.",
+    "2026-10-20T14:24:55.3539175Z PASS D11/D13 review extensions: immutable comparison, per-test changes, source inspector, filters, paper matrix, relationship revisions, draft invalidation, writing audit, native downloads and 10 mobile routes. Teaching fixtures; no model quality claimed.",
+    "2026-10-20T14:25:08.1130760Z PASS D02: boot recovery, actual CSV upload/training/approval/loading, paired experiment comparison, true inference, five monitoring scenarios, alert audit, rollback, cross-browser read, native artifact export, approval conflict and 22 mobile routes.",
+    "2026-10-20T14:25:11.6573399Z PASS D12 actual upload, decode, six server frames, <=1s seek, offline record/download, sample invalidation, task cancellation, asset cleanup, topic dialog, guide and five mobile routes. No model inference claimed.",
+    "2026-10-20T14:25:25.0635457Z PASS six project experience guides: visible entry, actual routes and highlights, no automatic business operations, manual progress/reload/reset, 390px layouts and real D11 two-round task.",
+    "2026-10-20T14:25:34.5343087Z PASS ten open case prefills across six projects: no automatic POST, actual imports/two-round task, both real open papers, unified settings save/reload/no key echo, explicit local HTTP protocol test and D09 model task, 390px layouts. Protocol fixture only; no semantic quality claimed.",
+    "2026-10-20T14:25:49.2650802Z PASS D12 restart: original video, immutable samples and offline analysis persisted.",
+    "2026-10-20T14:25:49.5426186Z PASS review extensions restart: fixed D11 comparison and D13 relationship history/audit retained.",
+    "2026-10-20T14:25:49.8043936Z PASS unified model configuration persisted across actual service/container restart; cleared fixture override."
+  ]
+}

@@ -4,6 +4,7 @@ import io
 import copy
 from concurrent.futures import ThreadPoolExecutor
 import json
+import os
 import tempfile
 import time
 import unittest
@@ -109,6 +110,23 @@ class LiteratureTests(unittest.TestCase):
         with patch('shared.literature_workspace.configured',return_value=True),patch('shared.literature_workspace.ask_json',side_effect=model):
             j=self.w.enqueue(self.pr,'read',{'mode':'multi'})['job_id'];self.w.process_one();self.assertEqual(self.w.job(j)['status'],'failed');self.assertEqual(self.w.evidence(self.pr),[])
             broken[0]=False;retry=self.w.job_action(j,'retry')['job_id'];self.w.process_one();self.assertEqual(self.w.job(retry)['status'],'succeeded');self.assertEqual(calls.count(self.p),1);self.assertEqual(calls.count(p2),2);self.assertTrue(any(n['reused_from']==j for n in self.w.job(retry)['nodes']))
+    def test_model_switch_during_retry_keeps_checkpoint_identity(self):
+        # Simulate a settings change exactly between retry validation and enqueue.
+        with patch.dict(os.environ,{'LAB_LLM_BASE_URL':'http://localhost/v1','LAB_LLM_MODEL':'model-a','LAB_LLM_API_KEY':'protocol-key'}),patch('shared.literature_workspace.configured',return_value=True),patch('shared.literature_workspace.ask_json',side_effect=ValueError('protocol failure')) as model:
+            job=self.w.enqueue(self.pr,'read',{'mode':'single'})['job_id'];self.w.process_one()
+            self.assertEqual(self.w.job(job)['status'],'failed')
+            original=self.w._enqueue
+            def switch(*args,**kwargs):
+                os.environ['LAB_LLM_MODEL']='model-b'
+                return original(*args,**kwargs)
+            with patch.object(self.w,'_enqueue',side_effect=switch):
+                retry=self.w.job_action(job,'retry')['job_id']
+            self.assertEqual(self.w.job(retry)['model'],'model-a')
+            self.assertEqual(self.w.job(retry)['model_fp'],self.w.job(job)['model_fp'])
+            self.w.process_one()
+            self.assertEqual(model.call_count,1,'A changed provider must not reuse old checkpoints under its identity')
+            self.assertIn('模型配置已变化',self.w.job(retry)['error'])
+
     def test_context_change_during_model_call_blocks_commit(self):
         def model(prompt,payload,**kwargs):
             p=self.w.project(self.pr);self.w.save_project({**p,'outline':[s['title'] for s in p['outline']],'question':'新问题'},self.pr);paper=payload['papers'][0];return {'evidence':[{'paper':paper['id'],'field':'method','page':1,'quote':'原文😀第一句。','summary':'说明'}]}
