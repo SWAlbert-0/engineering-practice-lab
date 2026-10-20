@@ -110,7 +110,7 @@ class LiteratureBenchmarkTests(unittest.TestCase):
     def test_remote_disconnect_is_sanitized_without_retry(self):
         from shared.model_client import ask_json
         with patch.dict(os.environ, {'LAB_LLM_BASE_URL': 'http://localhost/v1', 'LAB_LLM_MODEL': 'fixture', 'LAB_LLM_API_KEY': 'private-test-key'}):
-            with patch('urllib.request.urlopen', side_effect=http.client.RemoteDisconnected('private upstream details')) as request:
+            with patch('shared.model_client.open_model_request', side_effect=http.client.RemoteDisconnected('private upstream details')) as request:
                 with self.assertRaises(ValueError) as result:
                     ask_json('fixture', {})
                 self.assertNotIn('private', str(result.exception))
@@ -121,7 +121,7 @@ class LiteratureBenchmarkTests(unittest.TestCase):
         raw = {'choices': [{'message': {'content': '{"answer":"ok"}'}}], 'model': 'fixture-model',
                'usage': {'prompt_tokens': 12, 'completion_tokens': 3, 'total_tokens': 15}}
         with patch.dict(os.environ, {'LAB_LLM_BASE_URL': 'https://private.example/v1', 'LAB_LLM_MODEL': 'fixture', 'LAB_LLM_API_KEY': 'private-test-key'}):
-            with patch('urllib.request.urlopen') as open_url:
+            with patch('shared.model_client.open_model_request') as open_url:
                 open_url.return_value.__enter__.return_value = io.StringIO(json.dumps(raw))
                 telemetry = {}
                 self.assertEqual(ask_json('fixture', {}, telemetry=telemetry), {'answer': 'ok'})

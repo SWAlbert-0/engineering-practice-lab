@@ -12,7 +12,8 @@ def load(folder):
     return module
 repair=load('01-repair-agent');rag=load('02-process-rag');mlops=load('03-mlops')
 requirements=load('05-requirements');literature=load('06-literature');video=load('04-video-understanding')
-from shared.model_client import configured
+from shared.model_client import configured, ask_json
+from shared import model_settings
 from shared.process_workspace import get_workspace, WorkspaceError
 from shared.requirements_workspace import get_requirements_workspace
 from shared.repair_workspace import get_repair_workspace
@@ -32,6 +33,7 @@ class Handler(SimpleHTTPRequestHandler):
         path=urlsplit(self.path).path
         if path=='/healthz':return self.reply(200,{'status':'ok','projects':6})
         if path=='/api/capabilities':return self.reply(200,{'llm':configured()})
+        if path=='/api/model-settings':return self.reply(200,model_settings.public_state())
         if path.startswith('/api/video-workspace/'):
             try:
                 w=get_video_workspace();parts=path.removeprefix('/api/video-workspace/').strip('/').split('/');q=parse_qs(urlsplit(self.path).query)
@@ -186,6 +188,17 @@ class Handler(SimpleHTTPRequestHandler):
             if 'application/json' not in self.headers.get('Content-Type',''):raise ValueError('需要 JSON')
             data=json.loads(self.rfile.read(length))
             if not isinstance(data,dict):raise ValueError('需要 JSON 对象')
+            if self.path=='/api/model-settings':
+                return self.reply(200,model_settings.save(data))
+            if self.path=='/api/model-settings/clear':
+                return self.reply(200,model_settings.clear())
+            if self.path=='/api/model-settings/test':
+                if data.get('confirm_call') is not True:
+                    raise ValueError('连接测试会发送一次实际模型请求，请先确认。')
+                result=ask_json('This is a connection and JSON protocol check. Return {"ok":true}.',{'task':'connection_check'},max_tokens=32)
+                if result.get('ok') is not True:
+                    raise ValueError('服务已响应，但没有返回约定的JSON对象；请检查模型协议。')
+                return self.reply(200,{'ok':True,'message':'文本连接与JSON协议测试通过；未测试视觉能力。'})
             if self.path.startswith('/api/video-workspace/'):
                 parts=urlsplit(self.path).path.removeprefix('/api/video-workspace/').strip('/').split('/');w=get_video_workspace();status=200
                 if parts==['assets']:result=w.upload(data);status=202

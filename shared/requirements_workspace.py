@@ -1,4 +1,6 @@
 """Versioned single-user D09 workspace. Reviews are declarations, not authentication."""
+from shared.model_settings import model_name, model_session
+
 import csv
 import difflib
 import hashlib
@@ -134,7 +136,7 @@ def generate(ps,mode):
         cases.append({**c,'id':f'TC-{i:03}','requirement_id':r['id'],'criterion_ids':[r['criteria'][n]['id'] for n in indexes],'origin':'llm'})
     cases=validate_cases(cases,reqs)
     if {c['requirement_id'] for c in cases if c['kind']=='正向'}!={r['id'] for r in reqs}:raise WorkspaceError('模型未为每个需求生成正向用例。')
-    return {'requirements':reqs,'cases':cases,'provider':'大模型结构化分析与用例生成','model':os.environ.get('LAB_LLM_MODEL'),'usage':None,'prompt_version':'d09-1'}
+    return {'requirements':reqs,'cases':cases,'provider':'大模型结构化分析与用例生成','model':model_name(),'usage':None,'prompt_version':'d09-1'}
 
 class RequirementsWorkspace:
     def __init__(self,directory,start_worker=True):
@@ -229,6 +231,7 @@ class RequirementsWorkspace:
     def _check(self,c,job):
         r=self._row(c,'jobs',job)
         if self.stopping.is_set() or r['cancel']:raise WorkspaceError('任务已取消。')
+    @model_session
     def process_one(self):
         with self.lock,self.connect() as c:
             job=c.execute("SELECT * FROM jobs WHERE status='queued' ORDER BY created LIMIT 1").fetchone()

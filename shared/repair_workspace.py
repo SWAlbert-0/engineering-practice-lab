@@ -1,4 +1,6 @@
 """D11 local workspace: immutable task inputs, leases, attempts and review evidence."""
+from shared.model_settings import model_name, identity, model_session
+
 from contextlib import contextmanager
 from datetime import datetime,timezone
 import difflib
@@ -93,7 +95,8 @@ class RepairWorkspace:
                 tasks.append({k:t[k] for k in ('id','title','repository','mode','runner','status','phase','reason','created','updated','revision')}|{'attempt_count':len(t['attempts']),'review':reviews[-1] if reviews else None,'parent_id':t['parent_id']})
         return {'schema':1,'repositories':[snapshot(k) for k in CASES],'tasks':tasks,'capabilities':self.capabilities(),
                 'comparisons':self.comparisons(),
-                'boundary':'三个原创教学快照；独立验收为公开测试，不等于跨仓库泛化评测。'}
+                'boundary':'三个原创快照及一个开源算法教学改编；独立验收为公开测试，不等于跨仓库泛化评测。'}
+    @model_session
     def create(self,value,parent_id=None):
         parent_id=parent_id or value.get('parent_id')
         key=value.get('repository');mode=value.get('mode','offline');candidate=value.get('candidate','correct');budget=value.get('max_attempts',2)
@@ -114,7 +117,7 @@ class RepairWorkspace:
             if parent['status'] not in FINAL or parent['repository']!=key or parent['snapshot']['snapshot_sha256']!=snapshot(key)['snapshot_sha256']:raise WorkspaceError('来源任务尚未结束或代码快照不一致，请重新选择。',409)
         title=text(value.get('title') or CASES[key]['category']+' · '+CASES[key]['title'],'任务名称');tid=uid('repair');stamp=now()
         body={'snapshot':snapshot(key),'candidate':candidate,'max_attempts':budget,'manual_source':source,'parent_id':parent_id,'baseline':None,'attempts':[],
-              'environment':None,'model':os.environ.get('LAB_LLM_MODEL') if mode=='llm' else None,'prompt_version':PROTOCOL,'usage':None,'cost':None,'model_config_sha256':digest({'base':os.environ.get('LAB_LLM_BASE_URL'),'model':os.environ.get('LAB_LLM_MODEL')}) if mode=='llm' else None}
+              'environment':None,'model':model_name() if mode=='llm' else None,'prompt_version':PROTOCOL,'usage':None,'cost':None,'model_config_sha256':digest(identity()) if mode=='llm' else None}
         with self.connect(True) as c:
             if c.execute("SELECT count(*) FROM tasks WHERE status IN ('queued','running','cancelling')").fetchone()[0]>=24:raise WorkspaceError('等待或运行的任务已达 24 个，请完成或取消后再提交。',409)
             c.execute('INSERT INTO tasks(id,title,repository,mode,runner,status,phase,created,updated,data) VALUES(?,?,?,?,?,?,?,?,?,?)',
@@ -219,6 +222,7 @@ class RepairWorkspace:
             if row['owner']!=self.owner or row['status'] not in ('running','cancelling'):return
             if row['cancel']:status,reason='cancelled','user_cancelled'
             c.execute('UPDATE tasks SET status=?,phase=?,reason=?,updated=?,revision=revision+1 WHERE id=?',(status,status,reason,now(),tid));self._event(c,tid,status,reason or '所有测试门禁通过，等待人工审查。')
+    @model_session
     def process_one(self,runner=None):
         tid=self._claim()
         if not tid:return False
@@ -254,7 +258,7 @@ class RepairWorkspace:
                 self._update(tid,body,'propose','生成第 '+str(number)+' 轮候选。',number)
                 metadata={'provider':t['mode'],'model':t['model'],'prompt_version':PROTOCOL,'usage':None,'cost':None}
                 if t['mode']=='llm':
-                    if body['model_config_sha256']!=digest({'base':os.environ.get('LAB_LLM_BASE_URL'),'model':os.environ.get('LAB_LLM_MODEL')}):raise ValueError('模型配置已变化，请新建任务以固定调用来源。')
+                    if body['model_config_sha256']!=digest(identity()):raise ValueError('模型配置已变化，请新建任务以固定调用来源。')
                     if time.monotonic()-started>194:raise RunnerTimeout('剩余时限不足以再发起一次模型请求。')
                     payload={'issue':body['snapshot']['issue'],'allowed_file':body['snapshot']['path'],'function':CASES[key]['fn'],'baseline':body['snapshot']['source'],
                              'previous_candidate':body['attempts'][-1].get('source') if body['attempts'] else None,'feedback':feedback,'round':number,'max_rounds':rounds}

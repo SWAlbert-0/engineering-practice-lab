@@ -88,6 +88,12 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_experience_guide_browser.cjs
+      - name: Open cases and unified model configuration
+        env:
+          NODE_PATH: /tmp/lab-browser/node_modules
+        run: |
+          export LAB_MODEL_FIXTURE_HOST="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' "$(docker compose ps -q lab)")"
+          node tests/test_open_examples_browser.cjs
       - name: Verify persistent workspace after restart
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
@@ -101,6 +107,7 @@ jobs:
           node tests/test_mlops_browser.cjs --check-persistence
           node tests/test_video_browser.cjs --check-persistence
           node tests/test_review_workspaces_browser.cjs --check-persistence
+          node tests/test_open_examples_browser.cjs --check-persistence
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

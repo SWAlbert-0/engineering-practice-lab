@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "cases": [
+    {
+      "id": "pla",
+      "project": "D01",
+      "title": "UltiMaker · PLA材料参数",
+      "license": "CC0-1.0",
+      "source_url": "https://github.com/Ultimaker/fdm_materials/blob/0c0596974a58fa622eeaa2bebced433a7860ac4b/generic_pla.xml.fdm_material",
+      "revision": "0c0596974a58fa622eeaa2bebced433a7860ac4b",
+      "description": "固定XML的中文转换；保留设备适用范围，不作为生产批准。",
+      "route": "upload",
+      "form": "#upload-form",
+      "file_input": "file",
+      "fields": {
+        "title": "开源案例 · Generic PLA材料参数",
+        "material": "PLA"
+      },
+      "file": "/shared/examples/pla-profile.md",
+      "sha256": "1a3c172194878efa501e5c25256922d682a469bf111c3db15517f459bc6d2769"
+    },
+    {
+      "id": "iris",
+      "project": "D02",
+      "title": "UCI Iris · 二分类训练数据",
+      "license": "CC BY 4.0",
+      "source_url": "https://archive.ics.uci.edu/dataset/53/iris",
+      "revision": "106573971c28d82a1b5579aea7a23eecd80355f0",
+      "description": "Fisher/UCI Iris，取setosa与versicolor两类共100行、4特征；公开教学集，不证明业务泛化。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "开源案例 · Iris二分类（公开教学数据）",
+        "kind": "training",
+        "label": "label"
+      },
+      "upstream": "https://github.com/scikit-learn/scikit-learn/blob/106573971c28d82a1b5579aea7a23eecd80355f0/sklearn/datasets/data/iris.csv",
+      "file": "/shared/examples/iris-binary.csv",
+      "sha256": "34cb4f9339a8932ac18efb5ac00db849b9cae93c894d1096acf1c801e57394b6"
+    },
+    {
+      "id": "mean",
+      "project": "D11",
+      "title": "TheAlgorithms · 平均值函数",
+      "license": "MIT",
+      "source_url": "https://github.com/TheAlgorithms/Python/blob/6e03a48579ca212a08b36be00378f887dc41a003/maths/average_mean.py",
+      "revision": "6e03a48579ca212a08b36be00378f887dc41a003",
+      "description": "开源算法的教学改编：故意把除法改成整除，空输入改为返回0；不是上游历史缺陷。",
+      "route": "new?repository=opensource-mean",
+      "form": "#task-form",
+      "fields": {
+        "repository": "opensource-mean",
+        "title": "开源算法案例 · 平均值精度修复",
+        "mode": "offline",
+        "candidate": "progressive",
+        "max_attempts": "2"
+      }
+    },
+    {
+      "id": "conduit",
+      "project": "D09",
+      "title": "RealWorld · Conduit API需求",
+      "license": "MIT",
+      "source_url": "https://github.com/gothinkster/realworld/blob/ebbcdeb8d55b42a3a613c787560498b8ef10003f/specs/api/openapi.yml",
+      "revision": "ebbcdeb8d55b42a3a613c787560498b8ef10003f",
+      "description": "公开API规格的中文选译；包含认证、状态码与未定义条件。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "开源案例 · RealWorld认证与文章API"
+      },
+      "file": "/shared/examples/realworld-requirements.md",
+      "sha256": "cb84535e66cf153f2f66244c52279418a33a2250377d2681286ff2b2bc156851"
+    },
+    {
+      "id": "flower",
+      "project": "D12",
+      "title": "MDN · Flower公开视频",
+      "license": "CC0-1.0",
+      "source_url": "https://github.com/mdn/shared-assets/blob/41fe3ac4b31ed3f6afb1156fb22096392d0b806f/videos/flower.webm",
+      "revision": "41fe3ac4b31ed3f6afb1156fb22096392d0b806f",
+      "description": "未改动的开放短视频；用于真实采样、时间定位和可选视觉核对。",
+      "route": "studio",
+      "form": "#upload",
+      "file_input": null,
+      "input_selector": "#upload-file",
+      "fields": {},
+      "license_evidence": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm",
+      "file": "/shared/examples/flower.webm",
+      "sha256": "c6f8a348953395598a9a73b9bab1676436410797bce9f398f4be1531d6e76dda"
+    },
+    {
+      "id": "seaborn",
+      "project": "D13",
+      "title": "JOSS · seaborn统计可视化论文",
+      "license": "CC BY 4.0",
+      "source_url": "https://joss.theoj.org/papers/10.21105/joss.03021",
+      "revision": "2021 · DOI 10.21105/joss.03021",
+      "description": "已发表开放论文的PDF文本提取；不含图像，需亲自核对研究条件。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "seaborn: statistical data visualization",
+        "authors": "Michael L. Waskom",
+        "year": "2021",
+        "doi": "10.21105/joss.03021",
+        "url": "https://doi.org/10.21105/joss.03021",
+        "scope": "full_text"
+      },
+      "original_pdf_sha256": "163e1f3a1c502b0cc9005144811a69e03104cf009b75b028cba6dd6b725fef0e",
+      "file": "/shared/examples/seaborn-paper.txt",
+      "sha256": "ab370f8250a99add85db6f6f529d7e2b35fa7843a9ba8cd91189bdcb5b34fb16"
+    },
+    {
+      "id": "arviz",
+      "project": "D13",
+      "title": "JOSS · ArviZ贝叶斯可视化论文",
+      "license": "CC BY 4.0",
+      "source_url": "https://joss.theoj.org/papers/10.21105/joss.01143",
+      "revision": "2019 · DOI 10.21105/joss.01143",
+      "description": "已发表开放论文的PDF文本提取；与seaborn有不同研究对象，不直接比较效果。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "ArviZ a unified library for exploratory analysis of Bayesian models in Python",
+        "authors": "Ravin Kumar; Colin Carroll; Ari Hartikainen; Osvaldo Martin",
+        "year": "2019",
+        "doi": "10.21105/joss.01143",
+        "url": "https://doi.org/10.21105/joss.01143",
+        "scope": "full_text"
+      },
+      "original_pdf_sha256": "6712d61de7cdcb1d15d4f24ed27161794a1c9ccd6fadfbde2b681dd138225ffb",
+      "file": "/shared/examples/arviz-paper.txt",
+      "sha256": "87e5fa4f51470c7365a862969f17d923a47a1ee2ce52baa431c39c98919b0f12"
+    },
+    {
+      "id": "iris-clean",
+      "project": "D02",
+      "title": "Iris · 原样回放监控窗口",
+      "license": "CC BY 4.0",
+      "source_url": "https://archive.ics.uci.edu/dataset/53/iris",
+      "revision": "106573971c28d82a1b5579aea7a23eecd80355f0",
+      "description": "基于同一公开教学数据派生，非独立业务样本。重复使用原训练资料演示监控；不作为泛化评价。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "开放教学窗口 · Iris 原样回放",
+        "kind": "monitoring",
+        "label": "label"
+      },
+      "upstream": "https://github.com/scikit-learn/scikit-learn/blob/106573971c28d82a1b5579aea7a23eecd80355f0/sklearn/datasets/data/iris.csv",
+      "file": "/shared/examples/iris-monitor-clean.csv",
+      "sha256": "34cb4f9339a8932ac18efb5ac00db849b9cae93c894d1096acf1c801e57394b6"
+    },
+    {
+      "id": "iris-shift",
+      "project": "D02",
+      "title": "Iris · 合成特征偏移监控窗口",
+      "license": "CC BY 4.0",
+      "source_url": "https://archive.ics.uci.edu/dataset/53/iris",
+      "revision": "106573971c28d82a1b5579aea7a23eecd80355f0",
+      "description": "基于同一公开教学数据派生，非独立业务样本。petal_length统一增加1.5，保留原标签，仅演示偏移，不能解释为真实业务效果。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "开放教学窗口 · Iris 合成特征偏移",
+        "kind": "monitoring",
+        "label": "label"
+      },
+      "upstream": "https://github.com/scikit-learn/scikit-learn/blob/106573971c28d82a1b5579aea7a23eecd80355f0/sklearn/datasets/data/iris.csv",
+      "file": "/shared/examples/iris-monitor-shift.csv",
+      "sha256": "f743e283e3a69d9b8aeeec7406ddbbfd4e65824d74e476958bb8387f3555ba70"
+    },
+    {
+      "id": "iris-unlabeled",
+      "project": "D02",
+      "title": "Iris · 无标签回放监控窗口",
+      "license": "CC BY 4.0",
+      "source_url": "https://archive.ics.uci.edu/dataset/53/iris",
+      "revision": "106573971c28d82a1b5579aea7a23eecd80355f0",
+      "description": "基于同一公开教学数据派生，非独立业务样本。重复使用原训练资料演示监控；不作为泛化评价。",
+      "route": "import",
+      "form": "#import-form",
+      "text_field": "text",
+      "fields": {
+        "title": "开放教学窗口 · Iris 无标签回放",
+        "kind": "monitoring",
+        "label": ""
+      },
+      "upstream": "https://github.com/scikit-learn/scikit-learn/blob/106573971c28d82a1b5579aea7a23eecd80355f0/sklearn/datasets/data/iris.csv",
+      "file": "/shared/examples/iris-monitor-unlabeled.csv",
+      "sha256": "ecf98361b6055844fd2a0b95c238e6bba711cd14d6f1882cf143b6c687c4bbe8"
+    }
+  ]
+}

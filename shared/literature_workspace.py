@@ -1,4 +1,6 @@
 """D13 local evidence workspace. Exact quote checks do not prove semantic support."""
+from shared.model_settings import model_name, identity, model_session, contextual
+
 import base64
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager
@@ -40,7 +42,7 @@ def text(x, label, limit=300, empty=False):
     return x.strip()
 
 def model_fp():
-    return sha({'base': os.environ.get('LAB_LLM_BASE_URL'), 'model': os.environ.get('LAB_LLM_MODEL')})
+    return sha(identity())
 
 def pages_from(raw, name):
     if name.lower().endswith('.pdf'):
@@ -390,9 +392,10 @@ class LiteratureWorkspace(LiteratureReviewMixin):
                 return existing['id']
         if c.execute("SELECT count(*) FROM jobs WHERE status IN ('queued','running')").fetchone()[0] >= 24:
             raise WorkspaceError('等待任务已达24项，请先完成或取消。', 409)
-        c.execute("INSERT INTO jobs(id,project,kind,mode,status,payload,context,model,model_fp,cancel,error,result,created,updated) VALUES(?,?,?,?,?,?,?,?,?,0,'','{}',?,?)", (id, project, kind, mode, 'queued', dump(payload), dump(context) if context else None, os.environ.get('LAB_LLM_MODEL') if mode != 'offline' else None, model_fp() if mode != 'offline' else None, stamp, stamp))
+        c.execute("INSERT INTO jobs(id,project,kind,mode,status,payload,context,model,model_fp,cancel,error,result,created,updated) VALUES(?,?,?,?,?,?,?,?,?,0,'','{}',?,?)", (id, project, kind, mode, 'queued', dump(payload), dump(context) if context else None, model_name() if mode != 'offline' else None, model_fp() if mode != 'offline' else None, stamp, stamp))
         return id
 
+    @model_session
     def enqueue(self, project, kind, value):
         mode = value.get('mode', 'offline')
         if kind not in ('read', 'write') or mode not in ('offline', 'single', 'multi'):
@@ -547,7 +550,7 @@ class LiteratureWorkspace(LiteratureReviewMixin):
             return self._node(job['id'], 'reader:' + p['id'], call)
         if mode == 'multi':
             with ThreadPoolExecutor(max_workers=3) as pool:
-                results = list(pool.map(one, papers))
+                results = list(pool.map(contextual(one), papers))
         else:
             results = [one(p) for p in papers]
         return [row for group in results for row in group]
@@ -573,12 +576,13 @@ class LiteratureWorkspace(LiteratureReviewMixin):
             return self._node(job['id'], key, call)
         if mode == 'multi':
             with ThreadPoolExecutor(max_workers=2) as pool:
-                groups = list(pool.map(lambda s: one([s], 'writer:' + s['id']), outline))
+                groups = list(pool.map(contextual(lambda s: one([s], 'writer:' + s['id'])), outline))
             sections = [s for group in groups for s in group]
         else:
             sections = one(outline, 'writer:all')
         return self._node(job['id'], 'citation-check', lambda: validate_sections(sections, outline, evidence))
 
+    @model_session
     def process_one(self):
         self.recover()
         with self.connect(True) as c:

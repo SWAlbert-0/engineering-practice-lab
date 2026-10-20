@@ -6,7 +6,7 @@
  let current=null;
  input.value=params.get(isReq?'text':'topic') || (isReq?'用户可以查看本人订单。\n管理员应快速完成订单导出。':'Agent如何利用外部反馈改进任务执行？');
  if(!isReq){let selected;try{selected=JSON.parse(params.get('ids') || '[]');}catch{selected=[];}if(!Array.isArray(selected))selected=[];document.querySelector('#papers').insertAdjacentHTML('beforeend',LiteratureSeed.map(p=>`<label><input type="checkbox" name="paper" value="${escape(p.id)}" ${(!selected.length||selected.includes(p.id))?'checked':''}><span>${escape(p.title)}<small>${p.year} · ${escape(p.area)}</small></span></label>`).join(''));}
- fetch('/api/capabilities').then(r=>r.ok?r.json():Promise.reject()).then(c=>{document.querySelector('#capability').textContent=c.llm?'模型已配置。模型模式会请求服务并产生实际费用；密钥不会传到页面。':'当前未配置模型；离线模式可直接运行。模型模式需设置服务端 LAB_LLM_* 环境变量。';document.querySelectorAll('[data-model]').forEach(o=>o.disabled=!c.llm);}).catch(()=>{document.querySelector('#capability').textContent='请通过本地服务访问。模型配置状态暂不可用。';});
+ fetch('/api/capabilities').then(r=>r.ok?r.json():Promise.reject()).then(c=>{document.querySelector('#capability').textContent=c.llm?'模型已配置。模型模式会请求服务并产生实际费用；密钥不会传到页面。':'当前未配置模型；离线模式可直接运行。模型模式请到项目总览配置统一 API。';document.querySelectorAll('[data-model]').forEach(o=>o.disabled=!c.llm);}).catch(()=>{document.querySelector('#capability').textContent='请通过本地服务访问。模型配置状态暂不可用。';});
  form.addEventListener('input',()=>{if(current){download.disabled=true;document.querySelector('#run-context').textContent='输入已修改，请重新运行；下方保留上次结果。';}});
  form.addEventListener('change',()=>{if(current){download.disabled=true;document.querySelector('#run-context').textContent='配置已修改，请重新运行。';}});
  form.addEventListener('submit',async event=>{

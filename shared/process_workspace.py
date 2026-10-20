@@ -1,4 +1,6 @@
 """Persistent, single-user process document workspace. No production authorization implied."""
+from shared.model_settings import model_name, model_session
+
 import base64
 from collections import Counter
 from contextlib import contextmanager
@@ -290,6 +292,7 @@ class Workspace:
         Index(chunks)  # Validate lexical/LSA construction before publishing.
         return None,''
 
+    @model_session
     def _run_job(self,job):
         payload=json.loads(job['payload']);id=job['id']
         if job['kind']=='draft':return self._generate(id,payload)
@@ -507,7 +510,7 @@ class Workspace:
             steps=self._validate_steps([{'operation':s['text'],'source_ids':[s['id']],'parameters':[]} for s in sources],sources)
             questions=['请确认图纸版本、设备和适用范围。','未给出批准依据的工艺参数需另行补充并人工确认。']
         self._check_cancel(job)
-        value={'search_id':run['id'],'mode':payload['mode'],'model':os.environ.get('LAB_LLM_MODEL') if payload['mode']=='llm' else None,'prompt_version':'process-draft-v1','token_usage':None,'index_id':run['index_id'],'sources':sources,'steps':steps,'questions':questions,'confirmed':[]}
+        value={'search_id':run['id'],'mode':payload['mode'],'model':model_name() if payload['mode']=='llm' else None,'prompt_version':'process-draft-v1','token_usage':None,'index_id':run['index_id'],'sources':sources,'steps':steps,'questions':questions,'confirmed':[]}
         with self.lock,self.connect() as c:
             self._check_cancel(job)
             if self._stale(c,sources):raise WorkspaceError('生成期间来源已更新，请重新检索。',409)

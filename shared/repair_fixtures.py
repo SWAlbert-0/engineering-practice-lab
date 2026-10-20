@@ -1,4 +1,4 @@
-"""Three original, versioned teaching repositories. Not an external benchmark."""
+"""Three original teaching snapshots and one attributed open-source adaptation. Not an external benchmark."""
 import ast
 import hashlib
 import json
@@ -24,13 +24,28 @@ CASES={
   'wrong':'def unique(values):\n    return values\n',
   'tests':[([3,1,3,2],[3,1,2]),([],[]),([1,1],[1]),([2,1],[2,1])],'acceptance':[([5,2,5,1],[5,2,1]),([9,9,8],[9,8]),([0,-1,0],[0,-1])]}}
 
+# Derived from a fixed MIT-licensed TheAlgorithms example. The floor-division
+# mutation and empty-input policy are ours; this is not an upstream bug claim.
+CASES['opensource-mean'] = {
+ 'title':'开源算法 · 平均值精度', 'category':'数值精度', 'path':'src/mean.py', 'fn':'mean',
+ 'issue':'根据TheAlgorithms平均值函数改编。此教学变异错误地使用整除；非空数值列表应返回算术平均值，空列表按本案例约定返回0。不是上游真实历史缺陷。',
+ 'before':'def mean(nums):\n    return sum(nums) // len(nums) if nums else 0\n',
+ 'correct':'def mean(nums):\n    return sum(nums) / len(nums) if nums else 0\n',
+ 'wrong':'def mean(nums):\n    return 0\n',
+ 'tests':[([1,2],1.5),([2,4],3),([],0),([-2,-1],-1.5)],
+ 'acceptance':[([0.1,0.2],0.15000000000000002),([1,2,3,4],2.5),([0],0)],
+ 'provenance':{'source':'https://github.com/TheAlgorithms/Python/blob/6e03a48579ca212a08b36be00378f887dc41a003/maths/average_mean.py',
+               'license':'MIT', 'notice':'TheAlgorithms contributors; adapted signature and empty-input policy; injected floor-division teaching mutation.'}}
+
 def canonical(value):return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)
 def digest(value):return hashlib.sha256((value if isinstance(value,str) else canonical(value)).encode('utf-8')).hexdigest()
 def snapshot(key):
     case=CASES[key]
     tests={'regression':case['tests'],'acceptance':case['acceptance']}
     body={'protocol':PROTOCOL,'repository':key,'path':case['path'],'source':case['before'],'fn':case['fn'],'issue':case['issue'],'tests':tests,'offline_candidates':{'correct':digest(case['correct']),'wrong':digest(case['wrong'])}}
-    return {'repository':key,'title':case['title'],'category':case['category'],'path':case['path'],'issue':case['issue'],
+    provenance={'provenance':case['provenance']} if case.get('provenance') else {}
+    body.update(provenance)
+    return provenance | {'repository':key,'title':case['title'],'category':case['category'],'path':case['path'],'issue':case['issue'],
             'source':case['before'],'source_sha256':digest(case['before']),'tests_sha256':digest(tests),'snapshot_sha256':digest(body),
             'regression_count':len(case['tests']),'acceptance_count':len(case['acceptance']),'protocol':PROTOCOL,
             'tests':[{'id':('REG' if group=='regression' else 'ACC')+f'-{i:02}','group':group,'input':value,'expected':expected}
