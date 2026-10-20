@@ -1,5 +1,6 @@
 """Real local HTTP protocol/configuration checks; no provider inference claimed."""
 import concurrent.futures
+import io
 import json
 import os
 from pathlib import Path
@@ -123,6 +124,46 @@ class ModelSettingsTests(unittest.TestCase):
         settings.settings_path().write_text('invalid')
         with patch.dict(os.environ,{'LAB_LLM_BASE_URL':self.base,'LAB_LLM_MODEL':'environment','LAB_LLM_API_KEY':'env-secret'}):
             self.assertFalse(settings.configured());self.assertEqual(self.request()['source'],'invalid')
+
+
+class ModelClientProtocolTests(unittest.TestCase):
+    def call(self, response, *, base='https://api.deepseek.com/v1', model='deepseek-flash', **kwargs):
+        config = {'base_url': base, 'model': model, 'api_key': 'private-test-key'}
+        with patch('shared.model_client.resolve', return_value=config), patch('shared.model_client.configured', return_value=True), patch('shared.model_client.open_model_request') as request:
+            request.return_value.__enter__.return_value = io.StringIO(json.dumps(response))
+            result = ask_json('Return JSON', {}, **kwargs)
+            return result, json.loads(request.call_args.args[0].data)
+
+    def test_deepseek_probe_uses_answer_budget_and_json_mode(self):
+        response = {'choices': [{'finish_reason': 'stop', 'message': {'content': '{"ok":true}'}}]}
+        for model in ('deepseek-flash', 'deepseek-v4-pro'):
+            with self.subTest(model=model):
+                result, body = self.call(response, model=model, max_tokens=32)
+                self.assertEqual(result, {'ok': True})
+                self.assertEqual(body['thinking'], {'type': 'disabled'})
+                self.assertEqual(body['response_format'], {'type': 'json_object'})
+                self.assertEqual(body['max_tokens'], 32)
+        _, body = self.call(response, base='https://compatible.example/v1')
+        self.assertNotIn('thinking', body)
+        self.assertNotIn('response_format', body)
+        _, body = self.call(response, response_schema={'type': 'object'})
+        self.assertEqual(body['response_format']['type'], 'json_schema')
+
+    def test_truncated_reasoning_and_json_report_output_limit(self):
+        for content in ('', '{"ok":', '{"ok":true}'):
+            response = {'choices': [{'finish_reason': 'length', 'message': {'content': content, 'reasoning_content': 'private reasoning'}}]}
+            with self.subTest(content=content), self.assertRaisesRegex(ValueError, 'token 上限') as result:
+                self.call(response)
+            self.assertNotIn('private', str(result.exception))
+
+    def test_auth_balance_and_rate_errors_are_specific_and_redacted(self):
+        for code, hint in ((401, '认证失败'), (402, '余额不足'), (429, '配额')):
+            error = urllib.error.HTTPError('https://private.example', code, 'private-test-key', {}, io.BytesIO(b'private upstream body'))
+            with patch('shared.model_client.resolve', return_value={'base_url': 'https://api.deepseek.com/v1', 'model': 'deepseek-flash', 'api_key': 'private-test-key'}), patch('shared.model_client.configured', return_value=True), patch('shared.model_client.open_model_request', side_effect=error) as request:
+                with self.assertRaisesRegex(ValueError, hint) as result:
+                    ask_json('Return JSON', {})
+                self.assertNotIn('private', str(result.exception))
+                self.assertEqual(request.call_count, 1)
 
 
 class OpenExampleTests(unittest.TestCase):

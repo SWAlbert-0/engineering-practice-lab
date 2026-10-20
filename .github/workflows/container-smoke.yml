@@ -84,10 +84,18 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_video_browser.cjs
-      - name: Six project hands-on experience guides
+      - name: Five project hands-on experience guides
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_experience_guide_browser.cjs
+      - name: D11 guided repair walkthrough
+        env:
+          LAB_TEST_URL: http://127.0.0.1:8765
+          LAB_BROWSER_ARTIFACTS: /tmp/lab-browser-artifacts/repair-tour
+        run: |
+          python3 -m venv /tmp/lab-guide-browser
+          /tmp/lab-guide-browser/bin/pip install playwright==1.62.1
+          /tmp/lab-guide-browser/bin/python tests/test_repair_tour_browser.py
       - name: Open cases and unified model configuration
         env:
           NODE_PATH: /tmp/lab-browser/node_modules

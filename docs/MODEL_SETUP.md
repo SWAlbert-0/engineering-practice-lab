@@ -16,6 +16,14 @@ Docker Desktop访问宿主模型时，地址用`host.docker.internal`替换`127.
 
 接口：`GET /api/model-settings`返回基础地址/模型和是否已有Key，不返回Key；同源JSON的`POST /api/model-settings`保存，`POST /api/model-settings/clear`清除；`POST /api/model-settings/test`必须携带`confirm_call: true`，显式发送一次最多32输出token的文本协议请求。费用依供应商计，不虚构金额。
 
+## DeepSeek 官方 API
+
+基础地址填写 `https://api.deepseek.com/v1`，文本模型填写 `deepseek-flash` 或账号可用的 `deepseek-v4-pro`，Key 使用 DeepSeek 开放平台生成的 API Key。保存后再勾选费用确认并测试已保存的文本连接。
+
+DeepSeek 这两个模型默认开启思考，而本项目的输出预算用于最终 JSON；客户端对官方地址的这两个模型显式关闭思考，并启用 JSON 输出，避免 32 token 的连接测试在思考阶段就被截断。其他兼容服务保持原有参数；研究 CLI 显式传入的 JSON Schema 约束保留原样，需供应商支持。
+
+HTTP 401 表示密钥认证失败，请在总览页面重新输入有效的 DeepSeek API Key 并点击保存；密钥框留空会保留旧密钥，不能修复认证错误。HTTP 402 表示余额不足，429 表示限流或配额限制。`finish_reason=length` 会单独提示输出上限，不能作为连接正常的依据。不要把 Key 发到聊天或日志中。
+
 ## 可选：Docker Compose 环境变量配置
 
 
