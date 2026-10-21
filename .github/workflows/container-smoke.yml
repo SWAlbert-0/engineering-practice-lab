@@ -106,6 +106,10 @@ jobs:
           LAB_TEST_URL: http://127.0.0.1:8765
           LAB_BROWSER_ARTIFACTS: /tmp/lab-browser-artifacts/guided-tours
         run: /tmp/lab-guide-browser/bin/python tests/test_guided_tours_browser.py
+      - name: Guided tour same-frame exit regression
+        env:
+          LAB_TEST_URL: http://127.0.0.1:8765
+        run: /tmp/lab-guide-browser/bin/python tests/test_tour_exit_browser.py
       - name: Open cases and unified model configuration
         env:
           NODE_PATH: /tmp/lab-browser/node_modules

@@ -160,10 +160,12 @@
       lastTarget = target;
       (allowed || target).scrollIntoView({block:'center', behavior:'instant'});
       target.focus({preventScroll:true});
+      const focused = target;
       requestAnimationFrame(() => {
+        if (!run.active || target !== focused || !focused.isConnected) return;
         position();
-        if (innerWidth <= 760 && target.getBoundingClientRect().bottom > card.getBoundingClientRect().top-18) {
-          window.scrollBy(0, target.getBoundingClientRect().bottom-card.getBoundingClientRect().top+32); position();
+        if (innerWidth <= 760 && focused.getBoundingClientRect().bottom > card.getBoundingClientRect().top-18) {
+          window.scrollBy(0, focused.getBoundingClientRect().bottom-card.getBoundingClientRect().top+32); position();
         }
       });
     }
