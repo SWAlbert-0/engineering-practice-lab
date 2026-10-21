@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "case": {
+    "id": "httpie-4",
+    "repository": "https://github.com/jakubroztocil/httpie",
+    "project": "httpie",
+    "bug_id": 4,
+    "buggy_commit": "8c892edd4fe700a7ca5cc733dcb4817831d253e2",
+    "fixed_commit": "040d981f00c3f6830b2d0db3daf3c64c080e96e3",
+    "original_python": "3.7.3",
+    "test_files": [
+      "tests/test_regressions.py"
+    ],
+    "test_commands": [
+      "pytest tests/test_regressions.py::test_Host_header_overwrite"
+    ],
+    "metadata_sha256": {
+      "bug.info": "2a9fd211254061f3270e76ffd762ed2cde3171677277717fc9465986f5286128",
+      "run_test.sh": "d603dcdf141de94082e27fe74b2f06f69b594b81f672fabbb9b75ae4403c095c",
+      "requirements.txt": "a4b51347d77c828ffc1b3f8165373156251ff0329f17996585a6f7a4f78fd51b"
+    },
+    "split": "evaluation",
+    "defect_family": "parsing_or_protocol",
+    "upstream_fix_title": "Fixed custom Host",
+    "upstream_fix_url": "https://github.com/httpie/cli/commit/040d981f00c3f6830b2d0db3daf3c64c080e96e3",
+    "status": "reproduced",
+    "model_status": "model_error"
+  },
+  "reproduction": {
+    "id": "httpie-4",
+    "status": "reproduced",
+    "model": null,
+    "dependency_profile": "httpie-legacy",
+    "source_preparation": {
+      "omitted_non_runtime_links": [],
+      "safe_internal_links": "materialized as regular files; no host symlinks created",
+      "httpbin_fixture": "httpbin.org mapped to loopback HTTPbin 0.7.0 port 80; no external network",
+      "base_snapshot_sha256": "602d381dbceec1ce0a68b1ffd6b95471dfce2486d15944bdad2d253cb52fc8ce"
+    },
+    "frozen_test_sha256": {
+      "tests/test_regressions.py": "647fe2a52ab18e18fce5415092ca710bce9b4d9b85ca56572c9cafac88a9e8a1"
+    },
+    "production_files": [
+      "httpie/models.py"
+    ]
+  },
+  "variants": {
+    "buggy": {
+      "id": "httpie-4",
+      "variant": "buggy",
+      "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+      "phases": {
+        "trigger": {
+          "returncode": 1,
+          "seconds": 0.6679013339999926,
+          "tests": [
+            {
+              "id": "tests.test_regressions::test_Host_header_overwrite",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 1,
+          "seconds": 0.6676210180000055,
+          "tests": [
+            {
+              "id": "tests.test_regressions::test_Host_header_overwrite",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    },
+    "upstream_repair": {
+      "id": "httpie-4",
+      "variant": "upstream_repair",
+      "image": "sha256:055b509ae7d61ecfa6467648e93889ed255c2683853402ea69d96d18d767167c",
+      "phases": {
+        "trigger": {
+          "returncode": 0,
+          "seconds": 0.6175191640000008,
+          "tests": [
+            {
+              "id": "tests.test_regressions::test_Host_header_overwrite",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 0,
+          "seconds": 0.6174758639999993,
+          "tests": [
+            {
+              "id": "tests.test_regressions::test_Host_header_overwrite",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    }
+  },
+  "reproduction_run": {
+    "run_id": 39409631610,
+    "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907912",
+    "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409"
+  },
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "model_run": {
+    "schema": 1,
+    "project": "httpie",
+    "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+    "model": {
+      "available": true,
+      "missing": [],
+      "model": "qwen3-0.6b-q8-eval",
+      "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+    },
+    "model_requested": true,
+    "source": {
+      "name": "BugsInPy",
+      "repository": "https://github.com/soarsmu/BugsInPy",
+      "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+    },
+    "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+    "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+    "started_utc": "2026-10-20T10:40:58Z"
+  },
+  "model_run_id": 39409631644,
+  "model_source": "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-4.json"
+}

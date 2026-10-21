@@ -1,0 +1,1619 @@
+{
+  "schema": 1,
+  "case": {
+    "id": "tornado-4",
+    "repository": "https://github.com/tornadoweb/tornado",
+    "project": "tornado",
+    "bug_id": 4,
+    "buggy_commit": "a8420fc681c5423d072978f00eab4d0645057d16",
+    "fixed_commit": "db529031a1e1a6e951826aba0b7d0b18f05cd4c7",
+    "original_python": "3.7.0",
+    "test_files": [
+      "tornado/test/web_test.py"
+    ],
+    "test_commands": [
+      "python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_with_range_neg_past_start",
+      "python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_unsatisfiable_range_end_less_than_start"
+    ],
+    "metadata_sha256": {
+      "bug.info": "82dc28e61edfee9ce3ed884b8b52858d5ee89a63984299c2f1f622c3fed6a5a4",
+      "run_test.sh": "4f493563fea4e43e400d75e2ee9a1b8dd7e1c60e13a052f84083bf434158eb0d",
+      "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+    },
+    "split": "evaluation",
+    "defect_family": "parsing_or_protocol",
+    "upstream_fix_title": "Fix #2521: Serve full file when range start is negative and exceeds the total length (#2522)",
+    "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/db529031a1e1a6e951826aba0b7d0b18f05cd4c7",
+    "status": "reproduced",
+    "model_status": "input_out_of_scope"
+  },
+  "reproduction": {
+    "id": "tornado-4",
+    "status": "reproduced",
+    "model": null,
+    "dependency_profile": "default",
+    "source_preparation": {
+      "omitted_non_runtime_links": [],
+      "safe_internal_links": "materialized as regular files; no host symlinks created",
+      "httpbin_fixture": null,
+      "base_snapshot_sha256": "b4060c72915cc3e8eccd004e3e629349314fa84fd363f71489c92fcc838d1c14"
+    },
+    "frozen_test_sha256": {
+      "tornado/test/web_test.py": "782e4de8f09add65034a474d1d1cdacb17fcbcf9d37a0e85de52fb62bc45a71f"
+    },
+    "production_files": [
+      "tornado/web.py"
+    ]
+  },
+  "variants": {
+    "buggy": {
+      "id": "tornado-4",
+      "variant": "buggy",
+      "image": "sha256:5525efde211f22392684549ccb585ac52721af4cdcaa0da29284fe8609366850",
+      "phases": {
+        "trigger": {
+          "returncode": 1,
+          "seconds": 0.51614209600001,
+          "tests": [
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_past_start",
+              "status": "failure"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_end_less_than_start",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 1,
+          "seconds": 1.0679307690000144,
+          "tests": [
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_arbitrary_bytes",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_cookie_tampering_future_timestamp",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_round_trip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_increment_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_invalidate_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_roundtrip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_roundtrip_differing_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_round_trip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinalReturnTest::test_finish_method_return_future",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinalReturnTest::test_render_method_return_future",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_cookie_special_char",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_get_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_domain",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_expires_days",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_false_flags",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_max_age",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_overwrite",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AuthRedirectTest::test_absolute_auth_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AuthRedirectTest::test_relative_auth_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ConnectionCloseTest::test_connection_close",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_group_encoding",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_group_question_mark",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_slashes",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument_invalid_unicode",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument_plus",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_body_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_query_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_header_injection",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_multi_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_no_gzip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_optional_path",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_reverse_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_types",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_uimodule_resources",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_uimodule_unescaped",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_web_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_web_redirect_double_slash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NonWSGIWebTests::test_empty_flush",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_default",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_failed_write_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_write_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_absolute_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_absolute_version_exclusion",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_include_host_override",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_path_traversal_protection",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_relative_version_exclusion",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_root_static_path",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_etag_modified_bug",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_if_modified_since",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_if_none_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_compressed_files",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_etag",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_files",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_head",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_head_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_if_modified_since_pre_epoch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_if_modified_since_time_zone",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_invalid_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_range_if_none_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_end_less_than_start",
+              "status": "failure"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_invalid_start",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_zero_suffix",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_end_edge",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_full_file",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_full_past_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_past_start",
+              "status": "failure"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_partial_past_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticDefaultFilenameTest::test_static_default_filename",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticDefaultFilenameTest::test_static_default_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileWithPathTest::test_serve",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CustomStaticFileTest::test_serve",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CustomStaticFileTest::test_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HostMatchingTest::test_host_matching",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DefaultHostMatchingTest::test_default_host_matching",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NamedURLSpecGroupsTest::test_named_urlspec_groups",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClearHeaderTest::test_clear_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Header204Test::test_204_headers",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Header304Test::test_304_headers",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StatusReasonTest::test_status",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DateHeaderTest::test_date_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_httperror_str",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_httperror_str_from_httputil",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_raise_with_reason",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorHandlerXSRFTest::test_404_xsrf",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorHandlerXSRFTest::test_error_xsrf",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip_not_requested",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip_static",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_vary_already_present",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_vary_already_present_multiple",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PathArgsInPrepareTest::test_kw",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PathArgsInPrepareTest::test_pos",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClearAllCookiesTest::test_clear_all_cookies",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_http_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_known_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_unknown_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.BuggyLoggingTest::test_buggy_log_exception",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UIMethodUIModuleTest::test_ui_method",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetArgumentErrorTest::test_catch_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SetLazyPropertiesTest::test_set_properties",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_from_ui_module_is_lazy",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_from_ui_module_works",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_is_lazy",
+              "status": "skipped"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_works",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedHTTPMethodsTest::test_unimplemented_standard_methods",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedNonStandardMethodsTest::test_unimplemented_other",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedNonStandardMethodsTest::test_unimplemented_patch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AllHTTPMethodsTest::test_standard_methods",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PatchMethodTest::test_other",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PatchMethodTest::test_patch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinishInPrepareTest::test_finish_in_prepare",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Default404Test::test_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Custom404Test::test_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DefaultHandlerArgumentsTest::test_403",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HandlerByNameTest::test_handler_by_name",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_close_during_upload",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_early_return",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_early_return_with_data",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_streaming_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_chunked_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_compressed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_fixed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_chunked_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_compressed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_fixed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.IncorrectContentLengthTest::test_content_length_too_high",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.IncorrectContentLengthTest::test_content_length_too_low",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClientCloseTest::test_client_close",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_expired",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_version_retrieval",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_invalid_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_read_write_default_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_read_write_non_default_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_known_values",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_name_swap",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_non_ascii",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_payload_tampering",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_signature_tampering",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_cross_user",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_distinct_tokens",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_refresh_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_versioning",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_argument_invalid_format",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_body_no_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_cookie_invalid_format",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_cookie_no_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_no_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_non_hex_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_post_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_query_string",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_short_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFCookieKwargsTest::test_xsrf_httponly",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinishExceptionTest::test_finish_exception",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratorTest::test_addslash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratorTest::test_removeslash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_strong_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_strong_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_weak_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_weak_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_strong_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_strong_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_weak_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_weak_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_wildcard_etag",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestSummaryTest::test_missing_remote_ip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HTTPErrorTest::test_copy",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ApplicationTest::test_listen",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_non_reversible",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_reverse",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_reverse_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_basic_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_pattern",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_with_appending_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_with_argument",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    },
+    "upstream_repair": {
+      "id": "tornado-4",
+      "variant": "upstream_repair",
+      "image": "sha256:5525efde211f22392684549ccb585ac52721af4cdcaa0da29284fe8609366850",
+      "phases": {
+        "trigger": {
+          "returncode": 0,
+          "seconds": 0.4160222479999902,
+          "tests": [
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_past_start",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_end_less_than_start",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 0,
+          "seconds": 0.9676076650000027,
+          "tests": [
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_arbitrary_bytes",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_cookie_tampering_future_timestamp",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV1Test::test_round_trip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_increment_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_invalidate_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_roundtrip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_key_version_roundtrip_differing_version",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SecureCookieV2Test::test_round_trip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinalReturnTest::test_finish_method_return_future",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinalReturnTest::test_render_method_return_future",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_cookie_special_char",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_get_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_domain",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_expires_days",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_false_flags",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_max_age",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CookieTest::test_set_cookie_overwrite",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AuthRedirectTest::test_absolute_auth_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AuthRedirectTest::test_relative_auth_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ConnectionCloseTest::test_connection_close",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_group_encoding",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_group_question_mark",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestEncodingTest::test_slashes",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument_invalid_unicode",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_decode_argument_plus",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_body_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_get_query_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_header_injection",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_multi_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_no_gzip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_optional_path",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_reverse_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_types",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_uimodule_resources",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_uimodule_unescaped",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_web_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.WSGISafeWebTest::test_web_redirect_double_slash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NonWSGIWebTests::test_empty_flush",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_default",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_failed_write_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorResponseTest::test_write_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_absolute_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_absolute_version_exclusion",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_include_host_override",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_path_traversal_protection",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_relative_version_exclusion",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_root_static_path",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_etag_modified_bug",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_if_modified_since",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_304_if_none_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_compressed_files",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_etag",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_files",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_head",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_head_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_if_modified_since_pre_epoch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_if_modified_since_time_zone",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_invalid_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_range_if_none_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_end_less_than_start",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_invalid_start",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_unsatisfiable_range_zero_suffix",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_end_edge",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_full_file",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_full_past_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_neg_past_start",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileTest::test_static_with_range_partial_past_end",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticDefaultFilenameTest::test_static_default_filename",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticDefaultFilenameTest::test_static_default_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StaticFileWithPathTest::test_serve",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CustomStaticFileTest::test_serve",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CustomStaticFileTest::test_static_url",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HostMatchingTest::test_host_matching",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DefaultHostMatchingTest::test_default_host_matching",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NamedURLSpecGroupsTest::test_named_urlspec_groups",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClearHeaderTest::test_clear_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Header204Test::test_204_headers",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Header304Test::test_304_headers",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StatusReasonTest::test_status",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DateHeaderTest::test_date_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_httperror_str",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_httperror_str_from_httputil",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RaiseWithReasonTest::test_raise_with_reason",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorHandlerXSRFTest::test_404_xsrf",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ErrorHandlerXSRFTest::test_error_xsrf",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip_not_requested",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_gzip_static",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_vary_already_present",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GzipTestCase::test_vary_already_present_multiple",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PathArgsInPrepareTest::test_kw",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PathArgsInPrepareTest::test_pos",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClearAllCookiesTest::test_clear_all_cookies",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_http_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_known_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ExceptionHandlerTest::test_unknown_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.BuggyLoggingTest::test_buggy_log_exception",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UIMethodUIModuleTest::test_ui_method",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetArgumentErrorTest::test_catch_error",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SetLazyPropertiesTest::test_set_properties",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_from_ui_module_is_lazy",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_from_ui_module_works",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_is_lazy",
+              "status": "skipped"
+            },
+            {
+              "id": "tornado.test.web_test.GetCurrentUserTest::test_get_current_user_works",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedHTTPMethodsTest::test_unimplemented_standard_methods",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedNonStandardMethodsTest::test_unimplemented_other",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.UnimplementedNonStandardMethodsTest::test_unimplemented_patch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.AllHTTPMethodsTest::test_standard_methods",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PatchMethodTest::test_other",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.PatchMethodTest::test_patch",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinishInPrepareTest::test_finish_in_prepare",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Default404Test::test_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.Custom404Test::test_404",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DefaultHandlerArgumentsTest::test_403",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HandlerByNameTest::test_handler_by_name",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_close_during_upload",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_early_return",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_early_return_with_data",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.StreamingRequestBodyTest::test_streaming_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_chunked_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_compressed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratedStreamingRequestFlowControlTest::test_flow_control_fixed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_chunked_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_compressed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.NativeStreamingRequestFlowControlTest::test_flow_control_fixed_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.IncorrectContentLengthTest::test_content_length_too_high",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.IncorrectContentLengthTest::test_content_length_too_low",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ClientCloseTest::test_client_close",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_expired",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_version_retrieval",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_invalid_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_read_write_default_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_key_versioning_read_write_non_default_key",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_known_values",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_name_swap",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_non_ascii",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_payload_tampering",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.SignedValueTest::test_signature_tampering",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_cross_user",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_distinct_tokens",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_refresh_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_versioning",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_argument_invalid_format",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_body_no_cookie",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_cookie_invalid_format",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_cookie_no_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_fail_no_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_header",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_non_hex_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_post_body",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_query_string",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFTest::test_xsrf_success_short_token",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.XSRFCookieKwargsTest::test_xsrf_httponly",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.FinishExceptionTest::test_finish_exception",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratorTest::test_addslash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.DecoratorTest::test_removeslash",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_strong_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_strong_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_weak_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_multiple_weak_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_strong_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_strong_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_weak_etag_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_weak_etag_not_match",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.CacheTest::test_wildcard_etag",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RequestSummaryTest::test_missing_remote_ip",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.HTTPErrorTest::test_copy",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.ApplicationTest::test_listen",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_non_reversible",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_reverse",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.URLSpecReverseTest::test_reverse_arguments",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_basic_redirect",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_pattern",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_with_appending_argument",
+              "status": "passed"
+            },
+            {
+              "id": "tornado.test.web_test.RedirectHandlerTest::test_redirect_with_argument",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    }
+  },
+  "reproduction_run": {
+    "run_id": 39409631610,
+    "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583908108",
+    "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409"
+  },
+  "model": {
+    "status": "input_out_of_scope",
+    "attempts": []
+  },
+  "model_run": {
+    "schema": 1,
+    "project": "tornado",
+    "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+    "model": {
+      "available": true,
+      "missing": [],
+      "model": "qwen3-0.6b-q8-eval",
+      "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+    },
+    "model_requested": true,
+    "source": {
+      "name": "BugsInPy",
+      "repository": "https://github.com/soarsmu/BugsInPy",
+      "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+    },
+    "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+    "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+    "started_utc": "2026-10-20T10:40:59Z"
+  },
+  "model_run_id": 39409631644,
+  "model_source": "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-4.json"
+}

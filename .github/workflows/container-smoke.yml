@@ -88,6 +88,10 @@ jobs:
           python3 -m venv /tmp/lab-guide-browser
           /tmp/lab-guide-browser/bin/pip install playwright==1.63.0
           /tmp/lab-guide-browser/bin/python tests/test_repair_tour_browser.py
+      - name: D11 real repository evidence browser acceptance
+        env:
+          LAB_BASE_URL: http://127.0.0.1:8765
+        run: /tmp/lab-guide-browser/bin/python tests/test_d11_research_browser.py
       - name: D09 guided requirements walkthrough
         env:
           LAB_TEST_URL: http://127.0.0.1:8765

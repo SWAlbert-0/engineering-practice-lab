@@ -1,0 +1,1105 @@
+{
+  "schema": 1,
+  "date": "2026-10-20",
+  "dataset": {
+    "name": "BugsInPy",
+    "repository": "https://github.com/soarsmu/BugsInPy",
+    "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+  },
+  "selection": "Fixed first numeric bug IDs: black 1–7, httpie 1–5, tornado/tqdm/youtube-dl 1–6. Selected before execution; all 30 retained, including setup failures. No development cases or hidden tests claimed.",
+  "cases": [
+    {
+      "id": "black-1",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 1,
+      "buggy_commit": "26c9465a22c732ab1e17b0dec578fa3432e9b558",
+      "fixed_commit": "c0a7582e3d4cc8bec3b7f5a6c52b36880dcb57d7",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_works_in_mono_process_only_environment"
+      ],
+      "metadata_sha256": {
+        "bug.info": "f25c9512a79be435f9340ab09b1a365c172a18ee44841f529a2c68b6ac9c55f3",
+        "run_test.sh": "4cc4dcdb0380e6752e5115f068ba37550faf5071b888c90e32bcab0a40a7d5e1",
+        "requirements.txt": "0bf753789d959137ae76826b3df5446e232f1034921fe90c8fb1550f040e7b84"
+      },
+      "split": "evaluation",
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "permits black to run in AWS Lambda: (#1141)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/c0a7582e3d4cc8bec3b7f5a6c52b36880dcb57d7",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-2",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 2,
+      "buggy_commit": "c8ca6b2b9ff3510bee12129824cebfc2fc51e5b2",
+      "fixed_commit": "892eddacd215d685e136686b7f629ade70adca83",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_fmtonoff4"
+      ],
+      "metadata_sha256": {
+        "bug.info": "dccadf2989741b6c67e81ff339d7fcf9329f6bc7006517905274c86a44125b7c",
+        "run_test.sh": "661c7eff06a036821b9e66a3ef8b7c0e46e6a6e815f65db6427aad3f8f6adcec",
+        "requirements.txt": "9f397c088543e408d3a9611b315d6ced6e94ebbb2f8f67844ab8fa3ec19d401c"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fix for \"# fmt: on\" with decorators (#1325)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/892eddacd215d685e136686b7f629ade70adca83",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-3",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 3,
+      "buggy_commit": "8126b4f6a9342290de4655e6a8a78cd288ce7daa",
+      "fixed_commit": "7a14a37981862ef418f3cdb4a7e2375856f97529",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_invalid_config_return_code"
+      ],
+      "metadata_sha256": {
+        "bug.info": "09ac24b9d2f0224396ef78dd9ef288d4d4605acda48494400b908dfb8c4790cc",
+        "run_test.sh": "41745e9452aa678f675d1f6c66d963586276803f86ada6a9daffe7a8e5adae90",
+        "requirements.txt": "884f3f07aa0060f4650fd197f63c27c7d8c0e530afdee5d93e34f533f6e5a8bb"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Change exit code to 2 when config file doesn't exist (#1361)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/7a14a37981862ef418f3cdb4a7e2375856f97529",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-4",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 4,
+      "buggy_commit": "65ea568e3301951f26e0e3b98f6d5dc80132e917",
+      "fixed_commit": "c7495b9aa098ef7a358fc74556359d21c6a4ba11",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py",
+        "tests/data/beginning_backslash.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_beginning_backslash"
+      ],
+      "metadata_sha256": {
+        "bug.info": "1fef3ed3e436de9bfd1650c69ab996ed65039b55e878216af7aa7e9526b5c58a",
+        "run_test.sh": "2e1dd0725ca9e6b35a4bee6b3af6daf79b2509c1ff33e1ec74ef21380fd4e110",
+        "requirements.txt": "2fdb8f4e1cded9c90678d86271ae3d7eb1789754217eee53403e39016b224b15"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fix unstable format involving backslash + whitespace at beginning of file (#948)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/c7495b9aa098ef7a358fc74556359d21c6a4ba11",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-5",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 5,
+      "buggy_commit": "1bbb01b854d168d76ebe4bf78961c2152ae075d9",
+      "fixed_commit": "9394de150ebf0adc426523f46dc08e8b2b2b0b63",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_function_trailing_comma"
+      ],
+      "metadata_sha256": {
+        "bug.info": "679c472f6c117ba5adbc39032fe5a07337afd1c7620e8e8f610544c063887891",
+        "run_test.sh": "f62855bcc4294ddbf4ad7326b09d1f33171e6eecbf752c8048e60e69f19899f0",
+        "requirements.txt": "350f607591e678cfcbfd0116b3b2056ca5646e9a7fdf2c1092b933f2e67ec8d5"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fix trailing comma for function with one arg (#880) (#891)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/9394de150ebf0adc426523f46dc08e8b2b2b0b63",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-6",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 6,
+      "buggy_commit": "8c8adedc2a74a494c24f93e405b6418ac32f54cd",
+      "fixed_commit": "f8617f975d56e81cfb4070ce65584f7b29a77e7a",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/test_black.py",
+        "tests/data/comment_after_escaped_newline.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_async_as_identifier",
+        "python -m unittest -q tests.test_black.BlackTestCase.test_python37"
+      ],
+      "metadata_sha256": {
+        "bug.info": "9d72dbaa10482295bec4d93d21fde083c4c1ecc338baa7cb1ab8526d4851094e",
+        "run_test.sh": "453c394dd93a494cae316c65d310666361d3899bfc5d1db77ce115f308916b17",
+        "requirements.txt": "3a733e41a07282716d8a80e27cb23ee46fbd50dd57c92258fd4cabaa1ef1c761"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Add support for always tokenizing async/await as keywords",
+      "upstream_fix_url": "https://github.com/psf/black/commit/f8617f975d56e81cfb4070ce65584f7b29a77e7a",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "black-7",
+      "repository": "https://github.com/psf/black",
+      "project": "black",
+      "bug_id": 7,
+      "buggy_commit": "18119d38466652ae818436cb497f601294ed4558",
+      "fixed_commit": "de806405d2934b629d67e2a6317ad7e826765a20",
+      "original_python": "3.8.3",
+      "test_files": [
+        "tests/data/tupleassign.py",
+        "tests/test_black.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tests.test_black.BlackTestCase.test_tuple_assign"
+      ],
+      "metadata_sha256": {
+        "bug.info": "2273add3a7ce3f7e90b41e2fcc9f5bf9c0e7dcda22564b626720a78de956a2ca",
+        "run_test.sh": "b60f18af519fcda4cfab19106fd3099dba98ad6f92415228222de776a04e814e",
+        "requirements.txt": "b4b041f0bbda3ee84babd68a0a48e4c80725a58de8f5586147236b2a32337940"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Add parentheses around tuple unpack assignment (#832)",
+      "upstream_fix_url": "https://github.com/psf/black/commit/de806405d2934b629d67e2a6317ad7e826765a20",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "httpie-1",
+      "repository": "https://github.com/jakubroztocil/httpie",
+      "project": "httpie",
+      "bug_id": 1,
+      "buggy_commit": "001bda19450ad85c91345eea3cfa3991e1d492ba",
+      "fixed_commit": "5300b0b490b8db48fac30b5e32164be93dc574b7",
+      "original_python": "3.7.3",
+      "test_files": [
+        "tests/test_downloads.py"
+      ],
+      "test_commands": [
+        "pytest tests/test_downloads.py::TestDownloadUtils::test_unique_filename"
+      ],
+      "metadata_sha256": {
+        "bug.info": "00b4048bda9b8b93b57e5c53f3d4a88671464b36c6e0f0f0d1793f64df93a35d",
+        "run_test.sh": "40ce8d143d7063d6666334d65b9c22fba0a07478a699b32383275fc9a826ad5b",
+        "requirements.txt": "ebeb6bb518eb982502c174455d55403243a53c8253e4c96dadd792ab69428759"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "Fixed #451 - OSError: [Errno 36] File name too long",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/5300b0b490b8db48fac30b5e32164be93dc574b7",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "httpie-2",
+      "repository": "https://github.com/jakubroztocil/httpie",
+      "project": "httpie",
+      "bug_id": 2,
+      "buggy_commit": "356e0436510fee70b4071fac58be81c0a0a7db59",
+      "fixed_commit": "e18b609ef7d867d6efa0efe42c832be5e0d09338",
+      "original_python": "3.7.3",
+      "test_files": [
+        "tests/test_redirects.py"
+      ],
+      "test_commands": [
+        "pytest tests/test_redirects.py::TestRedirects::test_max_redirects"
+      ],
+      "metadata_sha256": {
+        "bug.info": "122b7c1f71ffd4a486f9676535cc631a3d51d6892a2d3ea344cf639805b52f72",
+        "run_test.sh": "7ea126c7282555dbf2894dcd12447d93c28886ff2d5962c6c88facca029e0ef7",
+        "requirements.txt": "635e348696ae1e110910784738d1e4c7cf79f89b7670349a0e31c124f2c1fc62"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed --max-redirects",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/e18b609ef7d867d6efa0efe42c832be5e0d09338",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "httpie-3",
+      "repository": "https://github.com/jakubroztocil/httpie",
+      "project": "httpie",
+      "bug_id": 3,
+      "buggy_commit": "8c33e5e3d31d3cd6476c4d9bc963a4c529f883d2",
+      "fixed_commit": "589887939507ff26d36ec74bd2c045819cfa3d56",
+      "original_python": "3.7.3",
+      "test_files": [
+        "tests/test_sessions.py"
+      ],
+      "test_commands": [
+        "pytest tests/test_sessions.py::TestSession::test_download_in_session"
+      ],
+      "metadata_sha256": {
+        "bug.info": "b477c55b1552be926d23fe00189538a6026762780471a693ca66c68297f32856",
+        "run_test.sh": "8de86574c2548bd2bde5aeb7e31c9430ded0fcc382a42e45a8bd97bf13301cf1",
+        "requirements.txt": "635e348696ae1e110910784738d1e4c7cf79f89b7670349a0e31c124f2c1fc62"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed --download with --session",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/589887939507ff26d36ec74bd2c045819cfa3d56",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "httpie-4",
+      "repository": "https://github.com/jakubroztocil/httpie",
+      "project": "httpie",
+      "bug_id": 4,
+      "buggy_commit": "8c892edd4fe700a7ca5cc733dcb4817831d253e2",
+      "fixed_commit": "040d981f00c3f6830b2d0db3daf3c64c080e96e3",
+      "original_python": "3.7.3",
+      "test_files": [
+        "tests/test_regressions.py"
+      ],
+      "test_commands": [
+        "pytest tests/test_regressions.py::test_Host_header_overwrite"
+      ],
+      "metadata_sha256": {
+        "bug.info": "2a9fd211254061f3270e76ffd762ed2cde3171677277717fc9465986f5286128",
+        "run_test.sh": "d603dcdf141de94082e27fe74b2f06f69b594b81f672fabbb9b75ae4403c095c",
+        "requirements.txt": "a4b51347d77c828ffc1b3f8165373156251ff0329f17996585a6f7a4f78fd51b"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed custom Host",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/040d981f00c3f6830b2d0db3daf3c64c080e96e3",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "httpie-5",
+      "repository": "https://github.com/jakubroztocil/httpie",
+      "project": "httpie",
+      "bug_id": 5,
+      "buggy_commit": "16df8848e81eefac830f407e4b985f42b52970da",
+      "fixed_commit": "90af1f742230831792d74d303d1e7ce56c96d4bd",
+      "original_python": "3.7.3",
+      "test_files": [
+        "tests/tests.py"
+      ],
+      "test_commands": [
+        "pytest tests/tests.py::TestItemParsing::test_escape_longsep"
+      ],
+      "metadata_sha256": {
+        "bug.info": "2dd5363740eca8808fa82cb8c10ff8cacb39a79d5a602eef2375f1bb65819535",
+        "run_test.sh": "95b90dd54986ed30a03883a76b629408f3c1e9c0409e68fd3a605e8d9ec34a6a",
+        "requirements.txt": "a4b51347d77c828ffc1b3f8165373156251ff0329f17996585a6f7a4f78fd51b"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fixed escaping for long separators.",
+      "upstream_fix_url": "https://github.com/httpie/cli/commit/90af1f742230831792d74d303d1e7ce56c96d4bd",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tornado-1",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 1,
+      "buggy_commit": "6a5a0bfa370b6c0d3dbbf9589a560a98202d2baa",
+      "fixed_commit": "4677c54cc18bbfbdf0f4dadf11610fab6203fd63",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/websocket_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.websocket_test.WebSocketTest.test_nodelay"
+      ],
+      "metadata_sha256": {
+        "bug.info": "453a311f228494491bf8601e26d8bbe79adc9abb2af5b2be477acee6849bc675",
+        "run_test.sh": "824b5decbe6517adcba0b9c8e773f810f1490c510b7cec960278d6f46eca777b",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "websocket: Fix set_nodelay",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/4677c54cc18bbfbdf0f4dadf11610fab6203fd63",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tornado-2",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 2,
+      "buggy_commit": "2ca8821d006f6693f920a4b183a3a7c985a5c8ad",
+      "fixed_commit": "4f486a4aec746e9d66441600ee3b0743228b061c",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/httpclient_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.httpclient_test.HTTPClientCommonTestCase.test_redirect_put_without_body"
+      ],
+      "metadata_sha256": {
+        "bug.info": "399b96f35c0f437fbb44fd12b1b9ea8c55c9d533ff44adaf255ab0f083ff4c9e",
+        "run_test.sh": "9e749a53b7a4bd1683b8d7c6ac6c3d84c3ad6315912647db58e1269fb89d782b",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "http1connection: Fix a bug with redirects and chunked requests",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/4f486a4aec746e9d66441600ee3b0743228b061c",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tornado-3",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 3,
+      "buggy_commit": "940fd87fe9145d1154c8457221f86d56ea063c65",
+      "fixed_commit": "aa622e724f80e0f7fcee369f75d69d1db13d72f2",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/httpclient_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.httpclient_test.SyncHTTPClientSubprocessTest"
+      ],
+      "metadata_sha256": {
+        "bug.info": "383a9e50eab339ad28a1e760804148d5464c94c42ce839e71feb4f12c3ad8aa1",
+        "run_test.sh": "33120f4cf0039b05b41b58240ad69f5ff94b226ad604748a9b1dd9647092c09d",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "httpclient: Fix warning logged by sync HTTPClient destructor",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/aa622e724f80e0f7fcee369f75d69d1db13d72f2",
+      "status": "not_reproduced",
+      "model_status": "not_eligible_not_reproduced"
+    },
+    {
+      "id": "tornado-4",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 4,
+      "buggy_commit": "a8420fc681c5423d072978f00eab4d0645057d16",
+      "fixed_commit": "db529031a1e1a6e951826aba0b7d0b18f05cd4c7",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/web_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_with_range_neg_past_start",
+        "python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_unsatisfiable_range_end_less_than_start"
+      ],
+      "metadata_sha256": {
+        "bug.info": "82dc28e61edfee9ce3ed884b8b52858d5ee89a63984299c2f1f622c3fed6a5a4",
+        "run_test.sh": "4f493563fea4e43e400d75e2ee9a1b8dd7e1c60e13a052f84083bf434158eb0d",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "Fix #2521: Serve full file when range start is negative and exceeds the total length (#2522)",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/db529031a1e1a6e951826aba0b7d0b18f05cd4c7",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "tornado-5",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 5,
+      "buggy_commit": "2d4053daa56c609d642b214399e046671d4a593e",
+      "fixed_commit": "886643965b5cb782503d8d7b374b7a794ec2077b",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/ioloop_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.ioloop_test.TestPeriodicCallbackMath.test_clock_backwards"
+      ],
+      "metadata_sha256": {
+        "bug.info": "7a550dd5a8eff243e80b1ab392482c37a6b9bca17949ae5152a5f8dc545187b6",
+        "run_test.sh": "1f4d28e6d3cc2ce3ba1306b2c617bb78b47fd1cf751aeddca1e48a884114dd6e",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "ioloop: Fix PeriodicCallback when system clock moves backwards",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/886643965b5cb782503d8d7b374b7a794ec2077b",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tornado-6",
+      "repository": "https://github.com/tornadoweb/tornado",
+      "project": "tornado",
+      "bug_id": 6,
+      "buggy_commit": "fb74e4816ccfa7fc6a7abd8c8aab1f415cfc1b13",
+      "fixed_commit": "2905ee4fb3c283d40b10f609359e189c83a0dc06",
+      "original_python": "3.7.0",
+      "test_files": [
+        "tornado/test/asyncio_test.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q tornado.test.asyncio_test.LeakTest.test_ioloop_close_leak",
+        "python -m unittest -q tornado.test.asyncio_test.LeakTest.test_asyncio_close_leak"
+      ],
+      "metadata_sha256": {
+        "bug.info": "728d5c07d01ab94c12d2978309b62e244b3680013f0ff93addebd1da58aa306a",
+        "run_test.sh": "fcb849ad14cb7514c4357241964b8c4d8b657885f01c577d5fcf3f004c5ca96d",
+        "requirements.txt": "7cc93dfddc6a9e281aac790929b60059027ce22f1be5eebc2846981d0902b713"
+      },
+      "split": "evaluation",
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "asyncio: Fix a leak when event loops are created and destroyed",
+      "upstream_fix_url": "https://github.com/tornadoweb/tornado/commit/2905ee4fb3c283d40b10f609359e189c83a0dc06",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tqdm-1",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 1,
+      "buggy_commit": "8cc777fe8401a05d07f2c97e65d15e4460feab88",
+      "fixed_commit": "c0dcf39b046d1b4ff6de14ac99ad9a1b10487512",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_contrib.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_contrib.py::test_enumerate"
+      ],
+      "metadata_sha256": {
+        "bug.info": "3bca7455cc4f7c6a5a653e91b5824f67384ecfbfc1901a6a27ae6eb7385fff44",
+        "run_test.sh": "ac23cf3aa708f053772f2bb16df79fbdf855188a09f8dc516bee91f5273b449d",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `tenumerate(start)`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/c0dcf39b046d1b4ff6de14ac99ad9a1b10487512",
+      "status": "reproduced",
+      "model_status": "budget_exhausted"
+    },
+    {
+      "id": "tqdm-2",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 2,
+      "buggy_commit": "bef86db56654d271838b145ad77f7040a73a7b4d",
+      "fixed_commit": "127af5caf19e7d29c346f5ca8a9c7ef3004b664b",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_tqdm.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_tqdm.py::test_format_meter"
+      ],
+      "metadata_sha256": {
+        "bug.info": "20e7313692bc7ea7af64675b1ceccbbf0618c6b68c401ac3de68cb6366d430d8",
+        "run_test.sh": "a34275c58852ddc675261386198e461aa6975706195d0a9647aecbc70c660998",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "resource_state_or_compatibility",
+      "upstream_fix_title": "fix most tests and logic",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/127af5caf19e7d29c346f5ca8a9c7ef3004b664b",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tqdm-3",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 3,
+      "buggy_commit": "c2599e3cd6087429f48bae34347ec5d2473c8392",
+      "fixed_commit": "73962a47026dd980ac0758820efc9c41cbf938e0",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_tqdm.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_tqdm.py::test_bool"
+      ],
+      "metadata_sha256": {
+        "bug.info": "48e4180efbd4d0e54faf353e0e94c9a47c69b0db03903baea16660abdb7501c8",
+        "run_test.sh": "38962eab7ed15017209aa152e2d83cec769dbcc4b3831d7fd4d72151829883b2",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "tqdm: fix boolean casting to work for sizeless self.iterable",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/73962a47026dd980ac0758820efc9c41cbf938e0",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tqdm-4",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 4,
+      "buggy_commit": "03b347646492131d889871939b40457d29147216",
+      "fixed_commit": "964dee631d0ed30e2f799b42fc58ba5e73795a08",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_tqdm.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_tqdm.py::test_nototal"
+      ],
+      "metadata_sha256": {
+        "bug.info": "51bea30e7d69f67f8a49da2e59594ca4feaa08737d6f65573af795fb46936ab8",
+        "run_test.sh": "05c0562d3d33fbfa2faaddf5cd369639570f4a99ba5626a8be18c7d7ce1d451d",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `TypeError` when `unit_scale` and unknown `total`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/964dee631d0ed30e2f799b42fc58ba5e73795a08",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tqdm-5",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 5,
+      "buggy_commit": "19b08ab34fdbfa0275bc5cb2430436c724c7e759",
+      "fixed_commit": "4f340697af69b71850aad496387c9c5aa1904136",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_tqdm.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_tqdm.py::test_bool"
+      ],
+      "metadata_sha256": {
+        "bug.info": "94c71277306cd397048c9624f9c92ef95f10dcd412965b4b715d49a0f5256c0f",
+        "run_test.sh": "38962eab7ed15017209aa152e2d83cec769dbcc4b3831d7fd4d72151829883b2",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "support `bool()` cast when `disable=True`",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/4f340697af69b71850aad496387c9c5aa1904136",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "tqdm-6",
+      "repository": "https://github.com/tqdm/tqdm",
+      "project": "tqdm",
+      "bug_id": 6,
+      "buggy_commit": "a4b9c86db548b2d0dbb5af7a6bbdc26ab47e1eec",
+      "fixed_commit": "6dad2e89019317e875c46d5a3a82a811ad6de2f9",
+      "original_python": "3.6.9",
+      "test_files": [
+        "tqdm/tests/tests_synchronisation.py"
+      ],
+      "test_commands": [
+        "python3 -m pytest tqdm/tests/tests_synchronisation.py::test_imap"
+      ],
+      "metadata_sha256": {
+        "bug.info": "363378aa64576f91c1e57493ad6fe37bd6071c023467c1be6a6d60afc14b5bc4",
+        "run_test.sh": "71675b11ef44fb78af9f8227a4f6ac53f4bea08224048c536cf5ca066624961a",
+        "requirements.txt": "351870f5066dc3de10d7b3b6ba01b8677d948fedc0d2165eb665a03b1426c22b"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "fix `disable=True` edge case",
+      "upstream_fix_url": "https://github.com/tqdm/tqdm/commit/6dad2e89019317e875c46d5a3a82a811ad6de2f9",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "youtube-dl-1",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 1,
+      "buggy_commit": "99036a1298089068dcf80c0985bfcc3f8c24f281",
+      "fixed_commit": "1cc47c667419e0eadc0a6989256ab7b276852adf",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_utils.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_utils.TestUtil.test_match_str"
+      ],
+      "metadata_sha256": {
+        "bug.info": "4271822e7deda3e9a5ae0c00768d8f6d3ab91e33f6d1f5e777f68b2016fffab5",
+        "run_test.sh": "43b0f0eb4ca881a13b89390a9fc36dda5c2a08a379b25746e58bf787451290f9",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix match_str for boolean meta fields",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/1cc47c667419e0eadc0a6989256ab7b276852adf",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "youtube-dl-2",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 2,
+      "buggy_commit": "84f085d4bdb66ee025fb337bcd571eab7469da97",
+      "fixed_commit": "9d6ac71c27b1dfb662c795ef598dbfd0286682da",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_InfoExtractor.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_InfoExtractor.TestInfoExtractor.test_parse_mpd_formats"
+      ],
+      "metadata_sha256": {
+        "bug.info": "34b61d5f3ed06db0ded22c0450d1fbb0624561a5d4a8ec114096c1dc1a70689f",
+        "run_test.sh": "e608b9338bb342334cb547f0080a471ea5dc179f11b16bdc850305f84c36f66d",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[extractor/common] Fix extraction of DASH formats with the same representation id (closes #15111)",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/9d6ac71c27b1dfb662c795ef598dbfd0286682da",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "youtube-dl-3",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 3,
+      "buggy_commit": "f5469da9e6e259c1690c7ef54f1da1c19f65036f",
+      "fixed_commit": "95f3f7c20a05e7ac490e768b8470b20538ef8581",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_utils.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_utils.TestUtil.test_unescape_html"
+      ],
+      "metadata_sha256": {
+        "bug.info": "0f4b4ad94adf577627c151fe23b9e77b0ee17319a8008d64c364bb16fc43012a",
+        "run_test.sh": "5d1d6641b56006f0916da8c864cc2adb5b9f6a0af785d0d2b4b9c2d79d5a31eb",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix unescapeHTML for misformed string like \"&a&quot;\" (#13935)",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/95f3f7c20a05e7ac490e768b8470b20538ef8581",
+      "status": "reproduced",
+      "model_status": "input_out_of_scope"
+    },
+    {
+      "id": "youtube-dl-4",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 4,
+      "buggy_commit": "bc40b3a5ba44006c23daf7fe0ed872af5e33bdc5",
+      "fixed_commit": "189935f15960300d316e8b07108b076ac6c2186a",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_jsinterp.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_jsinterp.TestJSInterpreter.test_call"
+      ],
+      "metadata_sha256": {
+        "bug.info": "2c31fc6663bb88119fa490f4612282e316fad4a6175a70aaa418092ce391136c",
+        "run_test.sh": "279d8fad881da2f7f386efcb07693cdc15d2b89a16adfaba9fa94c5af36d0004",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "boundary_or_empty_input",
+      "upstream_fix_title": "[jsinterp] Fix function calls without arguments.",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/189935f15960300d316e8b07108b076ac6c2186a",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "youtube-dl-5",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 5,
+      "buggy_commit": "b02b960c6bba834d9e7199ac53430c7933079dc8",
+      "fixed_commit": "7dc2a74e0ac9cfa74cc9de6f586ffd5cc8bac0d9",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_utils.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_utils.TestUtil.test_unified_timestamps"
+      ],
+      "metadata_sha256": {
+        "bug.info": "10890f7c0da46684857e55ce5762bdd87d688df3bb3378d3b212945f94066c31",
+        "run_test.sh": "ca642ff604fa0101be25ae06defe17baafa3900e480d8f3d177ad6dda01dd521",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix unified_timestamp for formats parsed by parsedate_tz()",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/7dc2a74e0ac9cfa74cc9de6f586ffd5cc8bac0d9",
+      "status": "reproduced",
+      "model_status": "model_error"
+    },
+    {
+      "id": "youtube-dl-6",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "project": "youtube-dl",
+      "bug_id": 6,
+      "buggy_commit": "4f29fa99069760dc47ef9ca5dbf607a567d2982f",
+      "fixed_commit": "d631d5f9f27f93767226192e4288990413fa9dbd",
+      "original_python": "3.7.0",
+      "test_files": [
+        "test/test_utils.py"
+      ],
+      "test_commands": [
+        "python -m unittest -q test.test_utils.TestUtil.test_parse_dfxp_time_expr"
+      ],
+      "metadata_sha256": {
+        "bug.info": "1753b2e441d20dd11cfc9a2b819cc6b0a720264a36b425364ddff513594f6650",
+        "run_test.sh": "7e860bbdf668aa9a1fde8fab89482996949efe055134739e424f62769f184e76",
+        "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "split": "evaluation",
+      "defect_family": "parsing_or_protocol",
+      "upstream_fix_title": "[utils] Fix TTML conversion",
+      "upstream_fix_url": "https://github.com/ytdl-org/youtube-dl/commit/d631d5f9f27f93767226192e4288990413fa9dbd",
+      "status": "reproduced",
+      "model_status": "model_error"
+    }
+  ],
+  "summary": {
+    "reproduction": {
+      "run_id": 39409631610,
+      "selected": 30,
+      "reproduced": 29,
+      "projects": [
+        {
+          "project": "black",
+          "selected": 7,
+          "reproduced": 7,
+          "statuses": {
+            "reproduced": 7
+          },
+          "model_repair_rate": null
+        },
+        {
+          "project": "httpie",
+          "selected": 5,
+          "reproduced": 5,
+          "statuses": {
+            "reproduced": 5
+          },
+          "model_repair_rate": null
+        },
+        {
+          "project": "tornado",
+          "selected": 6,
+          "reproduced": 5,
+          "statuses": {
+            "not_reproduced": 1,
+            "reproduced": 5
+          },
+          "model_repair_rate": null
+        },
+        {
+          "project": "tqdm",
+          "selected": 6,
+          "reproduced": 6,
+          "statuses": {
+            "reproduced": 6
+          },
+          "model_repair_rate": null
+        },
+        {
+          "project": "youtube-dl",
+          "selected": 6,
+          "reproduced": 6,
+          "statuses": {
+            "reproduced": 6
+          },
+          "model_repair_rate": null
+        }
+      ]
+    },
+    "model_diagnostic": {
+      "run_id": 39409631644,
+      "selected": 30,
+      "statuses": {
+        "input_out_of_scope": 11,
+        "model_error": 17,
+        "not_eligible_not_reproduced": 1,
+        "budget_exhausted": 1
+      },
+      "parsed_output_calls": 3,
+      "test_plausible": 0,
+      "semantic_repair_rate": null,
+      "complete_usage": null,
+      "projects": [
+        {
+          "schema": 1,
+          "project": "black",
+          "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+          "model": {
+            "available": true,
+            "missing": [],
+            "model": "qwen3-0.6b-q8-eval",
+            "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+          },
+          "model_requested": true,
+          "source": {
+            "name": "BugsInPy",
+            "repository": "https://github.com/soarsmu/BugsInPy",
+            "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+          },
+          "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+          "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+          "started_utc": "2026-10-20T10:40:56Z",
+          "selected": 7,
+          "reproduced": 7,
+          "statuses": {
+            "reproduced": 7
+          },
+          "model_repair_rate": null,
+          "model_comparison": {
+            "eligible_reproduced": 7,
+            "single_round_test_plausible": 0,
+            "bounded_loop_test_plausible": 0,
+            "bounded_loop_rate_all_selected": 0,
+            "bounded_loop_rate_reproduced": 0,
+            "rejected_candidate_count": 0,
+            "actual_recorded_calls": 0,
+            "usage": null,
+            "cost": null,
+            "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+          }
+        },
+        {
+          "schema": 1,
+          "project": "httpie",
+          "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+          "model": {
+            "available": true,
+            "missing": [],
+            "model": "qwen3-0.6b-q8-eval",
+            "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+          },
+          "model_requested": true,
+          "source": {
+            "name": "BugsInPy",
+            "repository": "https://github.com/soarsmu/BugsInPy",
+            "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+          },
+          "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+          "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+          "started_utc": "2026-10-20T10:40:58Z",
+          "selected": 5,
+          "reproduced": 5,
+          "statuses": {
+            "reproduced": 5
+          },
+          "model_repair_rate": null,
+          "model_comparison": {
+            "eligible_reproduced": 5,
+            "single_round_test_plausible": 0,
+            "bounded_loop_test_plausible": 0,
+            "bounded_loop_rate_all_selected": 0,
+            "bounded_loop_rate_reproduced": 0,
+            "rejected_candidate_count": 0,
+            "actual_recorded_calls": 0,
+            "usage": null,
+            "cost": null,
+            "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+          }
+        },
+        {
+          "schema": 1,
+          "project": "tornado",
+          "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+          "model": {
+            "available": true,
+            "missing": [],
+            "model": "qwen3-0.6b-q8-eval",
+            "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+          },
+          "model_requested": true,
+          "source": {
+            "name": "BugsInPy",
+            "repository": "https://github.com/soarsmu/BugsInPy",
+            "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+          },
+          "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+          "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+          "started_utc": "2026-10-20T10:40:59Z",
+          "selected": 6,
+          "reproduced": 5,
+          "statuses": {
+            "not_reproduced": 1,
+            "reproduced": 5
+          },
+          "model_repair_rate": null,
+          "model_comparison": {
+            "eligible_reproduced": 5,
+            "single_round_test_plausible": 0,
+            "bounded_loop_test_plausible": 0,
+            "bounded_loop_rate_all_selected": 0,
+            "bounded_loop_rate_reproduced": 0,
+            "rejected_candidate_count": 0,
+            "actual_recorded_calls": 0,
+            "usage": null,
+            "cost": null,
+            "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+          }
+        },
+        {
+          "schema": 1,
+          "project": "tqdm",
+          "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+          "model": {
+            "available": true,
+            "missing": [],
+            "model": "qwen3-0.6b-q8-eval",
+            "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+          },
+          "model_requested": true,
+          "source": {
+            "name": "BugsInPy",
+            "repository": "https://github.com/soarsmu/BugsInPy",
+            "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+          },
+          "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+          "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+          "started_utc": "2026-10-20T10:40:59Z",
+          "selected": 6,
+          "reproduced": 6,
+          "statuses": {
+            "reproduced": 6
+          },
+          "model_repair_rate": null,
+          "model_comparison": {
+            "eligible_reproduced": 6,
+            "single_round_test_plausible": 0,
+            "bounded_loop_test_plausible": 0,
+            "bounded_loop_rate_all_selected": 0,
+            "bounded_loop_rate_reproduced": 0,
+            "rejected_candidate_count": 3,
+            "actual_recorded_calls": 3,
+            "usage": null,
+            "cost": null,
+            "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+          }
+        },
+        {
+          "schema": 1,
+          "project": "youtube-dl",
+          "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+          "model": {
+            "available": true,
+            "missing": [],
+            "model": "qwen3-0.6b-q8-eval",
+            "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+          },
+          "model_requested": true,
+          "source": {
+            "name": "BugsInPy",
+            "repository": "https://github.com/soarsmu/BugsInPy",
+            "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+          },
+          "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+          "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+          "started_utc": "2026-10-20T10:40:59Z",
+          "selected": 6,
+          "reproduced": 6,
+          "statuses": {
+            "reproduced": 6
+          },
+          "model_repair_rate": null,
+          "model_comparison": {
+            "eligible_reproduced": 6,
+            "single_round_test_plausible": 0,
+            "bounded_loop_test_plausible": 0,
+            "bounded_loop_rate_all_selected": 0,
+            "bounded_loop_rate_reproduced": 0,
+            "rejected_candidate_count": 0,
+            "actual_recorded_calls": 0,
+            "usage": null,
+            "cost": null,
+            "interpretation": "Test-plausible on public trigger and relevant-module tests; no hidden correctness or contamination-free claim"
+          }
+        }
+      ]
+    }
+  },
+  "source_hash_format": "UTF-8 with LF line endings",
+  "source_sha256": {
+    "evaluations/d11/manifest.json": "83a92858c267f7bd04e1427faa1f408ee8d8776e65bce6c4e598e78fed5c30e8",
+    "evaluations/d11/results/2026-10-20/summary.json": "bfd929ad7d1b32d6e46fd34b47fd23d437df5ba9060b8b0d324895a948c9faf1",
+    "evaluations/d11/results/2026-10-20/repro-black.json": "1dfede1ee50b9c527caf8fd993ca1674cb8414a56f746e6bb9bfe8bbd3d2ef35",
+    "evaluations/d11/results/2026-10-20/model-black-raw/run.json": "2ce6d4ababd5c10191922325e09e4bc65bd2b13c631168bdc02fbfc1744dde4e",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-1.json": "5f456cd3c1b1b09203d2d52596aad8e3cf81d1c4cd2444868d52f79c1d60e5db",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-2.json": "2ba989c950a637d4777933eef0fb003145b98275b9620b616f727eefb1b3ff38",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-3.json": "7994a83e38ccb5e6a10c9625c720d0a3763dab8dba193258fe3a29535b306f04",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-4.json": "bbce39bc914c37024395fe449e673d1caf7b39c54884dec14a71a20ece3edb1e",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-5.json": "bf624833975563e8c09d4396e00a4daa887fdf1b1f652849e9db0cfe776d1fb0",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-6.json": "08e73057f03b3a95baab47dd0f2600b3a5a929e76914bf4564e22e006a908f98",
+    "evaluations/d11/results/2026-10-20/model-black-raw/black-7.json": "9541183be9a4cecf19aac080ebba433e85f86e7fb95936c79009258403e94cd2",
+    "evaluations/d11/results/2026-10-20/repro-httpie.json": "9aca7ad04deb7a1a145a3b88f4df3fd7bcfec12ba66fd5d94d6180d7721d7a68",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/run.json": "1ca79b82208386b75371fef4b1cf5e371ad3e4339b55f4a808f99476a0f35683",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-1.json": "7ac2a697123d032f6d634485c68a5f220b988ab3941c19695da07fad450cca77",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-2.json": "e3cf7ff748ef1a5e6cbd805879e6e4bd3dc4de15431fb5041c7985c7be4e4ff0",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-3.json": "7e9f17d9e13ad909e9807bc91a24746a2f7df29f46e8e899df6a5a35172ecb5c",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-4.json": "7e8e15216b455df1e2b07e9a5f9dee0a87157dfaddaecd979ba78784241b6dfd",
+    "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-5.json": "583625adefcaede57f3e09b22a3e6c599eb8e4e302316e72eab375e96f4bb09a",
+    "evaluations/d11/results/2026-10-20/repro-tornado.json": "d5bff3911a8509660dbcd1a6e1e8cc6cba980b5622037c8e527a0092c54bf5b5",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/run.json": "9a63ff58f4120fcb9c564aff7fec7e0020803d46c3c8aef213c56ae479524e25",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-1.json": "c96f74a1f67c69d168636b6bd44bbb409bc9a976ca88af4c59063729549444e6",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-2.json": "d3d9687fe49e1b4065d17282d115cea23529fc3b32de65a91774ede2bf019eb5",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-3.json": "13711e8675d4a241aad33c390f3375cbd3ec74927ce11a7ee627f64f9c0cbc31",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-4.json": "14fa7bab395d504ffde86c4b9d52f354edad7c80bc3ee6a231b5a81a57135c23",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-5.json": "bbf6d6d59f09e5e14d09a26044675ca41d32f27f1c6c4f055e4e92c929795941",
+    "evaluations/d11/results/2026-10-20/model-tornado-raw/tornado-6.json": "1d8f014333689b3d86e7b6d27b79cdb98568d0cbbe9e4b0cfef3d51373158119",
+    "evaluations/d11/results/2026-10-20/repro-tqdm.json": "518c5c7c74409e38d1e4d300828ac1cff7a174bd9c1595b2c69936e443ade7d3",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/run.json": "b1922704852218e99de7b3e51230909b5995a4a76ca11d1f9b8f49e69740fe76",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-1.json": "f9f11e97d9413bcd0dc1c91278091a085558e9788dd46b950de3d3439c6099b7",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-2.json": "bb4a78e62296e4fe5a1b9a159648ae0f312fb2c2877de5b8bd9a3528e8b0d835",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-3.json": "f97096b0389edfcf212b032910fddd26b3ed7af46703bbdc140d0034ff04fd71",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-4.json": "b9ce248221ee5d561eef392137b7d5c6532ede2814806fd01b92c05c9cc38947",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-5.json": "919fbfe5d365ea79b80e61683400734dc6a2a09deba091a7f552d668a8a9ac4a",
+    "evaluations/d11/results/2026-10-20/model-tqdm-raw/tqdm-6.json": "4fc25c2604d709f78c18a6e6820b43f432b5d27640dba46b3553dfd25493844d",
+    "evaluations/d11/results/2026-10-20/repro-youtube.json": "e58c9af24c701ebd9ea9e6d3d6b3537550b041c7f76a1b42620f11f3bef7773f",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/run.json": "b9a6f0ec012cfde8c04f5a738492c3f23a396e01e9baf07e65f6525ea6227cc2",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-1.json": "fc982b1b504a28c6e5d7503675772649605d0e5c0db5411c833a763e4ef2ea50",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-2.json": "78b7aaac75187afca959a1b0ab30f9b1cc5bca2ff499499c11cab1d1a6b44a90",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-3.json": "68466d7b04b7bef57e8dcdc2f836ce3cb8cf6ff5f7e7befa7714339a65178036",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-4.json": "e6f76b8e3c6483fed2e609b3dda582047eaa0eb43ec27ed031af1ca8d8f7fa6d",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-5.json": "968c680171968fab25367ac6c2ba821de144e517d105636693fe79aeb2993ad4",
+    "evaluations/d11/results/2026-10-20/model-youtube-raw/youtube-dl-6.json": "e4f3cd28e48461512434b022dfd7331670fe5eacaffc63b2c5b71d77fd009e6d"
+  }
+}

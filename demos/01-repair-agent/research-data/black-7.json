@@ -1,0 +1,914 @@
+{
+  "schema": 1,
+  "case": {
+    "id": "black-7",
+    "repository": "https://github.com/psf/black",
+    "project": "black",
+    "bug_id": 7,
+    "buggy_commit": "18119d38466652ae818436cb497f601294ed4558",
+    "fixed_commit": "de806405d2934b629d67e2a6317ad7e826765a20",
+    "original_python": "3.8.3",
+    "test_files": [
+      "tests/data/tupleassign.py",
+      "tests/test_black.py"
+    ],
+    "test_commands": [
+      "python -m unittest -q tests.test_black.BlackTestCase.test_tuple_assign"
+    ],
+    "metadata_sha256": {
+      "bug.info": "2273add3a7ce3f7e90b41e2fcc9f5bf9c0e7dcda22564b626720a78de956a2ca",
+      "run_test.sh": "b60f18af519fcda4cfab19106fd3099dba98ad6f92415228222de776a04e814e",
+      "requirements.txt": "b4b041f0bbda3ee84babd68a0a48e4c80725a58de8f5586147236b2a32337940"
+    },
+    "split": "evaluation",
+    "defect_family": "boundary_or_empty_input",
+    "upstream_fix_title": "Add parentheses around tuple unpack assignment (#832)",
+    "upstream_fix_url": "https://github.com/psf/black/commit/de806405d2934b629d67e2a6317ad7e826765a20",
+    "status": "reproduced",
+    "model_status": "input_out_of_scope"
+  },
+  "reproduction": {
+    "id": "black-7",
+    "status": "reproduced",
+    "model": null,
+    "dependency_profile": "default",
+    "source_preparation": {
+      "omitted_non_runtime_links": [
+        "docs/authors.md",
+        "docs/blackd.md",
+        "docs/change_log.md",
+        "docs/contributing_to_black.md",
+        "docs/editor_integration.md",
+        "docs/ignoring_unmodified_files.md",
+        "docs/installation_and_usage.md",
+        "docs/license.md",
+        "docs/pyproject_toml.md",
+        "docs/show_your_style.md",
+        "docs/testimonials.md",
+        "docs/the_black_code_style.md",
+        "docs/version_control_integration.md"
+      ],
+      "safe_internal_links": "materialized as regular files; no host symlinks created",
+      "httpbin_fixture": null,
+      "base_snapshot_sha256": "82c72fdb7115ef91fb3461ca04fc3470b80a55ea767ea3b9137f4204c91d670a"
+    },
+    "frozen_test_sha256": {
+      "tests/data/tupleassign.py": "13c006dfcfb94a760f9109ab4b59225cfa6c8bfc62202e285e9819744cf95607",
+      "tests/test_black.py": "92d3f0daf31c46ef66093f32a4d8a805c7e60d0afb22e1b59e4b2402461e2072"
+    },
+    "production_files": [
+      "black.py"
+    ]
+  },
+  "variants": {
+    "buggy": {
+      "id": "black-7",
+      "variant": "buggy",
+      "image": "sha256:2c9fe3cca88ca33cf0ae9f3a90e483fb9d9ea36a3d4ac3010ca76000117df8a7",
+      "phases": {
+        "trigger": {
+          "returncode": 1,
+          "seconds": 0.6668524080000111,
+          "tests": [
+            {
+              "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 1,
+          "seconds": 10.74237559400001,
+          "tests": [
+            {
+              "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_black",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_fast",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_invalid_line_length",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_invalid_python_variant",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_line_length",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_main",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_python_variant",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_needs_formatting",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_no_change",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_syntax_error",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_supported_version",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_unsupported_version",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_bracket_match",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cantfit",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments3",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments4",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments5",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments6",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments7",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_composition",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_ff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_include",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_lines",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_endmarker",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression_ff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_filter_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fstring",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_function",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_function2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_get_features_used",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_import_spacing",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_include_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_files",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_piping",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_piping_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python37",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_normal",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_quiet",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_verbose",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_self",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_setup",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_shhh_click",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_slices",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_string_quotes",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_stub",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+              "status": "failure"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    },
+    "upstream_repair": {
+      "id": "black-7",
+      "variant": "upstream_repair",
+      "image": "sha256:2c9fe3cca88ca33cf0ae9f3a90e483fb9d9ea36a3d4ac3010ca76000117df8a7",
+      "phases": {
+        "trigger": {
+          "returncode": 0,
+          "seconds": 0.5163551480000024,
+          "tests": [
+            {
+              "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 0,
+          "seconds": 10.691385804999982,
+          "tests": [
+            {
+              "id": "tests.test_black.BlackTestCase::test_assertFormatEqual",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_assert_equivalent_different_asts",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_black",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_fast",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_invalid_line_length",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_invalid_python_variant",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_line_length",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_main",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_python_variant",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_needs_formatting",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_no_change",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_request_syntax_error",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_supported_version",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_blackd_unsupported_version",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_bracket_match",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_broken_symlink",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_broken_file",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_multiple_files",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cache_single_file_already_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_cantfit",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_check_diff_use_together",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments3",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments4",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments5",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments6",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_comments7",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_composition",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_debug_visitor",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_ff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_include",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_empty_lines",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_endmarker",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_expression_ff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_failed_formatting_does_not_get_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_filter_cached",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fmtonoff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fmtonoff2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_format_file_contents",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_fstring",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_function",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_function2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_get_features_used",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_get_future_imports",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_import_spacing",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_include_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_invalid_include_exclude",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_lib2to3_parse",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_multi_file_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_multi_file_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_new_line_between_class_and_code",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_cache_when_stdin",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_cache_when_writeback_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_no_files",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals_ignoring_underscores",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_numeric_literals_py2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_pipe_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_pipe_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_piping",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_piping_diff",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_preserves_line_endings",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_preserves_line_endings_via_stdin",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2_print_function",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python2_unicode_literals",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_python37",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_read_cache_line_lengths",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_read_cache_no_cachefile",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_remove_empty_parentheses_after_class",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_normal",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_quiet",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_report_verbose",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_root_logger_not_used_directly",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_self",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_setup",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_shhh_click",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_single_file_force_py36",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_single_file_force_pyi",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_slices",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_string_prefixes",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_string_quotes",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_stub",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_symlink_out_of_root_directory",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_tab_comment_indentation",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_tuple_assign",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_creates_directory_if_needed",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_read_cache",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_black.BlackTestCase::test_write_cache_write_fail",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    }
+  },
+  "reproduction_run": {
+    "run_id": 39409631610,
+    "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907959",
+    "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409"
+  },
+  "model": {
+    "status": "input_out_of_scope",
+    "attempts": []
+  },
+  "model_run": {
+    "schema": 1,
+    "project": "black",
+    "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+    "model": {
+      "available": true,
+      "missing": [],
+      "model": "qwen3-0.6b-q8-eval",
+      "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+    },
+    "model_requested": true,
+    "source": {
+      "name": "BugsInPy",
+      "repository": "https://github.com/soarsmu/BugsInPy",
+      "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+    },
+    "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+    "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+    "started_utc": "2026-10-20T10:40:56Z"
+  },
+  "model_run_id": 39409631644,
+  "model_source": "evaluations/d11/results/2026-10-20/model-black-raw/black-7.json"
+}

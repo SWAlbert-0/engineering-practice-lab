@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "case": {
+    "id": "httpie-3",
+    "repository": "https://github.com/jakubroztocil/httpie",
+    "project": "httpie",
+    "bug_id": 3,
+    "buggy_commit": "8c33e5e3d31d3cd6476c4d9bc963a4c529f883d2",
+    "fixed_commit": "589887939507ff26d36ec74bd2c045819cfa3d56",
+    "original_python": "3.7.3",
+    "test_files": [
+      "tests/test_sessions.py"
+    ],
+    "test_commands": [
+      "pytest tests/test_sessions.py::TestSession::test_download_in_session"
+    ],
+    "metadata_sha256": {
+      "bug.info": "b477c55b1552be926d23fe00189538a6026762780471a693ca66c68297f32856",
+      "run_test.sh": "8de86574c2548bd2bde5aeb7e31c9430ded0fcc382a42e45a8bd97bf13301cf1",
+      "requirements.txt": "635e348696ae1e110910784738d1e4c7cf79f89b7670349a0e31c124f2c1fc62"
+    },
+    "split": "evaluation",
+    "defect_family": "parsing_or_protocol",
+    "upstream_fix_title": "Fixed --download with --session",
+    "upstream_fix_url": "https://github.com/httpie/cli/commit/589887939507ff26d36ec74bd2c045819cfa3d56",
+    "status": "reproduced",
+    "model_status": "model_error"
+  },
+  "reproduction": {
+    "id": "httpie-3",
+    "status": "reproduced",
+    "model": null,
+    "dependency_profile": "default",
+    "source_preparation": {
+      "omitted_non_runtime_links": [],
+      "safe_internal_links": "materialized as regular files; no host symlinks created",
+      "httpbin_fixture": null,
+      "base_snapshot_sha256": "8d2943a911649e509b02011fc5050fb9a073af32fbb364d4c8e5b735e7e5ba3e"
+    },
+    "frozen_test_sha256": {
+      "tests/test_sessions.py": "42345b4bb38bfff6f0a8e3e9e4071822cfe80d9dd8e9bd9f1763b17e54874bbb"
+    },
+    "production_files": [
+      "httpie/sessions.py"
+    ]
+  },
+  "variants": {
+    "buggy": {
+      "id": "httpie-3",
+      "variant": "buggy",
+      "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+      "phases": {
+        "trigger": {
+          "returncode": 1,
+          "seconds": 1.1697739859999956,
+          "tests": [
+            {
+              "id": "tests.test_sessions.TestSession::test_download_in_session",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 1,
+          "seconds": 1.3197449569999975,
+          "tests": [
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+              "status": "failure"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_by_path",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_unicode",
+              "status": "skipped"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_download_in_session",
+              "status": "failure"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    },
+    "upstream_repair": {
+      "id": "httpie-3",
+      "variant": "upstream_repair",
+      "image": "sha256:dc699a4a4d50a229be7977e98efd120f98da4d64c5722bdfc0ea5886e3366d47",
+      "phases": {
+        "trigger": {
+          "returncode": 0,
+          "seconds": 1.671235510999992,
+          "tests": [
+            {
+              "id": "tests.test_sessions.TestSession::test_download_in_session",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        },
+        "regression": {
+          "returncode": 1,
+          "seconds": 1.8722857080000068,
+          "tests": [
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_created_and_reused",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_update",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSessionFlow::test_session_read_only",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_ignored_header_prefixes",
+              "status": "failure"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_by_path",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_unicode",
+              "status": "skipped"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_session_default_header_value_overwritten",
+              "status": "passed"
+            },
+            {
+              "id": "tests.test_sessions.TestSession::test_download_in_session",
+              "status": "passed"
+            }
+          ],
+          "log_truncated": false,
+          "test_files_unchanged": true,
+          "fixture_files_changed": []
+        }
+      }
+    }
+  },
+  "reproduction_run": {
+    "run_id": 39409631610,
+    "job_url": "https://github.com/SWAlbert-0/engineering-practice-lab/actions/runs/39409631610/job/118583907912",
+    "head_sha": "ce5f24dfc3040bbcde78695b3072e800d3774409"
+  },
+  "model": {
+    "status": "model_error",
+    "attempts": [],
+    "error": "模型请求失败或超时，请检查服务连接；没有回退为离线结果。"
+  },
+  "model_run": {
+    "schema": 1,
+    "project": "httpie",
+    "manifest_sha256": "1998dd523fd2b48da177610c31b9c4ea0c22ea6d566991b96927e17fa748f61c",
+    "model": {
+      "available": true,
+      "missing": [],
+      "model": "qwen3-0.6b-q8-eval",
+      "endpoint_sha256": "5472804dabd2b4080746d8a0367b71f171488e1ec0bb59ce6fab71786d7ec340"
+    },
+    "model_requested": true,
+    "source": {
+      "name": "BugsInPy",
+      "repository": "https://github.com/soarsmu/BugsInPy",
+      "commit": "11c5f1eea954a42132cfd06bf257766a7963e0fd"
+    },
+    "protocol": "BugsInPy upstream-repair reproduction; optional oracle-file-localized model repair; public relevant-module tests, no hidden holdout",
+    "python_adaptation": "All cases use Python 3.8.20 and documented project dependencies; original versions retained in manifest",
+    "started_utc": "2026-10-20T10:40:58Z"
+  },
+  "model_run_id": 39409631644,
+  "model_source": "evaluations/d11/results/2026-10-20/model-httpie-raw/httpie-3.json"
+}
