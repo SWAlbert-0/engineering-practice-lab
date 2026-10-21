@@ -30,7 +30,7 @@ D09 首页点击“一键导入案例并开始”，自动填入 RealWorld 登�
 
 案例文件按清单校验 SHA-256；文本行尾规范化为 LF 后校验，以兼容 Windows 检出。D13 只导入明确范围的节选，不把节选称作全文阅读。D02 部署和回滚的确认框需使用者勾选。
 
-`tests/test_guided_tours_dom.cjs` 连接真实本地服务验证三条完整 DOM/HTTP 链路，包括实际训练、版本门禁、遮罩事件拦截和文件内容；不验证浏览器布局。`tests/test_guided_tours_browser.py` 为 1440px 和 390px 原生浏览器复跑提供完整检查，已接入容器 CI。本次环境无法启动浏览器驱动，原生浏览器的截图与布局检查尚未在本机执行。
+`tests/test_guided_tours_dom.cjs` 连接真实本地服务验证三条完整 DOM/HTTP 链路，包括实际训练、版本门禁、遮罩事件拦截和文件内容；不验证浏览器布局。`tests/test_guided_tours_browser.py` 为 1440px 和 390px 原生浏览器复跑提供完整检查，已接入容器 CI。2026-10-21 已在本机服务和更新后的 Docker 服务分别通过 1440px、390px 原生 Chromium 全流程验收，包含实际下载、刷新与退出；截图已检查。详见[验证记录](VALIDATION.md)。
 
 ## 视频观察台：手动步骤引导
 
