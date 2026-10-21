@@ -49,7 +49,7 @@ jobs:
           docker run --rm --user 0:10001 --read-only --tmpfs /tmp -e PYTHONDONTWRITEBYTECODE=1 -e LAB_REPAIR_DOCKER_TEST=1 -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:/suite:ro" -w /suite engineering-practice-lab:local python -m unittest discover -s tests -p test_repair_docker.py -v
       - name: Install browser acceptance tools
         run: |
-          npm install --prefix /tmp/lab-browser --no-audit --no-fund playwright@1.62.1
+          npm install --prefix /tmp/lab-browser --no-audit --no-fund playwright@1.63.0
           /tmp/lab-browser/node_modules/.bin/playwright install --with-deps chromium
           sudo apt-get install -y fonts-noto-cjk
       - name: D01 real browser acceptance
@@ -94,7 +94,7 @@ jobs:
           LAB_BROWSER_ARTIFACTS: /tmp/lab-browser-artifacts/repair-tour
         run: |
           python3 -m venv /tmp/lab-guide-browser
-          /tmp/lab-guide-browser/bin/pip install playwright==1.62.1
+          /tmp/lab-guide-browser/bin/pip install playwright==1.63.0
           /tmp/lab-guide-browser/bin/python tests/test_repair_tour_browser.py
       - name: D09 guided requirements walkthrough
         env:
