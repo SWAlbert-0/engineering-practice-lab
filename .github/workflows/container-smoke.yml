@@ -116,6 +116,7 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: |
+          node tests/test_mlops_browser.cjs --checkpoint-persistence
           docker compose restart lab
           docker compose up -d --wait --wait-timeout 90
           node tests/test_process_browser.cjs --check-persistence
