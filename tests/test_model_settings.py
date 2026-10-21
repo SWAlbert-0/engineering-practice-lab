@@ -170,12 +170,16 @@ class OpenExampleTests(unittest.TestCase):
     def test_catalog_assets_and_all_project_paths(self):
         import hashlib
         root=Path(__file__).resolve().parents[1]
-        catalog=json.loads((root/'shared/examples/catalog.json').read_text())['cases']
+        catalog=json.loads((root/'shared/examples/catalog.json').read_text(encoding='utf-8'))['cases']
         self.assertEqual({row['project'] for row in catalog},{'D01','D02','D09','D11','D12','D13'})
         for row in catalog:
             self.assertTrue(row['license']);self.assertTrue(row['source_url'].startswith('https://'))
             if row.get('file'):
                 content=(root/row['file'].lstrip('/')).read_bytes()
+                # Text digests use canonical LF, matching the guided importer
+                # when a Windows checkout converts source assets to CRLF.
+                if Path(row['file']).suffix in {'.txt','.md','.csv'}:
+                    content=content.replace(b'\r\n',b'\n')
                 self.assertEqual(hashlib.sha256(content).hexdigest(),row['sha256'])
         from shared.mlops_workspace import parse_csv
         iris=parse_csv((root/'shared/examples/iris-binary.csv').read_bytes(),'training','label')
@@ -183,7 +187,7 @@ class OpenExampleTests(unittest.TestCase):
         for kind in ['clean','shift','unlabeled']:
             data=parse_csv((root/('shared/examples/iris-monitor-'+kind+'.csv')).read_bytes(),'monitoring','' if kind=='unlabeled' else 'label')
             self.assertEqual(data['features'],iris['features']);self.assertEqual(len(data['rows']),100)
-        self.assertLess(sum(len((root/'shared/examples'/name).read_text()) for name in ['seaborn-paper.txt','arviz-paper.txt']),24000)
+        self.assertLess(sum(len((root/'shared/examples'/name).read_text(encoding='utf-8')) for name in ['seaborn-paper.txt','arviz-paper.txt']),24000)
 
     def test_open_algorithm_mutation_has_real_failure_and_correct_candidate(self):
         from shared.repair_fixtures import CASES,snapshot

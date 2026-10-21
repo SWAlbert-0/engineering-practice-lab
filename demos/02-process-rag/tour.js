@@ -1,0 +1,22 @@
+(() => {
+  'use strict';
+  const api='/api/process/';
+  const wait=(c,next,key)=>({path:'workspace',result:state=>{const j=state.jobs.find(j=>j.id===c.run.job);if(!j)return;if(j.status==='succeeded'){if(key)c.run[key]=j.result[key+'_id'];return next;}if(['failed','cancelled','interrupted'].includes(j.status))throw Error(j.error||'任务未完成，请退出体验检查。');}});
+  const resultRoute=c=>'search-result/'+c.run.search;
+  const draftRoute=c=>'draft/'+c.run.draft+'?version='+c.run.version;
+  LabGuidedTour.mount({id:'D01',view:'#rag-view',api,error:'#process-error',errorMessage:'#process-error-message',
+    title:'从一份材料，走到有出处的工艺草案。',description:'Generic PLA 开放案例 · 离线检索与摘录 · 约 5 分钟',
+    flow:['导入资料','检索原文','编辑草案','核对导出'],source:'UltiMaker fdm_materials · CC0。案例参数来自通用配置，仅用于检索与核对流程，不能直接作为生产批准。',initial:{job:'',document:'',search:'',draft:'',version:1},steps:[
+      {id:'upload',title:'导入开放案例',text:'已填入 PLA 材料资料。点击「上传并建立索引」，在本机建立可检索的版本。',route:()=> 'upload',target:'#upload-form [type=submit]',read:'#upload-form',async prepare(c){const f=c.$('#upload-form');if(!f||f.dataset.guidedPrepared)return;if(c.state.index.strategy==='embedding')throw Error('当前启用了嵌入 API。请退出体验核对索引设置，再决定是否发送资料。');const item=await c.asset('pla');c.fill(f,{title:'体验案例 · Generic PLA 材料核对',material:'PLA体验-'+c.run.session.slice(-8)});c.file(f.elements.file,item.text+'\n教学体验批次：'+c.run.session+'\n','pla-tour.md');f.dataset.guidedPrepared='yes';},response(c,r){if(r.path==='documents'){c.run.job=r.result.job_id;c.run.document=r.result.document_id;return r.result.duplicate?'search':'wait-import';}}},
+      {id:'wait-import',title:'正在建立资料索引',text:'等待本次入库任务完成后，自动准备检索问题。',route:()=> 'jobs',poll:c=>wait(c,'search','document')},
+      {id:'search',title:'检索案例中的依据',text:'已填入打印温度与适用机器的问题，并限定到本轮材料。点击「检索资料」。',route:()=> 'search',target:'#search-form [type=submit]',read:'#search-form',prepare(c){c.fill(c.$('#search-form'),{query:'Generic PLA print temperature 适用机器',material:'PLA体验-'+c.run.session.slice(-8),mode:'bm25'});},response(c,r){if(r.path==='search'){if(r.result.refused||!r.result.hits.some(h=>h.document_id===c.run.document))throw Error('本次未检索到体验资料，请退出检查索引。');c.run.search=r.result.id;return 'source';}}},
+      {id:'source',title:'打开证据原文',text:'点击第一条来源标题，核对命中的段落及其版本。检索到内容不代表工艺已获批准。',route:resultRoute,target:'.source-card h3 a',read:'.source-card',next(c){c.run.sourceRoute=c.action.getAttribute('href').slice(1);return 'read-source';}},
+      {id:'read-source',title:'核对资料的适用范围',text:'原文已定位。阅读通用配置和机器差异说明，再点击「返回本次检索」。',route:c=>c.run.sourceRoute,target:'.guided-back-evidence',read:'.rag-pages',prepare(c){if(c.$('.guided-back-evidence'))return;const a=document.createElement('a');a.className='btn guided-back-evidence';a.href='#'+resultRoute(c);a.textContent='返回本次检索';c.$('.rag-heading .actions').append(a);},next:'generate'},
+      {id:'generate',title:'形成待核对草案',text:'已选离线摘录。点击「生成待审核草案」，只使用本次检索的来源。',route:resultRoute,target:'#generate-form [type=submit]',read:'.rag-evidence-layout',prepare(c){c.fill(c.$('#generate-form'),{title:'体验案例 · PLA 参数与范围核对',mode:'offline'});},response(c,r){if(r.path==='drafts'){c.run.job=r.result.job_id;return 'wait-draft';}}},
+      {id:'wait-draft',title:'正在保存草案',text:'等待真实草案任务结束，随后自动打开编辑页。',route:()=> 'jobs',poll:c=>wait(c,'edit','draft')},
+      {id:'edit',title:'保存一份人工修订',text:'已在首道工序补充教学核对说明。可编辑操作内容，再点击「保存为新版本」。',route:draftRoute,target:'#draft-form [type=submit]',allow:'#draft-form',read:'#draft-form',prepare(c){const f=c.$('#draft-form');c.once(f,()=>{const input=f.querySelector('[name=operation]');c.input(input,input.value+' 教学核对：需结合具体设备确认适用范围，不作为生产批准。');});},response(c,r){if(r.path==='drafts/'+c.run.draft+'/save'){c.run.version=r.result.version;return 'review';}}},
+      {id:'review',title:'逐工序确认引用',text:'已选中本轮草案的工序，填入教学核对记录。阅读内容与来源后，点击「确认核对通过」；可按判断修改意见。',route:draftRoute,target:'#review-form [value=approved]',allow:'#review-form',read:'.rag-draft-layout',prepare(c){const f=c.$('#review-form');c.fill(f,{actor:'体验用户（教学核对）',comment:'已核对引用、通用配置与机器适用范围；此记录仅用于教学，不构成生产批准。'});f.querySelectorAll('[name=confirmed]').forEach(el=>el.checked=true);},response(c,r){if(r.path==='drafts/'+c.run.draft+'/review'&&r.body.decision==='approved')return 'export';}},
+      {id:'export',title:'导出本次核对记录',text:'草案新版本已核对。点击「导出 JSON」，下载包含来源、版本和人工记录的文件。',route:draftRoute,target:'.rag-heading a[href*="format=json"]',read:'.draft-bar',download:true,filename:c=>'D01-'+c.run.draft+'.json'},
+      {id:'complete',title:'已完成资料到草案的流程',text:'资料入库、检索、原文定位、草案修订和人工核对均已完成。记录保存在本机，工艺应用仍需专业确认。',route:draftRoute}
+    ]});
+})();

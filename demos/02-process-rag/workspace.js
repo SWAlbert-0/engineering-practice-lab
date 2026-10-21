@@ -5,11 +5,11 @@ const h=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 const $=s=>document.querySelector(s);
 const icon=name=>window.WorkspaceUI?.icon(name)||'';
 const api=async(path,body)=>{
- let r;try{r=await fetch('/api/process/'+path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});}catch{throw Error('无法连接资料服务，请确认项目已启动后重试。');}
+ const tourSession=window.LabGuidedTour?.session;let r;try{r=await fetch('/api/process/'+path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});}catch{throw Error('无法连接资料服务，请确认项目已启动后重试。');}
  let value;try{value=await r.json();}catch{throw Error('资料服务返回了无法识别的响应，请更新项目并重启服务后重试。');}
  if(!r.ok){const error=new Error(value?.error||'资料服务请求失败，请稍后重试。');error.status=r.status;throw error;}
  if(path==='workspace'&&(!value?.index||!value.capabilities||!['documents','drafts','jobs','searches','evaluations'].every(k=>Array.isArray(value[k]))))throw Error('资料服务版本不匹配，请更新项目并重启服务后重试。');
- return value;
+ window.dispatchEvent(new CustomEvent('lab:response',{detail:{project:'D01',session:tourSession,path,body,result:value}}));return value;
 };
 let state,detail,route='',loading=0,dirty=false,poll,stepCounter=0;
 const statusName={ready:'已索引',indexing:'处理中',pending:'待审核',failed:'失败',queued:'排队',running:'运行中',succeeded:'已完成',cancelled:'已取消',interrupted:'已中断',approved:'已核对',rejected:'需修改'};
@@ -57,7 +57,7 @@ async function render(){const token=++loading;const raw=location.hash.slice(1)||
  else if(page==='evaluation'){if(id)detail=await api('evaluations/'+encodeURIComponent(id));content=evaluationView(detail);}
  else if(page==='settings')content=settings();else if(page==='guide')content=guide();
  else content=title('页面不存在','请使用导航返回资料目录。');
- if(token!==loading)return;const view=$('#rag-view');view.innerHTML=content;view.classList.remove('view-enter');void view.offsetWidth;view.classList.add('view-enter');document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));$('#page-context').textContent=({'overview':'工作台','documents':'资料目录','search':'检索资料','draft':'草案审核','drafts':'草案审核','document':'文档详情','upload':'导入资料','search-result':'检索结果','evaluation':'检索评估','jobs':'处理任务','history':'检索记录','settings':'索引与数据','guide':'项目指南'}[page]||'工作台');$('#index-label').textContent=state.index.strategy==='embedding'?'嵌入索引':'离线索引';view.focus({preventScroll:true});
+ if(token!==loading)return;const view=$('#rag-view');view.innerHTML=content;view.classList.remove('view-enter');void view.offsetWidth;view.classList.add('view-enter');document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));$('#page-context').textContent=({'overview':'工作台','documents':'资料目录','search':'检索资料','draft':'草案审核','drafts':'草案审核','document':'文档详情','upload':'导入资料','search-result':'检索结果','evaluation':'检索评估','jobs':'处理任务','history':'检索记录','settings':'索引与数据','guide':'项目指南'}[page]||'工作台');$('#index-label').textContent=state.index.strategy==='embedding'?'嵌入索引':'离线索引';view.focus({preventScroll:true});view.dataset.route=raw;window.dispatchEvent(new CustomEvent('lab:render',{detail:{project:'D01',state,detail,route:raw}}));
  if(page==='document'&&q.get('page'))document.getElementById('page-'+q.get('page'))?.scrollIntoView({block:'start'});
  if(page==='guide'&&q.has('chapter'))document.getElementById('chapter-'+q.get('chapter'))?.scrollIntoView({block:'start'});
  }catch(e){if(token===loading){if(!$('#rag-view h1'))$('#rag-view').innerHTML=title('暂时无法读取资料库','请检查下方提示后重新读取，或返回项目总览。');error(e.message);}}

@@ -84,7 +84,7 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_video_browser.cjs
-      - name: Four project hands-on experience guides
+      - name: Video project hands-on experience guide
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_experience_guide_browser.cjs
@@ -101,6 +101,11 @@ jobs:
           LAB_TEST_URL: http://127.0.0.1:8765
           LAB_BROWSER_ARTIFACTS: /tmp/lab-browser-artifacts/requirements-tour
         run: /tmp/lab-guide-browser/bin/python tests/test_requirements_tour_browser.py
+      - name: D13 D01 D02 complete guided walkthroughs
+        env:
+          LAB_TEST_URL: http://127.0.0.1:8765
+          LAB_BROWSER_ARTIFACTS: /tmp/lab-browser-artifacts/guided-tours
+        run: /tmp/lab-guide-browser/bin/python tests/test_guided_tours_browser.py
       - name: Open cases and unified model configuration
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
