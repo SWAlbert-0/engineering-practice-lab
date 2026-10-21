@@ -76,23 +76,6 @@
       "sha256": "cb84535e66cf153f2f66244c52279418a33a2250377d2681286ff2b2bc156851"
     },
     {
-      "id": "flower",
-      "project": "D12",
-      "title": "MDN · Flower公开视频",
-      "license": "CC0-1.0",
-      "source_url": "https://github.com/mdn/shared-assets/blob/41fe3ac4b31ed3f6afb1156fb22096392d0b806f/videos/flower.webm",
-      "revision": "41fe3ac4b31ed3f6afb1156fb22096392d0b806f",
-      "description": "未改动的开放短视频；用于真实采样、时间定位和可选视觉核对。",
-      "route": "studio",
-      "form": "#upload",
-      "file_input": null,
-      "input_selector": "#upload-file",
-      "fields": {},
-      "license_evidence": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm",
-      "file": "/shared/examples/flower.webm",
-      "sha256": "c6f8a348953395598a9a73b9bab1676436410797bce9f398f4be1531d6e76dda"
-    },
-    {
       "id": "seaborn",
       "project": "D13",
       "title": "JOSS · seaborn统计可视化论文",

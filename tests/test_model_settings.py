@@ -94,15 +94,13 @@ class ModelSettingsTests(unittest.TestCase):
         self.assertEqual(self.calls[0]['authorization'],'Bearer fixture-private-key')
         self.assertEqual(self.calls[0]['body']['model'],'shared-text')
 
-    def test_all_five_project_adapters_use_saved_settings_and_vision_override(self):
+    def test_all_four_project_adapters_use_saved_settings(self):
         self.configure()
-        from shared import process_workspace,requirements_workspace,repair_workspace,literature_workspace,video_workspace
+        from shared import process_workspace,requirements_workspace,repair_workspace,literature_workspace
         for module in [process_workspace,requirements_workspace,repair_workspace,literature_workspace]:
             self.assertEqual(module.ask_json('Protocol fixture',{}),{'ok':True})
-        self.assertEqual(video_workspace.ask_json('Protocol fixture',{},images=[{'time':0,'image':'data:image/jpeg;base64,AA=='}]),{'ok':True})
-        self.assertEqual([r['body']['model'] for r in self.calls],['shared-text']*4+['shared-vision'])
+        self.assertEqual([r['body']['model'] for r in self.calls],['shared-text']*4)
         self.assertTrue(all(r['path']=='/v1/chat/completions' for r in self.calls))
-        self.assertEqual(settings.model_name(vision=True),'shared-vision')
 
     def test_running_session_and_parallel_nodes_keep_original_configuration(self):
         self.configure()
@@ -171,7 +169,7 @@ class OpenExampleTests(unittest.TestCase):
         import hashlib
         root=Path(__file__).resolve().parents[1]
         catalog=json.loads((root/'shared/examples/catalog.json').read_text(encoding='utf-8'))['cases']
-        self.assertEqual({row['project'] for row in catalog},{'D01','D02','D09','D11','D12','D13'})
+        self.assertEqual({row['project'] for row in catalog},{'D01','D02','D09','D11','D13'})
         for row in catalog:
             self.assertTrue(row['license']);self.assertTrue(row['source_url'].startswith('https://'))
             if row.get('file'):

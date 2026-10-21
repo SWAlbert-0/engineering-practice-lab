@@ -1,6 +1,6 @@
 # 容器部署与运行管理
 
-六个项目和调研报告由统一应用镜像提供网页与 API。D11 另用同一镜像运行独立 worker，并构建一次性测试使用的小型镜像。使用者只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
+五个项目和调研报告由统一应用镜像提供网页与 API。D11 另用同一镜像运行独立 worker，并构建一次性测试使用的小型镜像。使用者只需要 Docker，无需自行建立 Python/Conda 环境，也没有前端打包、数据库或 GPU 前置要求。
 
 ## 首次启动
 
@@ -25,7 +25,7 @@ docker compose up --build -d --wait
 
 三个系统使用相同命令。第一次会联网下载 `python:3.12-slim`、系统运行库和精确锁定的 Python 依赖，并构建本机架构的镜像；后续保留构建缓存。当前没有预发布到镜像仓库，`docker compose pull` 不能代替首次构建。构建完成后，默认离线模式不需要外部服务。
 
-等待命令成功后，打开 <http://127.0.0.1:8765>。`/healthz` 表示服务及六个引擎已加载，不代表可选模型服务已验证可用。所有项目入口、主题、图文指南和示例媒体均在镜像内。
+等待命令成功后，打开 <http://127.0.0.1:8765>。`/healthz` 表示服务及五个引擎已加载，不代表可选模型服务已验证可用。所有项目入口、主题、图文指南和示例媒体均在镜像内。
 
 ## 日常操作
 
@@ -38,7 +38,7 @@ docker compose up --build -d --wait
 | 获取代码更新 | `git pull`，然后 `docker compose up --build -d --wait` |
 | 重新下载基础镜像并构建 | `docker compose build --pull`，然后 `docker compose up -d --wait` |
 
-D01 资料、D09 需求/用例、D11 修复任务/证据、D13 文献/综述与 D02 数据/模型/服务/监控保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 、[D13 工作区说明](D13_WORKSPACE.md) 和 [D02 工作区说明](D02_WORKSPACE.md)。D12的视频、帧、回答和任务保存于`/data/video/`，同样复用此卷；完整限制见[D12工作区](D12_WORKSPACE.md)。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
+D01 资料、D09 需求/用例、D11 修复任务/证据、D13 文献/综述与 D02 数据/模型/服务/监控保存在独立的服务端 SQLite 数据库，`process-data` 命名卷挂载到 `/data`。重建容器或清理浏览器不会删除该卷；`docker compose down -v` 会删除数据，应避免误用。备份与恢复见 [D01 工作区说明](D01_WORKSPACE.md) 、[D09 工作区说明](D09_WORKSPACE.md) 、[D11 工作区说明](D11_WORKSPACE.md) 、[D13 工作区说明](D13_WORKSPACE.md) 和 [D02 工作区说明](D02_WORKSPACE.md)。应用服务不挂载源码或 Docker socket。受信任的 repair-worker 挂载数据卷和 Docker socket，用于创建任务容器；任务容器没有宿主或数据库挂载。
 
 ## 端口与可选配置
 
@@ -64,7 +64,7 @@ cp .env.example .env
 
 | 项目 | 约定 |
 |---|---|
-| Python 与运行依赖 | Python 3.12；六个运行包在 `requirements.container.txt` 固定版本 |
+| Python 与运行依赖 | Python 3.12；五个运行包在 `requirements.container.txt` 固定版本 |
 | 服务进程 | 容器内监听 `0.0.0.0:8765`；宿主机仅发布 `127.0.0.1` |
 | 权限 | UID/GID 10001，根文件系统只读，移除 Linux capabilities |
 | 临时文件 | `/tmp` 使用 64 MiB tmpfs，供内置可信测试样例使用，重建容器即清空 |
@@ -104,7 +104,7 @@ docker compose up --no-build --pull never -d --wait
 | D11 运行器不可用 | 查看 `docker compose logs --tail=100 repair-worker`；确认 Linux 引擎、socket 权限、任务镜像及 worker 健康，重新执行带 `--build` 的启动命令 |
 | 模型配置齐全但请求失败 | 检查模型名称、容器内可达地址、认证和图像能力；默认离线功能不依赖该配置 |
 
-仓库的 [Container smoke test](../.github/workflows/container-smoke.yml) 在 GitHub Actions 中验证 Compose、真实构建、只读非 root 容器、健康检查、六项目网页与离线 API。接口检查脚本只使用 Python 标准库：`python scripts/container_smoke.py`（需默认端口且关闭模型配置）。它不是视频内容理解或外部模型质量评测。
+仓库的 [Container smoke test](../.github/workflows/container-smoke.yml) 在 GitHub Actions 中验证 Compose、真实构建、只读非 root 容器、健康检查、五项目网页与离线 API。接口检查脚本只使用 Python 标准库：`python scripts/container_smoke.py`（需默认端口且关闭模型配置）。它不是视频内容理解或外部模型质量评测。
 
 实现依据：[Compose up](https://docs.docker.com/reference/cli/docker/compose/up/)、[Compose services](https://docs.docker.com/reference/compose-file/services/)、[Dockerfile](https://docs.docker.com/reference/dockerfile/)。
 
@@ -112,7 +112,7 @@ docker compose up --no-build --pull never -d --wait
 
 # 本地 Python 开发方式
 
-容器使用者不需要执行以下步骤。希望直接运行 Python 并修改代码时，六个项目继续共用一个 Conda 或 `.venv` 环境。默认仅监听本机。D11 在本地模式只运行内置可信候选，不需要也不自动连接 Docker；手写与模型候选使用 Compose 的独立运行器。
+容器使用者不需要执行以下步骤。希望直接运行 Python 并修改代码时，五个项目继续共用一个 Conda 或 `.venv` 环境。默认仅监听本机。D11 在本地模式只运行内置可信候选，不需要也不自动连接 Docker；手写与模型候选使用 Compose 的独立运行器。
 
 ## 1. 获取完整仓库
 
@@ -151,7 +151,7 @@ conda run --no-capture-output -n base python launch.py --manager conda
 
 1. 查找名为 `engineering-practice-lab` 的共用环境；没有则根据 `environment.yml` 创建。
 2. 已有环境首次交给脚本管理，或环境配置发生变化时，执行 `conda env update`。不使用 `--prune`，也不调用 pip。
-3. 检查 Python 3.12、NumPy、scikit-learn、Node.js 22，并实际加载六个 Python 引擎与 UTF-8 语料。
+3. 检查 Python 3.12、NumPy、scikit-learn、Node.js 22，并实际加载五个 Python 引擎与 UTF-8 语料。
 4. 检查通过后启动服务，终端显示访问地址。按 Ctrl+C 停止服务，环境保留供下次复用。
 
 只调用 `conda run`，不要求脚本修改终端的激活状态。依赖校验成功后，在环境内保存清单摘要；后续配置未变则跳过安装，可离线启动。首次创建与需要更新依赖时仍需要访问 Conda 软件源。
@@ -215,7 +215,7 @@ python3.12 launch.py --manager venv
 | `.venv` 不完整或来自另一台机器 | 确认其中没有要保留的文件，停止服务后将 `.venv` 移走，再用 Python 3.12 重建。脚本不会自动删除已有目录 |
 | Linux 提示缺少 ensurepip / venv | 通过系统包管理器安装与所用 Python 版本对应的 venv 组件后重试 |
 | 端口 8765 已占用 | 停止旧服务，或指定 8766；脚本不会终止其他进程 |
-| 新端口下看不到历史记录 | 旧教学页LocalStorage按来源隔离；六个服务端工作区应检查数据目录/卷是否为原路径 |
+| 新端口下看不到历史记录 | 旧教学页LocalStorage按来源隔离；五个服务端工作区应检查数据目录/卷是否为原路径 |
 
 同一环境不要同时运行两个首次安装/更新过程。依赖安装中断时可修复网络后重试；脚本只在安装和加载检查都成功后保存摘要。
 
@@ -239,8 +239,3 @@ conda run --no-capture-output -n engineering-practice-lab node tests/test_produc
 - [Conda env update](https://docs.conda.io/projects/conda/en/stable/commands/env/update.html)
 - [Conda run](https://docs.conda.io/projects/conda/en/26.3.x/commands/run.html)
 - [Python venv](https://docs.python.org/3/library/venv.html)
-
-
-### D12视频处理依赖
-
-Docker镜像包含FFmpeg / ffprobe；共用Conda环境新增ffmpeg，已有环境执行`conda env update -f environment.yml`。venv入口不使用pip安装外部解码器，须先在系统安装FFmpeg并加入PATH。原片上限16 MiB/600秒，单实例运行；数据库和视频文件应在停止服务后一起备份，暂无D12在线一致性备份工具。

@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     OMP_NUM_THREADS=1
 WORKDIR /app
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libgomp1 ffmpeg \
+    && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 lab \
     && useradd --uid 10001 --gid lab --no-create-home lab

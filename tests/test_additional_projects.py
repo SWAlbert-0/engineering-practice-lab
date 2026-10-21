@@ -1,5 +1,4 @@
 """New projects: actual local computations and offline model protocol checks."""
-import base64
 import json
 from pathlib import Path
 import sys
@@ -66,33 +65,6 @@ class LiteratureTests(unittest.TestCase):
     def test_single_call_rejects_unverifiable_citations(self):
         with patch.object(server.literature,'ask_json',return_value={'claims':[{'text':'内容','paper':'REACT-2022','quote':'编造的证据'}]}):
             with self.assertRaisesRegex(ValueError,'引用'):server.literature.run('反馈',['REACT-2022'],'single')
-
-
-class VideoTests(unittest.TestCase):
-    def frames(self):
-        # The transport validator checks JPEG markers; decoding happens in browser.
-        image='data:image/jpeg;base64,'+base64.b64encode(b'\xff\xd8transport fixture\xff\xd9').decode()
-        return [{'time':1.0,'image':image},{'time':3.0,'image':image}]
-
-    def test_offline_never_invents_a_visual_answer(self):
-        with patch.object(server.video,'ask_json',side_effect=AssertionError('network')):
-            r=server.video.run('是什么颜色？',self.frames(),duration=4)
-        self.assertEqual(r['evidence'],[]);self.assertIn('不能回答',r['answer'])
-
-    def test_model_must_cite_an_observed_time(self):
-        with patch.object(server.video,'ask_json',return_value={'answer':'回答','evidence':[{'time':2,'observation':'事件'}]}):
-            with self.assertRaisesRegex(ValueError,'时刻'):server.video.run('问题',self.frames(),'llm',4)
-
-    def test_actual_multimodal_payload_is_forwarded(self):
-        with patch.object(server.video,'ask_json',return_value={'answer':'回答','evidence':[{'time':1,'observation':'可见现象'}],'uncertainty':'帧间不确定'}) as ask:
-            r=server.video.run('问题',self.frames(),'llm',4)
-        self.assertEqual(len(ask.call_args.kwargs['images']),2)
-        self.assertEqual(r['evidence'][0]['time'],1)
-
-    def test_invalid_frames_and_duration(self):
-        for frames,duration in [(self.frames(),float('nan')),([self.frames()[0]]*2,4),([{'time':1,'image':'https://example.com/a.jpg'}],4),([],4)]:
-            with self.subTest(duration=duration):
-                with self.assertRaises(ValueError):server.video.run('问题',frames,duration=duration)
 
 
 class ClientTests(unittest.TestCase):

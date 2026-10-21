@@ -75,7 +75,7 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  mlops.c.submit('resolve-alert',{id:m.alerts[0].id,resolution:'标签回流后复核'},m);assert.equal(m.alerts[0].status,'已处理');
  const mlopsCount=routes(mlops,['new-release','new-experiment']);
 
- const video=setup('04-video-understanding'),literature=setup('06-literature');
+ const literature=setup('06-literature');
  // D09 persistent workspace is tested through domain/API and real browser contracts.
  literature.c.onResult({result:structuredClone(results.literature),context:{scope:'scope-agent'}},literature.s);
  const litDraft=literature.s.runs[0];
@@ -85,10 +85,8 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
  literature.c.submit('report-note',{id:litDraft.id,note:'摘记层面已核对，全文结论需继续验证'},literature.s);
  literature.c.action('approve-report',litDraft.id,literature.s);assert.equal(litDraft.status,'已审核');
  literature.c.submit('report-note',{id:litDraft.id,note:'更新意见'},literature.s);assert.equal(litDraft.status,'待审核');
- video.c.onResult({result:{question:'问题',provider:'离线采样校验',duration:12,frame_count:2,evidence:[],sampled_times:[3,9],duration_ms:1,answer:'无视觉推理',uncertainty:'待模型',boundary:'采样校验'},context:{material:'样片',frames:[]}},video.s);
- assert.equal(video.s.runs.length,1);
- const additionalCounts=[video,literature].map(a=>routes(a));
- for(const app of [repair,mlops,video,literature]) {
+ const additionalCounts=[literature].map(a=>routes(a));
+ for(const app of [repair,mlops,literature]) {
    assert(app.document.body.className.includes('theme-'+app.c.id));
    assert.match(app.document.body.innerHTML,/aria-controls="topic-dialog"/);
    const html=app.p.topicMarkup(),topic=app.context.ProjectTopics[app.c.id];
@@ -109,5 +107,5 @@ function routes(app,extra=[]){const queue=app.c.nav.map(n=>n[0]).concat(extra),v
    dialog.listeners.click({target:dialog,clientX:1,clientY:1});assert(!dialog.open);
  }
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(rendered,null,2));
- console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, video/literature ${additionalCounts.join(", ")}.`);
+ console.log(`Product flows passed; rendered routes: repair ${repairCount}, RAG ${ragCount}, MLOps ${mlopsCount}, literature ${additionalCounts.join(", ")}.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});

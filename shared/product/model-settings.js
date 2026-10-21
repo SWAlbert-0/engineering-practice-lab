@@ -14,11 +14,11 @@
     return value;
   }
   function display(value) {
-    for (const name of ['base_url','model','vision_model']) form.elements[name].value = value[name] || '';
+    for (const name of ['base_url','model']) form.elements[name].value = value[name] || '';
     form.elements.api_key.value = '';
     form.elements.api_key.placeholder = value.key_present ? '已有密钥；留空保留，不回显' : '请输入 API Key；本地无认证服务可填 local';
     const source = {overview:'总览页面配置',environment:'服务端环境变量',invalid:'保存的配置无法读取，请重新保存'}[value.source];
-    document.querySelector('#model-config-status').textContent = (value.configured ? '已配置 · ' : '尚未配置 · ') + source + '。视觉能力需在 D12 实际核验。';
+    document.querySelector('#model-config-status').textContent = (value.configured ? '已配置 · ' : '尚未配置 · ') + source + '。';
   }
   async function action(run) {
     if (busy) return;
@@ -31,7 +31,7 @@
   }
   form.addEventListener('submit', event => {
     event.preventDefault();
-    action(async () => {display(await api('', Object.fromEntries(new FormData(form)))); message.textContent = '已保存，五个项目及独立修复运行器共用此配置。';});
+    action(async () => {display(await api('', Object.fromEntries(new FormData(form)))); message.textContent = '已保存，四个项目及独立修复运行器共用此配置。';});
   });
   document.querySelector('#model-settings-clear').addEventListener('click', () => action(async () => {
     display(await api('/clear', {})); message.textContent = '已清除页面保存的配置，当前状态按服务端环境变量显示。';

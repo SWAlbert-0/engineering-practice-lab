@@ -17,11 +17,11 @@ jobs:
           docker compose config --quiet
       - name: Build, start and wait for readiness
         run: docker compose up --build -d --wait --wait-timeout 90
-      - name: Check six projects and offline APIs
+      - name: Check five projects and offline APIs
         run: python3 scripts/container_smoke.py
       - name: Check runtime permissions and image contents
         run: |
-          docker compose exec -T lab python -c "import os,pathlib; assert os.getuid()==10001; assert not pathlib.Path('/app/.env').exists(); assert not pathlib.Path('/app/.git').exists()"
+          docker compose exec -T lab python -c "import os,pathlib,shutil; assert os.getuid()==10001; assert not pathlib.Path('/app/.env').exists(); assert not pathlib.Path('/app/.git').exists(); assert shutil.which('ffmpeg') is None; assert shutil.which('ffprobe') is None"
           docker compose exec -T lab python -c "import pathlib,tempfile; t=tempfile.TemporaryDirectory(); pathlib.Path(t.name,'probe').write_text('ok'); t.cleanup()"
           docker compose exec -T lab python - <<'PYCODE'
           import errno
@@ -80,14 +80,6 @@ jobs:
         env:
           NODE_PATH: /tmp/lab-browser/node_modules
         run: node tests/test_mlops_browser.cjs
-      - name: D12 real browser acceptance
-        env:
-          NODE_PATH: /tmp/lab-browser/node_modules
-        run: node tests/test_video_browser.cjs
-      - name: Video project hands-on experience guide
-        env:
-          NODE_PATH: /tmp/lab-browser/node_modules
-        run: node tests/test_experience_guide_browser.cjs
       - name: D11 guided repair walkthrough
         env:
           LAB_TEST_URL: http://127.0.0.1:8765
@@ -128,7 +120,6 @@ jobs:
           node tests/test_repair_browser.cjs --check-persistence
           node tests/test_literature_browser.cjs --check-persistence
           node tests/test_mlops_browser.cjs --check-persistence
-          node tests/test_video_browser.cjs --check-persistence
           node tests/test_review_workspaces_browser.cjs --check-persistence
           node tests/test_open_examples_browser.cjs --check-persistence
       - name: Upload browser evidence

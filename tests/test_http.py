@@ -20,7 +20,7 @@ class HttpTests(unittest.TestCase):
                 with self.request(path,data) as r:self.assertTrue(json.load(r)[key])
     def test_readiness_does_not_expose_configuration(self):
         with urllib.request.urlopen(self.base+'/healthz') as response:
-            self.assertEqual(json.load(response),{'status':'ok','projects':6})
+            self.assertEqual(json.load(response),{'status':'ok','projects':5})
 
     def test_invalid_inputs_rejected(self):
         for path,data in [('/api/rag',{'query':''}),('/api/mlops',{'noise':2}),('/api/repair',{'case':'arbitrary'}),('/api/mlops',{'noise':float('nan')})]:
@@ -37,7 +37,7 @@ class HttpTests(unittest.TestCase):
             self.assertTrue(json.load(r)['changes'])
         with self.request('/api/literature',{'topic':'外部反馈','ids':['REACT-2022']}) as r:
             self.assertEqual(json.load(r)['model_calls'],0)
-        for path,data in [('/api/requirements',{'text':''}),('/api/literature',{'topic':'问题','ids':['unknown']}),('/api/video',{'question':'问题','frames':[],'duration':4})]:
+        for path,data in [('/api/requirements',{'text':''}),('/api/literature',{'topic':'问题','ids':['unknown']})]:
             with self.subTest(path=path):
                 with self.assertRaises(urllib.error.HTTPError) as e:self.request(path,data)
                 self.assertEqual(e.exception.code,400)
@@ -46,7 +46,24 @@ class HttpTests(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as e:
             urllib.request.urlopen(self.base+'/demos/04-tower-defense/')
         self.assertEqual(e.exception.code,404)
+    def test_removed_video_project_returns_not_found(self):
+        with urllib.request.urlopen(self.base+'/') as response:
+            page=response.read().decode('utf-8')
+        self.assertEqual(page.count('<article class="project-row">'),5)
+        self.assertNotIn('04-video-understanding',page)
+        self.assertNotIn('name="vision_model"',page)
+        for method in ['GET','HEAD']:
+            for path in ['/demos/04-video-understanding/','/demos/04-video-understanding/sample.webm','/api/video-workspace/workspace']:
+                with self.subTest(method=method,path=path):
+                    with self.assertRaises(urllib.error.HTTPError) as error:
+                        urllib.request.urlopen(urllib.request.Request(self.base+path,method=method))
+                    self.assertEqual(error.exception.code,404)
+        for path in ['/api/video','/api/video-workspace/assets']:
+            with self.subTest(path=path):
+                with self.assertRaises(urllib.error.HTTPError) as error:self.request(path,{})
+                self.assertEqual(error.exception.code,404)
+
     def test_pages_and_assets_exist(self):
-        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/04-video-understanding/','/demos/05-requirements/','/demos/06-literature/','/shared/product/core.js','/shared/product/style.css'] + [f'/demos/{name}/{file}' for name in ['01-repair-agent','02-process-rag','03-mlops','04-video-understanding','05-requirements','06-literature'] for file in ['workbench.html','workspace.js' if name in ('02-process-rag','05-requirements') else 'product.js']]:
+        for path in ['/','/report/index.html','/shared/style.css','/demos/01-repair-agent/','/demos/02-process-rag/','/demos/03-mlops/','/demos/05-requirements/','/demos/06-literature/','/shared/product/core.js','/shared/product/style.css'] + [f'/demos/{name}/{file}' for name in ['01-repair-agent','02-process-rag','03-mlops','05-requirements','06-literature'] for file in ['workbench.html','workspace.js' if name in ('02-process-rag','05-requirements') else 'product.js']]:
             with self.subTest(path=path):
                 with urllib.request.urlopen(self.base+path) as r:self.assertEqual(r.status,200);self.assertGreater(len(r.read()),100)
