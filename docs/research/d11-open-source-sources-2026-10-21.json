@@ -1,0 +1,235 @@
+{
+  "checked_date": "2026-10-21",
+  "method": "Official GitHub repository metadata, pinned README/source inspection and linked official documentation. No upstream tools or model tasks executed.",
+  "local_baseline": "21eba21",
+  "repositories": [
+    {
+      "repo": "SWE-agent/mini-swe-agent",
+      "branch": "main",
+      "sha": "04d809ceab9df28f9adaed044884180159172930",
+      "commit_date": "2026-09-03T05:05:59Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/SWE-agent/mini-swe-agent",
+      "description": "The 100 line AI agent that solves GitHub issues or helps you in your command line. Radically simple, no huge configs, no giant monorepo—but scores >74% on SWE-bench verified!",
+      "inspected_files": [
+        {
+          "path": "docs/advanced/v2_migration.md",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/docs/advanced/v2_migration.md",
+          "sha256": "d4b79e59d2aa8b883a0c4cc37b015d77391ea79299cad8c8704dd886c0d5aaaa"
+        },
+        {
+          "path": "docs/SECURITY.md",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/docs/SECURITY.md",
+          "sha256": "bfa2995a6ba4bc47300a878ba8fcd6f21bb529cf9c58d40e62c904bb55aa4793"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/README.md",
+          "sha256": "55c33a252df9a601d5ab25ee40fdb385733910875d54b01b3201b5f4eebf8229"
+        },
+        {
+          "path": "src/minisweagent/agents/default.py",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/src/minisweagent/agents/default.py",
+          "sha256": "e8ef8aa365942d739c2ec5cb0879f60f377d2dc2de8ec670aaedf3bafb45a4c2"
+        },
+        {
+          "path": "src/minisweagent/config/mini.yaml",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/src/minisweagent/config/mini.yaml",
+          "sha256": "b539a8965f5bf41dd0f32daafa5d2db22581923d13812fa378fd09569b9d6b0c"
+        },
+        {
+          "path": "src/minisweagent/environments/docker.py",
+          "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/src/minisweagent/environments/docker.py",
+          "sha256": "21d389122b008e7b743d1e640207fda0b08d9010cf6323ddd02f0742b33b96a6"
+        }
+      ]
+    },
+    {
+      "repo": "SWE-agent/SWE-agent",
+      "branch": "main",
+      "sha": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+      "commit_date": "2026-07-16T15:21:18Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/SWE-agent/SWE-agent",
+      "description": "SWE-agent takes a GitHub issue and tries to automatically fix it, using your LM of choice. It can also be employed for offensive cybersecurity or competitive coding challenges. [NeurIPS 2024] ",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/SWE-agent/SWE-agent/blob/3ea751c087f32b16e039a2233dd6eefecef325d5/README.md",
+          "sha256": "6487895da80987decb576be1a37e37c4d221faeb0d9354fe9bf9846730095684"
+        }
+      ]
+    },
+    {
+      "repo": "OpenHands/OpenHands",
+      "branch": "main",
+      "sha": "12026be8181b15dfb4f6af3dae600a07b8320e75",
+      "commit_date": "2026-10-21T12:52:04Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/OpenHands/OpenHands",
+      "description": "🙌 OpenHands: AI-Driven Development",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/OpenHands/OpenHands/blob/12026be8181b15dfb4f6af3dae600a07b8320e75/README.md",
+          "sha256": "32478eb7772057a8e4a6edb199cbe75070108015186c2f483272575ce898f0b1"
+        }
+      ]
+    },
+    {
+      "repo": "OpenHands/software-agent-sdk",
+      "branch": "main",
+      "sha": "77c6ee584101b929fbb50b7b09a66d3a5a0a1053",
+      "commit_date": "2026-10-21T10:21:16Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/OpenHands/software-agent-sdk",
+      "description": "A clean, modular SDK for building AI agents with OpenHands V1.",
+      "inspected_files": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/OpenHands/software-agent-sdk/blob/77c6ee584101b929fbb50b7b09a66d3a5a0a1053/LICENSE",
+          "sha256": "14a9b631c658eee682c6c2973525fbdf808c3457176bc47513052c559cc5ce86"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/OpenHands/software-agent-sdk/blob/77c6ee584101b929fbb50b7b09a66d3a5a0a1053/README.md",
+          "sha256": "bdc50c2993c8ac107c9d06e4ec41cefec3f1080115672a856f14b5f73ad7da3f"
+        }
+      ]
+    },
+    {
+      "repo": "OpenAutoCoder/Agentless",
+      "branch": "main",
+      "sha": "5ce5888b9f149beaace393957a55ea8ee46c9f71",
+      "commit_date": "2024-12-22T19:29:28Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/OpenAutoCoder/Agentless",
+      "description": "Agentless🐱:  an agentless approach to automatically solve software development problems",
+      "inspected_files": [
+        {
+          "path": "agentless/fl/localize.py",
+          "url": "https://github.com/OpenAutoCoder/Agentless/blob/5ce5888b9f149beaace393957a55ea8ee46c9f71/agentless/fl/localize.py",
+          "sha256": "bef8e67c1e1012cf0090985a68a3d165b4222b7c0fe42ac5e0b2d18c4f63cdb7"
+        },
+        {
+          "path": "agentless/repair/repair.py",
+          "url": "https://github.com/OpenAutoCoder/Agentless/blob/5ce5888b9f149beaace393957a55ea8ee46c9f71/agentless/repair/repair.py",
+          "sha256": "5bbd34d00a214624a7c01b44f96990dbe2cdb9ba60709b2571936eeb00b6bac7"
+        },
+        {
+          "path": "agentless/repair/rerank.py",
+          "url": "https://github.com/OpenAutoCoder/Agentless/blob/5ce5888b9f149beaace393957a55ea8ee46c9f71/agentless/repair/rerank.py",
+          "sha256": "4c43fa968a8ce7d5cf98b4c747c57e1ee504bc58686dbd328aced6d2ad10768e"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/OpenAutoCoder/Agentless/blob/5ce5888b9f149beaace393957a55ea8ee46c9f71/README.md",
+          "sha256": "09b2a22038136a4799070405fb4313c80d6dd61fcab30cb6826142e042ba877d"
+        }
+      ]
+    },
+    {
+      "repo": "Aider-AI/aider",
+      "branch": "main",
+      "sha": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "commit_date": "2026-05-22T14:02:20Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "url": "https://github.com/Aider-AI/aider",
+      "description": "aider is AI pair programming in your terminal",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/README.md",
+          "sha256": "a32917967d7ae9ebe198724a706d2d7788aac0a960ef6909b0caf5a692669e40"
+        }
+      ]
+    },
+    {
+      "repo": "SWE-bench/SWE-bench",
+      "branch": "main",
+      "sha": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "commit_date": "2026-09-02T01:50:34Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/SWE-bench/SWE-bench",
+      "description": "SWE-bench: Can Language Models Resolve Real-world Github Issues?",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/SWE-bench/SWE-bench/blob/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e/README.md",
+          "sha256": "d3fe992632dc2a9fa07b346234d623717575a3ba2c86c6f650534551bc3ee187"
+        },
+        {
+          "path": "swebench/harness/grading.py",
+          "url": "https://github.com/SWE-bench/SWE-bench/blob/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e/swebench/harness/grading.py",
+          "sha256": "a095273010175001a6779e365b3b77abb8657c7ac2e4f80b4bc360faa6f09483"
+        }
+      ]
+    },
+    {
+      "repo": "soarsmu/BugsInPy",
+      "branch": "master",
+      "sha": "11c5f1eea954a42132cfd06bf257766a7963e0fd",
+      "commit_date": "2025-10-09T13:31:55Z",
+      "archived": false,
+      "license": null,
+      "url": "https://github.com/soarsmu/BugsInPy",
+      "description": "BugsInPy: Benchmarking Bugs in Python Projects",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/soarsmu/BugsInPy/blob/11c5f1eea954a42132cfd06bf257766a7963e0fd/README.md",
+          "sha256": "f9cfe6e9a29fed98cdfd13c5847594dd629af8d07c2335c675fbf62791d5ce60"
+        }
+      ]
+    },
+    {
+      "repo": "qodo-ai/qodo-cover",
+      "branch": "main",
+      "sha": "adcf55baba40e8fbf8a84e68b70d08bef1e2b9c9",
+      "commit_date": "2025-06-24T03:26:40Z",
+      "archived": false,
+      "license": "AGPL-3.0",
+      "url": "https://github.com/qodo-ai/qodo-cover",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/qodo-ai/qodo-cover/blob/adcf55baba40e8fbf8a84e68b70d08bef1e2b9c9/README.md",
+          "sha256": "fa433062569c054afa59e62e1bce6282cee01aced824a95f38899694b743a5ed"
+        }
+      ]
+    },
+    {
+      "repo": "se2p/pynguin",
+      "branch": "main",
+      "sha": "3c6585c124f9aa3529bf589dfb89a35c5208c1d9",
+      "commit_date": "2026-10-17T09:04:22Z",
+      "archived": false,
+      "license": "MIT",
+      "url": "https://github.com/se2p/pynguin",
+      "inspected_files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/se2p/pynguin/blob/3c6585c124f9aa3529bf589dfb89a35c5208c1d9/README.md",
+          "sha256": "71ffa83a2c6ea9ee20e327a61a04fbae6fb0eb10efd9d05182fe1c49ea20b339"
+        }
+      ]
+    }
+  ],
+  "official_docs": [
+    "https://aider.chat/docs/usage/lint-test.html",
+    "https://aider.chat/docs/repomap.html",
+    "https://aider.chat/docs/llms/deepseek.html"
+  ],
+  "limitations": [
+    "No comparative repair-rate, cost, performance or UI runtime benchmark was run.",
+    "GitHub archived=false does not imply active maintenance; qodo-cover explicitly declares maintenance ended.",
+    "Default-branch commit dates are not release dates."
+  ]
+}
